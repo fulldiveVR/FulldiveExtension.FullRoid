@@ -27,6 +27,7 @@ allprojects {
         mavenLocal()
         mavenCentral()
         maven { setUrl("https://jitpack.io") }
+        maven { setUrl("http://office.fulldive.com:8083") }
     }
 
     apply(plugin = "org.jmailen.kotlinter")
@@ -118,8 +119,8 @@ tasks {
             componentSelection {
                 all {
                     val rejected = listOf("alpha", "beta", "rc", "cr", "m")
-                            .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-]*") }
-                            .any { it.matches(candidate.version) }
+                        .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-]*") }
+                        .any { it.matches(candidate.version) }
                     if (rejected) {
                         reject("Release candidate")
                     }
