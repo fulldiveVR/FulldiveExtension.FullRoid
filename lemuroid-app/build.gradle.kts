@@ -7,10 +7,14 @@ plugins {
 }
 
 android {
+    val versionMajor = 1
+    val versionMinor = 0
+    val versionPatch = 0
+
     defaultConfig {
-        versionCode = 150
-        versionName = "1.11.3"
-        applicationId = "com.swordfish.lemuroid"
+        versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
+        applicationId = "com.fulldive.extension.fullroid"
     }
 
     if (usePlayDynamicFeatures()) {
@@ -69,33 +73,45 @@ android {
     }
 
     signingConfigs {
-        maybeCreate("debug").apply {
-            storeFile = file("$rootDir/debug.keystore")
-        }
-
         maybeCreate("release").apply {
-            storeFile = file("$rootDir/release.jks")
-            keyAlias = "lemuroid"
-            storePassword = "lemuroid"
-            keyPassword = "lemuroid"
+            storeFile = file("keys/keys.jks")
+            keyAlias = "FULLDIVE_ALIAS"
+            storePassword = "FULLDIVE_KEYSTORE_PASSWORD"
+            keyPassword = "FULLDIVE_ALIAS_PASSWORD"
         }
     }
 
+    //Free Bundle
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
             signingConfig = signingConfigs["release"]
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            resValue("string", "lemuroid_name", "Lemuroid")
-            resValue("color", "main_color", "#00c64e")
-            resValue("color", "main_color_light", "#9de3aa")
+            applicationVariants.forEach { variant ->
+                variant.outputs
+                    .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+                    .forEach { output ->
+                        output.outputFileName =
+                            "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                    }
+            }
+            resValue("string", "lemuroid_name", "Full Roid")
+            resValue("color", "main_color", "#FF9900")
+            resValue("color", "main_color_light", "#FCC475")
         }
         getByName("debug") {
-            applicationIdSuffix = ".debug"
             versionNameSuffix = "-DEBUG"
-            resValue("string", "lemuroid_name", "LemuroiDebug")
-            resValue("color", "main_color", "#f44336")
-            resValue("color", "main_color_light", "#ef9a9a")
+            applicationVariants.forEach { variant ->
+                variant.outputs
+                    .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+                    .forEach { output ->
+                        output.outputFileName =
+                            "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                    }
+            }
+            resValue("string", "lemuroid_name", "Full Roid")
+            resValue("color", "main_color", "#FF9900")
+            resValue("color", "main_color_light", "#FCC475")
         }
     }
 
@@ -131,6 +147,7 @@ dependencies {
     implementation(deps.libs.arch.work.runtime)
     implementation(deps.libs.arch.work.runtimeKtx)
     implementation(deps.libs.arch.work.rxjava2)
+    implementation(deps.libs.arch.work.okhttp)
     implementation(deps.libs.androidx.lifecycle.commonJava8)
     implementation(deps.libs.androidx.lifecycle.extensions)
     implementation(deps.libs.androidx.lifecycle.reactiveStreams)

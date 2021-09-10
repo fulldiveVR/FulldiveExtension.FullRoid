@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.PopupManager
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesFragment
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesFragment
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeFragment
@@ -48,7 +49,8 @@ import javax.inject.Inject
 
 class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
 
-    @Inject lateinit var postGameHandler: PostGameHandler
+    @Inject
+    lateinit var postGameHandler: PostGameHandler
 
     private val reviewManager = ReviewManager()
     private var mainViewModel: MainViewModel? = null
@@ -57,10 +59,11 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initializeActivity()
+        PopupManager().onAppStarted(this)
     }
 
     override fun activity(): Activity = this
-    override fun isBusy(): Boolean = mainViewModel?.displayProgress?.value ?: false
+    override fun isBusy(): Boolean = false
 
     private fun initializeActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))

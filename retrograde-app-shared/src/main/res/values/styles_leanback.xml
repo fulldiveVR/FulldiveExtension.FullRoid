@@ -8,7 +8,7 @@
         <item name="defaultBrandColor">@color/leanbackForeground</item>
         <item name="defaultBrandColorDark">@color/leanbackForeground</item>
         <item name="defaultSearchColor">@color/main_color</item>
-        <item name="colorAccent">@color/main_color</item>
+        <item name="colorAccent">#FF9900</item>
         <item name="android:colorAccent">@color/main_color</item>
         <item name="android:colorPrimary">@color/leanbackForeground</item>
         <item name="android:windowBackground">@color/leanbackBackground</item>

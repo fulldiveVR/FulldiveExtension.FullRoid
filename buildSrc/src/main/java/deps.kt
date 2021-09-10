@@ -75,6 +75,7 @@ object deps {
                 const val runtime = "androidx.work:work-runtime:${versions.work}"
                 const val runtimeKtx = "androidx.work:work-runtime-ktx:${versions.work}"
                 const val rxjava2 ="androidx.work:work-rxjava2:${versions.work}"
+                const val okhttp = "com.squareup.okhttp3:okhttp:4.9.1"
             }
         }
         object autodispose {
