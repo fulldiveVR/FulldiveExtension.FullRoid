@@ -87,12 +87,14 @@ android {
             isMinifyEnabled = true
             signingConfig = signingConfigs["release"]
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            applicationVariants.forEach { variant ->
+            applicationVariants.all {
+                val variant = this
                 variant.outputs
                     .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                     .forEach { output ->
-                        output.outputFileName =
+                        val outputFileName =
                             "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                        output.outputFileName = outputFileName
                     }
             }
             resValue("string", "lemuroid_name", "Full Roid")
@@ -100,13 +102,14 @@ android {
             resValue("color", "main_color_light", "#FCC475")
         }
         getByName("debug") {
-            versionNameSuffix = "-DEBUG"
-            applicationVariants.forEach { variant ->
+            applicationVariants.all {
+                val variant = this
                 variant.outputs
                     .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                     .forEach { output ->
-                        output.outputFileName =
+                        val outputFileName =
                             "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                        output.outputFileName = outputFileName
                     }
             }
             resValue("string", "lemuroid_name", "Full Roid")
