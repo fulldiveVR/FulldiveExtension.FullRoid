@@ -74,9 +74,9 @@ android {
 
     signingConfigs {
         maybeCreate("release").apply {
-            storeFile = file("keys/keys.jks")
-            storePassword = System.getenv("FULLDIVE_KEYSTORE_PASSWORD")
+            storeFile = file("../keys/keys.jks")
             keyAlias = System.getenv("FULLDIVE_ALIAS")
+            storePassword = System.getenv("FULLDIVE_KEYSTORE_PASSWORD")
             keyPassword = System.getenv("FULLDIVE_ALIAS_PASSWORD")
         }
     }
@@ -87,12 +87,14 @@ android {
             isMinifyEnabled = true
             signingConfig = signingConfigs["release"]
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            applicationVariants.forEach { variant ->
+            applicationVariants.all {
+                val variant = this
                 variant.outputs
                     .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                     .forEach { output ->
-                        output.outputFileName =
+                        val outputFileName =
                             "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                        output.outputFileName = outputFileName
                     }
             }
             resValue("string", "lemuroid_name", "Full Roid")
@@ -100,13 +102,14 @@ android {
             resValue("color", "main_color_light", "#FCC475")
         }
         getByName("debug") {
-            versionNameSuffix = "-DEBUG"
-            applicationVariants.forEach { variant ->
+            applicationVariants.all {
+                val variant = this
                 variant.outputs
                     .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                     .forEach { output ->
-                        output.outputFileName =
+                        val outputFileName =
                             "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                        output.outputFileName = outputFileName
                     }
             }
             resValue("string", "lemuroid_name", "Full Roid")
