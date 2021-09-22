@@ -75,9 +75,9 @@ android {
     signingConfigs {
         maybeCreate("release").apply {
             storeFile = file("keys/keys.jks")
-            keyAlias = "FULLDIVE_ALIAS"
-            storePassword = "FULLDIVE_KEYSTORE_PASSWORD"
-            keyPassword = "FULLDIVE_ALIAS_PASSWORD"
+            storePassword = System.getenv("FULLDIVE_KEYSTORE_PASSWORD")
+            keyAlias = System.getenv("FULLDIVE_ALIAS")
+            keyPassword = System.getenv("FULLDIVE_ALIAS_PASSWORD")
         }
     }
 
