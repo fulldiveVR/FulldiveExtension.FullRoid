@@ -49,7 +49,7 @@ class ChannelHandler(
             TvContractCompat.Channels.CONTENT_URI,
             builder.build().toContentValues()
         )
-        channelId = ContentUris.parseId(channelUri)
+        channelId = ContentUris.parseId(channelUri!!)
 
         ChannelLogoUtils.storeChannelLogo(
             appContext,
