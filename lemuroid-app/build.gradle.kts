@@ -214,7 +214,6 @@ dependencies {
     implementation(deps.libs.androidx.documentfile)
     implementation(deps.libs.androidx.leanback.tvProvider)
     implementation(deps.libs.harmony)
-    implementation("com.snore.guard:fullroid:1.4.0")
 
     implementation(deps.libs.libretrodroid)
 
