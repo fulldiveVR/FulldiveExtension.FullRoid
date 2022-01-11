@@ -9,7 +9,7 @@ plugins {
 android {
     val versionMajor = 1
     val versionMinor = 0
-    val versionPatch = 2
+    val versionPatch = 3
 
     defaultConfig {
         versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
