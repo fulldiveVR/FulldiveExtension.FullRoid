@@ -1,24 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~  RetrogradeApplicationComponent.kt
-  ~
-  ~  Copyright (C) 2017 Retrograde Project
-  ~
-  ~  This program is free software: you can redistribute it and/or modify
-  ~  it under the terms of the GNU General Public License as published by
-  ~  the Free Software Foundation, either version 3 of the License, or
-  ~  (at your option) any later version.
-  ~
-  ~  This program is distributed in the hope that it will be useful,
-  ~  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~  GNU General Public License for more details.
-  ~
-  ~  You should have received a copy of the GNU General Public License
-  ~  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  ~
-  -->
-
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -37,6 +17,13 @@
             android:key="@string/pref_key_rescan"
             android:title="@string/rescan"
             app:iconSpaceReserved="false"
+            android:persistent="false"/>
+
+        <Preference
+            android:key="@string/pref_key_stop_rescan"
+            android:title="@string/stop"
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false"
             android:persistent="false"/>
 
     </PreferenceCategory>
@@ -66,29 +53,26 @@
         android:title="@string/settings_category_input"
         app:iconSpaceReserved="false">
 
-        <SwitchPreferenceCompat
-            android:key="@string/pref_key_vibrate_on_touch"
+        <ListPreference
+            android:key="@string/pref_key_haptic_feedback_mode"
             android:title="@string/settings_title_enable_touch_feedback"
+            android:entries="@array/pref_key_haptic_feedback_mode_names"
+            android:entryValues="@array/pref_key_haptic_feedback_mode_values"
             app:iconSpaceReserved="false"
-            android:defaultValue="true"/>
+            app:useSimpleSummaryProvider="true"
+            android:defaultValue="press"/>
 
         <Preference
             android:key="@string/pref_key_open_gamepad_settings"
-            android:title="@string/settings_gamepad_settings"
+            android:title="@string/settings_title_gamepad_settings"
+            android:summary="@string/settings_description_gamepad_settings"
             app:iconSpaceReserved="false"
             android:persistent="false"/>
-
-        <SeekBarPreference
-            android:key="@string/pref_key_tilt_sensitivity_index"
-            android:title="@string/settings_title_tilt_sensitivity"
-            app:iconSpaceReserved="false"
-            android:defaultValue="6"
-            android:max="10"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/settings_category_advanced"
+        android:title="@string/settings_category_misc"
         app:iconSpaceReserved="false">
 
         <Preference
@@ -112,9 +96,9 @@
             android:persistent="false"/>
 
         <Preference
-            android:key="@string/pref_key_reset_settings"
-            android:title="@string/settings_title_reset_settings"
-            app:summary="@string/settings_description_reset_settings"
+            android:key="@string/pref_key_advanced_settings"
+            android:title="@string/settings_title_advanced_settings"
+            android:summary="@string/settings_description_advanced_settings"
             app:iconSpaceReserved="false"
             android:persistent="false"/>
 

@@ -27,7 +27,7 @@ import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.GameMenuContract
 import com.swordfish.lemuroid.app.shared.coreoptions.CoreOptionsPreferenceHelper
 import com.swordfish.lemuroid.app.shared.coreoptions.LemuroidCoreOption
-import com.swordfish.lemuroid.app.shared.settings.GamePadManager
+import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
@@ -41,7 +41,7 @@ import javax.inject.Inject
 
 class GameMenuCoreOptionsFragment : PreferenceFragmentCompat() {
 
-    @Inject lateinit var gamePadManager: GamePadManager
+    @Inject lateinit var inputDeviceManager: InputDeviceManager
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -57,7 +57,7 @@ class GameMenuCoreOptionsFragment : PreferenceFragmentCompat() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        gamePadManager
+        inputDeviceManager
             .getGamePadsObservable()
             .observeOn(AndroidSchedulers.mainThread())
             .autoDispose(scope())

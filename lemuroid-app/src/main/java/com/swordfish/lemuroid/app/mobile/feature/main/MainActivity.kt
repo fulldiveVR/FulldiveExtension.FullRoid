@@ -28,18 +28,20 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.elevation.SurfaceColors
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.PopupManager
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesFragment
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesFragment
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeFragment
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchFragment
+import com.swordfish.lemuroid.app.mobile.feature.settings.AdvancedSettingsFragment
 import com.swordfish.lemuroid.app.mobile.feature.settings.BiosSettingsFragment
 import com.swordfish.lemuroid.app.mobile.feature.settings.CoresSelectionFragment
 import com.swordfish.lemuroid.app.mobile.feature.settings.GamepadSettingsFragment
@@ -51,7 +53,8 @@ import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
-import com.swordfish.lemuroid.app.shared.main.PostGameHandler
+import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
+import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
 import com.swordfish.lemuroid.lib.android.RetrogradeAppCompatActivity
@@ -59,31 +62,34 @@ import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerFragment
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
-import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
-import com.swordfish.lemuroid.lib.ui.setVisibleOrGone
+import com.swordfish.lemuroid.common.view.setVisibleOrGone
+import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import io.reactivex.rxkotlin.subscribeBy
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
 
-    @Inject
-    lateinit var postGameHandler: PostGameHandler
+    @Inject lateinit var gameLaunchTaskHandler: GameLaunchTaskHandler
+    @Inject lateinit var saveSyncManager: SaveSyncManager
 
     private val reviewManager = ReviewManager()
     private var mainViewModel: MainViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.navigationBarColor = SurfaceColors.SURFACE_2.getColor(this)
+        window.statusBarColor = SurfaceColors.SURFACE_2.getColor(this)
         setContentView(R.layout.activity_main)
         initializeActivity()
         PopupManager().onAppStarted(this)
     }
 
     override fun activity(): Activity = this
-    override fun isBusy(): Boolean = false
+    override fun isBusy(): Boolean = mainViewModel?.displayProgress?.value ?: false
 
     private fun initializeActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
@@ -105,7 +111,7 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        mainViewModel = ViewModelProviders.of(this, MainViewModel.Factory(applicationContext))
+        mainViewModel = ViewModelProvider(this, MainViewModel.Factory(applicationContext))
             .get(MainViewModel::class.java)
 
         mainViewModel?.displayProgress?.observe(this) { isRunning ->
@@ -116,16 +122,19 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode != Activity.RESULT_OK) return
-
         when (requestCode) {
             BaseGameActivity.REQUEST_PLAY_GAME -> {
-                val duration = data?.extras?.getLong(BaseGameActivity.PLAY_GAME_RESULT_SESSION_DURATION)
-                val game = data?.extras?.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as Game
-                postGameHandler.handleAfterGame(this, true, game, duration!!)
-                    .subscribeBy { }
+                gameLaunchTaskHandler.handleGameFinish(true, this, resultCode, data)
+                    .subscribeBy(Timber::e) { }
             }
         }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val isSupported = saveSyncManager.isSupported()
+        val isConfigured = saveSyncManager.isConfigured()
+        menu?.findItem(R.id.menu_options_sync)?.isVisible = isSupported && isConfigured
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -137,6 +146,10 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         return when (item.itemId) {
             R.id.menu_options_help -> {
                 displayLemuroidHelp()
+                true
+            }
+            R.id.menu_options_sync -> {
+                SaveSyncWork.enqueueManualWork(this)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -191,6 +204,10 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         @PerFragment
         @ContributesAndroidInjector(modules = [BiosSettingsFragment.Module::class])
         abstract fun biosInfoFragment(): BiosSettingsFragment
+
+        @PerFragment
+        @ContributesAndroidInjector(modules = [AdvancedSettingsFragment.Module::class])
+        abstract fun advancedSettingsFragment(): AdvancedSettingsFragment
 
         @PerFragment
         @ContributesAndroidInjector(modules = [SaveSyncFragment.Module::class])

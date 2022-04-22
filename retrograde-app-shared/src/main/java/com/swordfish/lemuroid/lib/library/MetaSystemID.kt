@@ -1,23 +1,3 @@
-/*
- *  RetrogradeApplicationComponent.kt
- *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
 package com.swordfish.lemuroid.lib.library
 
 import com.swordfish.lemuroid.lib.R
@@ -117,10 +97,20 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
         R.drawable.game_system_ngp,
         listOf(SystemID.NGP, SystemID.NGC)
     ),
+    WS(
+        R.string.game_system_title_ws,
+        R.drawable.game_system_ws,
+        listOf(SystemID.WS, SystemID.WSC)
+    ),
     DOS(
         R.string.game_system_title_dos,
         R.drawable.game_system_dos,
         listOf(SystemID.DOS)
+    ),
+    NINTENDO_3DS(
+        R.string.game_system_title_3ds,
+        R.drawable.game_system_3ds,
+        listOf(SystemID.NINTENDO_3DS)
     );
 
     companion object {
@@ -148,6 +138,9 @@ enum class MetaSystemID(val titleResId: Int, val imageResId: Int, val systemIDs:
                 SystemID.DOS -> DOS
                 SystemID.NGP -> NGP
                 SystemID.NGC -> NGP
+                SystemID.WS -> WS
+                SystemID.WSC -> WS
+                SystemID.NINTENDO_3DS -> NINTENDO_3DS
             }
         }
     }

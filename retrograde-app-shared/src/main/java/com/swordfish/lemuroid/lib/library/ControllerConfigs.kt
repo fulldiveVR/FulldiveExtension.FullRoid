@@ -1,23 +1,3 @@
-/*
- *  RetrogradeApplicationComponent.kt
- *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
 package com.swordfish.lemuroid.lib.library
 
 import com.swordfish.lemuroid.lib.R
@@ -214,5 +194,26 @@ object ControllerConfigs {
         TouchControllerID.DOS,
         allowTouchRotation = true,
         libretroId = 769
+    )
+
+    val WS_LANDSCAPE = ControllerConfig(
+        "landscape",
+        R.string.controller_landscape,
+        TouchControllerID.WS_LANDSCAPE,
+        mergeDPADAndLeftStickEvents = true,
+    )
+
+    val WS_PORTRAIT = ControllerConfig(
+        "portrait",
+        R.string.controller_portrait,
+        TouchControllerID.WS_PORTRAIT,
+        mergeDPADAndLeftStickEvents = true,
+    )
+
+    val NINTENDO_3DS = ControllerConfig(
+        "default",
+        R.string.controller_default,
+        TouchControllerID.NINTENDO_3DS,
+        allowTouchOverlay = false
     )
 }

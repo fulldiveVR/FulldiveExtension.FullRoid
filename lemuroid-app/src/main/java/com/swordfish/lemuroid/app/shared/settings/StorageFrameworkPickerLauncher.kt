@@ -100,7 +100,7 @@ class StorageFrameworkPickerLauncher : RetrogradeActivity() {
     }
 
     private fun startLibraryIndexWork() {
-        LibraryIndexScheduler.scheduleFullSync(applicationContext)
+        LibraryIndexScheduler.scheduleLibrarySync(applicationContext)
     }
 
     companion object {

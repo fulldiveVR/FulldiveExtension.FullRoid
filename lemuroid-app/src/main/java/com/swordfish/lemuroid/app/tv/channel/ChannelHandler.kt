@@ -20,6 +20,7 @@
 
 package com.swordfish.lemuroid.app.tv.channel
 
+import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.Context
 import android.graphics.Bitmap
@@ -54,7 +55,7 @@ class ChannelHandler(
 
     private val appName = appContext.getString(R.string.lemuroid_name)
 
-    private fun getOrCreateChannelId(): Long {
+    private fun getOrCreateChannelId(): Long? {
         var channelId = findChannel()
 
         if (channelId != null)
@@ -68,8 +69,9 @@ class ChannelHandler(
         val channelUri = appContext.contentResolver.insert(
             TvContractCompat.Channels.CONTENT_URI,
             builder.build().toContentValues()
-        )
-        channelId = ContentUris.parseId(channelUri!!)
+        ) ?: return null
+
+        channelId = ContentUris.parseId(channelUri)
 
         ChannelLogoUtils.storeChannelLogo(
             appContext,
@@ -112,7 +114,7 @@ class ChannelHandler(
             }
             .toList()
             .doOnSuccess {
-                val channelId = getOrCreateChannelId()
+                val channelId = getOrCreateChannelId() ?: return@doOnSuccess
 
                 val channel = Channel.Builder()
                 channel.setDisplayName(appName)
@@ -147,6 +149,7 @@ class ChannelHandler(
             .ignoreElement()
     }
 
+    @SuppressLint("RestrictedApi")
     private fun getGameProgram(
         channelId: Long,
         game: Game,

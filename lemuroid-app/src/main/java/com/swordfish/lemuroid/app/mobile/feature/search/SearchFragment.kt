@@ -27,7 +27,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.paging.cachedIn
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jakewharton.rxbinding3.appcompat.queryTextChanges
@@ -35,8 +35,9 @@ import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.shared.GamesAdapter
 import com.swordfish.lemuroid.app.mobile.shared.RecyclerViewFragment
 import com.swordfish.lemuroid.app.shared.GameInteractor
+import com.swordfish.lemuroid.app.shared.covers.CoverLoader
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
-import com.swordfish.lemuroid.lib.ui.setVisibleOrGone
+import com.swordfish.lemuroid.common.view.setVisibleOrGone
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDispose
@@ -49,6 +50,7 @@ class SearchFragment : RecyclerViewFragment() {
 
     @Inject lateinit var retrogradeDb: RetrogradeDatabase
     @Inject lateinit var gameInteractor: GameInteractor
+    @Inject lateinit var coverLoader: CoverLoader
 
     private lateinit var searchViewModel: SearchViewModel
 
@@ -68,11 +70,11 @@ class SearchFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchViewModel = ViewModelProviders.of(this, SearchViewModel.Factory(retrogradeDb))
+        searchViewModel = ViewModelProvider(this, SearchViewModel.Factory(retrogradeDb))
             .get(SearchViewModel::class.java)
 
-        val gamesAdapter = GamesAdapter(R.layout.layout_game_list, gameInteractor)
-        searchViewModel.searchResults.cachedIn(lifecycle).observe(this) {
+        val gamesAdapter = GamesAdapter(R.layout.layout_game_list, gameInteractor, coverLoader)
+        searchViewModel.searchResults.cachedIn(lifecycle).observe(viewLifecycleOwner) {
             gamesAdapter.submitData(lifecycle, it)
         }
 
@@ -114,11 +116,6 @@ class SearchFragment : RecyclerViewFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .autoDispose(scope())
             .subscribe(searchSubject)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        activity?.invalidateOptionsMenu()
     }
 
     @dagger.Module

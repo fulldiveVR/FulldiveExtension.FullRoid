@@ -22,7 +22,7 @@ package com.swordfish.lemuroid.app.mobile.feature.systems
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.shared.DynamicGridLayoutManager
@@ -30,7 +30,7 @@ import com.swordfish.lemuroid.app.mobile.shared.GridSpaceDecoration
 import com.swordfish.lemuroid.app.mobile.shared.RecyclerViewFragment
 import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
-import com.swordfish.lemuroid.lib.ui.setVisibleOrGone
+import com.swordfish.lemuroid.common.view.setVisibleOrGone
 import com.swordfish.lemuroid.lib.util.subscribeBy
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.uber.autodispose.autoDispose
@@ -49,7 +49,10 @@ class MetaSystemsFragment : RecyclerViewFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        metaSystemsViewModel = ViewModelProviders.of(this, MetaSystemsViewModel.Factory(retrogradeDb))
+        metaSystemsViewModel = ViewModelProvider(
+            this,
+            MetaSystemsViewModel.Factory(retrogradeDb, requireContext().applicationContext)
+        )
             .get(MetaSystemsViewModel::class.java)
 
         metaSystemsAdapter = MetaSystemsAdapter { navigateToGames(it) }

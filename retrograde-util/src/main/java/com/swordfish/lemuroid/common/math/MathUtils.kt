@@ -1,27 +1,6 @@
-/*
- *  RetrogradeApplicationComponent.kt
- *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
 package com.swordfish.lemuroid.common.math
 
 import android.graphics.PointF
-import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
@@ -29,15 +8,6 @@ import kotlin.math.sqrt
 fun linearInterpolation(t: Float, a: Float, b: Float) = (a * (1.0f - t)) + (b * t)
 
 object MathUtils {
-    /** Compute the angle with the x axis of the line between two points. Results in range [0,2pi[.*/
-    fun angle(x1: Float, x2: Float, y1: Float, y2: Float): Float {
-        return ((-atan2(y2 - y1, x2 - x1) + PI2) % (PI2))
-    }
-
-    fun clamp(x: Float, min: Float, max: Float): Float {
-        return maxOf(minOf(x, max), min)
-    }
-
     fun distance(x1: Float, x2: Float, y1: Float, y2: Float): Float {
         return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2))
     }
