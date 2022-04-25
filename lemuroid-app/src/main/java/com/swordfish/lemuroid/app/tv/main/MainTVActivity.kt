@@ -25,14 +25,14 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
-import com.swordfish.lemuroid.app.shared.main.PostGameHandler
+import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.app.tv.channel.ChannelUpdateWork
 import com.swordfish.lemuroid.app.tv.favorites.TVFavoritesFragment
 import com.swordfish.lemuroid.app.tv.games.TVGamesFragment
@@ -43,20 +43,21 @@ import com.swordfish.lemuroid.app.tv.shared.TVHelper
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerFragment
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
-import com.swordfish.lemuroid.lib.library.db.entity.Game
-import com.swordfish.lemuroid.lib.ui.setVisibleOrGone
+import com.swordfish.lemuroid.common.view.setVisibleOrGone
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDispose
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainTVActivity : BaseTVActivity(), BusyActivity {
 
-    @Inject lateinit var postGameHandler: PostGameHandler
+    @Inject lateinit var gameLaunchTaskHandler: GameLaunchTaskHandler
 
     var mainViewModel: MainTVViewModel? = null
 
@@ -68,8 +69,7 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
         setContentView(R.layout.activity_tv_main)
 
         val factory = MainTVViewModel.Factory(applicationContext)
-        mainViewModel = ViewModelProviders.of(this, factory)
-            .get(MainTVViewModel::class.java)
+        mainViewModel = ViewModelProvider(this, factory).get(MainTVViewModel::class.java)
 
         mainViewModel?.inProgress?.observe(this) {
             findViewById<View>(R.id.tv_loading).setVisibleOrGone(it)
@@ -81,15 +81,11 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode != Activity.RESULT_OK) return
-
         when (requestCode) {
             BaseGameActivity.REQUEST_PLAY_GAME -> {
-                val duration = data?.extras?.getLong(BaseGameActivity.PLAY_GAME_RESULT_SESSION_DURATION)
-                val game = data?.extras?.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as Game
-                postGameHandler.handleAfterGame(this, false, game, duration!!)
-                    .subscribeBy { }
-                ChannelUpdateWork.enqueue(applicationContext)
+                gameLaunchTaskHandler.handleGameFinish(false, this, resultCode, data)
+                    .andThen(Completable.fromCallable { ChannelUpdateWork.enqueue(applicationContext) })
+                    .subscribeBy(Timber::e) { }
             }
         }
     }

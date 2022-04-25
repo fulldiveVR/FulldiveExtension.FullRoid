@@ -34,6 +34,7 @@ import com.swordfish.lemuroid.lib.saves.SavesCoherencyEngine
 import com.swordfish.lemuroid.lib.saves.SavesManager
 import com.swordfish.lemuroid.lib.saves.StatesManager
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
+import com.swordfish.lemuroid.lib.storage.RomFiles
 import io.reactivex.Observable
 import timber.log.Timber
 import java.io.File
@@ -57,7 +58,8 @@ class GameLoader(
         appContext: Context,
         game: Game,
         loadSave: Boolean,
-        systemCoreConfig: SystemCoreConfig
+        systemCoreConfig: SystemCoreConfig,
+        directLoad: Boolean
     ): Observable<LoadingState> = Observable.create { emitter ->
         try {
             emitter.onNext(LoadingState.LoadingCore)
@@ -74,15 +76,11 @@ class GameLoader(
                 throw GameLoaderException(GameLoaderError.MISSING_BIOS)
             }
 
-            val gameFile = runCatching {
-                lemuroidLibrary.getGameRom(game).blockingGet()
+            val gameFiles = runCatching {
+                val useVFS = systemCoreConfig.supportsLibretroVFS && directLoad
+                val dataFiles = retrogradeDatabase.dataFileDao().selectDataFilesForGame(game.id)
+                lemuroidLibrary.getGameFiles(game, dataFiles, useVFS).blockingGet()
             }.getOrElse { throw GameLoaderException(GameLoaderError.LOAD_GAME) }
-
-            runCatching {
-                retrogradeDatabase.dataFileDao().selectDataFilesForGame(game.id).forEach {
-                    lemuroidLibrary.prepareDataFile(game, it).blockingAwait()
-                }
-            }.getOrElse { throw GameLoaderException(GameLoaderError.LOAD_CORE) }
 
             val saveRAMData = runCatching {
                 savesManager.getSaveRAM(game).toSingleAsOptional().blockingGet().toNullable()
@@ -114,7 +112,7 @@ class GameLoader(
                     GameData(
                         game,
                         coreLibrary,
-                        gameFile,
+                        gameFiles,
                         quickSaveData,
                         saveRAMData,
                         coreVariables,
@@ -155,7 +153,7 @@ class GameLoader(
     data class GameData(
         val game: Game,
         val coreLibrary: String,
-        val gameFile: File,
+        val gameFiles: RomFiles,
         val quickSaveData: SaveState?,
         val saveRAMData: ByteArray?,
         val coreVariables: Array<CoreVariable>,

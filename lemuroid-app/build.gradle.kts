@@ -29,7 +29,7 @@ plugins {
 android {
     val versionMajor = 1
     val versionMinor = 0
-    val versionPatch = 3
+    val versionPatch = 4
 
     defaultConfig {
         versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
@@ -39,25 +39,27 @@ android {
 
     if (usePlayDynamicFeatures()) {
         println("Building Google Play version. Bundling dynamic features.")
-        dynamicFeatures = mutableSetOf(
-            ":lemuroid_core_desmume",
-            ":lemuroid_core_dosbox_pure",
-            ":lemuroid_core_fbneo",
-            ":lemuroid_core_fceumm",
-            ":lemuroid_core_gambatte",
-            ":lemuroid_core_genesis_plus_gx",
-            ":lemuroid_core_handy",
-            ":lemuroid_core_mame2003_plus",
-            ":lemuroid_core_mednafen_ngp",
-            ":lemuroid_core_mednafen_pce_fast",
-            ":lemuroid_core_melonds",
-            ":lemuroid_core_mgba",
-            ":lemuroid_core_mupen64plus_next_gles3",
-            ":lemuroid_core_pcsx_rearmed",
-            ":lemuroid_core_ppsspp",
-            ":lemuroid_core_prosystem",
-            ":lemuroid_core_snes9x",
-            ":lemuroid_core_stella"
+        dynamicFeatures.addAll(
+            setOf(
+                ":lemuroid_core_desmume",
+                ":lemuroid_core_dosbox_pure",
+                ":lemuroid_core_fbneo",
+                ":lemuroid_core_fceumm",
+                ":lemuroid_core_gambatte",
+                ":lemuroid_core_genesis_plus_gx",
+                ":lemuroid_core_handy",
+                ":lemuroid_core_mame2003_plus",
+                ":lemuroid_core_mednafen_ngp",
+                ":lemuroid_core_mednafen_pce_fast",
+                ":lemuroid_core_melonds",
+                ":lemuroid_core_mgba",
+                ":lemuroid_core_mupen64plus_next_gles3",
+                ":lemuroid_core_pcsx_rearmed",
+                ":lemuroid_core_ppsspp",
+                ":lemuroid_core_prosystem",
+                ":lemuroid_core_snes9x",
+                ":lemuroid_core_stella"
+            )
         )
     }
 
@@ -118,8 +120,8 @@ android {
                     }
             }
             resValue("string", "lemuroid_name", "Full Roid")
-            resValue("color", "main_color", "#FF9900")
-            resValue("color", "main_color_light", "#FCC475")
+//            resValue("color", "main_color", "#FF9900")
+//            resValue("color", "main_color_light", "#FCC475")
         }
         getByName("debug") {
             applicationVariants.all {
@@ -133,8 +135,8 @@ android {
                     }
             }
             resValue("string", "lemuroid_name", "Full Roid")
-            resValue("color", "main_color", "#FF9900")
-            resValue("color", "main_color_light", "#FCC475")
+//            resValue("color", "main_color", "#FF9900")
+//            resValue("color", "main_color_light", "#FCC475")
         }
     }
 
@@ -172,7 +174,7 @@ dependencies {
     implementation(deps.libs.arch.work.rxjava2)
     implementation(deps.libs.arch.work.okhttp)
     implementation(deps.libs.androidx.lifecycle.commonJava8)
-    implementation(deps.libs.androidx.lifecycle.extensions)
+//    implementation(deps.libs.androidx.lifecycle.extensions)
     implementation(deps.libs.androidx.lifecycle.reactiveStreams)
     implementation(deps.libs.epoxy.expoxy)
     implementation(deps.libs.epoxy.paging)

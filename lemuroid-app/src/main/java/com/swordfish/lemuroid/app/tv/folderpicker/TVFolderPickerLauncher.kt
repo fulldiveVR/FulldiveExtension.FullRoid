@@ -62,7 +62,7 @@ class TVFolderPickerLauncher : ImmersiveActivity() {
     }
 
     private fun startLibraryIndexWork() {
-        LibraryIndexScheduler.scheduleFullSync(applicationContext)
+        LibraryIndexScheduler.scheduleLibrarySync(applicationContext)
     }
 
     companion object {

@@ -16,20 +16,16 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.swordfish.lemuroid">
 
-    <uses-feature
-        android:name="android.software.leanback"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.gamepad"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.touchscreen"
-        android:required="false" />
+    <uses-feature android:name="android.software.leanback" android:required="false" />
+    <uses-feature android:name="android.hardware.gamepad" android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="com.android.providers.tv.permission.WRITE_EPG_DATA" />
 
     <permission
@@ -47,8 +43,10 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.swordfish.lemuroid.app.mobile.feature.main.MainActivity">
+        android:theme="@style/LemuroidMaterialTheme">
+        <activity
+            android:name="com.swordfish.lemuroid.app.mobile.feature.main.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -58,41 +56,35 @@
         <activity
             android:name="com.swordfish.lemuroid.app.shared.game.ExternalGameLauncherActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/GameTheme">
+            android:exported="true"
+            android:theme="@style/LemuroidMaterialTheme.Game">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data
-                    android:host="${applicationId}"
-                    android:pathPattern="/play-game/id/.*"
-                    android:scheme="lemuroid" />
+                <data android:scheme="lemuroid" android:host="${applicationId}" android:pathPattern="/play-game/id/.*"/>
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.swordfish.lemuroid.app.mobile.feature.game.GameActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:launchMode="singleInstance"
+        <activity android:name="com.swordfish.lemuroid.app.mobile.feature.game.GameActivity"
             android:process=":game"
-            android:theme="@style/GameTheme" />
+            android:launchMode="singleInstance"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/LemuroidMaterialTheme.Game"/>
 
-        <service
-            android:name=".app.mobile.feature.game.GameService"
+        <service android:name=".app.mobile.feature.game.GameService"
             android:process=":game" />
 
-        <activity
-            android:name="com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity"
+        <activity android:name="com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity"
             android:process=":game"
-            android:theme="@style/PreferenceOverlay" />
+            android:theme="@style/LemuroidMaterialTheme.Menu"/>
 
-        <activity
-            android:name="com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher"
-            android:theme="@style/InvisibleTheme" />
+        <activity android:name="com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher"
+            android:theme="@style/LemuroidMaterialTheme.Invisible"/>
 
         <!-- Leanback activities -->
-        <activity
-            android:name=".app.tv.main.MainTVActivity"
-            android:theme="@style/LeanbackTheme">
+        <activity android:name=".app.tv.main.MainTVActivity"
+            android:exported="true"
+            android:theme="@style/LemuroidLeanbackTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
@@ -100,36 +92,30 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <data
-                    android:host="${applicationId}"
-                    android:pathPattern="/open-leanback"
-                    android:scheme="lemuroid" />
+                <data android:scheme="lemuroid" android:host="${applicationId}" android:pathPattern="/open-leanback"/>
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".app.tv.settings.TVSettingsActivity"
-            android:theme="@style/LeanbackPreferences" />
+        <activity android:name=".app.tv.settings.TVSettingsActivity"
+            android:theme="@style/LemuroidLeanbackPreferencesTheme" />
 
-        <activity
-            android:name=".app.tv.folderpicker.TVFolderPickerActivity"
+        <activity android:name=".app.tv.folderpicker.TVFolderPickerActivity"
             android:theme="@style/Theme.Leanback.GuidedStep" />
 
         <activity android:name=".app.tv.folderpicker.TVFolderPickerLauncher" />
 
-        <activity
-            android:name=".app.tv.game.TVGameActivity"
-            android:process=":game"
-            android:theme="@style/GameTheme" />
+        <activity android:name=".app.tv.game.TVGameActivity"
+            android:theme="@style/LemuroidMaterialTheme.Game"
+            android:process=":game"/>
 
-        <activity
-            android:name=".app.tv.gamemenu.TVGameMenuActivity"
-            android:process=":game"
-            android:theme="@style/LeanbackPreferences" />
+        <activity android:name=".app.tv.gamemenu.TVGameMenuActivity"
+            android:theme="@style/LemuroidLeanbackPreferencesTheme"
+            android:process=":game" />
 
-        <activity
-            android:name=".app.shared.gamecrash.GameCrashActivity"
-            android:theme="@style/GameTheme" />
+        <activity android:name=".app.shared.gamecrash.GameCrashActivity"
+            android:theme="@style/LemuroidMaterialTheme.Game" />
+
+        <receiver android:name=".app.shared.library.LibraryIndexBroadcastReceiver"/>
 
         <activity
             android:name = "com.swordfish.lemuroid.app.shared.game.CaribAshevilleActivity"
@@ -141,13 +127,14 @@
         <!-- It is not possible to invoke Work from another process with the default initializer.
              We have to disable it and manually initialize it in our custom Application. -->
         <provider
-            android:name="androidx.work.impl.WorkManagerInitializer"
-            android:authorities="${applicationId}.workmanager-init"
-            android:enabled="false" />
-        <provider
-            android:name=".app.appextension.FulldiveContentProvider"
-            android:authorities="com.fulldive.extension.fullroid.FulldiveContentProvider"
-            android:exported="true"
-            android:permission="com.fulldive.extension.fullroid.access.read" />
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+
+            <meta-data android:name="com.swordfish.lemuroid.app.shared.startup.WorkManagerTasksInitializer"
+                android:value="androidx.startup" />
+        </provider>
+
     </application>
 </manifest>

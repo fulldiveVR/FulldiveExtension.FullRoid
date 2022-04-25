@@ -1,30 +1,10 @@
-/*
- *  RetrogradeApplicationComponent.kt
- *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
 package com.swordfish.lemuroid.lib.storage.local
 
 import android.content.Context
 import com.swordfish.lemuroid.common.kotlin.calculateCrc32
 import com.swordfish.lemuroid.common.kotlin.toStringCRC32
 import com.swordfish.lemuroid.lib.storage.BaseStorageFile
-import com.swordfish.lemuroid.lib.storage.scanner.DiskScanner
+import com.swordfish.lemuroid.lib.storage.scanner.SerialScanner
 import com.swordfish.lemuroid.lib.storage.StorageFile
 import timber.log.Timber
 import java.util.zip.ZipEntry
@@ -67,7 +47,7 @@ object DocumentFileParser {
     ): StorageFile {
         Timber.d("Processing zipped entry: ${entry.name}")
 
-        val diskInfo = DiskScanner.extractInfo(entry.name, zipInputStream)
+        val diskInfo = SerialScanner.extractInfo(entry.name, zipInputStream)
 
         return StorageFile(
             entry.name,
@@ -82,7 +62,7 @@ object DocumentFileParser {
 
     private fun parseStandardFile(context: Context, baseStorageFile: BaseStorageFile): StorageFile {
         val diskInfo = context.contentResolver.openInputStream(baseStorageFile.uri)
-            ?.let { inputStream -> DiskScanner.extractInfo(baseStorageFile.name, inputStream) }
+            ?.let { inputStream -> SerialScanner.extractInfo(baseStorageFile.name, inputStream) }
 
         val crc32 = if (baseStorageFile.size < MAX_SIZE_CRC32 && diskInfo?.serial == null) {
             context.contentResolver.openInputStream(baseStorageFile.uri)?.calculateCrc32()

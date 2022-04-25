@@ -23,9 +23,7 @@ package com.swordfish.lemuroid.app.tv.main
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.swordfish.lemuroid.app.shared.library.LibraryIndexMonitor
-import com.swordfish.lemuroid.app.shared.savesync.SaveSyncMonitor
-import com.swordfish.lemuroid.app.utils.livedata.CombinedLiveData
+import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 
 class MainTVViewModel(appContext: Context) : ViewModel() {
 
@@ -35,7 +33,5 @@ class MainTVViewModel(appContext: Context) : ViewModel() {
         }
     }
 
-    private val indexingInProgress = LibraryIndexMonitor(appContext).getLiveData()
-    private val saveSyncInProgress = SaveSyncMonitor(appContext).getLiveData()
-    val inProgress = CombinedLiveData(indexingInProgress, saveSyncInProgress) { a, b -> a || b }
+    val inProgress = PendingOperationsMonitor(appContext).anyOperationInProgress()
 }

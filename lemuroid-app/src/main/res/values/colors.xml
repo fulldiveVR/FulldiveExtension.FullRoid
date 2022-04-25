@@ -20,6 +20,8 @@
   -->
 
 <resources>
+    <color name="edit_control_overlay">#99000000</color>
+    <color name="imageview_background">#09ffffff</color>
     <color name="textColorPrimary">#0D1826</color>
     <color name="textColorSecondary">#BABDC1</color>
     <color name="textColorAccent">#FF9900</color>

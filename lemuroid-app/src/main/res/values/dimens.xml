@@ -27,6 +27,10 @@
     <string name="system_card_image_ratio">4:3</string>
     <string name="game_card_image_ratio">1:1</string>
 
+    <dimen name="loading_circle_size">58dp</dimen>
+    <dimen name="loading_circle_icon_size">32dp</dimen>
+    <dimen name="loading_circle_progress_thickness">6dp</dimen>
+
 
     <dimen name="davy_badminton_width">116dp</dimen>
     <dimen name="lethargy_gout">340dp</dimen>

@@ -1,23 +1,3 @@
-/*
- *  RetrogradeApplicationComponent.kt
- *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
 plugins {
@@ -25,6 +5,12 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlinx-serialization")
+}
+
+android {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -36,7 +22,6 @@ dependencies {
     implementation(deps.libs.arch.work.runtime)
     implementation(deps.libs.arch.work.runtimeKtx)
     implementation(deps.libs.arch.work.rxjava2)
-    implementation(deps.libs.arch.work.okhttp)
     implementation(deps.libs.androidx.appcompat.appcompat)
     implementation(deps.libs.androidx.leanback.leanbackPreference)
     implementation(deps.libs.androidx.ktx.collection)
@@ -60,6 +45,7 @@ dependencies {
     implementation(deps.libs.rxKotlin2)
     implementation(deps.libs.rxRelay2)
     implementation(deps.libs.kotlin.serialization)
+    implementation(deps.libs.kotlin.serializationJson)
     implementation(deps.libs.harmony)
     implementation(deps.libs.multitouchGestures)
     implementation(deps.libs.material)
