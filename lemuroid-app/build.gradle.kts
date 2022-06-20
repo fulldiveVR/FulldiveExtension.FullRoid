@@ -1,65 +1,44 @@
-/*
- *  RetrogradeApplicationComponent.kt
- *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
-    val versionMajor = 1
-    val versionMinor = 0
-    val versionPatch = 4
-
     defaultConfig {
-        versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
-        versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
-        applicationId = "com.fulldive.extension.fullroid"
+        versionCode = 171
+        versionName = "1.13.3" // Always remember to update Cores Tag!
+        applicationId = "com.swordfish.lemuroid"
     }
 
     if (usePlayDynamicFeatures()) {
         println("Building Google Play version. Bundling dynamic features.")
         dynamicFeatures.addAll(
             setOf(
-                ":lemuroid_core_desmume",
-                ":lemuroid_core_dosbox_pure",
-                ":lemuroid_core_fbneo",
-                ":lemuroid_core_fceumm",
-                ":lemuroid_core_gambatte",
-                ":lemuroid_core_genesis_plus_gx",
-                ":lemuroid_core_handy",
-                ":lemuroid_core_mame2003_plus",
-                ":lemuroid_core_mednafen_ngp",
-                ":lemuroid_core_mednafen_pce_fast",
-                ":lemuroid_core_melonds",
-                ":lemuroid_core_mgba",
-                ":lemuroid_core_mupen64plus_next_gles3",
-                ":lemuroid_core_pcsx_rearmed",
-                ":lemuroid_core_ppsspp",
-                ":lemuroid_core_prosystem",
-                ":lemuroid_core_snes9x",
-                ":lemuroid_core_stella"
-            )
+            ":lemuroid_core_desmume",
+            ":lemuroid_core_dosbox_pure",
+            ":lemuroid_core_fbneo",
+            ":lemuroid_core_fceumm",
+            ":lemuroid_core_gambatte",
+            ":lemuroid_core_genesis_plus_gx",
+            ":lemuroid_core_handy",
+            ":lemuroid_core_mame2003_plus",
+            ":lemuroid_core_mednafen_ngp",
+            ":lemuroid_core_mednafen_pce_fast",
+                //todo addedv
+            ":lemuroid_core_mednafen_wswan",
+            ":lemuroid_core_melonds",
+            ":lemuroid_core_mgba",
+            ":lemuroid_core_mupen64plus_next_gles3",
+            ":lemuroid_core_pcsx_rearmed",
+            ":lemuroid_core_ppsspp",
+            ":lemuroid_core_prosystem",
+            ":lemuroid_core_snes9x",
+            ":lemuroid_core_stella",
+                //todo added
+            ":lemuroid_core_citra"
+        )
         )
     }
 
@@ -95,48 +74,29 @@ android {
     }
 
     signingConfigs {
+        maybeCreate("debug").apply {
+            storeFile = file("$rootDir/debug.keystore")
+        }
+
         maybeCreate("release").apply {
-            storeFile = file("../keys/keys.jks")
-            keyAlias = System.getenv("FULLDIVE_ALIAS")
-            storePassword = System.getenv("FULLDIVE_KEYSTORE_PASSWORD")
-            keyPassword = System.getenv("FULLDIVE_ALIAS_PASSWORD")
+            storeFile = file("$rootDir/release.jks")
+            keyAlias = "lemuroid"
+            storePassword = "lemuroid"
+            keyPassword = "lemuroid"
         }
     }
 
-    //Free Bundle
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
             signingConfig = signingConfigs["release"]
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            applicationVariants.all {
-                val variant = this
-                variant.outputs
-                    .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
-                    .forEach { output ->
-                        val outputFileName =
-                            "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
-                        output.outputFileName = outputFileName
-                    }
-            }
-            resValue("string", "lemuroid_name", "Full Roid")
-//            resValue("color", "main_color", "#FF9900")
-//            resValue("color", "main_color_light", "#FCC475")
+            resValue("string", "lemuroid_name", "Lemuroid")
         }
         getByName("debug") {
-            applicationVariants.all {
-                val variant = this
-                variant.outputs
-                    .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
-                    .forEach { output ->
-                        val outputFileName =
-                            "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
-                        output.outputFileName = outputFileName
-                    }
-            }
-            resValue("string", "lemuroid_name", "Full Roid")
-//            resValue("color", "main_color", "#FF9900")
-//            resValue("color", "main_color_light", "#FCC475")
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-DEBUG"
+            resValue("string", "lemuroid_name", "LemuroiDebug")
         }
     }
 
@@ -172,9 +132,7 @@ dependencies {
     implementation(deps.libs.arch.work.runtime)
     implementation(deps.libs.arch.work.runtimeKtx)
     implementation(deps.libs.arch.work.rxjava2)
-    implementation(deps.libs.arch.work.okhttp)
     implementation(deps.libs.androidx.lifecycle.commonJava8)
-//    implementation(deps.libs.androidx.lifecycle.extensions)
     implementation(deps.libs.androidx.lifecycle.reactiveStreams)
     implementation(deps.libs.epoxy.expoxy)
     implementation(deps.libs.epoxy.paging)
@@ -191,6 +149,7 @@ dependencies {
     implementation(deps.libs.androidx.paging.runtime)
     implementation(deps.libs.androidx.paging.rxjava2)
     implementation(deps.libs.androidx.room.common)
+    implementation(deps.libs.androidx.room.roomPaging)
     implementation(deps.libs.androidx.room.runtime)
     implementation(deps.libs.androidx.room.rxjava2)
     implementation(deps.libs.autodispose.android.archComponents)
@@ -216,8 +175,12 @@ dependencies {
     implementation(deps.libs.androidx.documentfile)
     implementation(deps.libs.androidx.leanback.tvProvider)
     implementation(deps.libs.harmony)
+    implementation(deps.libs.startup)
 
     implementation(deps.libs.libretrodroid)
+
+    // Uncomment this when using a local aar file.
+    //implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     kapt(deps.libs.dagger.android.processor)
     kapt(deps.libs.dagger.compiler)

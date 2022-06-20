@@ -1,23 +1,3 @@
-/*
- *  RetrogradeApplicationComponent.kt
- *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
 package com.swordfish.lemuroid.app.shared.game
 
 import android.app.Activity
@@ -202,7 +182,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
     private fun setUpExceptionsHandler() {
         Thread.setDefaultUncaughtExceptionHandler { thread, exception ->
-            performUnsuccessfulActivityFinish(exception)
+            performUnexpectedErrorFinish(exception)
             defaultExceptionHandler?.uncaughtException(thread, exception)
         }
     }
@@ -323,11 +303,11 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     private fun handleRetroViewError(errorCode: Int) {
         Timber.e("Error in GLRetroView $errorCode")
         val gameLoaderError = when (errorCode) {
-            GLRetroView.ERROR_GL_NOT_COMPATIBLE -> GameLoaderError.GL_INCOMPATIBLE
-            GLRetroView.ERROR_LOAD_GAME -> GameLoaderError.LOAD_GAME
-            GLRetroView.ERROR_LOAD_LIBRARY -> GameLoaderError.LOAD_CORE
-            GLRetroView.ERROR_SERIALIZATION -> GameLoaderError.SAVES
-            else -> GameLoaderError.GENERIC
+            GLRetroView.ERROR_GL_NOT_COMPATIBLE -> GameLoaderError.GLIncompatible
+            GLRetroView.ERROR_LOAD_GAME -> GameLoaderError.LoadGame
+            GLRetroView.ERROR_LOAD_LIBRARY -> GameLoaderError.LoadCore
+            GLRetroView.ERROR_SERIALIZATION -> GameLoaderError.Saves
+            else -> GameLoaderError.Generic
         }
         retroGameView = null
         displayGameLoaderError(gameLoaderError, systemCoreConfig)
@@ -376,6 +356,15 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             "lcd" -> GLRetroView.SHADER_LCD
             "smooth" -> GLRetroView.SHADER_DEFAULT
             "sharp" -> GLRetroView.SHADER_SHARP
+            "hd" -> when (system.id) {
+                SystemID.PSP -> GLRetroView.SHADER_UPSCALE_CUT_SMOOTH
+                SystemID.NDS -> GLRetroView.SHADER_UPSCALE_CUT_SMOOTH
+                SystemID.NINTENDO_3DS -> GLRetroView.SHADER_UPSCALE_CUT_SMOOTH
+                SystemID.DOS -> GLRetroView.SHADER_UPSCALE_CUT_SMOOTH
+                SystemID.N64 -> GLRetroView.SHADER_UPSCALE_CUT_SMOOTH
+                SystemID.PSX -> GLRetroView.SHADER_UPSCALE_CUT_SMOOTH
+                else -> GLRetroView.SHADER_UPSCALE_CUT_SHARP
+            }
             else -> when (system.id) {
                 SystemID.GBA -> GLRetroView.SHADER_LCD
                 SystemID.GBC -> GLRetroView.SHADER_LCD
@@ -747,14 +736,23 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         finishAndExitProcess()
     }
 
-    private fun performUnsuccessfulActivityFinish(exception: Throwable) {
+    private fun performUnexpectedErrorFinish(exception: Throwable) {
         Timber.e(exception, "Handling java exception in BaseGameActivity")
         val resultIntent = Intent().apply {
             putExtra(PLAY_GAME_RESULT_ERROR, exception.message)
         }
 
-        setResult(Activity.RESULT_CANCELED, resultIntent)
-        finish()
+        setResult(RESULT_UNEXPECTED_ERROR, resultIntent)
+        finishAndExitProcess()
+    }
+
+    private fun performErrorFinish(message: String) {
+        val resultIntent = Intent().apply {
+            putExtra(PLAY_GAME_RESULT_ERROR, message)
+        }
+
+        setResult(RESULT_ERROR, resultIntent)
+        finishAndExitProcess()
     }
 
     private fun finishAndExitProcess() {
@@ -975,6 +973,23 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         }
     }
 
+    private fun displayGameLoaderError(gameError: GameLoaderError, coreConfig: SystemCoreConfig) {
+
+        val messageId = when (gameError) {
+            is GameLoaderError.GLIncompatible -> getString(R.string.game_loader_error_gl_incompatible)
+            is GameLoaderError.Generic -> getString(R.string.game_loader_error_generic)
+            is GameLoaderError.LoadCore -> getString(R.string.game_loader_error_load_core)
+            is GameLoaderError.LoadGame -> getString(R.string.game_loader_error_load_game)
+            is GameLoaderError.Saves -> getString(R.string.game_loader_error_save)
+            is GameLoaderError.MissingBiosFiles -> getString(
+                R.string.game_loader_error_missing_bios,
+                gameError.missingFiles
+            )
+        }
+
+        performErrorFinish(messageId)
+    }
+
     companion object {
         const val DIALOG_REQUEST = 100
 
@@ -988,6 +1003,9 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         const val PLAY_GAME_RESULT_GAME = "PLAY_GAME_RESULT_GAME"
         const val PLAY_GAME_RESULT_LEANBACK = "PLAY_GAME_RESULT_LEANBACK"
         const val PLAY_GAME_RESULT_ERROR = "PLAY_GAME_RESULT_ERROR"
+
+        const val RESULT_ERROR = Activity.RESULT_FIRST_USER + 2
+        const val RESULT_UNEXPECTED_ERROR = Activity.RESULT_FIRST_USER + 3
 
         fun launchGame(
             activity: Activity,

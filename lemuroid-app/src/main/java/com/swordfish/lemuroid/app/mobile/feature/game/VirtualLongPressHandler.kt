@@ -1,21 +1,6 @@
-/*
- * Copyright (C) 2017 Retrograde Project
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */package com.swordfish.lemuroid.app.mobile.feature.game
+package com.swordfish.lemuroid.app.mobile.feature.game
 
-
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.view.View
@@ -23,6 +8,7 @@ import android.view.ViewConfiguration
 import android.widget.ImageView
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.common.graphics.GraphicsUtils
 import com.swordfish.lemuroid.common.view.animateProgress
 import com.swordfish.lemuroid.common.view.animateVisibleOrGone
 import com.swordfish.lemuroid.common.view.setVisibleOrGone
@@ -31,6 +17,7 @@ import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
+import kotlin.math.roundToInt
 
 object VirtualLongPressHandler {
 
@@ -42,14 +29,25 @@ object VirtualLongPressHandler {
         val palette = LemuroidTouchOverlayThemes.getGamePadTheme(longPressView(gameActivity))
         longPressIconView(gameActivity).setColorFilter(palette.textColor)
         longPressProgressBar(gameActivity).setIndicatorColor(palette.textColor)
-        longPressView(gameActivity).background = buildCircleDrawable(palette.backgroundColor)
-        longPressForegroundView(gameActivity).background = buildCircleDrawable(palette.normalColor)
+        longPressView(gameActivity).background = buildCircleDrawable(
+            gameActivity,
+            palette.backgroundColor,
+            palette.backgroundStrokeColor,
+            palette.strokeWidthDp
+        )
+        longPressForegroundView(gameActivity).background = buildCircleDrawable(
+            gameActivity,
+            palette.normalColor,
+            palette.normalStrokeColor,
+            palette.strokeWidthDp
+        )
     }
 
-    private fun buildCircleDrawable(color: Int): Drawable {
+    private fun buildCircleDrawable(context: Context, fillColor: Int, strokeColor: Int, strokeSize: Float): Drawable {
         return GradientDrawable().apply {
             shape = GradientDrawable.OVAL
-            setColor(color)
+            setColor(fillColor)
+            setStroke(GraphicsUtils.convertDpToPixel(strokeSize, context).roundToInt(), strokeColor)
         }
     }
 

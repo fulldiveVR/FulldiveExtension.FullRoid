@@ -58,5 +58,6 @@
         <item>smooth</item>
         <item>crt</item>
         <item>lcd</item>
+        <item>hd</item>
     </string-array>
 </resources>

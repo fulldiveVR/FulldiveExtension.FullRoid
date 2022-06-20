@@ -16,6 +16,7 @@ dependencies {
     implementation(deps.libs.androidx.appcompat.appcompat)
     implementation(deps.libs.androidx.appcompat.recyclerView)
     implementation(deps.libs.androidx.room.runtime)
+    implementation(deps.libs.androidx.room.roomPaging)
     implementation(deps.libs.androidx.documentfile)
     implementation(deps.libs.androidx.preferences.preferencesKtx)
     implementation(deps.libs.koptional)

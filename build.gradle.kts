@@ -29,7 +29,7 @@ buildscript {
     dependencies {
         classpath(deps.plugins.android)
         classpath(deps.plugins.navigationSafeArgs)
-        classpath("com.android.tools.build:gradle:7.1.3")
+        classpath("com.android.tools.build:gradle:7.2.1")
     }
 }
 

@@ -1,28 +1,8 @@
-/*
- *  RetrogradeApplicationComponent.kt
- *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
 /* ktlint-disable no-multi-spaces max-line-length */
 object deps {
     object android {
-        const val targetSdkVersion  = 32
-        const val compileSdkVersion = 32
+        const val targetSdkVersion  = 31
+        const val compileSdkVersion = 31
         const val minSdkVersion     = 23
         const val buildToolsVersion = "30.0.3"
     }
@@ -32,7 +12,7 @@ object deps {
         const val dagger          = "2.19"
         const val gms             = "17.0.0"
         const val koptional       = "1.7.0"
-        const val kotlin          = "1.4.30"
+        const val kotlin          = "1.6.0"
         const val okHttp          = "4.9.1"
         const val retrofit        = "2.9.0"
         const val work            = "2.7.1"
@@ -42,10 +22,10 @@ object deps {
         const val leanback        = "1.1.0-rc01"
         const val googleApiClient = "1.32.1"
         const val paging          = "3.0.1"
-        const val room            = "2.3.0"
+        const val room            = "2.4.0"
         const val epoxy           = "4.6.3-vinay-compose"
         const val serialization   = "1.2.2"
-        const val libretrodroid   = "0.7.0"
+        const val libretrodroid   = "0.7.0" //todo
         const val radialgamepad   = "1.1.0"
     }
 
@@ -63,12 +43,11 @@ object deps {
                 const val tvProvider = "androidx.tvprovider:tvprovider:1.0.0"
             }
             object ktx {
-                const val core = "androidx.core:core-ktx:1.6.0"
+                const val core = "androidx.core:core-ktx:1.7.0"
                 const val collection = "androidx.collection:collection-ktx:1.1.0"
             }
             object lifecycle {
                 const val commonJava8 = "androidx.lifecycle:lifecycle-common-java8:${versions.lifecycle}"
-                const val extensions = "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
                 const val processor = "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle}"
                 const val reactiveStreams = "android.arch.lifecycle:reactivestreams:1.1.1"
             }
@@ -89,6 +68,7 @@ object deps {
                 const val compiler = "androidx.room:room-compiler:${versions.room}"
                 const val runtime = "androidx.room:room-runtime:${versions.room}"
                 const val rxjava2 = "androidx.room:room-rxjava2:${versions.room}"
+                const val roomPaging = "androidx.room:room-paging:${versions.room}"
             }
             const val documentfile = "androidx.documentfile:documentfile:1.0.1"
         }

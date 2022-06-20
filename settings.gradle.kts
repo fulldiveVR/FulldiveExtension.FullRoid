@@ -1,23 +1,3 @@
-/*
- *  RetrogradeApplicationComponent.kt
- *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
 include(
     ":retrograde-util",
     ":retrograde-app-shared",
@@ -48,6 +28,7 @@ if (usePlayDynamicFeatures()) {
         ":lemuroid_core_mame2003_plus",
         ":lemuroid_core_mednafen_ngp",
         ":lemuroid_core_mednafen_pce_fast",
+        ":lemuroid_core_mednafen_wswan", //todo added
         ":lemuroid_core_melonds",
         ":lemuroid_core_mgba",
         ":lemuroid_core_mupen64plus_next_gles3",
@@ -55,7 +36,8 @@ if (usePlayDynamicFeatures()) {
         ":lemuroid_core_ppsspp",
         ":lemuroid_core_prosystem",
         ":lemuroid_core_snes9x",
-        ":lemuroid_core_stella"
+        ":lemuroid_core_stella",
+        ":lemuroid_core_citra" //todo added
     )
 
     project(":lemuroid_core_gambatte").projectDir = File("lemuroid-cores/lemuroid_core_gambatte")
@@ -75,5 +57,9 @@ if (usePlayDynamicFeatures()) {
     project(":lemuroid_core_prosystem").projectDir = File("lemuroid-cores/lemuroid_core_prosystem")
     project(":lemuroid_core_mednafen_pce_fast").projectDir = File("lemuroid-cores/lemuroid_core_mednafen_pce_fast")
     project(":lemuroid_core_mednafen_ngp").projectDir = File("lemuroid-cores/lemuroid_core_mednafen_ngp")
+    //todo added
+    project(":lemuroid_core_mednafen_wswan").projectDir = File("lemuroid-cores/lemuroid_core_mednafen_wswan")
     project(":lemuroid_core_dosbox_pure").projectDir = File("lemuroid-cores/lemuroid_core_dosbox_pure")
+    //todo added
+    project(":lemuroid_core_citra").projectDir = File("lemuroid-cores/lemuroid_core_citra")
 }
