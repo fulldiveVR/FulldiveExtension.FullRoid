@@ -1,16 +1,16 @@
 package com.swordfish.lemuroid.lib.library
 
 enum class SystemID(val dbname: String) {
-    NES("nes"),
+    NES("nes"), //market
     SNES("snes"),
     GENESIS("md"),
     GB("gb"),
     GBC("gbc"),
-    GBA("gba"),
-    N64("n64"),
+    GBA("gba"),//market
+    N64("n64"),//market
     SMS("sms"),
     PSP("psp"),
-    NDS("nds"),
+    NDS("nds"),//market
     GG("gg"),
     ATARI2600("atari2600"),
     PSX("psx"),
@@ -22,8 +22,8 @@ enum class SystemID(val dbname: String) {
     SEGACD("scd"),
     NGP("ngp"),
     NGC("ngc"),
-    WS("ws"),
-    WSC("wsc"),
+    WS("ws"),//new
+    WSC("wsc"),//new
     DOS("dos"),
-    NINTENDO_3DS("3ds"),
+    NINTENDO_3DS("3ds"),//new
 }

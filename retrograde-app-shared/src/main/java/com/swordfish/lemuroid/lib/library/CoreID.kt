@@ -1,6 +1,7 @@
 package com.swordfish.lemuroid.lib.library
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.assetsmanager.NoAssetsManager
 import com.swordfish.lemuroid.lib.core.assetsmanager.PPSSPPAssetsManager
@@ -115,6 +116,7 @@ enum class CoreID(
 
     companion object {
         fun getAssetManager(coreID: CoreID): AssetsManager {
+            Log.d("TestB","getAssetManager $coreID")
             return when (coreID) {
                 PPSSPP -> PPSSPPAssetsManager()
                 else -> NoAssetsManager()

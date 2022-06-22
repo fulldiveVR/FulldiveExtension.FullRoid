@@ -27,10 +27,11 @@ class CoreUpdaterImpl(
 ) : CoreUpdater {
 
     private val api = retrofit.create(CoreUpdater.CoreManagerApi::class.java)
-
+// [lemuroid_core_fceumm, lemuroid_core_mgba]
+    //// [DESMUME, FCEUMM, MGBA]
     override fun downloadCores(context: Context, coreIDs: List<CoreID>): Completable {
         val splitInstallManager = SplitInstallManagerFactory.create(context)
-
+        Log.d("TestB","play downloadCores: $coreIDs")
         return cancelPendingInstalls(splitInstallManager)
             .andThen(installCores(splitInstallManager, coreIDs))
             .andThen(installAssets(context, coreIDs))
@@ -120,7 +121,7 @@ class CoreUpdaterImpl(
 
     companion object {
         // Sadly dynamic features need to be tested directly on GooglePlay. Let's leave logging on.
-        private const val TAG_LOG = "CoreManagerImpl"
+        private const val TAG_LOG = "TestB" //todo
         private const val VERBOSE = true
     }
 }

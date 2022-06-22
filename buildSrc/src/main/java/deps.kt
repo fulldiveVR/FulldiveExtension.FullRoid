@@ -21,12 +21,13 @@ object deps {
         const val lifecycle       = "2.3.1"
         const val leanback        = "1.1.0-rc01"
         const val googleApiClient = "1.32.1"
-        const val paging          = "3.0.1"
+        const val paging          = "3.1.0-beta01"
         const val room            = "2.4.0"
         const val epoxy           = "4.6.3-vinay-compose"
         const val serialization   = "1.2.2"
-        const val libretrodroid   = "0.7.0" //todo
+        const val libretrodroid   = "85f0d7e7"
         const val radialgamepad   = "1.1.0"
+        const val lottie          = "3.5.0"
     }
 
     object libs {
@@ -53,7 +54,7 @@ object deps {
             }
             object preferences {
                 const val preferencesKtx = "androidx.preference:preference-ktx:1.1.1"
-            }
+            } ////implementation "androidx.paging:paging-compose:1.0.0-alpha14"
             object paging {
                 const val common = "androidx.paging:paging-common:${versions.paging}"
                 const val runtime = "androidx.paging:paging-runtime:${versions.paging}"
@@ -146,6 +147,7 @@ object deps {
         const val startup                  = "androidx.startup:startup-runtime:1.1.1"
         const val radialgamepad            = "com.github.Swordfish90:RadialGamePad:${versions.radialgamepad}"
         const val libretrodroid            = "com.github.Swordfish90:LibretroDroid:${versions.libretrodroid}"
+        const val lottie                   = "com.airbnb.android:lottie:${versions.lottie}"
     }
 
     object plugins {

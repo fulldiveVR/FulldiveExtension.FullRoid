@@ -22,31 +22,27 @@ package com.swordfish.lemuroid.lib.library
 import androidx.annotation.StringRes
 import com.swordfish.lemuroid.lib.R
 import com.swordfish.lemuroid.lib.core.CoreVariable
+import com.swordfish.lemuroid.lib.fulldive.FulldiveSettings
 import java.util.Locale
 
 data class GameSystem(
     val id: SystemID,
-
     val libretroFullName: String,
-
     @StringRes
     val titleResId: Int,
-
     @StringRes
     val shortTitleResId: Int,
-
     val systemCoreConfigs: List<SystemCoreConfig>,
-
     val uniqueExtensions: List<String>,
-
     val scanOptions: ScanOptions = ScanOptions(),
-
     val supportedExtensions: List<String> = uniqueExtensions,
-
     val hasMultiDiskSupport: Boolean = false,
-
-    val fastForwardSupport: Boolean = true,
+    val fastForwardSupport: Boolean = true
 ) {
+
+    init {
+        FulldiveSettings.isProVersion()
+    }
 
     companion object {
 
@@ -509,7 +505,7 @@ data class GameSystem(
                                     ),
                                 )
                             ),
-                            ExposedSetting(
+                            ExposedSetting( //todo pro
                                 "gambatte_gbc_color_correction",
                                 R.string.setting_gambatte_gbc_color_correction,
                                 arrayListOf(
@@ -653,7 +649,7 @@ data class GameSystem(
                                     ),
                                 )
                             ),
-                            ExposedSetting(
+                            ExposedSetting( //todo pro
                                 "mupen64plus-pak1",
                                 R.string.setting_mupen64plus_pak1,
                                 arrayListOf(
@@ -671,7 +667,7 @@ data class GameSystem(
                                     )
                                 )
                             ),
-                            ExposedSetting(
+                            ExposedSetting(//todo pro
                                 "mupen64plus-pak2",
                                 R.string.setting_mupen64plus_pak2,
                                 arrayListOf(
@@ -987,7 +983,7 @@ data class GameSystem(
                             0 to arrayListOf(ControllerConfigs.LYNX)
                         ),
                         exposedSettings = listOf(
-                            ExposedSetting(
+                            ExposedSetting( //todo pro
                                 "handy_rot",
                                 R.string.setting_handy_rot,
                                 arrayListOf(
@@ -1061,7 +1057,7 @@ data class GameSystem(
                 uniqueExtensions = listOf("ngc"),
             ),
             GameSystem(
-                SystemID.WS,
+                SystemID.WS,//todo new
                 "Bandai - WonderSwan",
                 R.string.game_system_title_ws,
                 R.string.game_system_abbr_ws,
@@ -1099,8 +1095,9 @@ data class GameSystem(
                 ),
                 uniqueExtensions = listOf("ws"),
             ),
+            //    if(FulldiveSettings.isProVersion()) {
             GameSystem(
-                SystemID.WSC,
+                SystemID.WSC, //todo new
                 "Bandai - WonderSwan Color",
                 R.string.game_system_title_wsc,
                 R.string.game_system_abbr_wsc,
@@ -1161,7 +1158,7 @@ data class GameSystem(
                 ),
             ),
             GameSystem(
-                SystemID.NINTENDO_3DS,
+                SystemID.NINTENDO_3DS, //todo new
                 "Nintendo - Nintendo 3DS",
                 R.string.game_system_title_3ds,
                 R.string.game_system_abbr_3ds,

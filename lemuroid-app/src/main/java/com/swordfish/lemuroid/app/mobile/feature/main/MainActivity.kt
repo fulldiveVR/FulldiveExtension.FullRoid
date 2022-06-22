@@ -30,6 +30,7 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -73,8 +74,10 @@ import javax.inject.Inject
 
 class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
 
-    @Inject lateinit var gameLaunchTaskHandler: GameLaunchTaskHandler
-    @Inject lateinit var saveSyncManager: SaveSyncManager
+    @Inject
+    lateinit var gameLaunchTaskHandler: GameLaunchTaskHandler
+    @Inject
+    lateinit var saveSyncManager: SaveSyncManager
 
     private val reviewManager = ReviewManager()
     private var mainViewModel: MainViewModel? = null
@@ -150,6 +153,10 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
             }
             R.id.menu_options_sync -> {
                 SaveSyncWork.enqueueManualWork(this)
+                true
+            }
+            R.id.menu_options_pro -> { //todo visibility
+                findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_pro_tutorial)
                 true
             }
             else -> super.onOptionsItemSelected(item)

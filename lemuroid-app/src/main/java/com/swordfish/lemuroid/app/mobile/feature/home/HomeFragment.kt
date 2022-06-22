@@ -22,6 +22,7 @@ package com.swordfish.lemuroid.app.mobile.feature.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.Carousel
+import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.mobile.feature.proinfo.ProPopupLayout
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.covers.CoverLoader
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
@@ -40,10 +43,14 @@ import javax.inject.Inject
 
 class HomeFragment : Fragment() {
 
-    @Inject lateinit var retrogradeDb: RetrogradeDatabase
-    @Inject lateinit var gameInteractor: GameInteractor
-    @Inject lateinit var coverLoader: CoverLoader
-    @Inject lateinit var settingsInteractor: SettingsInteractor
+    @Inject
+    lateinit var retrogradeDb: RetrogradeDatabase
+    @Inject
+    lateinit var gameInteractor: GameInteractor
+    @Inject
+    lateinit var coverLoader: CoverLoader
+    @Inject
+    lateinit var settingsInteractor: SettingsInteractor
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -92,6 +99,12 @@ class HomeFragment : Fragment() {
 
         homeViewModel.indexingInProgress.observe(viewLifecycleOwner) {
             pagingController.updateLibraryIndexingInProgress(it)
+        }
+
+        if (BuildConfig.FLAVOR.contains("free")) {
+            Log.d("TestB","onCreateView ${BuildConfig.FLAVOR}")
+            val proPopupLayout = view.findViewById<ProPopupLayout>(R.id.proPopupLayout)
+            proPopupLayout.showSnackbar()
         }
     }
 

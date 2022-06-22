@@ -22,6 +22,7 @@ package com.swordfish.lemuroid.ext.feature.core
 import android.content.Context
 import android.net.Uri
 import android.os.Build
+import android.util.Log
 import com.swordfish.lemuroid.common.files.safeDelete
 import com.swordfish.lemuroid.common.kotlin.writeToFile
 import com.swordfish.lemuroid.lib.core.CoreUpdater
@@ -51,6 +52,7 @@ class CoreUpdaterImpl(
     private val api = retrofit.create(CoreUpdater.CoreManagerApi::class.java)
 
     override fun downloadCores(context: Context, coreIDs: List<CoreID>): Completable {
+        Log.d("TestB","free downloadCores: $coreIDs")
         val sharedPreferences = SharedPreferencesHelper.getSharedPreferences(context.applicationContext)
         return Observable.fromIterable(coreIDs)
             .flatMapCompletable { coreId ->
@@ -89,6 +91,7 @@ class CoreUpdaterImpl(
 
         return api.downloadFile(uri.toString())
             .map { response ->
+                Log.d("TestB","api: ${response.body()}")
                 if (!response.isSuccessful) {
                     Timber.e("Download core response was unsuccessful")
                     throw Exception(response.errorBody()!!.string())

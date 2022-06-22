@@ -142,28 +142,29 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                 SystemID.SEGACD,
                 "C6D10268"
             ),
-            Bios(
-                "bios7.bin",
-                "DF692A80A5B1BC90728BC3DFC76CD948",
-                "Nintendo DS ARM7",
-                SystemID.NDS,
-                "1280F0D5"
-            ),
-            Bios(
-                "bios9.bin",
-                "A392174EB3E572FED6447E956BDE4B25",
-                "Nintendo DS ARM9",
-                SystemID.NDS,
-                "2AB23573"
-            ),
-            Bios(
-                "firmware.bin",
-                "E45033D9B0FA6B0DE071292BBA7C9D13",
-                "Nintendo DS Firmware",
-                SystemID.NDS,
-                "945F9DC9",
-                "nds_firmware.bin"
-            )
+            //
+//            Bios(
+//                "bios7.bin",
+//                "DF692A80A5B1BC90728BC3DFC76CD948",
+//                "Nintendo DS ARM7",
+//                SystemID.NDS,
+//                "1280F0D5"
+//            ),
+//            Bios(
+//                "bios9.bin",
+//                "A392174EB3E572FED6447E956BDE4B25",
+//                "Nintendo DS ARM9",
+//                SystemID.NDS,
+//                "2AB23573"
+//            ),
+//            Bios(
+//                "firmware.bin",
+//                "E45033D9B0FA6B0DE071292BBA7C9D13",
+//                "Nintendo DS Firmware",
+//                SystemID.NDS,
+//                "945F9DC9",
+//                "nds_firmware.bin"
+//            )
         )
     }
 }

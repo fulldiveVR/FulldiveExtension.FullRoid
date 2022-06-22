@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~  RetrogradeApplicationComponent.kt
   ~
   ~  Copyright (C) 2017 Retrograde Project
@@ -25,4 +24,8 @@
     <color name="textColorPrimary">#0D1826</color>
     <color name="textColorSecondary">#BABDC1</color>
     <color name="textColorAccent">#FF9900</color>
+    <color name="backgroundPopup">@color/md_theme_light_inverseSurface</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorTransparent">#00ffffff</color>
+
 </resources>

@@ -34,4 +34,19 @@
     <dimen name="loading_circle_progress">56dp</dimen>
     <dimen name="loading_circle_icon">32dp</dimen>
     <dimen name="loading_circle_progress_thickness">6dp</dimen>
+
+    <dimen name="size_1dp">1dp</dimen>
+    <dimen name="size_2dp">2dp</dimen>
+    <dimen name="size_4dp">4dp</dimen>
+    <dimen name="size_8dp">8dp</dimen>
+    <dimen name="size_10dp">10dp</dimen>
+    <dimen name="size_12dp">12dp</dimen>
+    <dimen name="size_14dp">14dp</dimen>
+    <dimen name="size_16dp">16dp</dimen>
+    <dimen name="size_18dp">18dp</dimen>
+    <dimen name="size_24dp">24dp</dimen>
+    <dimen name="size_32dp">32dp</dimen>
+    <dimen name="size_40dp">40dp</dimen>
+    <dimen name="lottie_animation_width">150dp</dimen>
+    <dimen name="lottie_animation_height">180dp</dimen>
 </resources>
