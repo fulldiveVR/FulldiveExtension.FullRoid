@@ -30,10 +30,9 @@ import com.swordfish.lemuroid.lib.library.GameSystem
 
 class CoresSelectionPreferences {
 
-    fun addCoresSelectionPreferences(preferenceScreen: PreferenceScreen) {
+    fun addCoresSelectionPreferences(preferenceScreen: PreferenceScreen, gameSystems: List<GameSystem>) {
         val context = preferenceScreen.context
-
-        GameSystem.all()
+        gameSystems
             .filter { it.systemCoreConfigs.size > 1 }
             .forEach {
                 preferenceScreen.addPreference(createPreference(context, it))

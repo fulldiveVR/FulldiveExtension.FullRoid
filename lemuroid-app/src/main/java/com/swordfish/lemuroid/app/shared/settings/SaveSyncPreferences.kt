@@ -28,9 +28,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import androidx.preference.SwitchPreference
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 import com.swordfish.lemuroid.lib.library.CoreID
-import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 
 class SaveSyncPreferences(private val saveSyncManager: SaveSyncManager) {
@@ -120,7 +120,7 @@ class SaveSyncPreferences(private val saveSyncManager: SaveSyncManager) {
     }
 
     private fun getDisplayNameForCore(context: Context, coreID: CoreID): String {
-        val systems = GameSystem.findSystemForCore(coreID)
+        val systems = GameSystemHelper().findSystemForCore(coreID)
         val systemHasMultipleCores = systems.any { it.systemCoreConfigs.size > 1 }
 
         val chunks = mutableListOf<String>().apply {

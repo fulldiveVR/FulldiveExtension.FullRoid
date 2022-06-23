@@ -52,7 +52,6 @@ class CoreUpdaterImpl(
     private val api = retrofit.create(CoreUpdater.CoreManagerApi::class.java)
 
     override fun downloadCores(context: Context, coreIDs: List<CoreID>): Completable {
-        Log.d("TestB","free downloadCores: $coreIDs")
         val sharedPreferences = SharedPreferencesHelper.getSharedPreferences(context.applicationContext)
         return Observable.fromIterable(coreIDs)
             .flatMapCompletable { coreId ->
@@ -91,7 +90,6 @@ class CoreUpdaterImpl(
 
         return api.downloadFile(uri.toString())
             .map { response ->
-                Log.d("TestB","api: ${response.body()}")
                 if (!response.isSuccessful) {
                     Timber.e("Download core response was unsuccessful")
                     throw Exception(response.errorBody()!!.string())

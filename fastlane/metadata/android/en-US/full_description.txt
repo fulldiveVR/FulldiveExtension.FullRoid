@@ -4,28 +4,28 @@ Lemuroid is an open-source emulator based on Libretro. It's designed to work on 
 Supported Systems:
 
 - Atari 2600 (A26)
-- Atari 7800 (A78)//todo added
-- Atari Lynx (Lynx)//todo added
+- Atari 7800 (A78)
+- Atari Lynx (Lynx)
 - Nintendo (NES)
 - Super Nintendo (SNES)
 - Game Boy (GB)
 - Game Boy Color (GBC)
 - Game Boy Advance (GBA)
 - Sega Genesis (aka Megadrive)
-- Sega CD (aka Mega CD)//todo added
+- Sega CD (aka Mega CD)
 - Sega Master System (SMS)
 - Sega Game Gear (GG)
 - Nintendo 64 (N64)
 - PlayStation (PSX)
 - PlayStation Portable (PSP)
-- FinalBurn Neo (Arcade)//todo added
-- Nintendo DS (NDS)//todo added
-- NEC PC Engine (PCE)//todo added
-- Neo Geo Pocket (NGP)//todo added
-- Neo Geo Pocket Color (NGC)//todo added
-- WonderSwan (WS)//todo added
-- WonderSwan Color (WSC)//todo added
-- Nintendo 3DS (3DS)//todo added
+- FinalBurn Neo (Arcade)
+- Nintendo DS (NDS)
+- NEC PC Engine (PCE)
+- Neo Geo Pocket (NGP)
+- Neo Geo Pocket Color (NGC)
+- WonderSwan (WS)
+- WonderSwan Color (WSC)
+- Nintendo 3DS (3DS)
 
 
 Features:
@@ -36,13 +36,13 @@ Features:
 - Quick save/load with slots
 - Support for zipped ROMs
 - Display simulation (LCD/CRT)
-- Fast-forward support //todo added
+- Fast-forward support
 - Gamepad support
 - Tilt to stick support
-- Touch control customization (size and position)//todo added
-- Cloud save sync//todo added!!!
+- Touch control customization (size and position)
+- Cloud save sync
 - No ads
-- Local multiplayer (connect multiple gamepads to the same device)//todo added
+- Local multiplayer (connect multiple gamepads to the same device)
 
 Keep in mind not every device can emulate every console. A very powerful one is required for more recent systems such as PSP and DS and 3DS.
 

@@ -44,7 +44,8 @@ import dagger.Lazy
 class LemuroidLibrary(
     private val retrogradedb: RetrogradeDatabase,
     private val providerProviderRegistry: Lazy<StorageProviderRegistry>,
-    private val biosManager: BiosManager
+    private val biosManager: BiosManager,
+    private val gameSystemHelper: GameSystemHelperImpl
 ) {
     fun indexLibrary(): Completable {
         val startedAtMs = System.currentTimeMillis()
@@ -61,7 +62,7 @@ class LemuroidLibrary(
                     .doOnNext { pairs -> updateExistingGames(pairs, startedAtMs) }
                     .doOnNext { pairs -> refreshGamesDataFiles(pairs, startedAtMs) }
                     .map { pairs -> filterNotExisting(pairs) }
-                    .flatMap { retrieveGames(it, provider, startedAtMs) }
+                    .flatMap { retrieveGames(it, provider, startedAtMs, gameSystemHelper) }
                     .buffer(BUFFER_SIZE)
                     .doOnNext { pairs ->
 
@@ -141,17 +142,19 @@ class LemuroidLibrary(
     private fun retrieveGames(
         it: List<GroupedStorageFiles>,
         provider: StorageProvider,
-        startedAtMs: Long
+        startedAtMs: Long,
+        gameSystemHelper: GameSystemHelperImpl
     ): Observable<Pair<GroupedStorageFiles, Optional<Game>>> {
         return Observable.fromIterable(it).flatMapSingle { storageFile ->
-            retrieveGame(storageFile, provider, startedAtMs)
+            retrieveGame(storageFile, provider, startedAtMs, gameSystemHelper)
         }
     }
 
     private fun retrieveGame(
         groupedStorageFile: GroupedStorageFiles,
         provider: StorageProvider,
-        startedAtMs: Long
+        startedAtMs: Long,
+        gameSystemHelper: GameSystemHelperImpl
     ): Single<Pair<GroupedStorageFiles, Optional<Game>>> {
         return Observable.fromIterable(sortedFilesForScanning(groupedStorageFile))
             .flatMapMaybe {
@@ -161,7 +164,7 @@ class LemuroidLibrary(
                 provider.metadataProvider.retrieveMetadata(storageFile).map { storageFile to it }
             }
             .map { (storageFile, metadata) ->
-                convertGameMetadataToGame(groupedStorageFile, storageFile, metadata, startedAtMs)
+                convertGameMetadataToGame(groupedStorageFile, storageFile, metadata, startedAtMs, gameSystemHelper)
             }
             .filter { it is Some }
             .first(None)
@@ -176,13 +179,14 @@ class LemuroidLibrary(
         groupedStorageFile: GroupedStorageFiles,
         storageFile: StorageFile,
         gameMetadataOptional: Optional<GameMetadata>,
-        lastIndexedAt: Long
+        lastIndexedAt: Long,
+        gameSystemHelper: GameSystemHelperImpl
     ): Optional<Game> {
 
         if (gameMetadataOptional is None) return None
         val gameMetadata = gameMetadataOptional.component1()!!
 
-        val gameSystem = GameSystem.findById(gameMetadata.system!!)
+        val gameSystem = gameSystemHelper.findById(gameMetadata.system!!)
 
         // If the databased matched a data file (as with bin/cue) we force link the primary filename
         val fileName = if (groupedStorageFile.dataFiles.isNotEmpty()) {

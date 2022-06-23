@@ -23,6 +23,7 @@ package com.swordfish.lemuroid.app.tv.home
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.lib.library.GameSystem
@@ -57,7 +58,7 @@ class TVHomeViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : V
         .selectSystemsWithCount()
         .map { systemCounts ->
             systemCounts.asSequence().filter { (_, count) -> count > 0 }
-                .map { (systemId, count) -> GameSystem.findById(systemId).metaSystemID() to count }
+                .map { (systemId, count) -> GameSystemHelper().findById(systemId).metaSystemID() to count }
                 .groupBy { (metaSystemId, _) -> metaSystemId }
                 .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumBy { it.second }) }
                 .sortedBy { it.getName(appContext) }

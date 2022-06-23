@@ -62,7 +62,7 @@ android {
                 ":lemuroid_core_snes9x",
                 ":lemuroid_core_stella",
 
-                ":lemuroid_core_citra"    //todo added
+                ":lemuroid_core_citra"
             )
         )
     }
@@ -74,14 +74,14 @@ android {
 
         create("free") {
             dimension = "opensource"
-            applicationId = "com.fulldive.extension.fullroid.debug" //todo
-            resValue("string", "lemuroid_name", "FREE Full Roid")
+            applicationId = "com.fulldive.extension.fullroid"
+            resValue("string", "lemuroid_name", "Full Roid")
         }
 
         create("pro") {
             dimension = "opensource"
             applicationId = "com.fulldive.extension.fullroid.pro"
-            resValue("string", "lemuroid_name", "Pro Full Roid")
+            resValue("string", "lemuroid_name", "Full Roid PRO")
         }
 
         create("play") {
@@ -166,6 +166,7 @@ dependencies {
     "bundleImplementation"(project(":bundled-cores"))
 
     "freeImplementation"(project(":lemuroid-app-ext-free"))
+    "proImplementation"(project(":lemuroid-app-ext-free"))
     "playImplementation"(project(":lemuroid-app-ext-play"))
 
     implementation(deps.libs.androidx.navigation.navigationFragment)
@@ -198,7 +199,6 @@ dependencies {
     implementation(deps.libs.androidx.paging.runtime)
     implementation(deps.libs.androidx.paging.rxjava2)
     implementation(deps.libs.androidx.room.common)
-    //paging  implementation(deps.libs.androidx.room.roomPaging)
     implementation(deps.libs.androidx.room.runtime)
     implementation(deps.libs.androidx.room.rxjava2)
     implementation(deps.libs.autodispose.android.archComponents)

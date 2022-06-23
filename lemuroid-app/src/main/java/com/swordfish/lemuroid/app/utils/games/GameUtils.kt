@@ -21,7 +21,7 @@
 package com.swordfish.lemuroid.app.utils.games
 
 import android.content.Context
-import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 class GameUtils {
@@ -38,7 +38,7 @@ class GameUtils {
         }
 
         private fun getSystemNameForGame(context: Context, game: Game): String {
-            val systemTitleResource = GameSystem.findById(game.systemId).shortTitleResId
+            val systemTitleResource = GameSystemHelper().findById(game.systemId).shortTitleResId
             return context.getString(systemTitleResource)
         }
     }

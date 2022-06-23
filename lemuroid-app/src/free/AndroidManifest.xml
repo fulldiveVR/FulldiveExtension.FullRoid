@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingLeanbackLauncher">
+
+    <permission
+        android:name="com.fulldive.extension.fullroid.access.read"
+        android:protectionLevel="signature" />
+
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <queries>
+        <package android:name="com.fulldive.extension.fullroid.pro" />
+    </queries>
+    <application>
+        <provider
+            android:name=".app.appextension.FulldiveContentProvider"
+            android:authorities="com.fulldive.extension.fullroid.FulldiveContentProvider"
+            android:exported="true"
+            android:permission="com.fulldive.extension.fullroid.access.read" />
+    </application>
+</manifest>

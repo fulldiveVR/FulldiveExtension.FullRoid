@@ -22,17 +22,17 @@ package com.swordfish.lemuroid.app.mobile.feature.home
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.Carousel
-import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.PopupManager
 import com.swordfish.lemuroid.app.mobile.feature.proinfo.ProPopupLayout
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.covers.CoverLoader
@@ -45,10 +45,13 @@ class HomeFragment : Fragment() {
 
     @Inject
     lateinit var retrogradeDb: RetrogradeDatabase
+
     @Inject
     lateinit var gameInteractor: GameInteractor
+
     @Inject
     lateinit var coverLoader: CoverLoader
+
     @Inject
     lateinit var settingsInteractor: SettingsInteractor
 
@@ -101,10 +104,12 @@ class HomeFragment : Fragment() {
             pagingController.updateLibraryIndexingInProgress(it)
         }
 
-        if (BuildConfig.FLAVOR.contains("free")) {
-            Log.d("TestB","onCreateView ${BuildConfig.FLAVOR}")
-            val proPopupLayout = view.findViewById<ProPopupLayout>(R.id.proPopupLayout)
-            proPopupLayout.showSnackbar()
+        val popupManager = PopupManager()
+        val isProPopupVisible = popupManager.isProVersionPopupVisible(requireContext())
+        view.findViewById<ProPopupLayout>(R.id.proPopupLayout).apply {
+            this.isVisible = isProPopupVisible
+            onCloseClickListener = { popupManager.setProVersionPopupShown(requireContext()) }
+            showSnackbar()
         }
     }
 

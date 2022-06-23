@@ -1,0 +1,14 @@
+<resources>
+
+    <style name="FlatTheme.OnboardingColoredButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minHeight">@dimen/size_48dp</item>
+        <item name="android:paddingStart">@dimen/size_48dp</item>
+        <item name="android:paddingEnd">@dimen/size_48dp</item>
+        <item name="android:background">@drawable/colored_button_background</item>
+        <item name="android:textColor">@drawable/selector_text_color</item>
+        <item name="android:layout_marginBottom">@dimen/size_10dp</item>
+    </style>
+</resources>

@@ -22,6 +22,7 @@ package com.swordfish.lemuroid.app
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity
 import com.swordfish.lemuroid.app.mobile.feature.main.MainActivity
@@ -140,8 +141,12 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun ovgdbMetadataProvider(ovgdbManager: LibretroDBManager) = LibretroDBMetadataProvider(
-            ovgdbManager
+        fun ovgdbMetadataProvider(
+            ovgdbManager: LibretroDBManager,
+            gameSystemHelper: GameSystemHelper
+        ) = LibretroDBMetadataProvider(
+            ovgdbManager,
+            gameSystemHelper
         )
 
         @Provides
@@ -179,8 +184,9 @@ abstract class LemuroidApplicationModule {
         fun lemuroidLibrary(
             db: RetrogradeDatabase,
             storageProviderRegistry: Lazy<StorageProviderRegistry>,
-            biosManager: BiosManager
-        ) = LemuroidLibrary(db, storageProviderRegistry, biosManager)
+            biosManager: BiosManager,
+            gameSystemHelper: GameSystemHelper
+        ) = LemuroidLibrary(db, storageProviderRegistry, biosManager, gameSystemHelper)
 
         @Provides
         @PerApp

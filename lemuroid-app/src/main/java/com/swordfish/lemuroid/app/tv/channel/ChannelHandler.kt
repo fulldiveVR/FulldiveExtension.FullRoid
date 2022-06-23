@@ -76,7 +76,7 @@ class ChannelHandler(
         ChannelLogoUtils.storeChannelLogo(
             appContext,
             channelId,
-            convertToBitmap(appContext, R.mipmap.lemuroid_tv_channel)!!
+            convertToBitmap(appContext, R.mipmap.ic_launcher)!!
         )
 
         TvContractCompat.requestChannelBrowsable(appContext, channelId)

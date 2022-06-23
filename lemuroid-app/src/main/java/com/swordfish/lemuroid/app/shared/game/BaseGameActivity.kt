@@ -41,6 +41,7 @@ import com.jakewharton.rxrelay2.BehaviorRelay
 import com.jakewharton.rxrelay2.PublishRelay
 import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.settings.RxSettingsManager
 import com.swordfish.lemuroid.app.shared.GameMenuContract
@@ -126,15 +127,32 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     private lateinit var loadingView: ProgressBar
     private lateinit var loadingMessageView: TextView
 
-    @Inject lateinit var settingsManager: RxSettingsManager
-    @Inject lateinit var statesManager: StatesManager
-    @Inject lateinit var statesPreviewManager: StatesPreviewManager
-    @Inject lateinit var savesManager: SavesManager
-    @Inject lateinit var coreVariablesManager: CoreVariablesManager
-    @Inject lateinit var inputDeviceManager: InputDeviceManager
-    @Inject lateinit var gameLoader: GameLoader
-    @Inject lateinit var controllerConfigsManager: ControllerConfigsManager
-    @Inject lateinit var rumbleManager: RumbleManager
+    @Inject
+    lateinit var settingsManager: RxSettingsManager
+
+    @Inject
+    lateinit var statesManager: StatesManager
+
+    @Inject
+    lateinit var statesPreviewManager: StatesPreviewManager
+
+    @Inject
+    lateinit var savesManager: SavesManager
+
+    @Inject
+    lateinit var coreVariablesManager: CoreVariablesManager
+
+    @Inject
+    lateinit var inputDeviceManager: InputDeviceManager
+
+    @Inject
+    lateinit var gameLoader: GameLoader
+
+    @Inject
+    lateinit var controllerConfigsManager: ControllerConfigsManager
+
+    @Inject
+    lateinit var rumbleManager: RumbleManager
 
     private var defaultExceptionHandler: Thread.UncaughtExceptionHandler? = Thread.getDefaultUncaughtExceptionHandler()
 
@@ -170,7 +188,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
         game = intent.getSerializableExtra(EXTRA_GAME) as Game
         systemCoreConfig = intent.getSerializableExtra(EXTRA_SYSTEM_CORE_CONFIG) as SystemCoreConfig
-        system = GameSystem.findById(game.systemId)
+        system = GameSystemHelper().findById(game.systemId)
 
         loadGame()
 
@@ -416,7 +434,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     }
 
     private fun isAutoSaveEnabled(): Single<Boolean> {
-        return settingsManager.autoSave.map { it && systemCoreConfig.statesSupported }
+        return Single.fromCallable { false }//settingsManager.autoSave.map { it && systemCoreConfig.statesSupported }
     }
 
     override fun onStart() {
@@ -785,7 +803,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
-    open fun onFinishTriggered() { }
+    open fun onFinishTriggered() {}
 
     private fun getAutoSaveCompletable(game: Game): Completable {
         return isAutoSaveEnabled()
@@ -948,7 +966,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                     game,
                     requestLoadSave && autoSaveEnabled,
                     systemCoreConfig,
-                    directLoad
+                    directLoad,
+                    GameSystemHelper().findById(game.systemId)
                 ).map { NTuple4(it, filter, lowLatencyAudio, enableRumble) }
             }
             .subscribeOn(Schedulers.single())

@@ -31,6 +31,8 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.isFullRoidProInstalled
+import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
@@ -44,9 +46,14 @@ import javax.inject.Inject
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
-    @Inject lateinit var settingsInteractor: SettingsInteractor
-    @Inject lateinit var directoriesManager: DirectoriesManager
-    @Inject lateinit var saveSyncManager: SaveSyncManager
+    @Inject
+    lateinit var settingsInteractor: SettingsInteractor
+
+    @Inject
+    lateinit var directoriesManager: DirectoriesManager
+
+    @Inject
+    lateinit var saveSyncManager: SaveSyncManager
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -87,6 +94,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val displayBiosPreference: Preference? = findPreference(getString(R.string.pref_key_display_bios_info))
         val resetSettings: Preference? = findPreference(getString(R.string.pref_key_reset_settings))
 
+        val proTutorialPreference: Preference? = findPreference(getString(R.string.pref_key_open_pro_tutorial))
+        val t = !requireContext().packageManager.isFullRoidProInstalled() && !isProVersion()
+        proTutorialPreference?.isVisible = t
         settingsViewModel.currentFolder
             .observeOn(AndroidSchedulers.mainThread())
             .autoDispose(scope())
@@ -119,6 +129,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getString(R.string.pref_key_open_cores_selection) -> handleDisplayCorePage()
             getString(R.string.pref_key_display_bios_info) -> handleDisplayBiosInfo()
             getString(R.string.pref_key_advanced_settings) -> handleAdvancedSettings()
+            getString(R.string.pref_key_open_pro_tutorial) -> openProTutorial()
             getString(R.string.pref_key_reset_settings) -> handleResetSettings()
         }
         return super.onPreferenceTreeClick(preference)
@@ -126,6 +137,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun handleAdvancedSettings() {
         findNavController().navigate(R.id.navigation_settings_advanced)
+    }
+
+    private fun openProTutorial() {
+        findNavController().navigate(R.id.navigation_pro_tutorial)
     }
 
     private fun handleDisplayBiosInfo() {

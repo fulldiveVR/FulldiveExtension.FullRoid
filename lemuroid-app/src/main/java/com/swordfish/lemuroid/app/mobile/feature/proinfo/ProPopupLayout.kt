@@ -2,16 +2,16 @@ package com.swordfish.lemuroid.app.mobile.feature.proinfo
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
-import androidx.recyclerview.widget.RecyclerView
 import com.swordfish.lemuroid.R
 
 class ProPopupLayout : FrameLayout {
+
+    var onCloseClickListener: (() -> Unit)? = null
 
     private val animator = NavigationPanelAnimator()
 
@@ -41,13 +41,13 @@ class ProPopupLayout : FrameLayout {
     }
 
     fun showSnackbar() {
-        Log.d("TestB", "showSnackbar")
         val cardView = findViewById<CardView>(R.id.cardView)
         cardView.isVisible = true
         animator.show(cardView)
     }
 
-    fun hideSnackbar() {
+    private fun hideSnackbar() {
+        onCloseClickListener?.invoke()
         val cardView = findViewById<CardView>(R.id.cardView)
         animator.hide(
             cardView,

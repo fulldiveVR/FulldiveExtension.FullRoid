@@ -25,6 +25,7 @@ import androidx.work.ForegroundInfo
 import androidx.work.ListenableWorker
 import androidx.work.RxWorker
 import androidx.work.WorkerParameters
+import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
 import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.CoresSelection
@@ -43,9 +44,12 @@ import javax.inject.Inject
 class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
     RxWorker(context, workerParams) {
 
-    @Inject lateinit var retrogradeDatabase: RetrogradeDatabase
-    @Inject lateinit var coreUpdater: CoreUpdater
-    @Inject lateinit var coresSelection: CoresSelection
+    @Inject
+    lateinit var retrogradeDatabase: RetrogradeDatabase
+    @Inject
+    lateinit var coreUpdater: CoreUpdater
+    @Inject
+    lateinit var coresSelection: CoresSelection
 
     override fun createWork(): Single<Result> {
         AndroidWorkerInjection.inject(this)
@@ -66,7 +70,7 @@ class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
             .firstOrError()
             .flatMap { systemIds ->
                 Observable.fromIterable(systemIds)
-                    .map { GameSystem.findById(it) }
+                    .map { GameSystemHelper().findById(it) }
                     .flatMapSingle { coresSelection.getCoreConfigForSystem(it) }
                     .map { it.coreID }
                     .toList()

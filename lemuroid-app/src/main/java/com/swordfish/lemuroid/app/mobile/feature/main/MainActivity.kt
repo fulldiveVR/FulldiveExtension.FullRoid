@@ -24,30 +24,25 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.elevation.SurfaceColors
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.app.appextension.PopupManager
+import com.swordfish.lemuroid.app.appextension.*
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesFragment
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesFragment
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeFragment
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.AdvancedSettingsFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.BiosSettingsFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.CoresSelectionFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.GamepadSettingsFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.SaveSyncFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsFragment
+import com.swordfish.lemuroid.app.mobile.feature.settings.*
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsFragment
 import com.swordfish.lemuroid.app.shared.GameInteractor
@@ -57,18 +52,19 @@ import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
+import com.swordfish.lemuroid.common.view.setVisibleOrGone
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
 import com.swordfish.lemuroid.lib.android.RetrogradeAppCompatActivity
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerFragment
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
-import com.swordfish.lemuroid.lib.storage.DirectoriesManager
-import com.swordfish.lemuroid.common.view.setVisibleOrGone
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
+import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.android.synthetic.main.activity_empty.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -76,6 +72,7 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
 
     @Inject
     lateinit var gameLaunchTaskHandler: GameLaunchTaskHandler
+
     @Inject
     lateinit var saveSyncManager: SaveSyncManager
 
@@ -89,6 +86,7 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         setContentView(R.layout.activity_main)
         initializeActivity()
         PopupManager().onAppStarted(this)
+        Log.d("TestB"," pack: ${this.applicationInfo.packageName}")
     }
 
     override fun activity(): Activity = this
@@ -137,8 +135,10 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         val isSupported = saveSyncManager.isSupported()
         val isConfigured = saveSyncManager.isConfigured()
         menu?.findItem(R.id.menu_options_sync)?.isVisible = isSupported && isConfigured
+        menu?.findItem(R.id.menu_options_pro)?.isVisible = !isProVersion()
         return super.onPrepareOptionsMenu(menu)
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_mobile_settings, menu)
@@ -155,8 +155,10 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
                 SaveSyncWork.enqueueManualWork(this)
                 true
             }
-            R.id.menu_options_pro -> { //todo visibility
-                findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_pro_tutorial)
+            R.id.menu_options_pro -> {
+                if (!launchApp(this, FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)) {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_pro_tutorial)
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)

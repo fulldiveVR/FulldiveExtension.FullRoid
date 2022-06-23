@@ -61,12 +61,11 @@ class GameLoader(
         game: Game,
         loadSave: Boolean,
         systemCoreConfig: SystemCoreConfig,
-        directLoad: Boolean
+        directLoad: Boolean,
+        system: GameSystem
     ): Observable<LoadingState> = Observable.create { emitter ->
         try {
             emitter.onNext(LoadingState.LoadingCore)
-
-            val system = GameSystem.findById(game.systemId)
 
             val coreLibrary = runCatching {
                 findLibrary(appContext, systemCoreConfig.coreID)!!.absolutePath
