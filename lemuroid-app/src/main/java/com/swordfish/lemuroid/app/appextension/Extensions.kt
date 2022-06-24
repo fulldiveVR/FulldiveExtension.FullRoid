@@ -99,11 +99,9 @@ fun launchApp(activity: Activity, appPackageName: String): Boolean {
 
 fun PackageManager.isPackageInstalled(packageName: String): Boolean {
     return try {
-       val i =  getPackageInfo(packageName, 0)
-        Log.d("TestB","i: $i")
+        getPackageInfo(packageName, 0)
         true
     } catch (e: PackageManager.NameNotFoundException) {
-        Log.d("TestB","eeer: $packageName")
         false
     }
 }
