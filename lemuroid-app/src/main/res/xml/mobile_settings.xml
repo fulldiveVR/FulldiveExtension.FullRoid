@@ -63,11 +63,11 @@
             app:useSimpleSummaryProvider="true"
             android:defaultValue="auto"/>
 
-<!--        <SwitchPreferenceCompat-->
-<!--            android:key="@string/pref_key_autosave"-->
-<!--            android:title="@string/settings_title_enable_autosave"-->
-<!--            app:iconSpaceReserved="false"-->
-<!--            android:defaultValue="true"/>-->
+        <SwitchPreferenceCompat
+            android:key="@string/pref_key_autosave"
+            android:title="@string/settings_title_enable_autosave"
+            app:iconSpaceReserved="false"
+            android:defaultValue="true"/>
 
         <PreferenceScreen
             android:key="@string/pref_key_open_pro_tutorial"

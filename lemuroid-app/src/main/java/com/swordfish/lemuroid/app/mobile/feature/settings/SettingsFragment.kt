@@ -97,8 +97,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val resetSettings: Preference? = findPreference(getString(R.string.pref_key_reset_settings))
 
         val proTutorialPreference: Preference? = findPreference(getString(R.string.pref_key_open_pro_tutorial))
-        val t = !requireContext().packageManager.isFullRoidProInstalled() && !isProVersion()
-        proTutorialPreference?.isVisible = t
+        proTutorialPreference?.isVisible = !requireContext().packageManager.isFullRoidProInstalled() && !isProVersion()
+
         settingsViewModel.currentFolder
             .observeOn(AndroidSchedulers.mainThread())
             .autoDispose(scope())

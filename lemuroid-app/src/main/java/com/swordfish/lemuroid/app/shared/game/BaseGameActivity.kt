@@ -436,7 +436,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     }
 
     private fun isAutoSaveEnabled(): Single<Boolean> {
-        return Single.fromCallable { false }//settingsManager.autoSave.map { it && systemCoreConfig.statesSupported }
+        return settingsManager.autoSave.map { it && systemCoreConfig.statesSupported }
     }
 
     override fun onStart() {
