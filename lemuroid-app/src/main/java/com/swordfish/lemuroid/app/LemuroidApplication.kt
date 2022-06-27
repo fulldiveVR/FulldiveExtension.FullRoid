@@ -25,7 +25,9 @@ package com.swordfish.lemuroid.app
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.work.ListenableWorker
+import com.flurry.android.FlurryAgent
 import com.google.android.material.color.DynamicColors
+import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.ext.feature.context.ContextHandler
 import com.swordfish.lemuroid.lib.injection.HasWorkerInjector
 import dagger.android.AndroidInjector
@@ -42,13 +44,17 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector {
     @Inject
     lateinit var gdriveStorageProvider: GDriveStorageProvider*/
 
-    @Inject lateinit var workerInjector: DispatchingAndroidInjector<ListenableWorker>
+    @Inject
+    lateinit var workerInjector: DispatchingAndroidInjector<ListenableWorker>
 
     @SuppressLint("CheckResult")
     override fun onCreate() {
         super.onCreate()
 
         DynamicColors.applyToActivitiesIfAvailable(this)
+        FlurryAgent.Builder()
+            .withLogEnabled(true)
+            .build(this, BuildConfig.FLURRY_API_KEY)
 
         // var isPlanted = false
         /* rxPrefs.getBoolean(getString(R.string.pref_key_flags_logging)).asObservable()

@@ -24,9 +24,11 @@ import android.widget.ImageView
 import androidx.cardview.widget.CardView
 import androidx.core.view.isVisible
 import com.swordfish.lemuroid.R
+import kotlinx.android.synthetic.main.layout_pro_popup.view.*
 
 class ProPopupLayout : FrameLayout {
 
+    var onClickListener: (() -> Unit)? = null
     var onCloseClickListener: (() -> Unit)? = null
 
     private val animator = NavigationPanelAnimator()
@@ -54,6 +56,7 @@ class ProPopupLayout : FrameLayout {
 
         val closeImageView = findViewById<ImageView>(R.id.closeImageView)
         closeImageView.setOnClickListener { hideSnackbar() }
+        containerLayout.setOnClickListener { onClickListener?.invoke() }
     }
 
     fun showSnackbar() {

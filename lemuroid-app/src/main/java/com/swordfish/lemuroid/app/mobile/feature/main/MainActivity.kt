@@ -39,6 +39,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.elevation.SurfaceColors
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.*
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesFragment
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesFragment
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeFragment
@@ -76,6 +78,9 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
 
     @Inject
     lateinit var saveSyncManager: SaveSyncManager
+
+    @Inject
+    lateinit var actionTracker: IActionTracker
 
     private val reviewManager = ReviewManager()
     private var mainViewModel: MainViewModel? = null
@@ -157,6 +162,7 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
             }
             R.id.menu_options_pro -> {
                 if (!launchApp(this, FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)) {
+                    actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_TOOLBAR)
                     findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_pro_tutorial)
                 }
                 true

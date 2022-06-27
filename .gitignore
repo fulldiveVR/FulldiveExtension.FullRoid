@@ -17,3 +17,7 @@ project.properties
 .externalNativeBuild
 local.properties
 release.jks
+flurry/key.txt
+google/key.txt
+lemuroid-app/src/main/google-services.json
+

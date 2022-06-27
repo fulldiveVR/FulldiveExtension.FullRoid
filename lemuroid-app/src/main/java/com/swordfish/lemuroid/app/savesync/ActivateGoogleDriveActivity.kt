@@ -20,7 +20,7 @@
  *
  */
 
-package com.swordfish.lemuroid.ext.feature.savesync
+package com.swordfish.lemuroid.app.savesync
 
 import android.app.Activity
 import android.content.Intent
@@ -34,6 +34,7 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Scope
 import com.google.api.services.drive.DriveScopes
+import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.ext.R
 import timber.log.Timber
 
@@ -98,7 +99,7 @@ class ActivateGoogleDriveActivity : Activity() {
 
     private fun googleSignInClient(): GoogleSignInClient {
         val signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestId()
+            .requestIdToken(BuildConfig.SERVER_CLIENT_ID)
             .requestEmail()
             .requestScopes(Scope(DriveScopes.DRIVE_APPDATA))
             .build()

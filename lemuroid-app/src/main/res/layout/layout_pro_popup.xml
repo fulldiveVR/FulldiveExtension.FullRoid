@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  *  RetrogradeApplicationComponent.kt
   ~  *
@@ -45,7 +44,9 @@
             android:id="@+id/containerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/size_16dp">
+            android:paddingStart="@dimen/size_16dp"
+            android:paddingTop="@dimen/size_16dp"
+            android:paddingBottom="@dimen/size_16dp">
 
             <ImageView
                 android:id="@+id/proImageView"
@@ -90,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:paddingStart="@dimen/size_16dp"
+                android:paddingEnd="@dimen/size_16dp"
                 android:paddingBottom="@dimen/size_16dp"
                 android:src="@drawable/ic_cross"
                 app:layout_constraintEnd_toEndOf="parent"

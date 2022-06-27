@@ -26,6 +26,21 @@ plugins {
     id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.firebase.crashlytics")
+    id("com.google.gms.google-services")
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+    }
+
+    dependencies {
+        classpath(deps.libs.googleServices.googleServices)
+        classpath(deps.libs.firebase.firebase)
+    }
 }
 
 android {
@@ -37,6 +52,12 @@ android {
         versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
         versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
         applicationId = "com.fulldive.extension.fullroid"
+        buildConfigField("String", "FLURRY_API_KEY", file("../flurry/key.txt").readText())
+        buildConfigField("String", "SERVER_CLIENT_ID", file("../google/key.txt").readText())
+
+        firebaseCrashlytics {
+            mappingFileUploadEnabled = false
+        }
     }
 
     if (usePlayDynamicFeatures()) {
@@ -135,8 +156,13 @@ android {
                         output.outputFileName = outputFileName
                     }
             }
+
+            firebaseCrashlytics {
+                mappingFileUploadEnabled = true
+            }
         }
         getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
             applicationVariants.all {
                 val variant = this
                 variant.outputs
@@ -146,6 +172,9 @@ android {
                             "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
                         output.outputFileName = outputFileName
                     }
+            }
+            firebaseCrashlytics {
+                mappingFileUploadEnabled = false
             }
         }
     }
@@ -235,6 +264,24 @@ dependencies {
 
     kapt(deps.libs.dagger.android.processor)
     kapt(deps.libs.dagger.compiler)
+
+    platform("com.google.firebase:firebase-bom:30.1.0")
+    implementation("com.google.firebase:firebase-core:21.0.0")
+    implementation(deps.libs.firebase.crashlytics) {
+        isTransitive = true
+    }
+    implementation(deps.libs.firebase.firebaseAnalytics)
+    implementation(deps.libs.firebase.firebaseStorage)
+
+
+    implementation(deps.libs.flurry.flurry)
+
+    implementation(deps.libs.koptional)
+
+    implementation(deps.libs.gdrive.apiClient)
+    implementation(deps.libs.gdrive.apiClientAndroid)
+    implementation(deps.libs.gdrive.apiServicesDrive)
+    implementation(deps.libs.play.playServices)
 }
 
 fun usePlayDynamicFeatures(): Boolean {

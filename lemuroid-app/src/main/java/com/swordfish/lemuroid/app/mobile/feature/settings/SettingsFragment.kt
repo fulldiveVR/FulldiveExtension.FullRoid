@@ -35,6 +35,8 @@ import com.f2prateek.rx.preferences2.RxSharedPreferences
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.isFullRoidProInstalled
 import com.swordfish.lemuroid.app.appextension.isProVersion
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
@@ -57,6 +59,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     @Inject
     lateinit var saveSyncManager: SaveSyncManager
 
+    @Inject
+    lateinit var actionTracker: IActionTracker
+
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
@@ -73,7 +78,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.mobile_settings, rootKey)
 
         findPreference<Preference>(getString(R.string.pref_key_open_save_sync_settings))?.apply {
-            isVisible = saveSyncManager.isSupported()
+            saveSyncManager.isSupported() && isProVersion()
         }
     }
 
@@ -142,6 +147,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun openProTutorial() {
+        actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_SETTINGS)
         findNavController().navigate(R.id.navigation_pro_tutorial)
     }
 
@@ -154,6 +160,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun handleDisplaySaveSync() {
+        actionTracker.logAction(TrackerConstants.EVENT_CLOUD_SAVE_SETTINGS_CLICKED)
         findNavController().navigate(R.id.navigation_settings_save_sync)
     }
 

@@ -28,9 +28,15 @@ import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.fromHtmlToSpanned
 import com.swordfish.lemuroid.app.appextension.getHexColor
 import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.utils.EmotionsTool
+import javax.inject.Inject
 
 class ProTutorialFragment : Fragment() {
+
+    @Inject
+    lateinit var actionTracker: IActionTracker
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +61,7 @@ class ProTutorialFragment : Fragment() {
             .apply { EmotionsTool.processCheckMark(requireContext(), this) }
 
         view.findViewById<TextView>(R.id.buyProButton).setOnClickListener {
+            actionTracker.logAction(TrackerConstants.EVENT_BUY_PRO_CLICKED)
             activity?.openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
         }
     }

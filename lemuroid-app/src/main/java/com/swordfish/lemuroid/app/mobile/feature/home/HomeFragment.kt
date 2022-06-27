@@ -30,11 +30,14 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.Carousel
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.PopupManager
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.mobile.feature.proinfo.ProPopupLayout
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.covers.CoverLoader
@@ -56,6 +59,9 @@ class HomeFragment : Fragment() {
 
     @Inject
     lateinit var settingsInteractor: SettingsInteractor
+
+    @Inject
+    lateinit var actionTracker: IActionTracker
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -110,7 +116,15 @@ class HomeFragment : Fragment() {
         val isProPopupVisible = popupManager.isProVersionPopupVisible(requireContext())
         view.findViewById<ProPopupLayout>(R.id.proPopupLayout).apply {
             this.isVisible = isProPopupVisible
-            onCloseClickListener = { popupManager.setProVersionPopupShown(requireContext()) }
+            onClickListener = {
+                actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP)
+                findNavController().navigate(R.id.navigation_pro_tutorial)
+                popupManager.setProVersionPopupShown(requireContext())
+            }
+            onCloseClickListener = {
+                actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
+                popupManager.setProVersionPopupShown(requireContext())
+            }
             showSnackbar()
         }
     }

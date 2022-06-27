@@ -123,3 +123,5 @@ fun fromHtmlToSpanned(html: String?): Spanned {
 fun Context.getHexColor(id: Int): String {
     return String.format("#%06x", ContextCompat.getColor(this, id).and(0xffffff))
 }
+
+inline fun <T> T?.or(block: () -> T) = this ?: block.invoke()

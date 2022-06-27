@@ -25,7 +25,7 @@
 
     <application>
         <activity
-            android:name="com.swordfish.lemuroid.ext.feature.savesync.ActivateGoogleDriveActivity"
+            android:name="com.swordfish.lemuroid.app.savesync.ActivateGoogleDriveActivity"
             android:theme="@style/InvisibleTheme"/>
     </application>
 </manifest>

@@ -25,6 +25,10 @@ package com.swordfish.lemuroid.app
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.swordfish.lemuroid.app.fulldive.analytics.FulldiveActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.ITagReader
+import com.swordfish.lemuroid.app.fulldive.analytics.TagReader
 import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity
@@ -45,7 +49,7 @@ import com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher
 import com.swordfish.lemuroid.app.tv.channel.ChannelHandler
 import com.swordfish.lemuroid.ext.feature.core.CoreUpdaterImpl
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
-import com.swordfish.lemuroid.ext.feature.savesync.SaveSyncManagerImpl
+import com.swordfish.lemuroid.app.savesync.SaveSyncManagerImpl
 import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.CoreVariablesManager
@@ -401,5 +405,18 @@ abstract class LemuroidApplicationModule {
         fun coverLoader(
             context: Context
         ) = CoverLoader(context)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun getTagReader(): ITagReader = TagReader()
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun actionTracker(
+            context: Context,
+            tagReader: ITagReader
+        ): IActionTracker = FulldiveActionTracker(context, tagReader)
     }
 }

@@ -32,6 +32,8 @@ buildscript {
         classpath(deps.plugins.android)
         classpath(deps.plugins.navigationSafeArgs)
         classpath("com.android.tools.build:gradle:7.2.1")
+        classpath(deps.libs.googleServices.googleServices)
+        classpath(deps.libs.firebase.firebase)
     }
 }
 

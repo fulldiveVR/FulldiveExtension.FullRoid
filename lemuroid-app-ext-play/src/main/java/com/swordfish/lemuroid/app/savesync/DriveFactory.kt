@@ -20,7 +20,7 @@
  *
  */
 
-package com.swordfish.lemuroid.ext.feature.savesync
+package com.swordfish.lemuroid.app.savesync
 
 import android.annotation.SuppressLint
 import android.content.Context
