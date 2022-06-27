@@ -1,20 +1,22 @@
 /*
- *  RetrogradeApplicationComponent.kt
  *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
  *
  */
 
@@ -24,6 +26,21 @@ plugins {
     id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.firebase.crashlytics")
+    id("com.google.gms.google-services")
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+    }
+
+    dependencies {
+        classpath(deps.libs.googleServices.googleServices)
+        classpath(deps.libs.firebase.firebase)
+    }
 }
 
 android {
@@ -35,6 +52,12 @@ android {
         versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
         versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
         applicationId = "com.fulldive.extension.fullroid"
+        buildConfigField("String", "FLURRY_API_KEY", file("../flurrykey.txt").readText())
+        buildConfigField("String", "SERVER_CLIENT_ID", file("../googlekey.txt").readText())
+
+        firebaseCrashlytics {
+            mappingFileUploadEnabled = false
+        }
     }
 
     if (usePlayDynamicFeatures()) {
@@ -51,6 +74,8 @@ android {
                 ":lemuroid_core_mame2003_plus",
                 ":lemuroid_core_mednafen_ngp",
                 ":lemuroid_core_mednafen_pce_fast",
+
+                ":lemuroid_core_mednafen_wswan",
                 ":lemuroid_core_melonds",
                 ":lemuroid_core_mgba",
                 ":lemuroid_core_mupen64plus_next_gles3",
@@ -58,7 +83,9 @@ android {
                 ":lemuroid_core_ppsspp",
                 ":lemuroid_core_prosystem",
                 ":lemuroid_core_snes9x",
-                ":lemuroid_core_stella"
+                ":lemuroid_core_stella",
+
+                ":lemuroid_core_citra"
             )
         )
     }
@@ -70,10 +97,20 @@ android {
 
         create("free") {
             dimension = "opensource"
+            applicationId = "com.fulldive.extension.fullroid"
+            resValue("string", "lemuroid_name", "Full Roid")
+        }
+
+        create("pro") {
+            dimension = "opensource"
+            applicationId = "com.fulldive.extension.fullroid.pro"
+            resValue("string", "lemuroid_name", "Full Roid PRO")
         }
 
         create("play") {
             dimension = "opensource"
+            applicationId = "com.fulldive.extension.fullroid.play"
+            resValue("string", "lemuroid_name", "PLAY Full Roid")
         }
 
         // Include cores in the final apk
@@ -119,11 +156,13 @@ android {
                         output.outputFileName = outputFileName
                     }
             }
-            resValue("string", "lemuroid_name", "Full Roid")
-//            resValue("color", "main_color", "#FF9900")
-//            resValue("color", "main_color_light", "#FCC475")
+
+            firebaseCrashlytics {
+                mappingFileUploadEnabled = true
+            }
         }
         getByName("debug") {
+            signingConfig = signingConfigs.getByName("debug")
             applicationVariants.all {
                 val variant = this
                 variant.outputs
@@ -134,9 +173,9 @@ android {
                         output.outputFileName = outputFileName
                     }
             }
-            resValue("string", "lemuroid_name", "Full Roid")
-//            resValue("color", "main_color", "#FF9900")
-//            resValue("color", "main_color_light", "#FCC475")
+            firebaseCrashlytics {
+                mappingFileUploadEnabled = false
+            }
         }
     }
 
@@ -158,6 +197,7 @@ dependencies {
     "bundleImplementation"(project(":bundled-cores"))
 
     "freeImplementation"(project(":lemuroid-app-ext-free"))
+    "proImplementation"(project(":lemuroid-app-ext-free"))
     "playImplementation"(project(":lemuroid-app-ext-play"))
 
     implementation(deps.libs.androidx.navigation.navigationFragment)
@@ -174,7 +214,6 @@ dependencies {
     implementation(deps.libs.arch.work.rxjava2)
     implementation(deps.libs.arch.work.okhttp)
     implementation(deps.libs.androidx.lifecycle.commonJava8)
-//    implementation(deps.libs.androidx.lifecycle.extensions)
     implementation(deps.libs.androidx.lifecycle.reactiveStreams)
     implementation(deps.libs.epoxy.expoxy)
     implementation(deps.libs.epoxy.paging)
@@ -216,11 +255,33 @@ dependencies {
     implementation(deps.libs.androidx.documentfile)
     implementation(deps.libs.androidx.leanback.tvProvider)
     implementation(deps.libs.harmony)
+    implementation(deps.libs.startup)
 
     implementation(deps.libs.libretrodroid)
+    implementation(deps.libs.lottie)
+    // Uncomment this when using a local aar file.
+    //implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     kapt(deps.libs.dagger.android.processor)
     kapt(deps.libs.dagger.compiler)
+
+    platform("com.google.firebase:firebase-bom:30.1.0")
+    implementation("com.google.firebase:firebase-core:21.0.0")
+    implementation(deps.libs.firebase.crashlytics) {
+        isTransitive = true
+    }
+    implementation(deps.libs.firebase.firebaseAnalytics)
+    implementation(deps.libs.firebase.firebaseStorage)
+
+
+    implementation(deps.libs.flurry.flurry)
+
+    implementation(deps.libs.koptional)
+
+    implementation(deps.libs.gdrive.apiClient)
+    implementation(deps.libs.gdrive.apiClientAndroid)
+    implementation(deps.libs.gdrive.apiServicesDrive)
+    implementation(deps.libs.play.playServices)
 }
 
 fun usePlayDynamicFeatures(): Boolean {

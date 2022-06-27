@@ -1,0 +1,34 @@
+<!--    /*-->
+<!--    * Copyright (c) 2022 FullDive-->
+<!--    *  This program is free software: you can redistribute it and/or modify-->
+<!--    *  it under the terms of the GNU General Public License as published by-->
+<!--    *  the Free Software Foundation, either version 3 of the License, or-->
+<!--    *  (at your option) any later version.-->
+<!--    *-->
+<!--    *  This program is distributed in the hope that it will be useful,-->
+<!--    *  but WITHOUT ANY WARRANTY; without even the implied warranty of-->
+<!--    *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the-->
+<!--    *  GNU General Public License for more details.-->
+<!--    *-->
+<!--    *  You should have received a copy of the GNU General Public License-->
+<!--    *  along with this program.  If not, see <https://www.gnu.org/licenses/>.-->
+<!--    */-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:pathData="M12,0L12,0A12,12 0,0 1,24 12L24,12A12,12 0,0 1,12 24L12,24A12,12 0,0 1,0 12L0,12A12,12 0,0 1,12 0z"
+      android:fillColor="#4BDA6F"/>
+  <path
+      android:pathData="M4.619,13.529V15.807H3V9.092H5.679C6.193,9.092 6.646,9.188 7.04,9.378C7.437,9.566 7.743,9.835 7.958,10.185C8.176,10.533 8.285,10.928 8.285,11.37C8.285,12.025 8.05,12.55 7.58,12.943C7.112,13.334 6.47,13.529 5.652,13.529H4.619ZM4.619,12.279H5.679C5.993,12.279 6.231,12.201 6.394,12.044C6.56,11.887 6.643,11.666 6.643,11.38C6.643,11.066 6.559,10.816 6.39,10.628C6.221,10.44 5.99,10.345 5.698,10.342H4.619V12.279Z"
+      android:fillColor="#2A2C29"/>
+  <path
+      android:pathData="M11.647,13.437H10.771V15.807H9.152V9.092H11.795C12.591,9.092 13.214,9.269 13.663,9.623C14.111,9.976 14.336,10.476 14.336,11.121C14.336,11.589 14.241,11.976 14.05,12.284C13.862,12.591 13.567,12.84 13.165,13.031L14.566,15.738V15.807H12.832L11.647,13.437ZM10.771,12.187H11.795C12.102,12.187 12.333,12.107 12.486,11.947C12.643,11.784 12.722,11.558 12.722,11.269C12.722,10.98 12.643,10.754 12.486,10.591C12.33,10.425 12.099,10.342 11.795,10.342H10.771V12.187Z"
+      android:fillColor="#2A2C29"/>
+  <path
+      android:pathData="M21,12.588C21,13.243 20.879,13.822 20.636,14.327C20.393,14.831 20.047,15.22 19.598,15.493C19.152,15.764 18.643,15.899 18.072,15.899C17.5,15.899 16.992,15.769 16.55,15.507C16.107,15.243 15.761,14.866 15.512,14.377C15.266,13.889 15.137,13.327 15.125,12.694V12.316C15.125,11.658 15.244,11.078 15.484,10.577C15.727,10.073 16.073,9.684 16.522,9.41C16.974,9.137 17.487,9 18.062,9C18.631,9 19.138,9.135 19.584,9.406C20.03,9.676 20.376,10.062 20.622,10.563C20.871,11.061 20.997,11.633 21,12.279V12.588ZM19.354,12.307C19.354,11.639 19.241,11.134 19.017,10.789C18.795,10.442 18.477,10.268 18.062,10.268C17.251,10.268 16.822,10.877 16.776,12.094L16.771,12.588C16.771,13.246 16.88,13.752 17.098,14.105C17.317,14.459 17.641,14.636 18.072,14.636C18.48,14.636 18.795,14.462 19.017,14.115C19.238,13.767 19.351,13.267 19.354,12.616V12.307Z"
+      android:fillColor="#2A2C29"/>
+</vector>

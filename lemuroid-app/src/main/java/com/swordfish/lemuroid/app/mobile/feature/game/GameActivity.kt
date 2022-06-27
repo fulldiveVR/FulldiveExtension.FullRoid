@@ -1,20 +1,23 @@
 /*
- * GameActivity.kt
  *
- * Copyright (C) 2017 Retrograde Project
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.swordfish.lemuroid.app.mobile.feature.game
@@ -54,6 +57,7 @@ import com.swordfish.lemuroid.lib.controller.TouchControllerSettingsManager
 import com.swordfish.lemuroid.lib.util.subscribeBy
 import com.swordfish.libretrodroid.GLRetroView
 import com.swordfish.radialgamepad.library.RadialGamePad
+import com.swordfish.radialgamepad.library.config.RadialGamePadTheme
 import com.swordfish.radialgamepad.library.event.Event
 import com.swordfish.radialgamepad.library.event.GestureType
 import com.swordfish.radialgamepad.library.haptics.HapticConfig
@@ -77,6 +81,10 @@ import kotlin.math.roundToInt
 
 class GameActivity : BaseGameActivity() {
     @Inject lateinit var sharedPreferences: Lazy<SharedPreferences>
+
+    private lateinit var horizontalDivider: View
+    private lateinit var leftVerticalDivider: View
+    private lateinit var rightVerticalDivider: View
 
     private var serviceController: GameService.GameServiceController? = null
 
@@ -107,6 +115,10 @@ class GameActivity : BaseGameActivity() {
         orientation = getCurrentOrientation()
 
         tiltSensor = TiltSensor(applicationContext)
+
+        horizontalDivider = findViewById(R.id.horizontaldividier)
+        leftVerticalDivider = findViewById(R.id.leftverticaldivider)
+        rightVerticalDivider = findViewById(R.id.rightverticaldivider)
 
         initializeInsetsObservable()
 
@@ -206,6 +218,8 @@ class GameActivity : BaseGameActivity() {
 
         val theme = LemuroidTouchOverlayThemes.getGamePadTheme(leftGamePadContainer)
 
+        updateDividers(orientation, theme, controllerConfig)
+
         val leftConfig = LemuroidTouchConfigs.getRadialGamePadConfig(
             touchControllerConfig.leftConfig,
             hapticConfig,
@@ -233,6 +247,26 @@ class GameActivity : BaseGameActivity() {
         this.rightPad = rightPad
 
         this.touchControllerConfig = controllerConfig
+    }
+
+    private fun updateDividers(
+        orientation: Int,
+        theme: RadialGamePadTheme,
+        controllerConfig: ControllerConfig
+    ) {
+        val displayHorizontalDivider = orientation == Configuration.ORIENTATION_PORTRAIT
+
+        val displayVerticalDivider = orientation != Configuration.ORIENTATION_PORTRAIT &&
+            !controllerConfig.allowTouchOverlay
+
+        updateDivider(horizontalDivider, displayHorizontalDivider, theme)
+        updateDivider(leftVerticalDivider, displayVerticalDivider, theme)
+        updateDivider(rightVerticalDivider, displayVerticalDivider, theme)
+    }
+
+    private fun updateDivider(divider: View, visible: Boolean, theme: RadialGamePadTheme) {
+        divider.setVisibleOrGone(visible)
+        divider.setBackgroundColor(theme.backgroundStrokeColor)
     }
 
     private fun setupDefaultActions(virtualPadEvents: Observable<Event>) {
@@ -578,7 +612,7 @@ class GameActivity : BaseGameActivity() {
                 constraintSet.connect(
                     R.id.gamecontainer,
                     ConstraintSet.BOTTOM,
-                    R.id.leftgamepad,
+                    R.id.horizontaldividier,
                     ConstraintSet.TOP
                 )
 
@@ -635,14 +669,14 @@ class GameActivity : BaseGameActivity() {
                     constraintSet.connect(
                         R.id.gamecontainer,
                         ConstraintSet.LEFT,
-                        R.id.leftgamepad,
+                        R.id.leftverticaldivider,
                         ConstraintSet.RIGHT
                     )
 
                     constraintSet.connect(
                         R.id.gamecontainer,
                         ConstraintSet.RIGHT,
-                        R.id.rightgamepad,
+                        R.id.rightverticaldivider,
                         ConstraintSet.LEFT
                     )
                 }

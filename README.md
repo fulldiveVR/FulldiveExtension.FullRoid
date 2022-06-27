@@ -9,7 +9,7 @@
 
 ## Description
 
-Lemuroid is an Android open-source emulation project based on Libretro. It's main goals are ease of use, good Android integration and great user experience.
+Lemuroid is an open-source emulation project for Android based on Libretro. Its main goal is ease of use, good Android integration and a great user experience.
 
 It originated from a rib of [Retrograde](https://github.com/retrograde/retrograde-android), but graduated to a standalone project integrating [LibretroDroid](https://github.com/Swordfish90/LibretroDroid).
 
@@ -38,6 +38,10 @@ It originated from a rib of [Retrograde](https://github.com/retrograde/retrograd
 - NEC PC Engine (PCE) ([beetle_pce_fast](https://docs.libretro.com/library/beetle_pce_fast/))
 - Neo Geo Pocket (NGP) ([mednafen_ngp](https://docs.libretro.com/library/beetle_neopop/))
 - Neo Geo Pocket Color (NGC) ([mednafen_ngp](https://docs.libretro.com/library/beetle_neopop/))
+
+- WonderSwan (WS) ([beetle_cygne](https://docs.libretro.com/library/beetle_cygne/))
+- WonderSwan Color (WSC) ([beetle_cygne](https://docs.libretro.com/library/beetle_cygne/))
+- Nintendo 3DS (3DS) ([citra](https://docs.libretro.com/library/citra/))
 
 ### Features:
 - Android TV support

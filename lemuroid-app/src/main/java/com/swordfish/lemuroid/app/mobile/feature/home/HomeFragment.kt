@@ -1,20 +1,22 @@
 /*
- *  RetrogradeApplicationComponent.kt
  *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
  *
  */
 
@@ -25,12 +27,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.Carousel
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.PopupManager
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
+import com.swordfish.lemuroid.app.mobile.feature.proinfo.ProPopupLayout
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.covers.CoverLoader
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
@@ -40,10 +48,20 @@ import javax.inject.Inject
 
 class HomeFragment : Fragment() {
 
-    @Inject lateinit var retrogradeDb: RetrogradeDatabase
-    @Inject lateinit var gameInteractor: GameInteractor
-    @Inject lateinit var coverLoader: CoverLoader
-    @Inject lateinit var settingsInteractor: SettingsInteractor
+    @Inject
+    lateinit var retrogradeDb: RetrogradeDatabase
+
+    @Inject
+    lateinit var gameInteractor: GameInteractor
+
+    @Inject
+    lateinit var coverLoader: CoverLoader
+
+    @Inject
+    lateinit var settingsInteractor: SettingsInteractor
+
+    @Inject
+    lateinit var actionTracker: IActionTracker
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -92,6 +110,22 @@ class HomeFragment : Fragment() {
 
         homeViewModel.indexingInProgress.observe(viewLifecycleOwner) {
             pagingController.updateLibraryIndexingInProgress(it)
+        }
+
+        val popupManager = PopupManager()
+        val isProPopupVisible = popupManager.isProVersionPopupVisible(requireContext())
+        view.findViewById<ProPopupLayout>(R.id.proPopupLayout).apply {
+            this.isVisible = isProPopupVisible
+            onClickListener = {
+                actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP)
+                findNavController().navigate(R.id.navigation_pro_tutorial)
+                popupManager.setProVersionPopupShown(requireContext())
+            }
+            onCloseClickListener = {
+                actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
+                popupManager.setProVersionPopupShown(requireContext())
+            }
+            showSnackbar()
         }
     }
 

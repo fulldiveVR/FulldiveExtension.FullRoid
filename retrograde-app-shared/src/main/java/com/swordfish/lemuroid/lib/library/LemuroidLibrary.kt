@@ -1,20 +1,23 @@
 /*
- * GameLibrary.kt
  *
- * Copyright (C) 2017 Retrograde Project
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.swordfish.lemuroid.lib.library
@@ -44,7 +47,8 @@ import dagger.Lazy
 class LemuroidLibrary(
     private val retrogradedb: RetrogradeDatabase,
     private val providerProviderRegistry: Lazy<StorageProviderRegistry>,
-    private val biosManager: BiosManager
+    private val biosManager: BiosManager,
+    private val gameSystemHelper: GameSystemHelperImpl
 ) {
     fun indexLibrary(): Completable {
         val startedAtMs = System.currentTimeMillis()
@@ -61,7 +65,7 @@ class LemuroidLibrary(
                     .doOnNext { pairs -> updateExistingGames(pairs, startedAtMs) }
                     .doOnNext { pairs -> refreshGamesDataFiles(pairs, startedAtMs) }
                     .map { pairs -> filterNotExisting(pairs) }
-                    .flatMap { retrieveGames(it, provider, startedAtMs) }
+                    .flatMap { retrieveGames(it, provider, startedAtMs, gameSystemHelper) }
                     .buffer(BUFFER_SIZE)
                     .doOnNext { pairs ->
 
@@ -141,17 +145,19 @@ class LemuroidLibrary(
     private fun retrieveGames(
         it: List<GroupedStorageFiles>,
         provider: StorageProvider,
-        startedAtMs: Long
+        startedAtMs: Long,
+        gameSystemHelper: GameSystemHelperImpl
     ): Observable<Pair<GroupedStorageFiles, Optional<Game>>> {
         return Observable.fromIterable(it).flatMapSingle { storageFile ->
-            retrieveGame(storageFile, provider, startedAtMs)
+            retrieveGame(storageFile, provider, startedAtMs, gameSystemHelper)
         }
     }
 
     private fun retrieveGame(
         groupedStorageFile: GroupedStorageFiles,
         provider: StorageProvider,
-        startedAtMs: Long
+        startedAtMs: Long,
+        gameSystemHelper: GameSystemHelperImpl
     ): Single<Pair<GroupedStorageFiles, Optional<Game>>> {
         return Observable.fromIterable(sortedFilesForScanning(groupedStorageFile))
             .flatMapMaybe {
@@ -161,7 +167,7 @@ class LemuroidLibrary(
                 provider.metadataProvider.retrieveMetadata(storageFile).map { storageFile to it }
             }
             .map { (storageFile, metadata) ->
-                convertGameMetadataToGame(groupedStorageFile, storageFile, metadata, startedAtMs)
+                convertGameMetadataToGame(groupedStorageFile, storageFile, metadata, startedAtMs, gameSystemHelper)
             }
             .filter { it is Some }
             .first(None)
@@ -176,13 +182,14 @@ class LemuroidLibrary(
         groupedStorageFile: GroupedStorageFiles,
         storageFile: StorageFile,
         gameMetadataOptional: Optional<GameMetadata>,
-        lastIndexedAt: Long
+        lastIndexedAt: Long,
+        gameSystemHelper: GameSystemHelperImpl
     ): Optional<Game> {
 
         if (gameMetadataOptional is None) return None
         val gameMetadata = gameMetadataOptional.component1()!!
 
-        val gameSystem = GameSystem.findById(gameMetadata.system!!)
+        val gameSystem = gameSystemHelper.findById(gameMetadata.system!!)
 
         // If the databased matched a data file (as with bin/cue) we force link the primary filename
         val fileName = if (groupedStorageFile.dataFiles.isNotEmpty()) {

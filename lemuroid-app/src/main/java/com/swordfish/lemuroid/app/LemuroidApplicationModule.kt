@@ -1,20 +1,23 @@
 /*
- * RetrogradeApplicationModule.kt
  *
- * Copyright (C) 2017 Retrograde Project
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.swordfish.lemuroid.app
@@ -22,6 +25,11 @@ package com.swordfish.lemuroid.app
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.swordfish.lemuroid.app.fulldive.analytics.FulldiveActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.ITagReader
+import com.swordfish.lemuroid.app.fulldive.analytics.TagReader
+import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity
 import com.swordfish.lemuroid.app.mobile.feature.main.MainActivity
@@ -41,7 +49,7 @@ import com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher
 import com.swordfish.lemuroid.app.tv.channel.ChannelHandler
 import com.swordfish.lemuroid.ext.feature.core.CoreUpdaterImpl
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
-import com.swordfish.lemuroid.ext.feature.savesync.SaveSyncManagerImpl
+import com.swordfish.lemuroid.app.savesync.SaveSyncManagerImpl
 import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.CoreVariablesManager
@@ -140,8 +148,12 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun ovgdbMetadataProvider(ovgdbManager: LibretroDBManager) = LibretroDBMetadataProvider(
-            ovgdbManager
+        fun ovgdbMetadataProvider(
+            ovgdbManager: LibretroDBManager,
+            gameSystemHelper: GameSystemHelper
+        ) = LibretroDBMetadataProvider(
+            ovgdbManager,
+            gameSystemHelper
         )
 
         @Provides
@@ -179,8 +191,9 @@ abstract class LemuroidApplicationModule {
         fun lemuroidLibrary(
             db: RetrogradeDatabase,
             storageProviderRegistry: Lazy<StorageProviderRegistry>,
-            biosManager: BiosManager
-        ) = LemuroidLibrary(db, storageProviderRegistry, biosManager)
+            biosManager: BiosManager,
+            gameSystemHelper: GameSystemHelper
+        ) = LemuroidLibrary(db, storageProviderRegistry, biosManager, gameSystemHelper)
 
         @Provides
         @PerApp
@@ -268,7 +281,8 @@ abstract class LemuroidApplicationModule {
             coreVariablesManager: CoreVariablesManager,
             retrogradeDatabase: RetrogradeDatabase,
             savesCoherencyEngine: SavesCoherencyEngine,
-            directoriesManager: DirectoriesManager
+            directoriesManager: DirectoriesManager,
+            biosManager: BiosManager
         ) = GameLoader(
             lemuroidLibrary,
             statesManager,
@@ -276,7 +290,8 @@ abstract class LemuroidApplicationModule {
             coreVariablesManager,
             retrogradeDatabase,
             savesCoherencyEngine,
-            directoriesManager
+            directoriesManager,
+            biosManager
         )
 
         @Provides
@@ -390,5 +405,18 @@ abstract class LemuroidApplicationModule {
         fun coverLoader(
             context: Context
         ) = CoverLoader(context)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun getTagReader(): ITagReader = TagReader()
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun actionTracker(
+            context: Context,
+            tagReader: ITagReader
+        ): IActionTracker = FulldiveActionTracker(context, tagReader)
     }
 }

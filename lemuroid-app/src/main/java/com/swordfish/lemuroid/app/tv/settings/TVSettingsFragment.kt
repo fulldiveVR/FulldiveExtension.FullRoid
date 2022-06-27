@@ -1,20 +1,22 @@
 /*
- *  RetrogradeApplicationComponent.kt
  *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
  *
  */
 
@@ -27,6 +29,7 @@ import androidx.leanback.preference.LeanbackPreferenceFragmentCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.shared.settings.AdvancedSettingsPreferences
 import com.swordfish.lemuroid.app.shared.settings.BiosPreferences
 import com.swordfish.lemuroid.app.shared.settings.CoresSelectionPreferences
@@ -45,12 +48,18 @@ import javax.inject.Inject
 
 class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
 
-    @Inject lateinit var settingsInteractor: SettingsInteractor
-    @Inject lateinit var biosPreferences: BiosPreferences
-    @Inject lateinit var gamePadPreferencesHelper: GamePadPreferencesHelper
-    @Inject lateinit var inputDeviceManager: InputDeviceManager
-    @Inject lateinit var coresSelectionPreferences: CoresSelectionPreferences
-    @Inject lateinit var saveSyncManager: SaveSyncManager
+    @Inject
+    lateinit var settingsInteractor: SettingsInteractor
+    @Inject
+    lateinit var biosPreferences: BiosPreferences
+    @Inject
+    lateinit var gamePadPreferencesHelper: GamePadPreferencesHelper
+    @Inject
+    lateinit var inputDeviceManager: InputDeviceManager
+    @Inject
+    lateinit var coresSelectionPreferences: CoresSelectionPreferences
+    @Inject
+    lateinit var saveSyncManager: SaveSyncManager
 
     lateinit var saveSyncPreferences: SaveSyncPreferences
 
@@ -68,7 +77,7 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.tv_settings, rootKey)
 
         getCoresSelectionScreen()?.let {
-            coresSelectionPreferences.addCoresSelectionPreferences(it)
+            coresSelectionPreferences.addCoresSelectionPreferences(it, GameSystemHelper().all())
         }
 
         getBiosInfoPreferenceScreen()?.let {

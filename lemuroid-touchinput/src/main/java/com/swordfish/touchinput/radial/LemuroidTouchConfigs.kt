@@ -1,3 +1,25 @@
+/*
+ *
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
+ *
+ */
+
 package com.swordfish.touchinput.radial
 
 import android.view.KeyEvent
@@ -223,17 +245,18 @@ object LemuroidTouchConfigs {
     private val PRIMARY_DIAL_CROSS = PrimaryDialConfig.Cross(
         CrossConfig(
             id = MOTION_SOURCE_DPAD,
-            shape = CrossConfig.Shape.STANDARD,
+            shape = CrossConfig.Shape.CIRCLE,
             supportsGestures = setOf(GestureType.TRIPLE_TAP, GestureType.FIRST_TOUCH),
-            rightDrawableForegroundId = R.drawable.direction_foreground
+            rightDrawableForegroundId = R.drawable.direction_alt_foreground
         ),
     )
 
     private val PRIMARY_DIAL_CROSS_MERGED = PrimaryDialConfig.Cross(
         CrossConfig(
             id = MOTION_SOURCE_DPAD_AND_LEFT_STICK,
-            shape = CrossConfig.Shape.STANDARD,
-            supportsGestures = setOf(GestureType.TRIPLE_TAP, GestureType.FIRST_TOUCH)
+            shape = CrossConfig.Shape.CIRCLE,
+            supportsGestures = setOf(GestureType.TRIPLE_TAP, GestureType.FIRST_TOUCH),
+            rightDrawableForegroundId = R.drawable.direction_alt_foreground
         )
     )
 
@@ -1165,33 +1188,9 @@ object LemuroidTouchConfigs {
             sockets = 12,
             primaryDial = PRIMARY_DIAL_CROSS,
             secondaryDials = listOf(
-                SecondaryDialConfig.SingleButton(
-                    2,
-                    1f,
-                    0f,
-                    ButtonConfig(
-                        id = KeyEvent.KEYCODE_BUTTON_SELECT,
-                        contentDescription = "Select"
-                    )
-                ),
-                SecondaryDialConfig.SingleButton(
-                    3,
-                    1f,
-                    0f,
-                    ButtonConfig(
-                        id = KeyEvent.KEYCODE_BUTTON_L1,
-                        contentDescription = "L1"
-                    )
-                ),
-                SecondaryDialConfig.SingleButton(
-                    4,
-                    1f,
-                    0f,
-                    ButtonConfig(
-                        id = KeyEvent.KEYCODE_BUTTON_L2,
-                        contentDescription = "L2"
-                    )
-                ),
+                SecondaryDialConfig.SingleButton(2, 1f, 0f, BUTTON_CONFIG_SELECT),
+                SecondaryDialConfig.SingleButton(3, 1f, 0f, BUTTON_CONFIG_L1),
+                SecondaryDialConfig.SingleButton(4, 1f, 0f, BUTTON_CONFIG_L2),
                 SecondaryDialConfig.SingleButton(
                     8,
                     1f,
@@ -1200,7 +1199,8 @@ object LemuroidTouchConfigs {
                         id = KeyEvent.KEYCODE_BUTTON_THUMBL,
                         iconId = R.drawable.button_keyboard,
                         contentDescription = "Keyboard"
-                    )
+                    ),
+                    rotationProcessor = rotationInvert(),
                 ),
                 SecondaryDialConfig.Stick(
                     9,
@@ -1211,8 +1211,7 @@ object LemuroidTouchConfigs {
                     contentDescription = "Left Stick",
                     supportsGestures = setOf(GestureType.TRIPLE_TAP, GestureType.FIRST_TOUCH),
                     rotationProcessor = rotationOffset(-DEFAULT_STICK_ROTATION)
-                ),
-                SecondaryDialConfig.Empty(8, 1, 1f, 0f)
+                )
             )
         )
 
@@ -1221,53 +1220,29 @@ object LemuroidTouchConfigs {
             theme = theme,
             sockets = 12,
             primaryDial = PrimaryDialConfig.PrimaryButtons(
-                listOf(
+                dials = listOf(
                     ButtonConfig(
                         id = KeyEvent.KEYCODE_BUTTON_A,
-                        contentDescription = "A"
+                        label = "A"
                     ),
                     ButtonConfig(
                         id = KeyEvent.KEYCODE_BUTTON_X,
-                        contentDescription = "X"
+                        label = "X"
                     ),
                     ButtonConfig(
                         id = KeyEvent.KEYCODE_BUTTON_Y,
-                        contentDescription = "Y"
+                        label = "Y"
                     ),
                     ButtonConfig(
                         id = KeyEvent.KEYCODE_BUTTON_B,
-                        contentDescription = "B"
+                        label = "B"
                     )
                 )
             ),
             secondaryDials = listOf(
-                SecondaryDialConfig.SingleButton(
-                    2,
-                    1f,
-                    0f,
-                    ButtonConfig(
-                        id = KeyEvent.KEYCODE_BUTTON_R2,
-                        contentDescription = "R2"
-                    )
-                ),
-                SecondaryDialConfig.SingleButton(
-                    3,
-                    1f,
-                    0f,
-                    ButtonConfig(
-                        id = KeyEvent.KEYCODE_BUTTON_R1,
-                        contentDescription = "R1"
-                    )
-                ),
-                SecondaryDialConfig.SingleButton(
-                    4,
-                    1f,
-                    0f,
-                    ButtonConfig(
-                        id = KeyEvent.KEYCODE_BUTTON_START,
-                        contentDescription = "Start"
-                    )
-                ),
+                SecondaryDialConfig.SingleButton(2, 1f, 0f, BUTTON_CONFIG_R2),
+                SecondaryDialConfig.SingleButton(3, 1f, 0f, BUTTON_CONFIG_R1),
+                SecondaryDialConfig.SingleButton(4, 1f, 0f, BUTTON_CONFIG_START),
                 buildMenuButtonConfig(10, theme),
                 SecondaryDialConfig.Stick(
                     8,
@@ -1275,6 +1250,7 @@ object LemuroidTouchConfigs {
                     2.2f,
                     0f,
                     MOTION_SOURCE_RIGHT_STICK,
+                    KeyEvent.KEYCODE_BUTTON_THUMBR,
                     contentDescription = "Right Stick",
                     supportsGestures = setOf(GestureType.TRIPLE_TAP, GestureType.FIRST_TOUCH),
                     rotationProcessor = rotationOffset(DEFAULT_STICK_ROTATION)
@@ -1455,11 +1431,7 @@ object LemuroidTouchConfigs {
             scale = 1f,
             distance = 0f,
             buttonConfig = BUTTON_CONFIG_MENU,
-            rotationProcessor = object : SecondaryDialConfig.RotationProcessor() {
-                override fun getRotation(rotation: Float): Float {
-                    return -rotation
-                }
-            },
+            rotationProcessor = rotationInvert(),
             theme = theme
         )
     }
@@ -1469,6 +1441,12 @@ object LemuroidTouchConfigs {
             override fun getRotation(rotation: Float): Float {
                 return rotation + degrees
             }
+        }
+    }
+
+    private fun rotationInvert() = object : SecondaryDialConfig.RotationProcessor() {
+        override fun getRotation(rotation: Float): Float {
+            return -rotation
         }
     }
 }

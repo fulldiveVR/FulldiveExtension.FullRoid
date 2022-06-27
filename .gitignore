@@ -17,3 +17,7 @@ project.properties
 .externalNativeBuild
 local.properties
 release.jks
+../flurrykey.txt
+../googlekey.txt
+../google-services.json
+

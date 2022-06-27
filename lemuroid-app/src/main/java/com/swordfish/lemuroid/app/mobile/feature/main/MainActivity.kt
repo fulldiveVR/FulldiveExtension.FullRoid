@@ -1,20 +1,22 @@
 /*
- *  RetrogradeApplicationComponent.kt
  *
- *  Copyright (C) 2017 Retrograde Project
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
  *
  */
 
@@ -36,17 +38,14 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.elevation.SurfaceColors
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.app.appextension.PopupManager
+import com.swordfish.lemuroid.app.appextension.*
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesFragment
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesFragment
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeFragment
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.AdvancedSettingsFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.BiosSettingsFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.CoresSelectionFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.GamepadSettingsFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.SaveSyncFragment
-import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsFragment
+import com.swordfish.lemuroid.app.mobile.feature.settings.*
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsFragment
 import com.swordfish.lemuroid.app.shared.GameInteractor
@@ -56,25 +55,32 @@ import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
+import com.swordfish.lemuroid.common.view.setVisibleOrGone
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
 import com.swordfish.lemuroid.lib.android.RetrogradeAppCompatActivity
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerFragment
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
-import com.swordfish.lemuroid.lib.storage.DirectoriesManager
-import com.swordfish.lemuroid.common.view.setVisibleOrGone
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
+import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.android.synthetic.main.activity_empty.*
 import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
 
-    @Inject lateinit var gameLaunchTaskHandler: GameLaunchTaskHandler
-    @Inject lateinit var saveSyncManager: SaveSyncManager
+    @Inject
+    lateinit var gameLaunchTaskHandler: GameLaunchTaskHandler
+
+    @Inject
+    lateinit var saveSyncManager: SaveSyncManager
+
+    @Inject
+    lateinit var actionTracker: IActionTracker
 
     private val reviewManager = ReviewManager()
     private var mainViewModel: MainViewModel? = null
@@ -134,8 +140,10 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         val isSupported = saveSyncManager.isSupported()
         val isConfigured = saveSyncManager.isConfigured()
         menu?.findItem(R.id.menu_options_sync)?.isVisible = isSupported && isConfigured
+        menu?.findItem(R.id.menu_options_pro)?.isVisible = !isProVersion()
         return super.onPrepareOptionsMenu(menu)
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_mobile_settings, menu)
@@ -150,6 +158,13 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
             }
             R.id.menu_options_sync -> {
                 SaveSyncWork.enqueueManualWork(this)
+                true
+            }
+            R.id.menu_options_pro -> {
+                if (!launchApp(this, FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)) {
+                    actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_TOOLBAR)
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_pro_tutorial)
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
