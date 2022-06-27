@@ -52,8 +52,8 @@ android {
         versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
         versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
         applicationId = "com.fulldive.extension.fullroid"
-        buildConfigField("String", "FLURRY_API_KEY", file("../flurry/key.txt").readText())
-        buildConfigField("String", "SERVER_CLIENT_ID", file("../google/key.txt").readText())
+        buildConfigField("String", "FLURRY_API_KEY", file("../flurrykey.txt").readText())
+        buildConfigField("String", "SERVER_CLIENT_ID", file("../googlekey.txt").readText())
 
         firebaseCrashlytics {
             mappingFileUploadEnabled = false

@@ -1,4 +1,4 @@
 /build
-flurry/key.txt
-google/key.txt
-google-services.json
+../key.txt
+../key.txt
+../google-services.json
