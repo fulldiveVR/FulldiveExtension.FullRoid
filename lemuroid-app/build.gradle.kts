@@ -152,7 +152,7 @@ android {
                     .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                     .forEach { output ->
                         val outputFileName =
-                            "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                            "FullRoid-v${android.defaultConfig.versionName}-${variant.flavorName}-${variant.buildType.name}.apk"
                         output.outputFileName = outputFileName
                     }
             }
