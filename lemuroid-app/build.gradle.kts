@@ -151,8 +151,12 @@ android {
                 variant.outputs
                     .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                     .forEach { output ->
-                        val outputFileName =
-                            "FullRoid-v${android.defaultConfig.versionName}-${variant.flavorName}-${variant.buildType.name}.apk"
+                        val outputFileName = if (isProVersion()) {
+                            "FullRoid-v${android.defaultConfig.versionName} Pro-${variant.buildType.name}.apk"
+
+                        } else {
+                            "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                        }
                         output.outputFileName = outputFileName
                     }
             }
@@ -168,8 +172,12 @@ android {
                 variant.outputs
                     .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                     .forEach { output ->
-                        val outputFileName =
+                        val outputFileName = if (isProVersion()) {
+                            "FullRoid-v${android.defaultConfig.versionName} Pro-${variant.buildType.name}.apk"
+
+                        } else {
                             "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                        }
                         output.outputFileName = outputFileName
                     }
             }
@@ -287,4 +295,9 @@ dependencies {
 fun usePlayDynamicFeatures(): Boolean {
     val task = gradle.startParameter.taskRequests.toString()
     return task.contains("Play") && task.contains("Dynamic")
+}
+
+fun isProVersion(): Boolean {
+    val task = gradle.startParameter.taskRequests.toString()
+    return task.contains("pro")
 }
