@@ -44,6 +44,7 @@ import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesFragment
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesFragment
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeFragment
+import com.swordfish.lemuroid.app.mobile.feature.proinfo.tutorial.ProTutorialFragment
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchFragment
 import com.swordfish.lemuroid.app.mobile.feature.settings.*
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
@@ -231,6 +232,10 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         @PerFragment
         @ContributesAndroidInjector(modules = [CoresSelectionFragment.Module::class])
         abstract fun coresSelectionFragment(): CoresSelectionFragment
+
+        @PerFragment
+        @ContributesAndroidInjector(modules = [ProTutorialFragment.Module::class])
+        abstract fun proTutorialFragment(): ProTutorialFragment
 
         @dagger.Module
         companion object {

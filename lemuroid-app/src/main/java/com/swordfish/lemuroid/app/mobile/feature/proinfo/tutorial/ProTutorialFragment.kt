@@ -16,6 +16,7 @@
 
 package com.swordfish.lemuroid.app.mobile.feature.proinfo.tutorial
 
+import android.content.Context
 import android.os.Bundle
 import android.text.SpannableString
 import android.view.LayoutInflater
@@ -31,12 +32,18 @@ import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
 import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
 import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.utils.EmotionsTool
+import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
 class ProTutorialFragment : Fragment() {
 
     @Inject
     lateinit var actionTracker: IActionTracker
+
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
