@@ -25,6 +25,7 @@ package com.swordfish.lemuroid.app
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.swordfish.lemuroid.app.appextension.PopupManager
 import com.swordfish.lemuroid.app.fulldive.analytics.FulldiveActionTracker
 import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
 import com.swordfish.lemuroid.app.fulldive.analytics.ITagReader
@@ -418,5 +419,12 @@ abstract class LemuroidApplicationModule {
             context: Context,
             tagReader: ITagReader
         ): IActionTracker = FulldiveActionTracker(context, tagReader)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun popupManager(
+            context: Context,
+        ): PopupManager = PopupManager(context)
     }
 }

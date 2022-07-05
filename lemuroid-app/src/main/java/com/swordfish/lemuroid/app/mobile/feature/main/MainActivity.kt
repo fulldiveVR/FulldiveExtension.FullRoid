@@ -68,7 +68,6 @@ import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.activity_empty.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -83,6 +82,9 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
     @Inject
     lateinit var actionTracker: IActionTracker
 
+    @Inject
+    lateinit var popupManager: PopupManager
+
     private val reviewManager = ReviewManager()
     private var mainViewModel: MainViewModel? = null
 
@@ -92,7 +94,7 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         window.statusBarColor = SurfaceColors.SURFACE_2.getColor(this)
         setContentView(R.layout.activity_main)
         initializeActivity()
-        PopupManager().onAppStarted(this)
+        popupManager.onAppStarted(this)
     }
 
     override fun activity(): Activity = this
