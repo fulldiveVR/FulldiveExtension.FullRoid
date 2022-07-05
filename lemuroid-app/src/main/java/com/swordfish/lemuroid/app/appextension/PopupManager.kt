@@ -154,8 +154,8 @@ class PopupManager(private val context: Context) {
         return result
     }
 
-    fun setProVersionPopupClosed() {
-        sharedPreferences.setProperty(KEY_IS_PRO_POPUP_CLOSED, true)
+    fun setProVersionPopupClosed(isClosed: Boolean) {
+        sharedPreferences.setProperty(KEY_IS_PRO_POPUP_CLOSED, isClosed)
         sharedPreferences.setProperty(
             KEY_IS_PRO_POPUP_CLOSED_START_COUNTER,
             getCurrentStartCounter()

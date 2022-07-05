@@ -119,6 +119,7 @@ class HomeFragment : Fragment() {
         view.findViewById<ProPopupLayout>(R.id.proPopupLayout).apply {
             this.isVisible = isProPopupVisible
             if (isProPopupVisible) {
+                popupManager.setProVersionPopupClosed(false)
                 actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_SHOWN)
             }
             onClickListener = {
@@ -127,7 +128,7 @@ class HomeFragment : Fragment() {
             }
             onCloseClickListener = {
                 actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
-                popupManager.setProVersionPopupClosed()
+                popupManager.setProVersionPopupClosed(true)
             }
             showSnackbar()
         }
