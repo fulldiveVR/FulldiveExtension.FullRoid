@@ -79,7 +79,7 @@
                 android:layout_marginTop="@dimen/size_8dp"
                 android:layout_marginEnd="@dimen/size_32dp"
                 android:fontFamily="@font/roboto_regular"
-                android:text="Grab FullRoid PRO for a cup of coffee price"
+                android:text="@string/string_pro_popup_disclamer"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/titleTextView"
