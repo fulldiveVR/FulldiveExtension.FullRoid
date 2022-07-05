@@ -16,8 +16,8 @@
 
 package com.swordfish.lemuroid.app.appextension
 
+import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
 import com.swordfish.lemuroid.BuildConfig
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -26,7 +26,7 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
-class PopupManager {
+class PopupManager(private val context: Context) {
 
     private val client = OkHttpClient()
     private val popupsFlow = listOf(
@@ -42,8 +42,9 @@ class PopupManager {
         StartAppDialog.Empty
     )
 
-    fun onAppStarted(context: Context) {
-        val sharedPreferences = context.getPrivateSharedPreferences()
+    val sharedPreferences by lazy { context.getPrivateSharedPreferences() }
+
+    fun onAppStarted(activity: Activity) {
         val startCounter = sharedPreferences.getProperty(KEY_START_APP_COUNTER, 0)
         sharedPreferences.setProperty(KEY_START_APP_COUNTER, startCounter + 1)
 
@@ -54,19 +55,15 @@ class PopupManager {
             when (getShowingPopup(startCounter)) {
                 StartAppDialog.RateUs -> {
                     if (!rateUsDone) {
-                        showRateUsDialog(context) {
-                            onRateUsPositiveClicked(
-                                context,
-                                sharedPreferences,
-                                it
-                            )
+                        showRateUsDialog(activity) {
+                            onRateUsPositiveClicked(activity, it)
                         }
                     }
                 }
                 StartAppDialog.InstallBrowser -> {
-                    if ((!installBrowserDone) && !isBrowserInstalled(context)) {
-                        showInstallBrowserDialog(context) {
-                            onInstallAppPositiveClicked(context, sharedPreferences)
+                    if ((!installBrowserDone) && !isBrowserInstalled()) {
+                        showInstallBrowserDialog(activity) {
+                            onInstallAppPositiveClicked()
                         }
                     }
                 }
@@ -76,7 +73,7 @@ class PopupManager {
         }
     }
 
-    private fun isBrowserInstalled(context: Context): Boolean {
+    private fun isBrowserInstalled(): Boolean {
         val app = try {
             context.packageManager.getApplicationInfo(BROWSER_PACKAGE_NAME, 0)
         } catch (e: Exception) {
@@ -85,13 +82,9 @@ class PopupManager {
         return app?.enabled ?: false
     }
 
-    private fun onRateUsPositiveClicked(
-        context: Context,
-        sharedPreferences: SharedPreferences,
-        rating: Int
-    ) {
+    private fun onRateUsPositiveClicked(activity: Activity, rating: Int) {
         if (rating < SUCCESS_RATING_VALUE) {
-            showRateReportDialog(context) { message ->
+            showRateReportDialog(activity) { message ->
                 sendMessage(message)
                 sharedPreferences.setProperty(KEY_RATE_US_DONE, true)
             }
@@ -101,10 +94,7 @@ class PopupManager {
         }
     }
 
-    private fun onInstallAppPositiveClicked(
-        context: Context,
-        sharedPreferences: SharedPreferences
-    ) {
+    private fun onInstallAppPositiveClicked() {
         context.openAppInGooglePlay(BROWSER_PACKAGE_NAME)
         sharedPreferences.setProperty(KEY_INSTALL_BROWSER_DONE, true)
     }
@@ -132,29 +122,20 @@ class PopupManager {
         }
     }
 
-    private fun showRateUsDialog(
-        context: Context,
-        positiveClickListener: (value: Int) -> Unit
-    ) {
-        RateUsDialogBuilder.show(context) { value ->
+    private fun showRateUsDialog(activity: Activity, positiveClickListener: (value: Int) -> Unit) {
+        RateUsDialogBuilder.show(activity) { value ->
             positiveClickListener.invoke(value)
         }
     }
 
-    private fun showRateReportDialog(
-        context: Context,
-        positiveClickListener: (message: String) -> Unit
-    ) {
-        RateReportDialogBuilder.show(context) { message ->
+    private fun showRateReportDialog(activity: Activity, positiveClickListener: (message: String) -> Unit) {
+        RateReportDialogBuilder.show(activity) { message ->
             positiveClickListener.invoke(message)
         }
     }
 
-    private fun showInstallBrowserDialog(
-        context: Context,
-        positiveClickListener: () -> Unit
-    ) {
-        InstallBrowserDialogBuilder.show(context) {
+    private fun showInstallBrowserDialog(activity: Activity, positiveClickListener: () -> Unit) {
+        InstallBrowserDialogBuilder.show(activity) {
             positiveClickListener.invoke()
         }
     }
@@ -173,15 +154,38 @@ class PopupManager {
         return result
     }
 
-    fun isProVersionPopupVisible(context: Context): Boolean {
-        val sharedPreferences = context.getPrivateSharedPreferences()
-        val isShown = sharedPreferences.getProperty(KEY_IS_PRO_VERSION_POPUP_SHOWN, false)
-        return !context.packageManager.isFullRoidProInstalled() && !isProVersion() && !isShown
+    fun setProVersionPopupClosed() {
+        sharedPreferences.setProperty(KEY_IS_PRO_POPUP_CLOSED, true)
+        sharedPreferences.setProperty(
+            KEY_IS_PRO_POPUP_CLOSED_START_COUNTER,
+            getCurrentStartCounter()
+        )
     }
 
-    fun setProVersionPopupShown(context: Context) {
+    private fun getCurrentStartCounter(): Int {
         val sharedPreferences = context.getPrivateSharedPreferences()
-        sharedPreferences.setProperty(KEY_IS_PRO_VERSION_POPUP_SHOWN, true)
+        return sharedPreferences.getProperty(KEY_START_APP_COUNTER, 0)
+    }
+
+    private fun isProVersionPopupClosed(): Boolean {
+        return sharedPreferences.getProperty(KEY_IS_PRO_POPUP_CLOSED, false)
+    }
+
+    private fun getPromoCloseStartCounter(): Int {
+        return sharedPreferences.getProperty(KEY_IS_PRO_POPUP_CLOSED_START_COUNTER, 0)
+    }
+
+    fun isProPopupVisible(): Boolean {
+        return when {
+            isProVersion() -> false
+            isProVersionPopupClosed() -> {
+                val closeCount = getPromoCloseStartCounter()
+                val startCount = getCurrentStartCounter()
+                val diff = startCount - closeCount
+                listOf(2, 5).any { it == diff }
+            }
+            else -> true
+        }
     }
 
     companion object {
@@ -189,7 +193,11 @@ class PopupManager {
         private const val KEY_START_APP_COUNTER = "KEY_START_APP_COUNTER"
         private const val KEY_RATE_US_DONE = "KEY_RATE_US_DONE"
         private const val KEY_INSTALL_BROWSER_DONE = "KEY_INSTALL_BROWSER_DONE"
-        private const val KEY_IS_PRO_VERSION_POPUP_SHOWN = "KEY_IS_PRO_VERSION_POPUP_SHOWN"
+
+        private const val KEY_IS_PRO_POPUP_CLOSED = "KEY_IS_PRO_POPUP_CLOSED"
+        private const val KEY_IS_PRO_POPUP_CLOSED_START_COUNTER =
+            "KEY_IS_PRO_POPUP_CLOSED_START_COUNTER"
+
         private const val BROWSER_PACKAGE_NAME = "com.fulldive.mobile"
         private const val SUCCESS_RATING_VALUE = 4
     }

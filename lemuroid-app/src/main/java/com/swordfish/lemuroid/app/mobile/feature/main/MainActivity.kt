@@ -44,6 +44,7 @@ import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesFragment
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesFragment
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeFragment
+import com.swordfish.lemuroid.app.mobile.feature.proinfo.tutorial.ProTutorialFragment
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchFragment
 import com.swordfish.lemuroid.app.mobile.feature.settings.*
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
@@ -67,7 +68,6 @@ import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.activity_empty.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -82,6 +82,9 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
     @Inject
     lateinit var actionTracker: IActionTracker
 
+    @Inject
+    lateinit var popupManager: PopupManager
+
     private val reviewManager = ReviewManager()
     private var mainViewModel: MainViewModel? = null
 
@@ -91,7 +94,7 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         window.statusBarColor = SurfaceColors.SURFACE_2.getColor(this)
         setContentView(R.layout.activity_main)
         initializeActivity()
-        PopupManager().onAppStarted(this)
+        popupManager.onAppStarted(this)
     }
 
     override fun activity(): Activity = this
@@ -231,6 +234,10 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         @PerFragment
         @ContributesAndroidInjector(modules = [CoresSelectionFragment.Module::class])
         abstract fun coresSelectionFragment(): CoresSelectionFragment
+
+        @PerFragment
+        @ContributesAndroidInjector(modules = [ProTutorialFragment.Module::class])
+        abstract fun proTutorialFragment(): ProTutorialFragment
 
         @dagger.Module
         companion object {

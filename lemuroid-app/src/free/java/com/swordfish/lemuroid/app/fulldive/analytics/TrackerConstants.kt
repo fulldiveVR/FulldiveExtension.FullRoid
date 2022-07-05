@@ -25,6 +25,7 @@ object TrackerConstants {
     const val FLURRY_SCREEN_TIME = "Fulldive.ScreenTime"
     const val FIREBASE_SCREEN_TIME = "screen_time"
 
+    const val EVENT_PRO_POPUP_SHOWN = "pro_popup_shown"
     const val EVENT_PRO_POPUP_CLOSED = "pro_popup_closed"
     const val EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP = "pro_tutorial_opened_from_pro_popup"
     const val EVENT_PRO_TUTORIAL_OPENED_FROM_TOOLBAR = "pro_tutorial_opened_from_toolbar"

@@ -63,6 +63,9 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var actionTracker: IActionTracker
 
+    @Inject
+    lateinit var popupManager: PopupManager
+
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
@@ -112,18 +115,19 @@ class HomeFragment : Fragment() {
             pagingController.updateLibraryIndexingInProgress(it)
         }
 
-        val popupManager = PopupManager()
-        val isProPopupVisible = popupManager.isProVersionPopupVisible(requireContext())
+        val isProPopupVisible = popupManager.isProPopupVisible()
         view.findViewById<ProPopupLayout>(R.id.proPopupLayout).apply {
             this.isVisible = isProPopupVisible
+            if (isProPopupVisible) {
+                actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_SHOWN)
+            }
             onClickListener = {
                 actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP)
                 findNavController().navigate(R.id.navigation_pro_tutorial)
-                popupManager.setProVersionPopupShown(requireContext())
             }
             onCloseClickListener = {
                 actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
-                popupManager.setProVersionPopupShown(requireContext())
+                popupManager.setProVersionPopupClosed()
             }
             showSnackbar()
         }

@@ -46,7 +46,7 @@ buildscript {
 android {
     val versionMajor = 1
     val versionMinor = 0
-    val versionPatch = 4
+    val versionPatch = 5
 
     defaultConfig {
         versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
@@ -151,8 +151,12 @@ android {
                 variant.outputs
                     .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                     .forEach { output ->
-                        val outputFileName =
+                        val outputFileName = if (variant.flavorName.contains("pro")) {
+                            "FullRoid-v${android.defaultConfig.versionName} Pro-${variant.buildType.name}.apk"
+
+                        } else {
                             "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                        }
                         output.outputFileName = outputFileName
                     }
             }
@@ -168,8 +172,11 @@ android {
                 variant.outputs
                     .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                     .forEach { output ->
-                        val outputFileName =
+                        val outputFileName = if (variant.flavorName.contains("pro")) {
+                            "FullRoid-v${android.defaultConfig.versionName} Pro-${variant.buildType.name}.apk"
+                        } else {
                             "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                        }
                         output.outputFileName = outputFileName
                     }
             }
