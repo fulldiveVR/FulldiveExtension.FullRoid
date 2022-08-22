@@ -180,7 +180,9 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
             .map { "<i>$it</i>" }
             .joinToString(", ")
 
-        val message = getString(R.string.lemuroid_help_content).replace("\$SYSTEMS", systemFolders)
+        val message = String
+            .format(getString(R.string.lemuroid_help_content), getString(R.string.lemuroid_name))
+            .replace("\$SYSTEMS", systemFolders)
         AlertDialog.Builder(this)
             .setMessage(Html.fromHtml(message))
             .show()

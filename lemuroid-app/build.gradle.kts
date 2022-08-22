@@ -98,13 +98,13 @@ android {
         create("free") {
             dimension = "opensource"
             applicationId = "com.fulldive.extension.fullroid"
-            resValue("string", "lemuroid_name", "Full Roid")
+            resValue("string", "lemuroid_name", "FullRoid")
         }
 
         create("pro") {
             dimension = "opensource"
             applicationId = "com.fulldive.extension.fullroid.pro"
-            resValue("string", "lemuroid_name", "Full Roid PRO")
+            resValue("string", "lemuroid_name", "FullRoid X")
         }
 
         create("play") {
@@ -152,7 +152,7 @@ android {
                     .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                     .forEach { output ->
                         val outputFileName = if (variant.flavorName.contains("pro")) {
-                            "FullRoid-v${android.defaultConfig.versionName} Pro-${variant.buildType.name}.apk"
+                            "FullRoid-v${android.defaultConfig.versionName} X-${variant.buildType.name}.apk"
 
                         } else {
                             "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
@@ -173,7 +173,7 @@ android {
                     .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
                     .forEach { output ->
                         val outputFileName = if (variant.flavorName.contains("pro")) {
-                            "FullRoid-v${android.defaultConfig.versionName} Pro-${variant.buildType.name}.apk"
+                            "FullRoid-v${android.defaultConfig.versionName} X-${variant.buildType.name}.apk"
                         } else {
                             "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
                         }
