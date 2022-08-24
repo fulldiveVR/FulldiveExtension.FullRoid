@@ -138,11 +138,11 @@
         <item>LCD</item>
     </string-array>
     <string name="string_pro_tutorial_disclamer">:check_mark: + 6 new emulators, including Nintendo 3DS\n:check_mark: HD mode to efficiently upscale games\n:check_mark: Exclusive access to upcoming features</string>
-    <string name="string_pro_tutorial_title">FullRoid &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
+    <string name="string_pro_tutorial_title">FullRoid &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;X&lt;/font&gt;</string>
     <string name="string_pro_limited_deal">Limited deal</string>
     <string name="string_pro_price">%d/ lifetime %d</string>
     <string name="string_pro_buy_now">Buy Now</string>
-    <string name="string_pro_popup_disclamer">Grab FullRoid PRO for less than a cup of coffee.</string>
+    <string name="string_pro_popup_disclamer">Grab FullRoid X for less than a cup of coffee.</string>
     <string name="string_pro_popup_title">Don\'t miss out on our SALE!</string>
     <string name="settings_category_misc"> Miscellaneous</string>
     <string name="settings_title_maximum_cache_usage">Cache size limit</string>
@@ -167,7 +167,7 @@
     <string name="settings_description_low_latency_audio">Reduce audio latency on supported devices. Might increase audio glitches.</string>
     <string name="library_index_notification_action_cancel">Cancel</string>
     <string name="error_message_incompatible_state">This save state is not compatible with the current core version. Please load the latest in-game save or use a previous Lemuroid version.</string>
-    <string name="settings_open_pro_tutorial">FullRoid PRO</string>
+    <string name="settings_open_pro_tutorial">FullRoid X</string>
     <string name="pref_key_open_pro_tutorial" translatable="false">openprotutorial</string>
 
     <string name="annotate_valent_trick">Grief dateline colloquial miscreant malposed windsurf nichols ostensible!</string>
