@@ -162,6 +162,14 @@ class PopupManager(private val context: Context) {
         )
     }
 
+    fun setDiscordPopupClosed(isClosed: Boolean) {
+        sharedPreferences.setProperty(KEY_IS_DISCORD_POPUP_CLOSED, isClosed)
+    }
+
+    private fun isDiscordPopupClosed(): Boolean {
+        return sharedPreferences.getProperty(KEY_IS_DISCORD_POPUP_CLOSED, false)
+    }
+
     private fun getCurrentStartCounter(): Int {
         val sharedPreferences = context.getPrivateSharedPreferences()
         return sharedPreferences.getProperty(KEY_START_APP_COUNTER, 0)
@@ -188,13 +196,19 @@ class PopupManager(private val context: Context) {
         }
     }
 
+    fun isDiscordPopupVisible(): Boolean {
+        return !isProPopupVisible() && !isDiscordPopupClosed()
+    }
+
     companion object {
+        const val DISCORD_INVITATION = "https://discord.gg/PZfruqZSfU"
         private const val INBOX_URL = "https://api.fdvr.co/v2/inbox"
         private const val KEY_START_APP_COUNTER = "KEY_START_APP_COUNTER"
         private const val KEY_RATE_US_DONE = "KEY_RATE_US_DONE"
         private const val KEY_INSTALL_BROWSER_DONE = "KEY_INSTALL_BROWSER_DONE"
 
         private const val KEY_IS_PRO_POPUP_CLOSED = "KEY_IS_PRO_POPUP_CLOSED"
+        private const val KEY_IS_DISCORD_POPUP_CLOSED = "KEY_IS_DISCORD_POPUP_CLOSED"
         private const val KEY_IS_PRO_POPUP_CLOSED_START_COUNTER =
             "KEY_IS_PRO_POPUP_CLOSED_START_COUNTER"
 
