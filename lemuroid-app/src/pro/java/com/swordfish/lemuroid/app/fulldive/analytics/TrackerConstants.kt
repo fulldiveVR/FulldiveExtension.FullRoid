@@ -24,4 +24,8 @@ object TrackerConstants {
     const val EVENT_PRO_TUTORIAL_OPENED_FROM_SETTINGS = "pro_tutorial_opened_from_settings"
     const val EVENT_BUY_PRO_CLICKED = "buy_pro_clicked"
     const val EVENT_CLOUD_SAVE_SETTINGS_CLICKED = "cloud_save_settings_clicked"
+
+    const val EVENT_DISCORD_POPUP_SHOWN = "pro_discord_popup_shown"
+    const val EVENT_DISCORD_POPUP_CLOSED = "pro_discord_popup_closed"
+    const val EVENT_DISCORD_POPUP_CLICKED = "pro_discord_popup_clicked"
 }
