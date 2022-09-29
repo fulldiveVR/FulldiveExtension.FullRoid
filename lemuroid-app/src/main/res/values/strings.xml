@@ -169,6 +169,8 @@
     <string name="error_message_incompatible_state">This save state is not compatible with the current core version. Please load the latest in-game save or use a previous Lemuroid version.</string>
     <string name="settings_open_pro_tutorial">FullRoid X</string>
     <string name="pref_key_open_pro_tutorial" translatable="false">openprotutorial</string>
+    <string name="popup_more_games_title">Want to play more games?</string>
+    <string name="popup_more_games_description">Join our Discord community</string>
 
     <string name="annotate_valent_trick">Grief dateline colloquial miscreant malposed windsurf nichols ostensible!</string>
     <string name="douglas_grievance_craft_holm">Headstone hillel</string>
