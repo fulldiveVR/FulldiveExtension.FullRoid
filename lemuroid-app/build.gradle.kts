@@ -46,7 +46,7 @@ buildscript {
 android {
     val versionMajor = 1
     val versionMinor = 0
-    val versionPatch = 7
+    val versionPatch = 6
 
     defaultConfig {
         versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
