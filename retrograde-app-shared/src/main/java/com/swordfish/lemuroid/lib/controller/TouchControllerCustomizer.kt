@@ -1,25 +1,3 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 package com.swordfish.lemuroid.lib.controller
 
 import android.app.Activity
@@ -35,7 +13,11 @@ import androidx.core.math.MathUtils
 import com.dinuscxj.gesture.MultiTouchGestureDetector
 import com.swordfish.lemuroid.common.graphics.GraphicsUtils
 import com.swordfish.touchinput.controller.R
-import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onSubscription
 
 class TouchControllerCustomizer {
 
@@ -47,6 +29,8 @@ class TouchControllerCustomizer {
         class Scale(val value: Float) : Event()
         class Margins(val x: Float, val y: Float) : Event()
         object Save : Event()
+        object Close : Event()
+        object Init : Event()
     }
 
     data class Settings(
@@ -56,13 +40,15 @@ class TouchControllerCustomizer {
         val margin: Float
     )
 
-    private fun getObservable(
+    private fun getEvents(
         activity: Activity,
         layoutInflater: LayoutInflater,
         view: View,
         settings: Settings,
         insets: Rect
-    ): Observable<Event> = Observable.create { emitter ->
+    ): SharedFlow<Event> {
+        val events = MutableStateFlow<Event>(Event.Init)
+
         var (scale, rotation, marginX, marginY) = settings
 
         val contentView = layoutInflater.inflate(R.layout.layout_edit_touch_controls, null)
@@ -79,15 +65,15 @@ class TouchControllerCustomizer {
                 marginX = TouchControllerSettingsManager.DEFAULT_MARGIN_X
                 marginY = TouchControllerSettingsManager.DEFAULT_MARGIN_Y
 
-                emitter.onNext(Event.Margins(marginX, marginY))
-                emitter.onNext(Event.Rotation(rotation))
-                emitter.onNext(Event.Scale(scale))
+                events.value = Event.Margins(marginX, marginY)
+                events.value = Event.Rotation(rotation)
+                events.value = Event.Scale(scale)
             }
         editControlsWindow?.contentView?.findViewById<Button>(R.id.edit_control_done)
             ?.setOnClickListener {
-                emitter.onNext(Event.Save)
+                events.value = Event.Save
                 hideCustomizationOptions()
-                emitter.onComplete()
+                events.value = Event.Close
             }
 
         touchDetector = MultiTouchGestureDetector(
@@ -114,7 +100,7 @@ class TouchControllerCustomizer {
 
                 override fun onScale(detector: MultiTouchGestureDetector) {
                     scale = MathUtils.clamp(scale + (detector.scale - 1f) * 0.5f, 0f, 1f)
-                    emitter.onNext(Event.Scale(scale))
+                    events.value = Event.Scale(scale)
                 }
 
                 override fun onMove(detector: MultiTouchGestureDetector) {
@@ -128,7 +114,7 @@ class TouchControllerCustomizer {
                         minMarginX,
                         maxMarginX
                     )
-                    emitter.onNext(Event.Margins(marginX, marginY))
+                    events.value = Event.Margins(marginX, marginY)
                 }
 
                 override fun onRotate(detector: MultiTouchGestureDetector) {
@@ -139,18 +125,19 @@ class TouchControllerCustomizer {
                         0f,
                         1f
                     )
-                    emitter.onNext(Event.Rotation(rotation))
+                    events.value = Event.Rotation(rotation)
                 }
             }
         )
 
-        editControlsWindow?.setOnDismissListener { emitter.onComplete() }
+        editControlsWindow?.setOnDismissListener { events.value = Event.Close }
 
         editControlsWindow?.contentView?.setOnTouchListener { _, event ->
             touchDetector.onTouchEvent(event)
         }
         editControlsWindow?.isFocusable = false
         editControlsWindow?.showAtLocation(view, Gravity.CENTER, 0, 0)
+        return events
     }
 
     fun displayCustomizationPopup(
@@ -159,12 +146,12 @@ class TouchControllerCustomizer {
         view: View,
         insets: Rect,
         settings: Settings
-    ): Observable<Event> {
+    ): Flow<Event> {
         val originalRequestedOrientation = activity.requestedOrientation
-        return getObservable(activity, layoutInflater, view, settings, insets)
-            .doOnSubscribe { activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED }
-            .doFinally { activity.requestedOrientation = originalRequestedOrientation }
-            .doFinally { hideCustomizationOptions() }
+        return getEvents(activity, layoutInflater, view, settings, insets)
+            .onSubscription { activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED }
+            .onCompletion { activity.requestedOrientation = originalRequestedOrientation }
+            .onCompletion { hideCustomizationOptions() }
     }
 
     private fun hideCustomizationOptions() {

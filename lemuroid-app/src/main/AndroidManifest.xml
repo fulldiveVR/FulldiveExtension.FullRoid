@@ -1,26 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ /*
-  ~  *  RetrogradeApplicationComponent.kt
-  ~  *
-  ~  *  Copyright (C) 2017 Retrograde Project
-  ~  *
-  ~  *  This program is free software: you can redistribute it and/or modify
-  ~  *  it under the terms of the GNU General Public License as published by
-  ~  *  the Free Software Foundation, either version 3 of the License, or
-  ~  *  (at your option) any later version.
-  ~  *
-  ~  *  This program is distributed in the hope that it will be useful,
-  ~  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~  *  GNU General Public License for more details.
-  ~  *
-  ~  *  You should have received a copy of the GNU General Public License
-  ~  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  ~  *
-  ~  */
-  -->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.swordfish.lemuroid">
@@ -43,13 +21,13 @@
     <application
         android:name="com.swordfish.lemuroid.app.LemuroidApplication"
         android:allowBackup="true"
-        android:banner="@mipmap/ic_launcher"
-        android:icon="@mipmap/ic_launcher"
+        android:banner="@mipmap/ic_banner"
+        android:icon="@mipmap/lemuroid_launcher"
         android:isGame="true"
         android:label="@string/lemuroid_name"
         android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/lemuroid_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/LemuroidMaterialTheme">
         <activity
@@ -58,7 +36,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -69,6 +46,7 @@
             android:theme="@style/LemuroidMaterialTheme.Game">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <data
                     android:host="${applicationId}"
                     android:pathPattern="/play-game/id/.*"
@@ -91,6 +69,10 @@
             android:name="com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity"
             android:process=":game"
             android:theme="@style/LemuroidMaterialTheme.Menu" />
+
+        <activity
+            android:name="com.swordfish.lemuroid.app.mobile.feature.input.GamePadBindingActivity"
+            android:theme="@style/LemuroidMaterialTheme.Invisible" />
 
         <activity
             android:name="com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher"
@@ -122,8 +104,11 @@
         <activity
             android:name=".app.tv.folderpicker.TVFolderPickerActivity"
             android:theme="@style/Theme.Leanback.GuidedStep" />
-
         <activity android:name=".app.tv.folderpicker.TVFolderPickerLauncher" />
+
+        <activity
+            android:name=".app.tv.input.TVGamePadBindingActivity"
+            android:theme="@style/Theme.Leanback.GuidedStep" />
 
         <activity
             android:name=".app.tv.game.TVGameActivity"
@@ -140,25 +125,13 @@
             android:theme="@style/LemuroidMaterialTheme.Game" />
 
         <receiver android:name=".app.shared.library.LibraryIndexBroadcastReceiver" />
+        <receiver android:name=".app.shared.library.CoreUpdateBroadcastReceiver" />
 
-        <activity
-            android:name = "com.swordfish.lemuroid.app.shared.game.CaribAshevilleActivity"
-            android:exported="false"
-            android:label="@string/spacious_rancid_holman_ieee"
-            android:launchMode="singleTop"
-            />
-
-        <!-- It is not possible to invoke Work from another process with the default initializer.
-             We have to disable it and manually initialize it in our custom Application. -->
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
-            android:exported="false"
-            tools:node="merge">
+            tools:node="remove" />
 
-            <meta-data
-                android:name="com.swordfish.lemuroid.app.shared.startup.WorkManagerTasksInitializer"
-                android:value="androidx.startup" />
-        </provider>
     </application>
+
 </manifest>

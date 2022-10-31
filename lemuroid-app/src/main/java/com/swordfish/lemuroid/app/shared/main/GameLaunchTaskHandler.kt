@@ -1,24 +1,3 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
 package com.swordfish.lemuroid.app.shared.main
 
 import android.app.Activity
@@ -31,13 +10,8 @@ import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 import com.swordfish.lemuroid.app.shared.storage.cache.CacheCleanerWork
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
-import com.swordfish.lemuroid.lib.library.db.dao.updateAsync
 import com.swordfish.lemuroid.lib.library.db.entity.Game
-import io.reactivex.Completable
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.delay
 
 class GameLaunchTaskHandler(
     private val reviewManager: ReviewManager,
@@ -48,9 +22,14 @@ class GameLaunchTaskHandler(
         cancelBackgroundWork(context)
     }
 
-    fun handleGameFinish(enableRatingFlow: Boolean, activity: Activity, resultCode: Int, data: Intent?): Completable {
+    suspend fun handleGameFinish(
+        enableRatingFlow: Boolean,
+        activity: Activity,
+        resultCode: Int,
+        data: Intent?
+    ) {
         rescheduleBackgroundWork(activity.applicationContext)
-        return when (resultCode) {
+        when (resultCode) {
             Activity.RESULT_OK -> handleSuccessfulGameFinish(activity, enableRatingFlow, data)
             BaseGameActivity.RESULT_ERROR -> handleUnsuccessfulGameFinish(
                 activity,
@@ -62,7 +41,6 @@ class GameLaunchTaskHandler(
                 activity.getString(R.string.lemuroid_crash_disclamer),
                 data?.getStringExtra(BaseGameActivity.PLAY_GAME_RESULT_ERROR)
             )
-            else -> Completable.complete()
         }
     }
 
@@ -78,41 +56,35 @@ class GameLaunchTaskHandler(
         CacheCleanerWork.enqueueCleanCacheLRU(context)
     }
 
-    private fun handleUnsuccessfulGameFinish(activity: Activity, message: String, messageDetail: String?): Completable {
-        return Completable.fromAction {
-            GameCrashActivity.launch(activity, message, messageDetail)
-        }.subscribeOn(AndroidSchedulers.mainThread())
+    private fun handleUnsuccessfulGameFinish(
+        activity: Activity,
+        message: String,
+        messageDetail: String?
+    ) {
+        GameCrashActivity.launch(activity, message, messageDetail)
     }
 
-    private fun handleSuccessfulGameFinish(
+    private suspend fun handleSuccessfulGameFinish(
         activity: Activity,
         enableRatingFlow: Boolean,
         data: Intent?
-    ): Completable {
-        val duration = data?.extras?.getLong(BaseGameActivity.PLAY_GAME_RESULT_SESSION_DURATION) ?: 0L
+    ) {
+        val duration = data?.extras?.getLong(BaseGameActivity.PLAY_GAME_RESULT_SESSION_DURATION)
+            ?: 0L
         val game = data?.extras?.getSerializable(BaseGameActivity.PLAY_GAME_RESULT_GAME) as Game
 
-        return Single.just(game)
-            .flatMapCompletable {
-                val comps = mutableListOf<Completable>().apply {
-                    add(updateGamePlayedTimestamp(it))
-
-                    if (enableRatingFlow) {
-                        add(displayReviewRequest(activity, duration))
-                    }
-                }
-                Completable.concat(comps)
-            }
-            .subscribeOn(Schedulers.io())
+        updateGamePlayedTimestamp(game)
+        if (enableRatingFlow) {
+            displayReviewRequest(activity, duration)
+        }
     }
 
-    private fun displayReviewRequest(activity: Activity, durationMillis: Long): Completable {
-        return Completable.timer(500, TimeUnit.MILLISECONDS)
-            .andThen { reviewManager.startReviewFlow(activity, durationMillis) }
+    private suspend fun displayReviewRequest(activity: Activity, durationMillis: Long) {
+        delay(500)
+        reviewManager.launchReviewFlow(activity, durationMillis)
     }
 
-    private fun updateGamePlayedTimestamp(game: Game): Completable {
-        return retrogradeDb.gameDao()
-            .updateAsync(game.copy(lastPlayedAt = System.currentTimeMillis()))
+    private suspend fun updateGamePlayedTimestamp(game: Game) {
+        retrogradeDb.gameDao().update(game.copy(lastPlayedAt = System.currentTimeMillis()))
     }
 }

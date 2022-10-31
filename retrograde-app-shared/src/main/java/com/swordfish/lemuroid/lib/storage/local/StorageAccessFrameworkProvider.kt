@@ -1,25 +1,3 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 package com.swordfish.lemuroid.lib.storage.local
 
 import android.content.Context
@@ -33,23 +11,20 @@ import com.swordfish.lemuroid.common.kotlin.writeToFile
 import com.swordfish.lemuroid.lib.R
 import com.swordfish.lemuroid.lib.library.db.entity.DataFile
 import com.swordfish.lemuroid.lib.library.db.entity.Game
-import com.swordfish.lemuroid.lib.library.metadata.GameMetadataProvider
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.storage.BaseStorageFile
 import com.swordfish.lemuroid.lib.storage.RomFiles
 import com.swordfish.lemuroid.lib.storage.StorageFile
 import com.swordfish.lemuroid.lib.storage.StorageProvider
-import io.reactivex.Observable
-import io.reactivex.Single
-import timber.log.Timber
 import java.io.File
 import java.io.InputStream
 import java.util.zip.ZipInputStream
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
-class StorageAccessFrameworkProvider(
-    private val context: Context,
-    override val metadataProvider: GameMetadataProvider
-) : StorageProvider {
+class StorageAccessFrameworkProvider(private val context: Context) : StorageProvider {
 
     override val id: String = "access_framework"
 
@@ -61,10 +36,10 @@ class StorageAccessFrameworkProvider(
 
     override val enabledByDefault = true
 
-    override fun listBaseStorageFiles(): Observable<List<BaseStorageFile>> {
+    override fun listBaseStorageFiles(): Flow<List<BaseStorageFile>> {
         return getExternalFolder()?.let { folder ->
             traverseDirectoryEntries(Uri.parse(folder))
-        } ?: Observable.empty()
+        } ?: emptyFlow()
     }
 
     override fun getStorageFile(baseStorageFile: BaseStorageFile): StorageFile? {
@@ -77,35 +52,27 @@ class StorageAccessFrameworkProvider(
         return preferenceManager.getString(prefString, null)
     }
 
-    private fun traverseDirectoryEntries(
-        rootUri: Uri
-    ): Observable<List<BaseStorageFile>> = Observable.create { emitter ->
-        try {
-            val directoryDocumentIds = mutableListOf<String>()
-            DocumentsContract.getTreeDocumentId(rootUri)?.let { directoryDocumentIds.add(it) }
+    private fun traverseDirectoryEntries(rootUri: Uri): Flow<List<BaseStorageFile>> = flow {
+        val directoryDocumentIds = mutableListOf<String>()
+        DocumentsContract.getTreeDocumentId(rootUri)?.let { directoryDocumentIds.add(it) }
 
-            while (directoryDocumentIds.isNotEmpty()) {
-                val currentDirectoryDocumentId = directoryDocumentIds.removeAt(0)
+        while (directoryDocumentIds.isNotEmpty()) {
+            val currentDirectoryDocumentId = directoryDocumentIds.removeAt(0)
 
-                val result = runCatching {
-                    listBaseStorageFiles(rootUri, currentDirectoryDocumentId)
-                }
-                if (result.isFailure) {
-                    Timber.e(result.exceptionOrNull(), "Error while listing files")
-                }
-
-                val (files, directories) = result.getOrDefault(
-                    listOf<BaseStorageFile>() to listOf<String>()
-                )
-
-                emitter.onNext(files)
-                directoryDocumentIds.addAll(directories)
+            val result = runCatching {
+                listBaseStorageFiles(rootUri, currentDirectoryDocumentId)
             }
-        } catch (e: Exception) {
-            emitter.onError(e)
-        }
+            if (result.isFailure) {
+                Timber.e(result.exceptionOrNull(), "Error while listing files")
+            }
 
-        emitter.onComplete()
+            val (files, directories) = result.getOrDefault(
+                listOf<BaseStorageFile>() to listOf<String>()
+            )
+
+            emit(files)
+            directoryDocumentIds.addAll(directories)
+        }
     }
 
     private fun listBaseStorageFiles(
@@ -158,13 +125,13 @@ class StorageAccessFrameworkProvider(
         game: Game,
         dataFiles: List<DataFile>,
         allowVirtualFiles: Boolean
-    ): Single<RomFiles> = Single.fromCallable {
+    ): RomFiles {
         val originalDocumentUri = Uri.parse(game.fileUri)
         val originalDocument = DocumentFile.fromSingleUri(context, originalDocumentUri)!!
 
         val isZipped = originalDocument.isZipped() && originalDocument.name != game.fileName
 
-        when {
+        return when {
             isZipped && dataFiles.isEmpty() -> getGameRomFilesZipped(game, originalDocument)
             allowVirtualFiles -> getGameRomFilesVirtual(game, dataFiles)
             else -> getGameRomFilesStandard(game, dataFiles, originalDocument)

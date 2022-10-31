@@ -1,26 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ /*
-  ~  *  RetrogradeApplicationComponent.kt
-  ~  *
-  ~  *  Copyright (C) 2017 Retrograde Project
-  ~  *
-  ~  *  This program is free software: you can redistribute it and/or modify
-  ~  *  it under the terms of the GNU General Public License as published by
-  ~  *  the Free Software Foundation, either version 3 of the License, or
-  ~  *  (at your option) any later version.
-  ~  *
-  ~  *  This program is distributed in the hope that it will be useful,
-  ~  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~  *  GNU General Public License for more details.
-  ~  *
-  ~  *  You should have received a copy of the GNU General Public License
-  ~  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  ~  *
-  ~  */
-  -->
-
 <resources>
     <string name="pref_key_rescan" translatable="false">rescan</string>
     <string name="pref_key_stop_rescan" translatable="false">stop_rescan</string>
@@ -48,18 +26,33 @@
 
     <string name="pref_key_shader_filter" translatable="false">shader_filter</string>
 
-    <string-array name="pref_key_haptic_feedback_mode_values">
+    <string-array translatable="false" name="pref_key_haptic_feedback_mode_values">
         <item>none</item>
         <item>press</item>
         <item>press_release</item>
     </string-array>
 
-    <string-array name="pref_key_shader_filter_values">
+    <string-array translatable="false" name="pref_key_haptic_feedback_mode_display_names">
+        <item>@string/haptic_feedback_mode_names_none</item>
+        <item>@string/haptic_feedback_mode_names_press</item>
+        <item>@string/haptic_feedback_mode_names_press_release</item>
+    </string-array>
+
+    <string-array translatable="false" name="pref_key_shader_filter_values">
         <item>auto</item>
         <item>sharp</item>
         <item>smooth</item>
         <item>crt</item>
         <item>lcd</item>
         <item>hd</item>
+    </string-array>
+
+    <string-array translatable="false" name="pref_key_shader_filter_display_names">
+        <item>@string/shader_filter_names_auto</item>
+        <item>@string/shader_filter_names_sharp</item>
+        <item>@string/shader_filter_names_smooth</item>
+        <item>@string/shader_filter_names_crt</item>
+        <item>@string/shader_filter_names_lcd</item>
+        <item>@string/shader_filter_names_hd</item>
     </string-array>
 </resources>

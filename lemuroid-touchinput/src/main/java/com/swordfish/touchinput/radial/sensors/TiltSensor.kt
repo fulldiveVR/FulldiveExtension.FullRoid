@@ -29,13 +29,14 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.view.Surface
 import android.view.WindowManager
-import com.jakewharton.rxrelay2.PublishRelay
 import com.swordfish.lemuroid.common.kotlin.CustomDelegates
 import com.swordfish.lemuroid.common.math.linearInterpolation
-import io.reactivex.Observable
-import timber.log.Timber
 import kotlin.math.abs
 import kotlin.math.sign
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import timber.log.Timber
 
 class TiltSensor(context: Context) : SensorEventListener {
 
@@ -45,7 +46,7 @@ class TiltSensor(context: Context) : SensorEventListener {
     private val restOrientationsBuffer = mutableListOf<FloatArray>()
     private var restOrientation: FloatArray? = null
 
-    private val tiltEvents = PublishRelay.create<FloatArray>()
+    private val tiltEvents = MutableStateFlow<FloatArray?>(null)
 
     private val rotationMatrix = FloatArray(9)
     private val remappedRotationMatrix = FloatArray(9)
@@ -62,7 +63,7 @@ class TiltSensor(context: Context) : SensorEventListener {
         setSensitivity(0.5f)
     }
 
-    fun getTiltEvents(): Observable<FloatArray> = tiltEvents
+    fun getTiltEvents(): Flow<FloatArray> = tiltEvents.filterNotNull()
 
     private fun onRunStateChanged() {
         if (shouldRun && isAllowedToRun) {
@@ -132,7 +133,7 @@ class TiltSensor(context: Context) : SensorEventListener {
         } else {
             val x = clamp(applyDeadZone(yRotation - restOrientation!![0], deadZone) / (maxRotation))
             val y = clamp(-applyDeadZone(xRotation - restOrientation!![1], deadZone) / (maxRotation))
-            tiltEvents.accept(floatArrayOf(x, y))
+            tiltEvents.value = (floatArrayOf(x, y))
         }
     }
 

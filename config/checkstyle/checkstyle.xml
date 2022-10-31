@@ -146,9 +146,6 @@ Description: https://source.android.com/source/code-style.html
         <!--################ IMPORTS ##########################-->
         <!--###################################################-->
 
-        <!-- Star imports are forbidden. -->
-        <module name="AvoidStarImport"/>
-
         <!-- Forbid imports from sun.* -->
         <module name="IllegalImport"/>
 

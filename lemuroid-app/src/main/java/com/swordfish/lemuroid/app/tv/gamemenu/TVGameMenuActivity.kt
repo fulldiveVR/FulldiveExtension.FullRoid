@@ -1,25 +1,3 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 package com.swordfish.lemuroid.app.tv.gamemenu
 
 import android.os.Bundle
@@ -37,9 +15,12 @@ import javax.inject.Inject
 
 class TVGameMenuActivity : TVBaseSettingsActivity() {
 
-    @Inject lateinit var statesManager: StatesManager
-    @Inject lateinit var statesPreviewManager: StatesPreviewManager
-    @Inject lateinit var inputDeviceManager: InputDeviceManager
+    @Inject
+    lateinit var statesManager: StatesManager
+    @Inject
+    lateinit var statesPreviewManager: StatesPreviewManager
+    @Inject
+    lateinit var inputDeviceManager: InputDeviceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,15 +30,18 @@ class TVGameMenuActivity : TVBaseSettingsActivity() {
 
             val core = intent.extras?.getSerializable(
                 GameMenuContract.EXTRA_SYSTEM_CORE_CONFIG
-            ) as SystemCoreConfig? ?: throw InvalidParameterException("Missing EXTRA_SYSTEM_CORE_CONFIG")
+            ) as SystemCoreConfig?
+                ?: throw InvalidParameterException("Missing EXTRA_SYSTEM_CORE_CONFIG")
 
             val options = intent.extras?.getSerializable(
                 GameMenuContract.EXTRA_CORE_OPTIONS
-            ) as Array<LemuroidCoreOption>? ?: throw InvalidParameterException("Missing EXTRA_CORE_OPTIONS")
+            ) as Array<LemuroidCoreOption>?
+                ?: throw InvalidParameterException("Missing EXTRA_CORE_OPTIONS")
 
             val advancedOptions = intent.extras?.getSerializable(
                 GameMenuContract.EXTRA_ADVANCED_CORE_OPTIONS
-            ) as Array<LemuroidCoreOption>? ?: throw InvalidParameterException("Missing EXTRA_ADVANCED_CORE_OPTIONS")
+            ) as Array<LemuroidCoreOption>?
+                ?: throw InvalidParameterException("Missing EXTRA_ADVANCED_CORE_OPTIONS")
 
             val numDisks = intent.extras?.getInt(GameMenuContract.EXTRA_DISKS)
                 ?: throw InvalidParameterException("Missing EXTRA_DISKS")

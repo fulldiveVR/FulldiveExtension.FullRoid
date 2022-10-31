@@ -1,25 +1,3 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 package com.swordfish.lemuroid.lib.bios
 
 import com.swordfish.lemuroid.common.files.safeDelete
@@ -30,9 +8,9 @@ import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import com.swordfish.lemuroid.lib.storage.StorageFile
-import timber.log.Timber
 import java.io.File
 import java.io.InputStream
+import timber.log.Timber
 
 class BiosManager(private val directoriesManager: DirectoriesManager) {
 
@@ -79,7 +57,11 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
         return BiosInfo(bios.getValue(true), bios.getValue(false))
     }
 
-    fun tryAddBiosAfter(storageFile: StorageFile, inputStream: InputStream, timestampMs: Long): Boolean {
+    fun tryAddBiosAfter(
+        storageFile: StorageFile,
+        inputStream: InputStream,
+        timestampMs: Long
+    ): Boolean {
         val bios = findByCRC(storageFile) ?: findByName(storageFile) ?: return false
 
         Timber.i("Importing bios file: $bios")
@@ -164,29 +146,28 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                 SystemID.SEGACD,
                 "C6D10268"
             ),
-            //
-//            Bios(
-//                "bios7.bin",
-//                "DF692A80A5B1BC90728BC3DFC76CD948",
-//                "Nintendo DS ARM7",
-//                SystemID.NDS,
-//                "1280F0D5"
-//            ),
-//            Bios(
-//                "bios9.bin",
-//                "A392174EB3E572FED6447E956BDE4B25",
-//                "Nintendo DS ARM9",
-//                SystemID.NDS,
-//                "2AB23573"
-//            ),
-//            Bios(
-//                "firmware.bin",
-//                "E45033D9B0FA6B0DE071292BBA7C9D13",
-//                "Nintendo DS Firmware",
-//                SystemID.NDS,
-//                "945F9DC9",
-//                "nds_firmware.bin"
-//            )
+            Bios(
+                "bios7.bin",
+                "DF692A80A5B1BC90728BC3DFC76CD948",
+                "Nintendo DS ARM7",
+                SystemID.NDS,
+                "1280F0D5"
+            ),
+            Bios(
+                "bios9.bin",
+                "A392174EB3E572FED6447E956BDE4B25",
+                "Nintendo DS ARM9",
+                SystemID.NDS,
+                "2AB23573"
+            ),
+            Bios(
+                "firmware.bin",
+                "E45033D9B0FA6B0DE071292BBA7C9D13",
+                "Nintendo DS Firmware",
+                SystemID.NDS,
+                "945F9DC9",
+                "nds_firmware.bin"
+            )
         )
     }
 }

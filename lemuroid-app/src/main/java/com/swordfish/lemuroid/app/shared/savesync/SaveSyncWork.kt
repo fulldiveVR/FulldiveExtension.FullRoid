@@ -1,29 +1,8 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 package com.swordfish.lemuroid.app.shared.savesync
 
 import android.content.Context
 import androidx.work.Constraints
+import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ExistingWorkPolicy
@@ -32,11 +11,10 @@ import androidx.work.ListenableWorker
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.RxWorker
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
-import com.swordfish.lemuroid.app.mobile.feature.settings.RxSettingsManager
+import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
 import com.swordfish.lemuroid.lib.injection.WorkerKey
@@ -45,52 +23,58 @@ import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import dagger.Binds
 import dagger.android.AndroidInjector
 import dagger.multibindings.IntoMap
-import io.reactivex.Scheduler
-import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.flow
+import timber.log.Timber
 
 class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
-    RxWorker(context, workerParams) {
+    CoroutineWorker(context, workerParams) {
 
-    @Inject lateinit var saveSyncManager: SaveSyncManager
-    @Inject lateinit var settingsManager: RxSettingsManager
+    @Inject
+    lateinit var saveSyncManager: SaveSyncManager
 
-    override fun createWork(): Single<Result> {
+    @Inject
+    lateinit var settingsManager: SettingsManager
+
+    override suspend fun doWork(): Result {
         AndroidWorkerInjection.inject(this)
 
-        if (!saveSyncManager.isSupported() || !saveSyncManager.isConfigured())
-            return Single.just(Result.success())
+        if (!shouldPerformSaveSync()) {
+            return Result.success()
+        }
 
-        return settingsManager.syncSaves
-            .filter { it }
-            .flatMapCompletable {
-                shouldPerformSync()
-                    .filter { it }
-                    .doOnSuccess { displayNotification() }
-                    .flatMapSingle { settingsManager.syncStatesCores }
-                    .flatMapCompletable { coreNames ->
-                        val coresToSync = coreNames.mapNotNull { findByName(it) }.toSet()
-                        saveSyncManager.sync(coresToSync)
-                    }
-            }
-            .subscribeOn(Schedulers.io())
-            .doOnError { e -> Timber.e(e, "Error in saves sync") }
-            .onErrorComplete()
-            .andThen(Single.just(Result.success()))
+        displayNotification()
+
+        val coresToSync = settingsManager.syncStatesCores()
+            .mapNotNull { findByName(it) }
+            .toSet()
+
+        try {
+            saveSyncManager.sync(coresToSync)
+        } catch (e: Throwable) {
+            Timber.e(e, "Error in saves sync")
+        }
+
+        return Result.success()
     }
 
-    override fun getBackgroundScheduler(): Scheduler {
-        return Schedulers.io()
+    private suspend fun shouldPerformSaveSync(): Boolean {
+        val conditionsToRunThisWork = flow {
+            emit(saveSyncManager.isSupported())
+            emit(saveSyncManager.isConfigured())
+            emit(settingsManager.syncSaves())
+            emit(shouldScheduleThisSync())
+        }
+
+        return conditionsToRunThisWork.firstOrNull { !it } ?: true
     }
 
-    private fun shouldPerformSync(): Single<Boolean> {
+    private suspend fun shouldScheduleThisSync(): Boolean {
         val isAutoSync = inputData.getBoolean(IS_AUTO, false)
         val isManualSync = !isAutoSync
-        return settingsManager.autoSaveSync
-            .map { it && isAutoSync || isManualSync }
+        return settingsManager.autoSaveSync() && isAutoSync || isManualSync
     }
 
     private fun displayNotification() {

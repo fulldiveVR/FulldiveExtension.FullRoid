@@ -1,63 +1,51 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 package com.swordfish.lemuroid.app.tv.settings
 
 import android.content.Context
 import android.os.Bundle
 import android.view.InputDevice
+import android.view.View
 import androidx.leanback.preference.LeanbackPreferenceFragmentCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
+import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
+import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.settings.AdvancedSettingsPreferences
 import com.swordfish.lemuroid.app.shared.settings.BiosPreferences
 import com.swordfish.lemuroid.app.shared.settings.CoresSelectionPreferences
-import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
-import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.settings.GamePadPreferencesHelper
 import com.swordfish.lemuroid.app.shared.settings.SaveSyncPreferences
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
+import com.swordfish.lemuroid.common.coroutines.launchOnState
+import com.swordfish.lemuroid.common.kotlin.NTuple2
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
-import com.uber.autodispose.android.lifecycle.scope
-import com.uber.autodispose.autoDispose
 import dagger.android.support.AndroidSupportInjection
-import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
 
     @Inject
     lateinit var settingsInteractor: SettingsInteractor
+
     @Inject
     lateinit var biosPreferences: BiosPreferences
+
     @Inject
     lateinit var gamePadPreferencesHelper: GamePadPreferencesHelper
+
     @Inject
     lateinit var inputDeviceManager: InputDeviceManager
+
     @Inject
     lateinit var coresSelectionPreferences: CoresSelectionPreferences
+
     @Inject
     lateinit var saveSyncManager: SaveSyncManager
 
@@ -71,13 +59,35 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
         super.onAttach(context)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        launchOnState(Lifecycle.State.CREATED) {
+            val gamePadStatus = combine(
+                inputDeviceManager.getGamePadsObservable(),
+                inputDeviceManager.getEnabledInputsObservable(),
+                ::NTuple2
+            )
+
+            gamePadStatus
+                .distinctUntilChanged()
+                .collect { (pads, enabledPads) -> addGamePadBindingsScreen(pads, enabledPads) }
+        }
+
+        launchOnState(Lifecycle.State.RESUMED) {
+            inputDeviceManager.getEnabledInputsObservable()
+                .distinctUntilChanged()
+                .collect { refreshGamePadBindingsScreen(it) }
+        }
+    }
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         preferenceManager.preferenceDataStore =
             SharedPreferencesHelper.getSharedPreferencesDataStore(requireContext())
         setPreferencesFromResource(R.xml.tv_settings, rootKey)
 
         getCoresSelectionScreen()?.let {
-            coresSelectionPreferences.addCoresSelectionPreferences(it, GameSystemHelper().all())
+            coresSelectionPreferences.addCoresSelectionPreferences(it)
         }
 
         getBiosInfoPreferenceScreen()?.let {
@@ -98,11 +108,6 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
 
     override fun onResume() {
         super.onResume()
-        inputDeviceManager.getGamePadsObservable()
-            .distinctUntilChanged()
-            .observeOn(AndroidSchedulers.mainThread())
-            .autoDispose(scope())
-            .subscribe { refreshGamePadBindingsScreen(it) }
 
         refreshSaveSyncScreen()
 
@@ -135,10 +140,28 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
         return findPreference(resources.getString(R.string.pref_key_advanced_settings))
     }
 
-    private fun refreshGamePadBindingsScreen(gamePads: List<InputDevice>) {
-        getGamePadPreferenceScreen()?.let {
-            it.removeAll()
-            gamePadPreferencesHelper.addGamePadsPreferencesToScreen(requireContext(), it, gamePads)
+    private fun addGamePadBindingsScreen(
+        gamePads: List<InputDevice>,
+        enabledGamePads: List<InputDevice>
+    ) {
+        lifecycleScope.launch {
+            getGamePadPreferenceScreen()?.let {
+                it.removeAll()
+                gamePadPreferencesHelper.addGamePadsPreferencesToScreen(
+                    requireActivity(),
+                    it,
+                    gamePads,
+                    enabledGamePads
+                )
+            }
+        }
+    }
+
+    private fun refreshGamePadBindingsScreen(enabledGamePads: List<InputDevice>) {
+        lifecycleScope.launch {
+            getGamePadPreferenceScreen()?.let {
+                gamePadPreferencesHelper.refreshGamePadsPreferencesToScreen(it, enabledGamePads)
+            }
         }
     }
 
@@ -154,17 +177,17 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
         }
 
         when (preference.key) {
-            getString(R.string.pref_key_reset_gamepad_bindings) -> handleResetGamePadBindings()
+            getString(R.string.pref_key_reset_gamepad_bindings) -> lifecycleScope.launch {
+                handleResetGamePadBindings()
+            }
             getString(R.string.pref_key_reset_settings) -> handleResetSettings()
         }
         return super.onPreferenceTreeClick(preference)
     }
 
-    private fun handleResetGamePadBindings() {
-        gamePadPreferencesHelper.resetBindingsAndRefresh()
-            .observeOn(AndroidSchedulers.mainThread())
-            .autoDispose(scope())
-            .subscribe { refreshGamePadBindingsScreen(it) }
+    private suspend fun handleResetGamePadBindings() {
+        inputDeviceManager.resetAllBindings()
+        refreshGamePadBindingsScreen(inputDeviceManager.getGamePadsObservable().first())
     }
 
     private fun handleResetSettings() {

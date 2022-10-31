@@ -1,25 +1,3 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 package com.swordfish.lemuroid.app.tv.channel
 
 import android.annotation.SuppressLint
@@ -40,9 +18,9 @@ import com.swordfish.lemuroid.app.shared.covers.CoverLoader
 import com.swordfish.lemuroid.app.shared.deeplink.DeepLink
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
-import io.reactivex.Completable
-import io.reactivex.Single
-import io.reactivex.rxkotlin.toObservable
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.toList
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.HEAD
@@ -78,7 +56,7 @@ class ChannelHandler(
         ChannelLogoUtils.storeChannelLogo(
             appContext,
             channelId,
-            convertToBitmap(appContext, R.mipmap.ic_launcher)!!
+            convertToBitmap(appContext, R.mipmap.lemuroid_tv_channel)!!
         )
 
         TvContractCompat.requestChannelBrowsable(appContext, channelId)
@@ -101,54 +79,51 @@ class ChannelHandler(
         return BitmapFactory.decodeResource(context.resources, resourceId)
     }
 
-    fun update(): Completable {
-        return retrogradeDatabase.gameDao()
-            .rxSelectFirstRecents(10)
-            .firstElement()
-            .filter { it.isNotEmpty() }
-            .flatMapObservable { it.toObservable() }
-            .flatMapSingle { game ->
-                if (game.coverFrontUrl != null) {
-                    thumbnailsApi.thumbnailExists(game.coverFrontUrl!!).map { game to it.isSuccessful }
-                } else {
-                    Single.just(game to false)
-                }
-            }
+    suspend fun update() {
+        val recentGames = retrogradeDatabase.gameDao().asyncSelectFirstRecents(10)
+
+        val channelEntries = recentGames.asFlow()
+            .map { getChannelEntry(it) }
             .toList()
-            .doOnSuccess {
-                val channelId = getOrCreateChannelId() ?: return@doOnSuccess
 
-                val channel = Channel.Builder()
-                channel.setDisplayName(appName)
-                    .setType(TvContractCompat.Channels.TYPE_PREVIEW)
-                    .setAppLinkIntentUri(DeepLink.openLeanbackUri(appContext))
-                    .build()
+        val channelId = getOrCreateChannelId() ?: return
 
-                appContext.contentResolver.delete(
-                    TvContractCompat.buildPreviewProgramsUriForChannel(channelId),
-                    null,
-                    null
-                )
+        val channel = Channel.Builder()
+        channel.setDisplayName(appName)
+            .setType(TvContractCompat.Channels.TYPE_PREVIEW)
+            .setAppLinkIntentUri(DeepLink.openLeanbackUri(appContext))
+            .build()
 
-                appContext.contentResolver.update(
-                    TvContractCompat.buildChannelUri(channelId),
-                    channel.build().toContentValues(),
-                    null,
-                    null
-                )
+        appContext.contentResolver.delete(
+            TvContractCompat.buildPreviewProgramsUriForChannel(channelId),
+            null,
+            null
+        )
 
-                val contentValues = it.map { (game, thumbnail) ->
-                    getGameProgram(channelId, game, thumbnail).toContentValues()
-                }
+        appContext.contentResolver.update(
+            TvContractCompat.buildChannelUri(channelId),
+            channel.build().toContentValues(),
+            null,
+            null
+        )
 
-                if (contentValues.isNotEmpty()) {
-                    appContext.contentResolver.bulkInsert(
-                        Uri.parse("content://android.media.tv/preview_program"),
-                        contentValues.toTypedArray()
-                    )
-                }
-            }
-            .ignoreElement()
+        val contentValues = channelEntries.map { (game, thumbnail) ->
+            getGameProgram(channelId, game, thumbnail).toContentValues()
+        }
+
+        if (contentValues.isNotEmpty()) {
+            appContext.contentResolver.bulkInsert(
+                Uri.parse("content://android.media.tv/preview_program"),
+                contentValues.toTypedArray()
+            )
+        }
+    }
+
+    private suspend fun getChannelEntry(game: Game): ChannelEntry {
+        val hasThumbnail = game.coverFrontUrl
+            ?.let { thumbnailsApi.thumbnailExists(it).isSuccessful }
+            ?: false
+        return ChannelEntry(game, hasThumbnail)
     }
 
     @SuppressLint("RestrictedApi")
@@ -206,8 +181,10 @@ class ChannelHandler(
         return null
     }
 
+    private data class ChannelEntry(val game: Game, val hasThumbnail: Boolean)
+
     interface ThumbnailsApi {
         @HEAD
-        fun thumbnailExists(@Url url: String): Single<Response<Void>>
+        suspend fun thumbnailExists(@Url url: String): Response<Void>
     }
 }

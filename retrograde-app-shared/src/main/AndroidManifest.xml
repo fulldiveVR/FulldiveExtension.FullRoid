@@ -22,4 +22,6 @@
   ~  */
   -->
 
-<manifest package="com.swordfish.lemuroid.lib"/>
+<manifest package="com.swordfish.lemuroid.lib"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingLeanbackLauncher,ImpliedTouchscreenHardware,MissingLeanbackSupport"/>

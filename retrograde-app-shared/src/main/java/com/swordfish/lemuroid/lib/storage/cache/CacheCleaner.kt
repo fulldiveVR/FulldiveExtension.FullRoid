@@ -1,25 +1,3 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 package com.swordfish.lemuroid.lib.storage.cache
 
 import android.content.Context
@@ -31,11 +9,12 @@ import com.swordfish.lemuroid.common.kotlin.gigaBytes
 import com.swordfish.lemuroid.common.kotlin.megaBytes
 import com.swordfish.lemuroid.lib.storage.local.LocalStorageProvider
 import com.swordfish.lemuroid.lib.storage.local.StorageAccessFrameworkProvider
-import io.reactivex.Completable
-import timber.log.Timber
 import java.io.File
 import kotlin.math.abs
 import kotlin.math.roundToLong
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 object CacheCleaner {
 
@@ -64,12 +43,15 @@ object CacheCleaner {
         return stat.blockSizeLong * stat.blockCountLong
     }
 
-    fun cleanAll(appContext: Context) = Completable.fromAction {
+    suspend fun cleanAll(appContext: Context): Unit = withContext(Dispatchers.IO) {
         Timber.i("Running cache cleanup everything task")
         appContext.cacheDir.listFiles()?.forEach { it.deleteRecursively() }
     }
 
-    fun clean(appContext: Context, requestedLimit: Long) = Completable.fromAction {
+    suspend fun clean(
+        appContext: Context,
+        requestedLimit: Long
+    ): Unit = withContext(Dispatchers.IO) {
         Timber.i("Running cache cleanup lru task")
         val cacheLimit = getClosestCacheLimit(requestedLimit)
 
