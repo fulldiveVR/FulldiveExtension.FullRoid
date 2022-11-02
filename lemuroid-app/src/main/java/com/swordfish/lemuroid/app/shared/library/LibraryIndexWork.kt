@@ -1,3 +1,25 @@
+/*
+ *
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
+ *
+ */
+
 package com.swordfish.lemuroid.app.shared.library
 
 import android.content.Context
@@ -8,6 +30,7 @@ import androidx.work.WorkerParameters
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
 import com.swordfish.lemuroid.lib.injection.WorkerKey
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.LemuroidLibrary
 import dagger.Binds
 import dagger.android.AndroidInjector
@@ -23,6 +46,10 @@ class LibraryIndexWork(context: Context, workerParams: WorkerParameters) :
     @Inject
     lateinit var lemuroidLibrary: LemuroidLibrary
 
+    @Inject
+    lateinit var gameSystemHelper: GameSystemHelperImpl
+
+
     override suspend fun doWork(): Result {
         AndroidWorkerInjection.inject(this)
 
@@ -37,7 +64,7 @@ class LibraryIndexWork(context: Context, workerParams: WorkerParameters) :
 
         val result = withContext(Dispatchers.IO) {
             kotlin.runCatching {
-                lemuroidLibrary.indexLibrary()
+                lemuroidLibrary.indexLibrary(gameSystemHelper)
             }
         }
 

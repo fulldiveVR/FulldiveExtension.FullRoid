@@ -1,3 +1,25 @@
+<!--
+  ~ /*
+  ~  *  RetrogradeApplicationComponent.kt
+  ~  *
+  ~  *  Copyright (C) 2017 Retrograde Project
+  ~  *
+  ~  *  This program is free software: you can redistribute it and/or modify
+  ~  *  it under the terms of the GNU General Public License as published by
+  ~  *  the Free Software Foundation, either version 3 of the License, or
+  ~  *  (at your option) any later version.
+  ~  *
+  ~  *  This program is distributed in the hope that it will be useful,
+  ~  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~  *  GNU General Public License for more details.
+  ~  *
+  ~  *  You should have received a copy of the GNU General Public License
+  ~  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  ~  *
+  ~  */
+  -->
+
 <resources>
     <dimen name="game_entry_size">144dp</dimen>
     <dimen name="favorite_toggle_size">40dp</dimen>
@@ -14,4 +36,25 @@
     <dimen name="loading_circle_progress">56dp</dimen>
     <dimen name="loading_circle_icon">32dp</dimen>
     <dimen name="loading_circle_progress_thickness">6dp</dimen>
+
+    <dimen name="size_1dp">1dp</dimen>
+    <dimen name="size_2dp">2dp</dimen>
+    <dimen name="size_4dp">4dp</dimen>
+    <dimen name="size_8dp">8dp</dimen>
+    <dimen name="size_10dp">10dp</dimen>
+    <dimen name="size_12dp">12dp</dimen>
+    <dimen name="size_14dp">14dp</dimen>
+    <dimen name="size_16dp">16dp</dimen>
+    <dimen name="size_18dp">18dp</dimen>
+    <dimen name="size_24dp">24dp</dimen>
+    <dimen name="size_32dp">32dp</dimen>
+    <dimen name="size_36dp">36dp</dimen>
+    <dimen name="size_40dp">40dp</dimen>
+    <dimen name="size_48dp">48dp</dimen>
+    <dimen name="lottie_animation_width">150dp</dimen>
+    <dimen name="lottie_animation_height">180dp</dimen>
+
+    <dimen name="textsize_large">18sp</dimen>
+    <dimen name="textsize_xxxlarge">24sp</dimen>
+    <dimen name="line_spacing_extra">1dp</dimen>
 </resources>

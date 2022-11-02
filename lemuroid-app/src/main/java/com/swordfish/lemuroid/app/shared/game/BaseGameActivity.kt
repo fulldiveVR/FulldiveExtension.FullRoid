@@ -1,3 +1,25 @@
+/*
+ *
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
+ *
+ */
+
 package com.swordfish.lemuroid.app.shared.game
 
 import android.app.Activity
@@ -18,6 +40,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.shared.GameMenuContract
@@ -170,7 +193,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
         game = intent.getSerializableExtra(EXTRA_GAME) as Game
         systemCoreConfig = intent.getSerializableExtra(EXTRA_SYSTEM_CORE_CONFIG) as SystemCoreConfig
-        system = GameSystem.findById(game.systemId)
+        system = GameSystemHelper().findById(game.systemId)
 
         lifecycleScope.launch {
             loadGame()
@@ -542,7 +565,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     }
 
     private suspend fun initializeGamePadShortcutsFlow() {
-        inputDeviceManager.getInputMenuShortCutObservable()
+        inputDeviceManager
+            .getInputMenuShortCutObservable()
             .distinctUntilChanged()
             .safeCollect { shortcut ->
                 shortcut?.let {
@@ -1001,7 +1025,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             game,
             requestLoadSave && autoSaveEnabled,
             systemCoreConfig,
-            directLoad
+            directLoad,
+            system
         )
 
         loadingStatesFlow

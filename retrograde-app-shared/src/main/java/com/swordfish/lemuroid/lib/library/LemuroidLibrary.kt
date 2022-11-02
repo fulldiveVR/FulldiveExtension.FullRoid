@@ -51,11 +51,13 @@ class LemuroidLibrary(
     private val biosManager: BiosManager
 ) {
 
-    suspend fun indexLibrary() {
+    suspend fun indexLibrary(
+        gameSystemHelper: GameSystemHelperImpl
+    ) {
         val startedAtMs = System.currentTimeMillis()
 
         try {
-            indexProviders(startedAtMs)
+            indexProviders(startedAtMs, gameSystemHelper)
         } catch (e: Throwable) {
             Timber.e("Library indexing stopped due to exception", e)
         } finally {
@@ -67,11 +69,14 @@ class LemuroidLibrary(
     }
 
     @OptIn(FlowPreview::class)
-    private suspend fun indexProviders(startedAtMs: Long) {
+    private suspend fun indexProviders(
+        startedAtMs: Long,
+        gameSystemHelper: GameSystemHelperImpl
+    ) {
         val gameMetadata = gameMetadataProvider.get()
         val enabledProviders = storageProviderRegistry.get().enabledProviders
         enabledProviders.asFlow()
-            .flatMapConcat { indexSingleProvider(it, startedAtMs, gameMetadata) }
+            .flatMapConcat { indexSingleProvider(it, startedAtMs, gameMetadata, gameSystemHelper) }
             .collect()
     }
 
@@ -79,19 +84,21 @@ class LemuroidLibrary(
     private fun indexSingleProvider(
         provider: StorageProvider,
         startedAtMs: Long,
-        gameMetadata: GameMetadataProvider
+        gameMetadata: GameMetadataProvider,
+        gameSystemHelper: GameSystemHelperImpl
     ): Flow<Unit> {
         return provider.listBaseStorageFiles()
             .flatMapConcat { StorageFilesMerger.mergeDataFiles(provider, it).asFlow() }
             .batchWithSizeAndTime(MAX_BUFFER_SIZE, MAX_TIME)
-            .flatMapMerge { processBatch(it, provider, startedAtMs, gameMetadata) }
+            .flatMapMerge { processBatch(it, provider, startedAtMs, gameMetadata, gameSystemHelper) }
     }
 
     private suspend fun processBatch(
         batch: List<GroupedStorageFiles>,
         provider: StorageProvider,
         startedAtMs: Long,
-        gameMetadata: GameMetadataProvider
+        gameMetadata: GameMetadataProvider,
+        gameSystemHelper: GameSystemHelperImpl
     ) = flow<Unit> {
         val entries = batch.map { fetchEntriesFromDatabase(it) }
 
@@ -99,7 +106,7 @@ class LemuroidLibrary(
         handleExistingEntries(existingEntries, startedAtMs)
 
         val newEntries = entries.filterIsInstance<ScanEntry.File>()
-            .map { buildEntryFromMetadata(it.file, provider, gameMetadata, startedAtMs) }
+            .map { buildEntryFromMetadata(it.file, provider, gameMetadata, startedAtMs, gameSystemHelper) }
 
         handleNewEntries(newEntries, startedAtMs, provider)
     }
@@ -212,13 +219,14 @@ class LemuroidLibrary(
         groupedStorageFile: GroupedStorageFiles,
         provider: StorageProvider,
         metadataProvider: GameMetadataProvider,
-        startedAtMs: Long
+        startedAtMs: Long,
+        gameSystemHelper: GameSystemHelperImpl
     ): ScanEntry {
         val game = sortedFilesForScanning(groupedStorageFile).asFlow()
             .mapNotNull { safeStorageFile(provider, it) }
             .mapNotNull { storageFile ->
                 val metadata = metadataProvider.retrieveMetadata(storageFile)
-                convertGameMetadataToGame(groupedStorageFile, storageFile, metadata, startedAtMs)
+                convertGameMetadataToGame(groupedStorageFile, storageFile, metadata, startedAtMs, gameSystemHelper)
             }
             .firstOrNull()
 
@@ -257,14 +265,15 @@ class LemuroidLibrary(
         groupedStorageFile: GroupedStorageFiles,
         storageFile: StorageFile,
         gameMetadata: GameMetadata?,
-        lastIndexedAt: Long
+        lastIndexedAt: Long,
+        gameSystemHelper: GameSystemHelperImpl
     ): Game? {
 
         if (gameMetadata == null) {
             return null
         }
 
-        val gameSystem = GameSystem.findById(gameMetadata.system!!)
+        val gameSystem = gameSystemHelper.findById(gameMetadata.system!!)
 
         // If the databased matched a data file (as with bin/cue) we force link the primary filename
         val fileName = if (groupedStorageFile.dataFiles.isNotEmpty()) {

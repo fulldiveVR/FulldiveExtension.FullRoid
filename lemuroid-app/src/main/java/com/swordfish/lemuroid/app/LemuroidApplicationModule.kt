@@ -1,7 +1,4 @@
 /*
- * RetrogradeApplicationModule.kt
- *
- * Copyright (C) 2017 Retrograde Project
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +19,12 @@ package com.swordfish.lemuroid.app
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.swordfish.lemuroid.app.appextension.PopupManager
+import com.swordfish.lemuroid.app.fulldive.analytics.FulldiveActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.ITagReader
+import com.swordfish.lemuroid.app.fulldive.analytics.TagReader
+import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity
 import com.swordfish.lemuroid.app.mobile.feature.input.GamePadBindingActivity
@@ -49,6 +52,7 @@ import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.game.GameLoader
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerApp
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.LemuroidLibrary
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.dao.GameSearchDao
@@ -133,11 +137,20 @@ abstract class LemuroidApplicationModule {
                 .fallbackToDestructiveMigration()
                 .build()
 
+
         @Provides
         @PerApp
         @JvmStatic
-        fun gameMetadataProvider(libretroDBManager: LibretroDBManager): GameMetadataProvider =
-            LibretroDBMetadataProvider(libretroDBManager)
+        fun gameSystemHelper(): GameSystemHelperImpl = GameSystemHelper()
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun gameMetadataProvider(
+            libretroDBManager: LibretroDBManager,
+            gameSystemHelper: GameSystemHelperImpl
+        ): GameMetadataProvider =
+            LibretroDBMetadataProvider(libretroDBManager, gameSystemHelper)
 
         @Provides
         @PerApp
@@ -376,5 +389,25 @@ abstract class LemuroidApplicationModule {
         fun coverLoader(
             context: Context
         ) = CoverLoader(context)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun getTagReader(): ITagReader = TagReader()
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun actionTracker(
+            context: Context,
+            tagReader: ITagReader
+        ): IActionTracker = FulldiveActionTracker(context, tagReader)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun popupManager(
+            context: Context,
+        ): PopupManager = PopupManager(context)
     }
 }

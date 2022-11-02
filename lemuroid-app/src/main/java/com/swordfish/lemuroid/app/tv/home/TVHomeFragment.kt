@@ -1,3 +1,25 @@
+/*
+ *
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
+ *
+ */
+
 package com.swordfish.lemuroid.app.tv.home
 
 import android.content.Context
@@ -30,6 +52,7 @@ import com.swordfish.lemuroid.app.tv.settings.TVSettingsActivity
 import com.swordfish.lemuroid.app.tv.shared.GamePresenter
 import com.swordfish.lemuroid.app.tv.shared.TVHelper
 import com.swordfish.lemuroid.common.coroutines.launchOnState
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
@@ -49,6 +72,9 @@ class TVHomeFragment : BrowseSupportFragment() {
 
     @Inject
     lateinit var saveSyncManager: SaveSyncManager
+
+    @Inject
+    lateinit var gameSystemHelper: GameSystemHelperImpl
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -105,7 +131,7 @@ class TVHomeFragment : BrowseSupportFragment() {
             findNavController().navigate(R.id.navigation_search)
         }
 
-        val factory = TVHomeViewModel.Factory(retrogradeDb, requireContext().applicationContext)
+        val factory = TVHomeViewModel.Factory(retrogradeDb, requireContext().applicationContext, gameSystemHelper)
         val homeViewModel = ViewModelProvider(this, factory)[TVHomeViewModel::class.java]
 
         launchOnState(Lifecycle.State.RESUMED) {
@@ -136,7 +162,7 @@ class TVHomeFragment : BrowseSupportFragment() {
                 setItems(viewState.favoritesGames, LEANBACK_MULTI_DIFF_CALLBACK)
             } else {
                 val allItems = viewState.favoritesGames.subList(0, TVHomeViewModel.CAROUSEL_MAX_ITEMS) +
-                    listOf(TVSetting(TVSettingType.SHOW_ALL_FAVORITES))
+                        listOf(TVSetting(TVSettingType.SHOW_ALL_FAVORITES))
                 setItems(allItems, LEANBACK_MULTI_DIFF_CALLBACK)
             }
         }

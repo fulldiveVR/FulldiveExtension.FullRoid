@@ -62,12 +62,11 @@ class GameLoader(
         game: Game,
         loadSave: Boolean,
         systemCoreConfig: SystemCoreConfig,
-        directLoad: Boolean
+        directLoad: Boolean,
+        system: GameSystem
     ): Flow<LoadingState> = flow {
         try {
             emit(LoadingState.LoadingCore)
-
-            val system = GameSystem.findById(game.systemId)
 
             if (!isArchitectureSupported(systemCoreConfig)) {
                 throw GameLoaderException(GameLoaderError.UnsupportedArchitecture)

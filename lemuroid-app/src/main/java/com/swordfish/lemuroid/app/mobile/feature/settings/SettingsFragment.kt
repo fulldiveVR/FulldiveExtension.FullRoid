@@ -1,3 +1,25 @@
+/*
+ *
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
+ *
+ */
+
 package com.swordfish.lemuroid.app.mobile.feature.settings
 
 import android.content.Context
@@ -12,6 +34,10 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.isFullRoidProInstalled
+import com.swordfish.lemuroid.app.appextension.isProVersion
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
 import com.swordfish.lemuroid.common.coroutines.launchOnState
@@ -30,6 +56,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
     @Inject
     lateinit var saveSyncManager: SaveSyncManager
 
+    @Inject
+    lateinit var actionTracker: IActionTracker
+
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
@@ -46,7 +75,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.mobile_settings, rootKey)
 
         findPreference<Preference>(getString(R.string.pref_key_open_save_sync_settings))?.apply {
-            isVisible = saveSyncManager.isSupported()
+            isVisible = saveSyncManager.isSupported() && isProVersion()
         }
     }
 
@@ -74,6 +103,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
                         ?: getString(R.string.none)
                 }
         }
+
+        val proTutorialPreference: Preference? = findPreference(getString(R.string.pref_key_open_pro_tutorial))
+        proTutorialPreference?.isVisible = !requireContext().packageManager.isFullRoidProInstalled() && !isProVersion()
 
         settingsViewModel.indexingInProgress.observe(this) {
             rescanPreference?.isEnabled = !it
@@ -104,6 +136,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             getString(R.string.pref_key_open_cores_selection) -> handleDisplayCorePage()
             getString(R.string.pref_key_display_bios_info) -> handleDisplayBiosInfo()
             getString(R.string.pref_key_advanced_settings) -> handleAdvancedSettings()
+            getString(R.string.pref_key_open_pro_tutorial) -> openProTutorial()
             getString(R.string.pref_key_reset_settings) -> handleResetSettings()
         }
         return super.onPreferenceTreeClick(preference)
@@ -111,6 +144,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun handleAdvancedSettings() {
         findNavController().navigate(R.id.navigation_settings_advanced)
+    }
+
+    private fun openProTutorial() {
+        actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_SETTINGS)
+        findNavController().navigate(R.id.navigation_pro_tutorial)
     }
 
     private fun handleDisplayBiosInfo() {
@@ -122,6 +160,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun handleDisplaySaveSync() {
+        actionTracker.logAction(TrackerConstants.EVENT_CLOUD_SAVE_SETTINGS_CLICKED)
         findNavController().navigate(R.id.navigation_settings_save_sync)
     }
 

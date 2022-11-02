@@ -69,6 +69,9 @@
 -dontwarn com.google.errorprone.**
 -dontnote android.net.http.*
 
+## AutoDispose
+-keepnames public interface com.uber.autodispose.lifecycle.CorrespondingEventsFunction { *; }
+
 ## Kotlin serialization
 -keepattributes *Annotation*, InnerClasses
 -dontnote kotlinx.serialization.SerializationKt

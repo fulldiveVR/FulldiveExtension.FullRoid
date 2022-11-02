@@ -1,16 +1,65 @@
+/*
+ *
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
+ *
+ */
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlinx-serialization")
+    id("com.google.firebase.crashlytics")
+    id("com.google.gms.google-services")
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+    }
+
+    dependencies {
+        classpath(deps.libs.googleServices.googleServices)
+        classpath(deps.libs.firebase.firebase)
+    }
 }
 
 android {
+    val versionMajor = 1
+    val versionMinor = 0
+    val versionPatch = 7
+
+   // namespace "com.swordfish.lemuroid"
+
     defaultConfig {
-        versionCode = 193
-        versionName = "1.14.3" // Always remember to update Cores Tag!
-        applicationId = "com.swordfish.lemuroid"
+        versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
+        applicationId = "com.fulldive.extension.fullroid"
+        buildConfigField("String", "FLURRY_API_KEY", file("../flurrykey.txt").readText())
+        buildConfigField("String", "SERVER_CLIENT_ID", file("../googlekey.txt").readText())
+
+        firebaseCrashlytics {
+            mappingFileUploadEnabled = false
+        }
     }
 
     if (usePlayDynamicFeatures()) {
@@ -27,6 +76,7 @@ android {
                 ":lemuroid_core_mame2003_plus",
                 ":lemuroid_core_mednafen_ngp",
                 ":lemuroid_core_mednafen_pce_fast",
+
                 ":lemuroid_core_mednafen_wswan",
                 ":lemuroid_core_melonds",
                 ":lemuroid_core_mgba",
@@ -36,6 +86,7 @@ android {
                 ":lemuroid_core_prosystem",
                 ":lemuroid_core_snes9x",
                 ":lemuroid_core_stella",
+
                 ":lemuroid_core_citra"
             )
         )
@@ -48,10 +99,20 @@ android {
 
         create("free") {
             dimension = "opensource"
+            applicationId = "com.fulldive.extension.fullroid"
+            resValue("string", "lemuroid_name", "FullRoid")
+        }
+
+        create("pro") {
+            dimension = "opensource"
+            applicationId = "com.fulldive.extension.fullroid.pro"
+            resValue("string", "lemuroid_name", "FullRoid X")
         }
 
         create("play") {
             dimension = "opensource"
+            applicationId = "com.fulldive.extension.fullroid.play"
+            resValue("string", "lemuroid_name", "PLAY Full Roid")
         }
 
         // Include cores in the final apk
@@ -73,29 +134,57 @@ android {
     }
 
     signingConfigs {
-        maybeCreate("debug").apply {
-            storeFile = file("$rootDir/debug.keystore")
-        }
-
         maybeCreate("release").apply {
-            storeFile = file("$rootDir/release.jks")
-            keyAlias = "lemuroid"
-            storePassword = "lemuroid"
-            keyPassword = "lemuroid"
+            storeFile = file("../keys/keys.jks")
+            keyAlias = System.getenv("FULLDIVE_ALIAS")
+            storePassword = System.getenv("FULLDIVE_KEYSTORE_PASSWORD")
+            keyPassword = System.getenv("FULLDIVE_ALIAS_PASSWORD")
         }
     }
 
+    //Free Bundle
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
             signingConfig = signingConfigs["release"]
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-            resValue("string", "lemuroid_name", "Lemuroid")
+            applicationVariants.all {
+                val variant = this
+                variant.outputs
+                    .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+                    .forEach { output ->
+                        val outputFileName = if (variant.flavorName.contains("pro")) {
+                            "FullRoid-v${android.defaultConfig.versionName} X-${variant.buildType.name}.apk"
+
+                        } else {
+                            "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                        }
+                        output.outputFileName = outputFileName
+                    }
+            }
+
+            firebaseCrashlytics {
+                mappingFileUploadEnabled = true
+            }
         }
         getByName("debug") {
-            applicationIdSuffix = ".debug"
-            versionNameSuffix = "-DEBUG"
-            resValue("string", "lemuroid_name", "LemuroiDebug")
+            signingConfig = signingConfigs.getByName("debug")
+            applicationVariants.all {
+                val variant = this
+                variant.outputs
+                    .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+                    .forEach { output ->
+                        val outputFileName = if (variant.flavorName.contains("pro")) {
+                            "FullRoid-v${android.defaultConfig.versionName} X-${variant.buildType.name}.apk"
+                        } else {
+                            "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}.apk"
+                        }
+                        output.outputFileName = outputFileName
+                    }
+            }
+            firebaseCrashlytics {
+                mappingFileUploadEnabled = false
+            }
         }
     }
 
@@ -117,6 +206,7 @@ dependencies {
     "bundleImplementation"(project(":bundled-cores"))
 
     "freeImplementation"(project(":lemuroid-app-ext-free"))
+    "proImplementation"(project(":lemuroid-app-ext-free"))
     "playImplementation"(project(":lemuroid-app-ext-play"))
 
     implementation(deps.libs.androidx.navigation.navigationFragment)
@@ -128,8 +218,12 @@ dependencies {
     implementation(deps.libs.androidx.activity.activityKtx)
     implementation(deps.libs.androidx.appcompat.appcompat)
     implementation(deps.libs.androidx.preferences.preferencesKtx)
+    implementation(deps.libs.rxbindings.core)
+    implementation(deps.libs.rxbindings.appcompat)
     implementation(deps.libs.arch.work.runtime)
     implementation(deps.libs.arch.work.runtimeKtx)
+    implementation(deps.libs.arch.work.rxjava2)
+    implementation(deps.libs.arch.work.okhttp)
     implementation(deps.libs.androidx.lifecycle.commonJava8)
     implementation(deps.libs.androidx.lifecycle.reactiveStreams)
     implementation(deps.libs.epoxy.expoxy)
@@ -145,13 +239,19 @@ dependencies {
     implementation(deps.libs.androidx.appcompat.recyclerView)
     implementation(deps.libs.androidx.paging.common)
     implementation(deps.libs.androidx.paging.runtime)
+    implementation(deps.libs.androidx.paging.rxjava2)
     implementation(deps.libs.androidx.room.common)
     implementation(deps.libs.androidx.room.runtime)
     implementation(deps.libs.androidx.room.rxjava2)
     implementation(deps.libs.androidx.room.ktx)
+    implementation(deps.libs.autodispose.android.archComponents)
+    implementation(deps.libs.autodispose.android.core)
+    implementation(deps.libs.autodispose.core)
     implementation(deps.libs.dagger.android.core)
     implementation(deps.libs.dagger.android.support)
     implementation(deps.libs.dagger.core)
+    implementation(deps.libs.koptional)
+    implementation(deps.libs.koptionalRxJava2)
     implementation(deps.libs.kotlinxCoroutinesAndroid)
     implementation(deps.libs.kotlinxCoroutinesRxJava2)
     implementation(deps.libs.okHttp3)
@@ -161,6 +261,10 @@ dependencies {
     implementation(deps.libs.rxAndroid2)
     implementation(deps.libs.rxJava2)
     implementation(deps.libs.flowPreferences)
+//    implementation(deps.libs.rxPermissions2)
+//    implementation(deps.libs.rxPreferences)
+//    implementation(deps.libs.rxRelay2)
+//    implementation(deps.libs.rxKotlin2)
     implementation(deps.libs.guava)
     implementation(deps.libs.androidx.documentfile)
     implementation(deps.libs.androidx.leanback.tvProvider)
@@ -170,12 +274,30 @@ dependencies {
     implementation(deps.libs.kotlin.serializationJson)
 
     implementation(deps.libs.libretrodroid)
-
+    implementation(deps.libs.lottie)
     // Uncomment this when using a local aar file.
     //implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     kapt(deps.libs.dagger.android.processor)
     kapt(deps.libs.dagger.compiler)
+
+    platform("com.google.firebase:firebase-bom:30.1.0")
+    implementation("com.google.firebase:firebase-core:21.0.0")
+    implementation(deps.libs.firebase.crashlytics) {
+        isTransitive = true
+    }
+    implementation(deps.libs.firebase.firebaseAnalytics)
+    implementation(deps.libs.firebase.firebaseStorage)
+
+
+    implementation(deps.libs.flurry.flurry)
+
+    implementation(deps.libs.koptional)
+
+    implementation(deps.libs.gdrive.apiClient)
+    implementation(deps.libs.gdrive.apiClientAndroid)
+    implementation(deps.libs.gdrive.apiServicesDrive)
+    implementation(deps.libs.play.playServices)
 }
 
 fun usePlayDynamicFeatures(): Boolean {

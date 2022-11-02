@@ -1,3 +1,25 @@
+/*
+ *
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
+ *
+ */
+
 package com.swordfish.lemuroid.app.mobile.feature.main
 
 import android.app.Activity
@@ -17,9 +39,16 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.elevation.SurfaceColors
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
+import com.swordfish.lemuroid.app.appextension.PopupManager
+import com.swordfish.lemuroid.app.appextension.isProVersion
+import com.swordfish.lemuroid.app.appextension.launchApp
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesFragment
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesFragment
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeFragment
+import com.swordfish.lemuroid.app.mobile.feature.proinfo.tutorial.ProTutorialFragment
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchFragment
 import com.swordfish.lemuroid.app.mobile.feature.settings.AdvancedSettingsFragment
 import com.swordfish.lemuroid.app.mobile.feature.settings.BiosSettingsFragment
@@ -43,6 +72,7 @@ import com.swordfish.lemuroid.ext.feature.review.ReviewManager
 import com.swordfish.lemuroid.lib.android.RetrogradeAppCompatActivity
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerFragment
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
@@ -62,6 +92,12 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
     @Inject
     lateinit var saveSyncManager: SaveSyncManager
 
+    @Inject
+    lateinit var actionTracker: IActionTracker
+
+    @Inject
+    lateinit var popupManager: PopupManager
+
     private val reviewManager = ReviewManager()
     private var mainViewModel: MainViewModel? = null
 
@@ -71,6 +107,7 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         window.statusBarColor = SurfaceColors.SURFACE_2.getColor(this)
         setContentView(R.layout.activity_main)
         initializeActivity()
+        popupManager.onAppStarted(this)
     }
 
     override fun activity(): Activity = this
@@ -122,6 +159,7 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         val isSupported = saveSyncManager.isSupported()
         val isConfigured = saveSyncManager.isConfigured()
         menu.findItem(R.id.menu_options_sync)?.isVisible = isSupported && isConfigured
+        menu?.findItem(R.id.menu_options_pro)?.isVisible = !isProVersion()
         return super.onPrepareOptionsMenu(menu)
     }
 
@@ -140,6 +178,13 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
                 SaveSyncWork.enqueueManualWork(this)
                 true
             }
+            R.id.menu_options_pro -> {
+                if (!launchApp(this, FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)) {
+                    actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_TOOLBAR)
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_pro_tutorial)
+                }
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -150,7 +195,9 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
             .map { "<i>$it</i>" }
             .joinToString(", ")
 
-        val message = getString(R.string.lemuroid_help_content).replace("\$SYSTEMS", systemFolders)
+        val message = String
+            .format(getString(R.string.lemuroid_help_content), getString(R.string.lemuroid_name))
+            .replace("\$SYSTEMS", systemFolders)
         AlertDialog.Builder(this)
             .setMessage(Html.fromHtml(message))
             .show()
@@ -205,6 +252,10 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         @ContributesAndroidInjector(modules = [CoresSelectionFragment.Module::class])
         abstract fun coresSelectionFragment(): CoresSelectionFragment
 
+        @PerFragment
+        @ContributesAndroidInjector(modules = [ProTutorialFragment.Module::class])
+        abstract fun proTutorialFragment(): ProTutorialFragment
+
         @dagger.Module
         companion object {
 
@@ -227,9 +278,9 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
                 activity: MainActivity,
                 retrogradeDb: RetrogradeDatabase,
                 shortcutsGenerator: ShortcutsGenerator,
-                gameLauncher: GameLauncher
-            ) =
-                GameInteractor(activity, retrogradeDb, false, shortcutsGenerator, gameLauncher)
+                gameLauncher: GameLauncher,
+                gameSystemHelper: GameSystemHelperImpl
+            ) = GameInteractor(activity, retrogradeDb, false, shortcutsGenerator, gameLauncher, gameSystemHelper)
         }
     }
 }
