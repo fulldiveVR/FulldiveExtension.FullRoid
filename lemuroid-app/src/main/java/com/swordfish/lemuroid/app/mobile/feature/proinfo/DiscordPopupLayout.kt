@@ -52,7 +52,7 @@ class DiscordPopupLayout : FrameLayout {
     private fun initLayout() {
         val inflater = context
             .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.layout_discord_popup, this, true)
+        inflater.inflate(R.layout. layout_discord_popup, this, true)
 
         val closeImageView = findViewById<ImageView>(R.id.closeImageView)
         closeImageView.setOnClickListener { hideSnackbar() }

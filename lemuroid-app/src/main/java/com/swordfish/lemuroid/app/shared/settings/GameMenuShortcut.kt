@@ -23,14 +23,14 @@
 package com.swordfish.lemuroid.app.shared.settings
 
 import android.view.InputDevice
-import com.swordfish.lemuroid.app.shared.input.getInputClass
+import com.swordfish.lemuroid.app.shared.input.lemuroiddevice.getLemuroidInputDevice
 
 data class GameMenuShortcut(val name: String, val keys: Set<Int>) {
 
     companion object {
 
         fun getDefault(inputDevice: InputDevice): GameMenuShortcut? {
-            return inputDevice.getInputClass()
+            return inputDevice.getLemuroidInputDevice()
                 .getSupportedShortcuts()
                 .firstOrNull { shortcut ->
                     inputDevice.hasKeys(*(shortcut.keys.toIntArray())).all { it }
@@ -38,7 +38,7 @@ data class GameMenuShortcut(val name: String, val keys: Set<Int>) {
         }
 
         fun findByName(device: InputDevice, name: String): GameMenuShortcut? {
-            return device.getInputClass()
+            return device.getLemuroidInputDevice()
                 .getSupportedShortcuts()
                 .firstOrNull { it.name == name }
         }

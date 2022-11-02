@@ -23,9 +23,9 @@
 package com.swordfish.lemuroid.app.shared.library
 
 import android.content.Context
+import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.ListenableWorker
-import androidx.work.RxWorker
 import androidx.work.WorkerParameters
 import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
@@ -33,26 +33,34 @@ import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
 import com.swordfish.lemuroid.lib.injection.WorkerKey
+import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import dagger.Binds
 import dagger.android.AndroidInjector
 import dagger.multibindings.IntoMap
-import io.reactivex.Observable
-import io.reactivex.Single
-import timber.log.Timber
 import javax.inject.Inject
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.toList
+import timber.log.Timber
 
-class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
-    RxWorker(context, workerParams) {
+class CoreUpdateWork(
+    context: Context,
+    workerParams: WorkerParameters,
+    private val gameSystemHelper: GameSystemHelperImpl
+) : CoroutineWorker(context, workerParams) {
 
     @Inject
     lateinit var retrogradeDatabase: RetrogradeDatabase
+
     @Inject
     lateinit var coreUpdater: CoreUpdater
+
     @Inject
     lateinit var coresSelection: CoresSelection
 
-    override fun createWork(): Single<Result> {
+    override suspend fun doWork(): Result {
         AndroidWorkerInjection.inject(this)
 
         Timber.i("Starting core update/install work")
@@ -66,20 +74,20 @@ class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
 
         setForegroundAsync(foregroundInfo)
 
-        return retrogradeDatabase.gameDao()
-            .rxSelectSystems()
-            .firstOrError()
-            .flatMap { systemIds ->
-                Observable.fromIterable(systemIds)
-                    .map { GameSystemHelper().findById(it) }
-                    .flatMapSingle { coresSelection.getCoreConfigForSystem(it) }
-                    .map { it.coreID }
-                    .toList()
-            }
-            .flatMapCompletable { coreUpdater.downloadCores(applicationContext, it) }
-            .doOnError { Timber.e(it, "Core update work failed with exception: $it") }
-            .toSingleDefault(Result.success())
-            .onErrorReturn { Result.success() }
+        try {
+            val cores = retrogradeDatabase.gameDao().selectSystems()
+                .asFlow()
+                .map { gameSystemHelper.findById(it) }
+                .map { coresSelection.getCoreConfigForSystem(it) }
+                .map { it.coreID }
+                .toList()
+
+            coreUpdater.downloadCores(applicationContext, cores)
+        } catch (e: Throwable) {
+            Timber.e(e, "Core update work failed with exception: ${e.message}")
+        }
+
+        return Result.success()
     }
 
     @dagger.Module(subcomponents = [Subcomponent::class])

@@ -1,23 +1,20 @@
 /*
+ * GameSystem.kt
  *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
+ * Copyright (C) 2017 Retrograde Project
  *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.swordfish.lemuroid.lib.library
@@ -28,17 +25,26 @@ import com.swordfish.lemuroid.lib.core.CoreVariable
 
 data class GameSystem(
     val id: SystemID,
+
     val libretroFullName: String,
+
     @StringRes
     val titleResId: Int,
+
     @StringRes
     val shortTitleResId: Int,
+
     val systemCoreConfigs: List<SystemCoreConfig>,
+
     val uniqueExtensions: List<String>,
+
     val scanOptions: ScanOptions = ScanOptions(),
+
     val supportedExtensions: List<String> = uniqueExtensions,
+
     val hasMultiDiskSupport: Boolean = false,
-    val fastForwardSupport: Boolean = true
+
+    val fastForwardSupport: Boolean = true,
 ) {
 
     companion object {
@@ -381,7 +387,7 @@ data class GameSystem(
                             ),
                         )
                     ),
-                    scanOptions = GameSystem.Companion.ScanOptions(
+                    scanOptions = ScanOptions(
                         scanByFilename = false,
                         scanByUniqueExtension = false,
                         scanByPathAndSupportedExtensions = true,
@@ -505,24 +511,24 @@ data class GameSystem(
                                         )
                                     )
                                 )
-                                if (isProVersion) {
-                                    add(
-                                        ExposedSetting(
-                                            "gambatte_gbc_color_correction",
-                                            R.string.setting_gambatte_gbc_color_correction,
-                                            arrayListOf(
-                                                ExposedSetting.Value(
-                                                    "disabled",
-                                                    R.string.value_gambatte_gbc_color_correction_disabled
-                                                ),
-                                                ExposedSetting.Value(
-                                                    "always",
-                                                    R.string.value_gambatte_gbc_color_correction_always
-                                                )
+                                //   if (isProVersion) {
+                                add(
+                                    ExposedSetting(
+                                        "gambatte_gbc_color_correction",
+                                        R.string.setting_gambatte_gbc_color_correction,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "disabled",
+                                                R.string.value_gambatte_gbc_color_correction_disabled
+                                            ),
+                                            ExposedSetting.Value(
+                                                "always",
+                                                R.string.value_gambatte_gbc_color_correction_always
                                             )
                                         )
                                     )
-                                }
+                                )
+                                // }
                                 add(
                                     ExposedSetting(
                                         "gambatte_dark_filter_level",
@@ -661,46 +667,46 @@ data class GameSystem(
                                         )
                                     )
                                 )
-                                if (isProVersion) {
-                                    add(
-                                        ExposedSetting(
-                                            "mupen64plus-pak1",
-                                            R.string.setting_mupen64plus_pak1,
-                                            arrayListOf(
-                                                ExposedSetting.Value(
-                                                    "memory",
-                                                    R.string.value_mupen64plus_mupen64plus_pak1_memory
-                                                ),
-                                                ExposedSetting.Value(
-                                                    "rumble",
-                                                    R.string.value_mupen64plus_mupen64plus_pak1_rumble
-                                                ),
-                                                ExposedSetting.Value(
-                                                    "none",
-                                                    R.string.value_mupen64plus_mupen64plus_pak1_none
-                                                )
+                                // if (isProVersion) {
+                                add(
+                                    ExposedSetting(
+                                        "mupen64plus-pak1",
+                                        R.string.setting_mupen64plus_pak1,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "memory",
+                                                R.string.value_mupen64plus_mupen64plus_pak1_memory
+                                            ),
+                                            ExposedSetting.Value(
+                                                "rumble",
+                                                R.string.value_mupen64plus_mupen64plus_pak1_rumble
+                                            ),
+                                            ExposedSetting.Value(
+                                                "none",
+                                                R.string.value_mupen64plus_mupen64plus_pak1_none
                                             )
                                         )
                                     )
-                                }
-                                if (isProVersion) {
-                                    add(
-                                        ExposedSetting(
-                                            "mupen64plus-pak2",
-                                            R.string.setting_mupen64plus_pak2,
-                                            arrayListOf(
-                                                ExposedSetting.Value(
-                                                    "none",
-                                                    R.string.value_mupen64plus_mupen64plus_pak2_none
-                                                ),
-                                                ExposedSetting.Value(
-                                                    "rumble",
-                                                    R.string.value_mupen64plus_mupen64plus_pak2_rumble
-                                                )
+                                )
+                                //  }
+                                // if (isProVersion) {
+                                add(
+                                    ExposedSetting(
+                                        "mupen64plus-pak2",
+                                        R.string.setting_mupen64plus_pak2,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "none",
+                                                R.string.value_mupen64plus_mupen64plus_pak2_none
+                                            ),
+                                            ExposedSetting.Value(
+                                                "rumble",
+                                                R.string.value_mupen64plus_mupen64plus_pak2_rumble
                                             )
                                         )
                                     )
-                                }
+                                )
+                                // }
                             },
                             defaultSettings = listOf(
                                 CoreVariable("mupen64plus-43screensize", "320x240"),
@@ -764,7 +770,7 @@ data class GameSystem(
                     ),
                     uniqueExtensions = listOf(),
                     supportedExtensions = listOf("iso", "pbp", "chd", "cue", "m3u"),
-                    scanOptions = GameSystem.Companion.ScanOptions(
+                    scanOptions = ScanOptions(
                         scanByFilename = false,
                         scanByUniqueExtension = false,
                         scanByPathAndSupportedExtensions = true
@@ -794,7 +800,10 @@ data class GameSystem(
                                     "ppsspp_cpu_core",
                                     R.string.setting_ppsspp_cpu_core,
                                     arrayListOf(
-                                        ExposedSetting.Value("JIT", R.string.value_ppsspp_cpu_core_jit),
+                                        ExposedSetting.Value(
+                                            "JIT",
+                                            R.string.value_ppsspp_cpu_core_jit
+                                        ),
                                         ExposedSetting.Value(
                                             "IR JIT",
                                             R.string.value_ppsspp_cpu_core_irjit
@@ -822,7 +831,7 @@ data class GameSystem(
                     ),
                     uniqueExtensions = listOf(),
                     supportedExtensions = listOf("iso", "cso", "pbp"),
-                    scanOptions = GameSystem.Companion.ScanOptions(
+                    scanOptions = ScanOptions(
                         scanByFilename = false,
                         scanByUniqueExtension = false,
                         scanByPathAndSupportedExtensions = true
@@ -848,13 +857,16 @@ data class GameSystem(
                                 )
                             ),
                             controllerConfigs = hashMapOf(
-                                0 to arrayListOf(ControllerConfigs.FB_NEO_4, ControllerConfigs.FB_NEO_6)
+                                0 to arrayListOf(
+                                    ControllerConfigs.FB_NEO_4,
+                                    ControllerConfigs.FB_NEO_6
+                                )
                             )
                         )
                     ),
                     uniqueExtensions = listOf(),
                     supportedExtensions = listOf("zip"),
-                    scanOptions = GameSystem.Companion.ScanOptions(
+                    scanOptions = ScanOptions(
                         scanByFilename = false,
                         scanByUniqueExtension = false,
                         scanByPathAndFilename = true,
@@ -880,7 +892,7 @@ data class GameSystem(
                     ),
                     uniqueExtensions = listOf(),
                     supportedExtensions = listOf("zip"),
-                    scanOptions = GameSystem.Companion.ScanOptions(
+                    scanOptions = ScanOptions(
                         scanByFilename = false,
                         scanByUniqueExtension = false,
                         scanByPathAndFilename = true,
@@ -1003,28 +1015,28 @@ data class GameSystem(
                                 0 to arrayListOf(ControllerConfigs.LYNX)
                             ),
                             exposedSettings = mutableListOf<ExposedSetting>().apply {
-                                if (isProVersion) {
-                                    add(
-                                        ExposedSetting(
-                                            "handy_rot",
-                                            R.string.setting_handy_rot,
-                                            arrayListOf(
-                                                ExposedSetting.Value(
-                                                    "None",
-                                                    R.string.value_handy_rot_none
-                                                ),
-                                                ExposedSetting.Value(
-                                                    "90",
-                                                    R.string.value_handy_rot_90
-                                                ),
-                                                ExposedSetting.Value(
-                                                    "270",
-                                                    R.string.value_handy_rot_270
-                                                ),
-                                            )
+                                //   if (isProVersion) {
+                                add(
+                                    ExposedSetting(
+                                        "handy_rot",
+                                        R.string.setting_handy_rot,
+                                        arrayListOf(
+                                            ExposedSetting.Value(
+                                                "None",
+                                                R.string.value_handy_rot_none
+                                            ),
+                                            ExposedSetting.Value(
+                                                "90",
+                                                R.string.value_handy_rot_90
+                                            ),
+                                            ExposedSetting.Value(
+                                                "270",
+                                                R.string.value_handy_rot_270
+                                            ),
                                         )
                                     )
-                                }
+                                )
+                                // }
                             },
                             defaultSettings = listOf(
                                 CoreVariable("handy_rot", "None"),
@@ -1081,6 +1093,48 @@ data class GameSystem(
                     uniqueExtensions = listOf("ngc"),
                 ),
                 GameSystem(
+                    SystemID.WS,
+                    "Bandai - WonderSwan",
+                    R.string.game_system_title_ws,
+                    R.string.game_system_abbr_ws,
+                    listOf(
+                        SystemCoreConfig(
+                            CoreID.MEDNAFEN_WSWAN,
+                            controllerConfigs = hashMapOf(
+                                0 to arrayListOf(
+                                    ControllerConfigs.WS_LANDSCAPE,
+                                    ControllerConfigs.WS_PORTRAIT
+                                )
+                            ),
+                            exposedSettings = listOf(
+                                ExposedSetting(
+                                    "wswan_rotate_display",
+                                    R.string.setting_wswan_rotate_display,
+                                    arrayListOf(
+                                        ExposedSetting.Value(
+                                            "landscape",
+                                            R.string.value_wswan_rotate_display_landscape
+                                        ),
+                                        ExposedSetting.Value(
+                                            "portrait",
+                                            R.string.value_wswan_rotate_display_portrait
+                                        ),
+                                    )
+                                ),
+                                ExposedSetting(
+                                    "wswan_mono_palette",
+                                    R.string.setting_wswan_mono_palette
+                                )
+                            ),
+                            defaultSettings = listOf(
+                                CoreVariable("wswan_rotate_display", "landscape"),
+                                CoreVariable("wswan_mono_palette", "wonderswan"),
+                            )
+                        ),
+                    ),
+                    uniqueExtensions = listOf("ws"),
+                ),
+                GameSystem(
                     SystemID.DOS,
                     "DOS",
                     R.string.game_system_title_dos,
@@ -1100,7 +1154,7 @@ data class GameSystem(
                     ),
                     fastForwardSupport = false,
                     uniqueExtensions = listOf("dosz"),
-                    scanOptions = GameSystem.Companion.ScanOptions(
+                    scanOptions = ScanOptions(
                         scanByFilename = false,
                         scanByUniqueExtension = true,
                         scanByPathAndFilename = false,
@@ -1111,48 +1165,6 @@ data class GameSystem(
                 if (isProVersion) {
                     add(
                         GameSystem(
-                            SystemID.WS,
-                            "Bandai - WonderSwan",
-                            R.string.game_system_title_ws,
-                            R.string.game_system_abbr_ws,
-                            listOf(
-                                SystemCoreConfig(
-                                    CoreID.MEDNAFEN_WSWAN,
-                                    controllerConfigs = hashMapOf(
-                                        0 to arrayListOf(ControllerConfigs.WS_LANDSCAPE, ControllerConfigs.WS_PORTRAIT)
-                                    ),
-                                    exposedSettings = listOf(
-                                        ExposedSetting(
-                                            "wswan_rotate_display",
-                                            R.string.setting_wswan_rotate_display,
-                                            arrayListOf(
-                                                ExposedSetting.Value(
-                                                    "landscape",
-                                                    R.string.value_wswan_rotate_display_landscape
-                                                ),
-                                                ExposedSetting.Value(
-                                                    "portrait",
-                                                    R.string.value_wswan_rotate_display_portrait
-                                                ),
-                                            )
-                                        ),
-                                        ExposedSetting(
-                                            "wswan_mono_palette",
-                                            R.string.setting_wswan_mono_palette
-                                        )
-                                    ),
-                                    defaultSettings = listOf(
-                                        CoreVariable("wswan_rotate_display", "landscape"),
-                                        CoreVariable("wswan_mono_palette", "wonderswan"),
-                                    )
-                                ),
-                            ),
-                            uniqueExtensions = listOf("ws"),
-                        )
-                    )
-
-                    add(
-                        GameSystem(
                             SystemID.WSC,
                             "Bandai - WonderSwan Color",
                             R.string.game_system_title_wsc,
@@ -1161,7 +1173,10 @@ data class GameSystem(
                                 SystemCoreConfig(
                                     CoreID.MEDNAFEN_WSWAN,
                                     controllerConfigs = hashMapOf(
-                                        0 to arrayListOf(ControllerConfigs.WS_LANDSCAPE, ControllerConfigs.WS_PORTRAIT)
+                                        0 to arrayListOf(
+                                            ControllerConfigs.WS_LANDSCAPE,
+                                            ControllerConfigs.WS_PORTRAIT
+                                        )
                                     ),
                                     exposedSettings = listOf(
                                         ExposedSetting(
@@ -1235,7 +1250,8 @@ data class GameSystem(
                                         ),
                                     ),
                                     statesSupported = false,
-                                    supportsLibretroVFS = true
+                                    supportsLibretroVFS = true,
+                                    supportedOnlyArchitectures = setOf("arm64-v8a")
                                 ),
                             ),
                             uniqueExtensions = listOf("3ds"),

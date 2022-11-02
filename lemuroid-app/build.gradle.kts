@@ -19,13 +19,13 @@
  *  *
  *
  */
-
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlinx-serialization")
     id("com.google.firebase.crashlytics")
     id("com.google.gms.google-services")
 }
@@ -46,7 +46,9 @@ buildscript {
 android {
     val versionMajor = 1
     val versionMinor = 0
-    val versionPatch = 6
+    val versionPatch = 8
+
+   // namespace "com.swordfish.lemuroid"
 
     defaultConfig {
         versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
@@ -186,8 +188,8 @@ android {
         }
     }
 
-    lintOptions {
-        disable += setOf("MissingTranslation", "ExtraTranslation")
+    lint {
+        disable += setOf("MissingTranslation", "ExtraTranslation", "EnsureInitializerMetadata")
     }
 
     kotlinOptions {
@@ -212,6 +214,8 @@ dependencies {
     implementation(deps.libs.material)
     implementation(deps.libs.coil)
     implementation(deps.libs.androidx.appcompat.constraintLayout)
+    implementation(deps.libs.androidx.activity.activity)
+    implementation(deps.libs.androidx.activity.activityKtx)
     implementation(deps.libs.androidx.appcompat.appcompat)
     implementation(deps.libs.androidx.preferences.preferencesKtx)
     implementation(deps.libs.rxbindings.core)
@@ -239,6 +243,7 @@ dependencies {
     implementation(deps.libs.androidx.room.common)
     implementation(deps.libs.androidx.room.runtime)
     implementation(deps.libs.androidx.room.rxjava2)
+    implementation(deps.libs.androidx.room.ktx)
     implementation(deps.libs.autodispose.android.archComponents)
     implementation(deps.libs.autodispose.android.core)
     implementation(deps.libs.autodispose.core)
@@ -248,21 +253,21 @@ dependencies {
     implementation(deps.libs.koptional)
     implementation(deps.libs.koptionalRxJava2)
     implementation(deps.libs.kotlinxCoroutinesAndroid)
+    implementation(deps.libs.kotlinxCoroutinesRxJava2)
     implementation(deps.libs.okHttp3)
     implementation(deps.libs.okio)
     implementation(deps.libs.retrofit)
     implementation(deps.libs.retrofitRxJava2)
     implementation(deps.libs.rxAndroid2)
     implementation(deps.libs.rxJava2)
-    implementation(deps.libs.rxPermissions2)
-    implementation(deps.libs.rxPreferences)
-    implementation(deps.libs.rxRelay2)
-    implementation(deps.libs.rxKotlin2)
+    implementation(deps.libs.flowPreferences)
     implementation(deps.libs.guava)
     implementation(deps.libs.androidx.documentfile)
     implementation(deps.libs.androidx.leanback.tvProvider)
     implementation(deps.libs.harmony)
     implementation(deps.libs.startup)
+    implementation(deps.libs.kotlin.serialization)
+    implementation(deps.libs.kotlin.serializationJson)
 
     implementation(deps.libs.libretrodroid)
     implementation(deps.libs.lottie)

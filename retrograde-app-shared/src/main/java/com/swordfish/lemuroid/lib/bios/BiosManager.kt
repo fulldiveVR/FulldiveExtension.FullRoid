@@ -30,9 +30,9 @@ import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import com.swordfish.lemuroid.lib.storage.StorageFile
-import timber.log.Timber
 import java.io.File
 import java.io.InputStream
+import timber.log.Timber
 
 class BiosManager(private val directoriesManager: DirectoriesManager) {
 
@@ -79,7 +79,11 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
         return BiosInfo(bios.getValue(true), bios.getValue(false))
     }
 
-    fun tryAddBiosAfter(storageFile: StorageFile, inputStream: InputStream, timestampMs: Long): Boolean {
+    fun tryAddBiosAfter(
+        storageFile: StorageFile,
+        inputStream: InputStream,
+        timestampMs: Long
+    ): Boolean {
         val bios = findByCRC(storageFile) ?: findByName(storageFile) ?: return false
 
         Timber.i("Importing bios file: $bios")
@@ -164,29 +168,28 @@ class BiosManager(private val directoriesManager: DirectoriesManager) {
                 SystemID.SEGACD,
                 "C6D10268"
             ),
-            //
-//            Bios(
-//                "bios7.bin",
-//                "DF692A80A5B1BC90728BC3DFC76CD948",
-//                "Nintendo DS ARM7",
-//                SystemID.NDS,
-//                "1280F0D5"
-//            ),
-//            Bios(
-//                "bios9.bin",
-//                "A392174EB3E572FED6447E956BDE4B25",
-//                "Nintendo DS ARM9",
-//                SystemID.NDS,
-//                "2AB23573"
-//            ),
-//            Bios(
-//                "firmware.bin",
-//                "E45033D9B0FA6B0DE071292BBA7C9D13",
-//                "Nintendo DS Firmware",
-//                SystemID.NDS,
-//                "945F9DC9",
-//                "nds_firmware.bin"
-//            )
+            Bios(
+                "bios7.bin",
+                "DF692A80A5B1BC90728BC3DFC76CD948",
+                "Nintendo DS ARM7",
+                SystemID.NDS,
+                "1280F0D5"
+            ),
+            Bios(
+                "bios9.bin",
+                "A392174EB3E572FED6447E956BDE4B25",
+                "Nintendo DS ARM9",
+                SystemID.NDS,
+                "2AB23573"
+            ),
+            Bios(
+                "firmware.bin",
+                "E45033D9B0FA6B0DE071292BBA7C9D13",
+                "Nintendo DS Firmware",
+                SystemID.NDS,
+                "945F9DC9",
+                "nds_firmware.bin"
+            )
         )
     }
 }

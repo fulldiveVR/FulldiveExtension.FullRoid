@@ -31,6 +31,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,7 +39,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.Carousel
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.PopupManager
-import com.swordfish.lemuroid.app.appextension.PopupManager.Companion.DISCORD_INVITATION
 import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
 import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.mobile.feature.proinfo.DiscordPopupLayout
@@ -46,6 +46,7 @@ import com.swordfish.lemuroid.app.mobile.feature.proinfo.ProPopupLayout
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.covers.CoverLoader
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
+import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
@@ -86,11 +87,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val homeViewModel =
-            ViewModelProvider(
-                this,
-                HomeViewModel.Factory(requireContext().applicationContext, retrogradeDb)
-            ).get(HomeViewModel::class.java)
+        val factory = HomeViewModel.Factory(requireContext().applicationContext, retrogradeDb)
+        val homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
         // Disable snapping in carousel view
         Carousel.setDefaultGlobalSnapHelperFactory(null)
@@ -103,20 +101,10 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = pagingController.adapter
 
-        homeViewModel.recentGames.observe(viewLifecycleOwner) {
-            pagingController.updateRecents(it)
-        }
-
-        homeViewModel.favoriteGames.observe(viewLifecycleOwner) {
-            pagingController.updateFavorites(it)
-        }
-
-        homeViewModel.discoverGames.observe(viewLifecycleOwner) {
-            pagingController.updateDiscover(it)
-        }
-
-        homeViewModel.indexingInProgress.observe(viewLifecycleOwner) {
-            pagingController.updateLibraryIndexingInProgress(it)
+        launchOnState(Lifecycle.State.RESUMED) {
+            homeViewModel.getViewStates().collect {
+                pagingController.update(it)
+            }
         }
 
         val isProPopupVisible = popupManager.isProPopupVisible()
@@ -147,7 +135,7 @@ class HomeFragment : Fragment() {
             onClickListener = {
                 actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_CLICKED)
                 popupManager.setDiscordPopupClosed(true)
-                startActivity(Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(DISCORD_INVITATION) })
+                startActivity(Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(PopupManager.DISCORD_INVITATION) })
             }
             onCloseClickListener = {
                 actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_CLOSED)

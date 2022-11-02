@@ -94,7 +94,11 @@ object CoreOptionsPreferenceHelper {
             .forEach { preferenceGroup.addPreference(it) }
     }
 
-    private fun convertToPreference(context: Context, it: LemuroidCoreOption, systemID: String): Preference {
+    private fun convertToPreference(
+        context: Context,
+        it: LemuroidCoreOption,
+        systemID: String
+    ): Preference {
         return if (it.getEntriesValues().toSet() == BOOLEAN_SET) {
             buildSwitchPreference(context, it, systemID)
         } else {
@@ -102,7 +106,11 @@ object CoreOptionsPreferenceHelper {
         }
     }
 
-    private fun buildListPreference(context: Context, it: LemuroidCoreOption, systemID: String): ListPreference {
+    private fun buildListPreference(
+        context: Context,
+        it: LemuroidCoreOption,
+        systemID: String
+    ): ListPreference {
         val preference = ListPreference(context)
         preference.key = CoreVariablesManager.computeSharedPreferenceKey(it.getKey(), systemID)
         preference.title = it.getDisplayName(context)
@@ -115,7 +123,11 @@ object CoreOptionsPreferenceHelper {
         return preference
     }
 
-    private fun buildSwitchPreference(context: Context, it: LemuroidCoreOption, systemID: String): SwitchPreference {
+    private fun buildSwitchPreference(
+        context: Context,
+        it: LemuroidCoreOption,
+        systemID: String
+    ): SwitchPreference {
         val preference = SwitchPreference(context)
         preference.key = CoreVariablesManager.computeSharedPreferenceKey(it.getKey(), systemID)
         preference.title = it.getDisplayName(context)

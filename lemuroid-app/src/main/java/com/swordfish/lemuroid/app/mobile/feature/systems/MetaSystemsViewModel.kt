@@ -25,29 +25,36 @@ package com.swordfish.lemuroid.app.mobile.feature.systems
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
+import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.metaSystemID
-import io.reactivex.Observable
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
-class MetaSystemsViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : ViewModel() {
+class MetaSystemsViewModel(
+    retrogradeDb: RetrogradeDatabase,
+    appContext: Context,
+    private val gameSystemHelper: GameSystemHelperImpl
+) : ViewModel() {
 
     class Factory(
         val retrogradeDb: RetrogradeDatabase,
-        val appContext: Context
+        val appContext: Context,
+        private val gameSystemHelper: GameSystemHelperImpl
     ) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return MetaSystemsViewModel(retrogradeDb, appContext) as T
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return MetaSystemsViewModel(retrogradeDb, appContext, gameSystemHelper) as T
         }
     }
 
-    val availableMetaSystems: Observable<List<MetaSystemInfo>> = retrogradeDb.gameDao()
+    val availableMetaSystems: Flow<List<MetaSystemInfo>> = retrogradeDb.gameDao()
         .selectSystemsWithCount()
         .map { systemCounts ->
             systemCounts.asSequence()
                 .filter { (_, count) -> count > 0 }
-                .map { (systemId, count) -> GameSystemHelper().findById(systemId).metaSystemID() to count }
+                .map { (systemId, count) -> gameSystemHelper.findById(systemId).metaSystemID() to count }
                 .groupBy { (metaSystemId, _) -> metaSystemId }
                 .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumBy { it.second }) }
                 .sortedBy { it.getName(appContext) }

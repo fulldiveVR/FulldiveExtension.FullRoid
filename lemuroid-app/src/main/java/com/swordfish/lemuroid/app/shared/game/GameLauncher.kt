@@ -23,25 +23,31 @@
 package com.swordfish.lemuroid.app.shared.game
 
 import android.app.Activity
-import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.lib.core.CoresSelection
+import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.db.entity.Game
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class GameLauncher(
     private val coresSelection: CoresSelection,
     private val gameLaunchTaskHandler: GameLaunchTaskHandler
 ) {
 
-    fun launchGameAsync(activity: Activity, game: Game, loadSave: Boolean, leanback: Boolean) {
-        val system = GameSystemHelper().findById(game.systemId)
-        coresSelection.getCoreConfigForSystem(system)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy {
-                gameLaunchTaskHandler.handleGameStart(activity.applicationContext)
-                BaseGameActivity.launchGame(activity, it, game, loadSave, leanback)
-            }
+    @OptIn(DelicateCoroutinesApi::class)
+    fun launchGameAsync(
+        activity: Activity,
+        game: Game, loadSave: Boolean, leanback: Boolean,
+        gameSystemHelper: GameSystemHelperImpl
+    ) {
+        GlobalScope.launch {
+            val system = gameSystemHelper.findById(game.systemId)
+            val coreConfig = coresSelection.getCoreConfigForSystem(system)
+            gameLaunchTaskHandler.handleGameStart(activity.applicationContext)
+            BaseGameActivity.launchGame(activity, coreConfig, game, loadSave, leanback)
+        }
     }
 }

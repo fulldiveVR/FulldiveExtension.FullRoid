@@ -1,23 +1,17 @@
 /*
  *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package com.swordfish.lemuroid.app
@@ -33,24 +27,24 @@ import com.swordfish.lemuroid.app.fulldive.analytics.TagReader
 import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity
+import com.swordfish.lemuroid.app.mobile.feature.input.GamePadBindingActivity
 import com.swordfish.lemuroid.app.mobile.feature.main.MainActivity
-import com.swordfish.lemuroid.app.mobile.feature.settings.RxSettingsManager
+import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.covers.CoverLoader
-import com.swordfish.lemuroid.app.shared.rumble.RumbleManager
 import com.swordfish.lemuroid.app.shared.game.ExternalGameLauncherActivity
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
+import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
+import com.swordfish.lemuroid.app.shared.rumble.RumbleManager
 import com.swordfish.lemuroid.app.shared.settings.BiosPreferences
 import com.swordfish.lemuroid.app.shared.settings.ControllerConfigsManager
 import com.swordfish.lemuroid.app.shared.settings.CoresSelectionPreferences
-import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
-import com.swordfish.lemuroid.app.shared.settings.GamePadPreferencesHelper
 import com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher
 import com.swordfish.lemuroid.app.tv.channel.ChannelHandler
 import com.swordfish.lemuroid.ext.feature.core.CoreUpdaterImpl
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
-import com.swordfish.lemuroid.app.savesync.SaveSyncManagerImpl
+import com.swordfish.lemuroid.ext.feature.savesync.SaveSyncManagerImpl
 import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.CoreVariablesManager
@@ -58,11 +52,12 @@ import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.game.GameLoader
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerApp
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.LemuroidLibrary
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.dao.GameSearchDao
 import com.swordfish.lemuroid.lib.library.db.dao.Migrations
-import com.swordfish.lemuroid.lib.logging.RxTimberTree
+import com.swordfish.lemuroid.lib.library.metadata.GameMetadataProvider
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.saves.SavesCoherencyEngine
 import com.swordfish.lemuroid.lib.saves.SavesManager
@@ -77,22 +72,20 @@ import com.swordfish.lemuroid.lib.storage.local.StorageAccessFrameworkProvider
 import com.swordfish.lemuroid.metadata.libretrodb.LibretroDBMetadataProvider
 import com.swordfish.lemuroid.metadata.libretrodb.db.LibretroDBManager
 import dagger.Binds
+import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoSet
+import java.io.InputStream
+import java.lang.reflect.Type
+import java.util.concurrent.TimeUnit
+import java.util.zip.ZipInputStream
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import java.io.InputStream
-import java.lang.reflect.Type
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
-import java.util.zip.ZipInputStream
-import dagger.Lazy
 
 @Module
 abstract class LemuroidApplicationModule {
@@ -123,18 +116,16 @@ abstract class LemuroidApplicationModule {
     @ContributesAndroidInjector
     abstract fun storageFrameworkPickerLauncher(): StorageFrameworkPickerLauncher
 
+    @PerActivity
+    @ContributesAndroidInjector(modules = [GamePadBindingActivity.Module::class])
+    abstract fun gamepadBindingActivity(): GamePadBindingActivity
+
     @Module
     companion object {
         @Provides
         @PerApp
         @JvmStatic
-        fun executorService(): ExecutorService = Executors.newSingleThreadExecutor()
-
-        @Provides
-        @PerApp
-        @JvmStatic
-        fun libretroDBManager(app: LemuroidApplication, executorService: ExecutorService) =
-            LibretroDBManager(app, executorService)
+        fun libretroDBManager(app: LemuroidApplication) = LibretroDBManager(app)
 
         @Provides
         @PerApp
@@ -146,25 +137,27 @@ abstract class LemuroidApplicationModule {
                 .fallbackToDestructiveMigration()
                 .build()
 
+
         @Provides
         @PerApp
         @JvmStatic
-        fun ovgdbMetadataProvider(
-            ovgdbManager: LibretroDBManager,
-            gameSystemHelper: GameSystemHelper
-        ) = LibretroDBMetadataProvider(
-            ovgdbManager,
-            gameSystemHelper
-        )
+        fun gameSystemHelper(): GameSystemHelperImpl = GameSystemHelper()
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun gameMetadataProvider(
+            libretroDBManager: LibretroDBManager,
+            gameSystemHelper: GameSystemHelperImpl
+        ): GameMetadataProvider =
+            LibretroDBMetadataProvider(libretroDBManager, gameSystemHelper)
 
         @Provides
         @PerApp
         @IntoSet
         @JvmStatic
-        fun localSAFStorageProvider(
-            context: Context,
-            metadataProvider: LibretroDBMetadataProvider
-        ): StorageProvider = StorageAccessFrameworkProvider(context, metadataProvider)
+        fun localSAFStorageProvider(context: Context): StorageProvider =
+            StorageAccessFrameworkProvider(context)
 
         @Provides
         @PerApp
@@ -172,10 +165,9 @@ abstract class LemuroidApplicationModule {
         @JvmStatic
         fun localGameStorageProvider(
             context: Context,
-            directoriesManager: DirectoriesManager,
-            metadataProvider: LibretroDBMetadataProvider
+            directoriesManager: DirectoriesManager
         ): StorageProvider =
-            LocalStorageProvider(context, directoriesManager, metadataProvider)
+            LocalStorageProvider(context, directoriesManager)
 
         @Provides
         @PerApp
@@ -192,9 +184,9 @@ abstract class LemuroidApplicationModule {
         fun lemuroidLibrary(
             db: RetrogradeDatabase,
             storageProviderRegistry: Lazy<StorageProviderRegistry>,
-            biosManager: BiosManager,
-            gameSystemHelper: GameSystemHelper
-        ) = LemuroidLibrary(db, storageProviderRegistry, biosManager, gameSystemHelper)
+            gameMetadataProvider: Lazy<GameMetadataProvider>,
+            biosManager: BiosManager
+        ) = LemuroidLibrary(db, storageProviderRegistry, gameMetadataProvider, biosManager)
 
         @Provides
         @PerApp
@@ -213,9 +205,9 @@ abstract class LemuroidApplicationModule {
             .addConverterFactory(
                 object : Converter.Factory() {
                     override fun responseBodyConverter(
-                        type: Type,
-                        annotations: Array<out Annotation>,
-                        retrofit: Retrofit
+                        type: Type?,
+                        annotations: Array<out Annotation>?,
+                        retrofit: Retrofit?
                     ): Converter<ResponseBody, *>? {
                         if (type == ZipInputStream::class.java) {
                             return Converter<ResponseBody, ZipInputStream> { responseBody ->
@@ -265,12 +257,8 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun rxTree() = RxTimberTree()
-
-        @Provides
-        @PerApp
-        @JvmStatic
-        fun coreVariablesManager(sharedPreferences: Lazy<SharedPreferences>) = CoreVariablesManager(sharedPreferences)
+        fun coreVariablesManager(sharedPreferences: Lazy<SharedPreferences>) =
+            CoreVariablesManager(sharedPreferences)
 
         @Provides
         @PerApp
@@ -298,7 +286,7 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun gamepadsManager(context: Context, sharedPreferences: Lazy<SharedPreferences>) =
+        fun inputDeviceManager(context: Context, sharedPreferences: Lazy<SharedPreferences>) =
             InputDeviceManager(context, sharedPreferences)
 
         @Provides
@@ -314,18 +302,13 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun coresSelection(sharedPreferences: Lazy<SharedPreferences>) = CoresSelection(sharedPreferences)
+        fun coresSelection(sharedPreferences: Lazy<SharedPreferences>) =
+            CoresSelection(sharedPreferences)
 
         @Provides
         @PerApp
         @JvmStatic
         fun coreSelectionPreferences() = CoresSelectionPreferences()
-
-        @Provides
-        @PerApp
-        @JvmStatic
-        fun inputDeviceManager(inputDeviceManager: InputDeviceManager) =
-            GamePadPreferencesHelper(inputDeviceManager)
 
         @Provides
         @PerApp
@@ -372,8 +355,8 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun rxSettingsManager(context: Context, sharedPreferences: Lazy<SharedPreferences>) =
-            RxSettingsManager(context, sharedPreferences)
+        fun settingsManager(context: Context, sharedPreferences: Lazy<SharedPreferences>) =
+            SettingsManager(context, sharedPreferences)
 
         @Provides
         @PerApp
@@ -395,10 +378,10 @@ abstract class LemuroidApplicationModule {
         @JvmStatic
         fun rumbleManager(
             context: Context,
-            rxSettingsManager: RxSettingsManager,
+            settingsManager: SettingsManager,
             inputDeviceManager: InputDeviceManager
         ) =
-            RumbleManager(context, rxSettingsManager, inputDeviceManager)
+            RumbleManager(context, settingsManager, inputDeviceManager)
 
         @Provides
         @PerApp

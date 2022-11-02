@@ -32,6 +32,7 @@ fun Bundle?.dump(): String {
 
     val builder = StringBuilder("Extras:\n")
     keySet()
+        .toSet()
         .forEach { key ->
             builder.append(key).append(": ").append(get(key)).append("\n")
         }

@@ -58,7 +58,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -69,6 +68,7 @@
             android:theme="@style/LemuroidMaterialTheme.Game">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <data
                     android:host="${applicationId}"
                     android:pathPattern="/play-game/id/.*"
@@ -91,6 +91,10 @@
             android:name="com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity"
             android:process=":game"
             android:theme="@style/LemuroidMaterialTheme.Menu" />
+
+        <activity
+            android:name="com.swordfish.lemuroid.app.mobile.feature.input.GamePadBindingActivity"
+            android:theme="@style/LemuroidMaterialTheme.Invisible" />
 
         <activity
             android:name="com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher"
@@ -122,8 +126,11 @@
         <activity
             android:name=".app.tv.folderpicker.TVFolderPickerActivity"
             android:theme="@style/Theme.Leanback.GuidedStep" />
-
         <activity android:name=".app.tv.folderpicker.TVFolderPickerLauncher" />
+
+        <activity
+            android:name=".app.tv.input.TVGamePadBindingActivity"
+            android:theme="@style/Theme.Leanback.GuidedStep" />
 
         <activity
             android:name=".app.tv.game.TVGameActivity"
@@ -140,25 +147,13 @@
             android:theme="@style/LemuroidMaterialTheme.Game" />
 
         <receiver android:name=".app.shared.library.LibraryIndexBroadcastReceiver" />
+        <receiver android:name=".app.shared.library.CoreUpdateBroadcastReceiver" />
 
-        <activity
-            android:name = "com.swordfish.lemuroid.app.shared.game.CaribAshevilleActivity"
-            android:exported="false"
-            android:label="@string/spacious_rancid_holman_ieee"
-            android:launchMode="singleTop"
-            />
-
-        <!-- It is not possible to invoke Work from another process with the default initializer.
-             We have to disable it and manually initialize it in our custom Application. -->
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
-            android:exported="false"
-            tools:node="merge">
+            tools:node="remove" />
 
-            <meta-data
-                android:name="com.swordfish.lemuroid.app.shared.startup.WorkManagerTasksInitializer"
-                android:value="androidx.startup" />
-        </provider>
     </application>
+
 </manifest>
