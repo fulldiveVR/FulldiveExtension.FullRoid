@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--    /*-->
+<?xml version="1.0" encoding="utf-8"?><!--    /*-->
 <!--    * Copyright (c) 2022 FullDive-->
 <!--    *  This program is free software: you can redistribute it and/or modify-->
 <!--    *  it under the terms of the GNU General Public License as published by-->
@@ -17,6 +16,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/size_24dp">
@@ -25,7 +25,6 @@
         android:id="@+id/animationContainer"
         android:layout_width="@dimen/lottie_animation_width"
         android:layout_height="@dimen/lottie_animation_height"
-        android:layout_marginTop="@dimen/size_32dp"
         app:layout_constraintBottom_toTopOf="@+id/titleTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +37,7 @@
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size_24dp"
+        android:layout_marginBottom="@dimen/size_16dp"
         android:text="@string/string_pro_tutorial_title"
         android:textSize="@dimen/textsize_xxxlarge"
         app:layout_constraintBottom_toTopOf="@+id/disclamerTextView"
@@ -49,36 +48,40 @@
     <TextView
         android:id="@+id/disclamerTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size_36dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/size_16dp"
         android:lineSpacingExtra="@dimen/line_spacing_extra"
         android:text="@string/string_pro_tutorial_disclamer"
         app:layout_constraintBottom_toTopOf="@+id/limitedDealTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+        tools:text="@tools:sample/lorem/random" />
 
     <TextView
         android:id="@+id/limitedDealTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/size_16dp"
-        android:drawableStart="@drawable/ic_sale"
         android:drawablePadding="@dimen/size_8dp"
         android:text="@string/string_pro_limited_deal"
         android:textAllCaps="true"
+        app:drawableStartCompat="@drawable/ic_sale"
         app:layout_constraintBottom_toTopOf="@+id/priceImageView"
         app:layout_constraintEnd_toEndOf="@+id/priceImageView"
-        app:layout_constraintStart_toStartOf="@+id/priceImageView" />
+        app:layout_constraintStart_toStartOf="@+id/priceImageView"
+        app:layout_constraintTop_toBottomOf="@+id/disclamerTextView" />
 
     <ImageView
         android:id="@+id/priceImageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/size_32dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/size_16dp"
         android:src="@drawable/ic_limited_deal"
         app:layout_constraintBottom_toTopOf="@+id/buyProButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/limitedDealTextView" />
 
     <TextView
         android:id="@+id/buyProButton"
@@ -90,6 +93,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/priceImageView"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,3 +27,5 @@ enum class SystemID(val dbname: String) {
     DOS("dos"),
     NINTENDO_3DS("3ds"),
 }
+
+val proConsoles = listOf(SystemID.WS, SystemID.WSC, SystemID.NINTENDO_3DS)
