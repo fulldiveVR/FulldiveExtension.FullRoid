@@ -36,6 +36,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.flurry.sdk.db
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.elevation.SurfaceColors
 import com.swordfish.lemuroid.R
@@ -75,6 +76,7 @@ import com.swordfish.lemuroid.lib.injection.PerFragment
 import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
+import com.swordfish.lemuroid.lib.library.proConsoles
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import dagger.Provides
@@ -191,7 +193,14 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
 
     private fun displayLemuroidHelp() {
         val systemFolders = SystemID.values()
-            .map { it.dbname }
+            .mapNotNull { systemId ->
+                val name = systemId.dbname
+                if (!isProVersion() && proConsoles.contains(systemId)) {
+                    null
+                } else {
+                    name
+                }
+            }
             .map { "<i>$it</i>" }
             .joinToString(", ")
 
