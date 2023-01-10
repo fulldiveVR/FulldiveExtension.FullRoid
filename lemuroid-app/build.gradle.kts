@@ -46,7 +46,7 @@ buildscript {
 android {
     val versionMajor = 1
     val versionMinor = 0
-    val versionPatch = 8
+    val versionPatch = 9
 
    // namespace "com.swordfish.lemuroid"
 
@@ -218,12 +218,12 @@ dependencies {
     implementation(deps.libs.androidx.activity.activityKtx)
     implementation(deps.libs.androidx.appcompat.appcompat)
     implementation(deps.libs.androidx.preferences.preferencesKtx)
-    implementation(deps.libs.rxbindings.core)
-    implementation(deps.libs.rxbindings.appcompat)
+    //implementation(deps.libs.rxbindings.core)
+   // implementation(deps.libs.rxbindings.appcompat)
     implementation(deps.libs.arch.work.runtime)
     implementation(deps.libs.arch.work.runtimeKtx)
-    implementation(deps.libs.arch.work.rxjava2)
-    implementation(deps.libs.arch.work.okhttp)
+   // implementation(deps.libs.arch.work.rxjava2)
+  //  implementation(deps.libs.arch.work.okhttp)
     implementation(deps.libs.androidx.lifecycle.commonJava8)
     implementation(deps.libs.androidx.lifecycle.reactiveStreams)
     implementation(deps.libs.epoxy.expoxy)
@@ -239,19 +239,19 @@ dependencies {
     implementation(deps.libs.androidx.appcompat.recyclerView)
     implementation(deps.libs.androidx.paging.common)
     implementation(deps.libs.androidx.paging.runtime)
-    implementation(deps.libs.androidx.paging.rxjava2)
+//    implementation(deps.libs.androidx.paging.rxjava2)
     implementation(deps.libs.androidx.room.common)
     implementation(deps.libs.androidx.room.runtime)
     implementation(deps.libs.androidx.room.rxjava2)
     implementation(deps.libs.androidx.room.ktx)
-    implementation(deps.libs.autodispose.android.archComponents)
-    implementation(deps.libs.autodispose.android.core)
-    implementation(deps.libs.autodispose.core)
+//    implementation(deps.libs.autodispose.android.archComponents)
+//    implementation(deps.libs.autodispose.android.core)
+//    implementation(deps.libs.autodispose.core)
     implementation(deps.libs.dagger.android.core)
     implementation(deps.libs.dagger.android.support)
     implementation(deps.libs.dagger.core)
-    implementation(deps.libs.koptional)
-    implementation(deps.libs.koptionalRxJava2)
+//    implementation(deps.libs.koptional)
+//    implementation(deps.libs.koptionalRxJava2)
     implementation(deps.libs.kotlinxCoroutinesAndroid)
     implementation(deps.libs.kotlinxCoroutinesRxJava2)
     implementation(deps.libs.okHttp3)
@@ -260,7 +260,11 @@ dependencies {
     implementation(deps.libs.retrofitRxJava2)
     implementation(deps.libs.rxAndroid2)
     implementation(deps.libs.rxJava2)
-    implementation(deps.libs.flowPreferences)
+   implementation(deps.libs.flowPreferences)
+//    implementation(deps.libs.rxPermissions2)
+//    implementation(deps.libs.rxPreferences)
+//    implementation(deps.libs.rxRelay2)
+//    implementation(deps.libs.rxKotlin2)
     implementation(deps.libs.guava)
     implementation(deps.libs.androidx.documentfile)
     implementation(deps.libs.androidx.leanback.tvProvider)
@@ -288,7 +292,7 @@ dependencies {
 
     implementation(deps.libs.flurry.flurry)
 
-    implementation(deps.libs.koptional)
+//    implementation(deps.libs.koptional)
 
     implementation(deps.libs.gdrive.apiClient)
     implementation(deps.libs.gdrive.apiClientAndroid)
