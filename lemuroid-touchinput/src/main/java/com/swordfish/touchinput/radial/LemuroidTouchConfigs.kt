@@ -22,6 +22,7 @@
 
 package com.swordfish.touchinput.radial
 
+import android.os.Build
 import android.view.KeyEvent
 import com.swordfish.radialgamepad.library.config.ButtonConfig
 import com.swordfish.radialgamepad.library.config.CrossConfig
@@ -149,7 +150,14 @@ object LemuroidTouchConfigs {
             Kind.NINTENDO_3DS_RIGHT -> getNintendo3DSRight(theme)
         }
 
-        return radialGamePadConfig.copy(haptic = haptic)
+        // Using standard MotionEvents.getX/Y() is broken on Samsung devices running Android 11,
+        // but Android 13 broke MotionEvents.getRawX/Y() events in landscape mode for every device.
+        val useRawTouchCoordinates = Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU
+
+        return radialGamePadConfig.copy(
+            haptic = haptic,
+            preferScreenTouchCoordinates = useRawTouchCoordinates
+        )
     }
 
     const val MOTION_SOURCE_DPAD = 0

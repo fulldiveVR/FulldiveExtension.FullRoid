@@ -56,7 +56,7 @@ dependencies {
     implementation(deps.libs.androidx.paging.common)
     implementation(deps.libs.androidx.paging.runtime)
     implementation(deps.libs.androidx.room.runtime)
-    implementation(deps.libs.androidx.room.roomPaging)
+    implementation(deps.libs.androidx.room.paging)
     implementation(deps.libs.androidx.room.rxjava2)
     implementation(deps.libs.androidx.room.ktx)
     implementation(deps.libs.androidx.room.paging)

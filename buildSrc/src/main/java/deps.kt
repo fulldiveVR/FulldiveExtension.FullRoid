@@ -23,34 +23,35 @@
 /* ktlint-disable no-multi-spaces max-line-length */
 object deps {
     object android {
-        const val targetSdkVersion  = 31
-        const val compileSdkVersion = 31
-        const val minSdkVersion     = 23
-        const val buildToolsVersion = "30.0.2"
+        const val targetSdkVersion = 31
+        const val compileSdkVersion = 33
+        const val minSdkVersion = 23
+        const val buildToolsVersion = "31.0.0"
     }
 
     object versions {
-        const val autoDispose     = "1.4.0"
-        const val koptional       = "1.7.0"
-        const val dagger          = "2.19"
-        const val gms             = "17.0.0"
-        const val kotlin          = "1.6.21"
-        const val okHttp          = "4.9.1"
-        const val retrofit        = "2.9.0"
-        const val work            = "2.7.1"
-        const val navigation      = "2.3.5"
-        const val lifecycle       = "2.5.1"
-        const val leanback        = "1.1.0-rc01"
+        const val autoDispose = "1.4.0"
+        const val koptional = "1.7.0"
+        const val dagger = "2.19"
+        const val gms = "17.0.0"
+        const val kotlin = "1.6.21"
+        const val okHttp = "4.9.1"
+        const val retrofit = "2.9.0"
+        const val work = "2.7.1"
+        const val navigation = "2.3.5"
+        const val lifecycle = "2.5.1"
+        const val leanback = "1.1.0-rc01"
         const val googleApiClient = "1.32.1"
-        const val paging          = "3.1.1"
-        const val room            = "2.4.2"
-        const val epoxy           = "4.6.3-vinay-compose"
-        const val serialization   = "1.2.2"
-        const val fragment        = "1.5.1"
-        const val activity        = "1.5.1"
-        const val libretrodroid   = "85f0d7e7"   //"0.8.1"
-        const val radialgamepad   = "1.1.0"
-        const val flow            = "1.8.0"
+        const val paging = "3.1.1"
+        const val room = "2.4.2"
+        const val epoxy = "4.6.3-vinay-compose"
+        const val serialization = "1.2.2"
+        const val fragment = "1.5.1"
+        const val activity = "1.5.1"
+        const val libretrodroid = "0.9.0"
+        const val radialgamepad = "2.0.0"
+        const val flow = "1.8.0"
+
         const val lottie = "3.5.0"
         const val flurry = "12.11.0"
         const val firebase = "29.0.3"
@@ -94,10 +95,11 @@ object deps {
             object preferences {
                 const val preferencesKtx = "androidx.preference:preference-ktx:1.1.1"
             }
+
             object paging {
                 const val common = "androidx.paging:paging-common:${versions.paging}"
                 const val runtime = "androidx.paging:paging-runtime:${versions.paging}"
-                const val rxjava2 = "androidx.paging:paging-rxjava2-ktx:${versions.paging}"
+                //  const val rxjava2 = "androidx.paging:paging-rxjava2-ktx:${versions.paging}"
             }
 
             object navigation {
@@ -112,31 +114,33 @@ object deps {
                 const val rxjava2 = "androidx.room:room-rxjava2:${versions.room}"
                 const val paging = "androidx.room:room-paging:${versions.room}"
 
-                const val roomPaging = "androidx.room:room-paging:${versions.room}"
+                // const val roomPaging = "androidx.room:room-paging:${versions.room}"
                 const val ktx = "androidx.room:room-ktx:${versions.room}"
             }
+
             object fragment {
                 const val fragment = "androidx.fragment:fragment:${versions.fragment}"
                 const val ktx = "androidx.fragment:fragment-ktx:${versions.fragment}"
             }
 
+            const val documentfile = "androidx.documentfile:documentfile:1.0.1"
+
             object activity {
                 const val activity = "androidx.activity:activity:${versions.activity}"
                 const val activityKtx = "androidx.activity:activity-ktx:${versions.activity}"
             }
-
-            const val documentfile = "androidx.documentfile:documentfile:1.0.1"
         }
 
         object arch {
             object work {
                 const val runtime = "androidx.work:work-runtime:${versions.work}"
                 const val runtimeKtx = "androidx.work:work-runtime-ktx:${versions.work}"
-                const val rxjava2 = "androidx.work:work-rxjava2:${versions.work}"
-                const val multiprocess = "androidx.work:work-multiprocess:${versions.work}"
-                const val okhttp = "com.squareup.okhttp3:okhttp:4.9.1"
+                //     const val rxjava2 = "androidx.work:work-rxjava2:${versions.work}"
+                //     const val multiprocess = "androidx.work:work-multiprocess:${versions.work}"
+                //    const val okhttp = "com.squareup.okhttp3:okhttp:4.9.1"
             }
         }
+
         object dagger {
             const val core = "com.google.dagger:dagger:${versions.dagger}"
             const val compiler = "com.google.dagger:dagger-compiler:${versions.dagger}"
@@ -148,20 +152,20 @@ object deps {
             }
         }
 
-        object autodispose {
-            const val core = "com.uber.autodispose:autodispose:${versions.autoDispose}"
+//        object autodispose {
+//            const val core = "com.uber.autodispose:autodispose:${versions.autoDispose}"
+//
+//            object android {
+//                const val core = "com.uber.autodispose:autodispose-android:${versions.autoDispose}"
+//                const val archComponents =
+//                    "com.uber.autodispose:autodispose-android-archcomponents:${versions.autoDispose}"
+//            }
+//        }
 
-            object android {
-                const val core = "com.uber.autodispose:autodispose-android:${versions.autoDispose}"
-                const val archComponents =
-                    "com.uber.autodispose:autodispose-android-archcomponents:${versions.autoDispose}"
-            }
-        }
-
-        object rxbindings {
-            const val core = "com.jakewharton.rxbinding3:rxbinding-core:${versions.rxbindings}"
-            const val appcompat = "com.jakewharton.rxbinding3:rxbinding-appcompat:${versions.rxbindings}"
-        }
+//        object rxbindings {
+//            const val core = "com.jakewharton.rxbinding3:rxbinding-core:${versions.rxbindings}"
+//            const val appcompat = "com.jakewharton.rxbinding3:rxbinding-appcompat:${versions.rxbindings}"
+//        }
 
         object kotlin {
             const val stdlib = "stdlib"
@@ -185,9 +189,10 @@ object deps {
         }
 
         object gdrive {
-            const val apiClient            = "com.google.api-client:google-api-client:${versions.googleApiClient}"
-            const val apiClientAndroid     = "com.google.api-client:google-api-client-android:${versions.googleApiClient}"
-            const val apiServicesDrive     = "com.google.apis:google-api-services-drive:v3-rev20210725-${versions.googleApiClient}"
+            const val apiClient = "com.google.api-client:google-api-client:${versions.googleApiClient}"
+            const val apiClientAndroid = "com.google.api-client:google-api-client-android:${versions.googleApiClient}"
+            const val apiServicesDrive =
+                "com.google.apis:google-api-services-drive:v3-rev20210725-${versions.googleApiClient}"
         }
 
         object flurry {
@@ -210,24 +215,24 @@ object deps {
 
         const val kotlinxCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
         const val kotlinxCoroutinesRxJava2 = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.6.4"
-        const val ktlint                   = "com.github.shyiko:ktlint:0.29.0"
-        const val okio                     = "com.squareup.okio:okio:2.10.0"
-        const val okHttp3                  = "com.squareup.okhttp3:okhttp:${versions.okHttp}"
-        const val coil                     = "io.coil-kt:coil:1.4.0"
-        const val retrofit                 = "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-        const val retrofitRxJava2          = "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
-        const val rxAndroid2               = "io.reactivex.rxjava2:rxandroid:2.1.1"
-        const val rxJava2                  = "io.reactivex.rxjava2:rxjava:2.2.21"
-        const val flowPreferences          = "com.fredporciuncula:flow-preferences:${versions.flow}"
-        const val timber                   = "com.jakewharton.timber:timber:5.0.1"
-        const val material                 = "com.google.android.material:material:1.6.1"
-        const val multitouchGestures       = "com.dinuscxj:multitouchgesturedetector:1.0.0"
-        const val guava                    = "com.google.guava:guava:30.1.1-android"
-        const val harmony                  = "com.frybits.harmony:harmony:1.1.9"
-        const val startup                  = "androidx.startup:startup-runtime:1.1.1"
-        const val radialgamepad            = "com.github.Swordfish90:RadialGamePad:${versions.radialgamepad}"
-        const val libretrodroid            = "com.github.Swordfish90:LibretroDroid:${versions.libretrodroid}"
-        const val lottie                   = "com.airbnb.android:lottie:${versions.lottie}"
+        const val ktlint = "com.github.shyiko:ktlint:0.29.0"
+        const val okio = "com.squareup.okio:okio:2.10.0"
+        const val okHttp3 = "com.squareup.okhttp3:okhttp:${versions.okHttp}"
+        const val coil = "io.coil-kt:coil:1.4.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+        const val retrofitRxJava2 = "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
+        const val rxAndroid2 = "io.reactivex.rxjava2:rxandroid:2.1.1"
+        const val rxJava2 = "io.reactivex.rxjava2:rxjava:2.2.21"
+        const val flowPreferences = "com.fredporciuncula:flow-preferences:${versions.flow}"
+        const val timber = "com.jakewharton.timber:timber:5.0.1"
+        const val material = "com.google.android.material:material:1.6.1"
+        const val multitouchGestures = "com.dinuscxj:multitouchgesturedetector:1.0.0"
+        const val guava = "com.google.guava:guava:30.1.1-android"
+        const val harmony = "com.frybits.harmony:harmony:1.1.9"
+        const val startup = "androidx.startup:startup-runtime:1.1.1"
+        const val radialgamepad = "com.github.Swordfish90:RadialGamePad:${versions.radialgamepad}"
+        const val libretrodroid = "com.github.Swordfish90:LibretroDroid:${versions.libretrodroid}"
+        const val lottie = "com.airbnb.android:lottie:${versions.lottie}"
     }
 
     object plugins {

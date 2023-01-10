@@ -262,7 +262,7 @@ class GameActivity : BaseGameActivity() {
         val rightPad = RadialGamePad(rightConfig, DEFAULT_MARGINS_DP, this)
         rightGamePadContainer.addView(rightPad)
 
-        val touchControllerEvents = merge(leftPad.events().asFlow(), rightPad.events().asFlow())
+        val touchControllerEvents = merge(leftPad.events(), rightPad.events())
             .shareIn(lifecycleScope, SharingStarted.Lazily)
 
         setupDefaultActions(touchControllerEvents)
