@@ -53,7 +53,7 @@ object deps {
         const val flow = "1.8.0"
 
         const val lottie = "3.5.0"
-        const val flurry = "12.11.0"
+        const val flurry = "14.0.0"
         const val firebase = "29.0.3"
         const val googleServices = "4.3.8"
         const val fabric = "2.5.2"
