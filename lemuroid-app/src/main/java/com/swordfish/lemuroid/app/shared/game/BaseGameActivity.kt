@@ -76,7 +76,6 @@ import com.swordfish.lemuroid.lib.game.GameLoaderException
 import com.swordfish.lemuroid.lib.library.ExposedSetting
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
-import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.saves.IncompatibleStateException
 import com.swordfish.lemuroid.lib.saves.SaveState
@@ -121,7 +120,6 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.rx2.asFlow
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
@@ -356,6 +354,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
     private fun initializeRetroGameView(
         gameData: GameLoader.GameData,
+        hdMode: Boolean,
+        forceLegacyHdMode: Boolean,
         screenFilter: String,
         lowLatencyAudio: Boolean,
         enableRumble: Boolean
@@ -377,7 +377,13 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             savesDirectory = gameData.savesDirectory.absolutePath
             variables = gameData.coreVariables.map { Variable(it.key, it.value) }.toTypedArray()
             saveRAMState = gameData.saveRAMData
-            shader = getShaderForSystem(screenFilter, system)
+            shader = ShaderChooser.getShaderForSystem(
+                applicationContext,
+                hdMode,
+                forceLegacyHdMode,
+                screenFilter,
+                system
+            )
             preferLowLatencyAudio = lowLatencyAudio
             rumbleEventsEnabled = enableRumble
             skipDuplicateFrames = systemCoreConfig.skipDuplicateFrames
@@ -489,81 +495,6 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     }
 
     protected abstract fun getDialogClass(): Class<out Activity>
-
-    private fun getShaderForSystem(screenFiter: String, system: GameSystem): ShaderConfig {
-        return when (screenFiter) {
-            "crt" -> ShaderConfig.CRT
-            "lcd" -> ShaderConfig.LCD
-            "smooth" -> ShaderConfig.Default
-            "sharp" -> ShaderConfig.Sharp
-            "hd" -> getHDShaderForSystem(system)
-            else -> getDefaultShaderForSystem(system)
-        }
-    }
-
-    private fun getDefaultShaderForSystem(system: GameSystem) =
-        when (system.id) {
-            SystemID.GBA -> ShaderConfig.LCD
-            SystemID.GBC -> ShaderConfig.LCD
-            SystemID.GB -> ShaderConfig.LCD
-            SystemID.N64 -> ShaderConfig.CRT
-            SystemID.GENESIS -> ShaderConfig.CRT
-            SystemID.SEGACD -> ShaderConfig.CRT
-            SystemID.NES -> ShaderConfig.CRT
-            SystemID.SNES -> ShaderConfig.CRT
-            SystemID.FBNEO -> ShaderConfig.CRT
-            SystemID.SMS -> ShaderConfig.CRT
-            SystemID.PSP -> ShaderConfig.LCD
-            SystemID.NDS -> ShaderConfig.LCD
-            SystemID.GG -> ShaderConfig.LCD
-            SystemID.ATARI2600 -> ShaderConfig.CRT
-            SystemID.PSX -> ShaderConfig.CRT
-            SystemID.MAME2003PLUS -> ShaderConfig.CRT
-            SystemID.ATARI7800 -> ShaderConfig.CRT
-            SystemID.PC_ENGINE -> ShaderConfig.CRT
-            SystemID.LYNX -> ShaderConfig.LCD
-            SystemID.DOS -> ShaderConfig.CRT
-            SystemID.NGP -> ShaderConfig.LCD
-            SystemID.NGC -> ShaderConfig.LCD
-            SystemID.WS -> ShaderConfig.LCD
-            SystemID.WSC -> ShaderConfig.LCD
-            SystemID.NINTENDO_3DS -> ShaderConfig.LCD
-        }
-
-    private fun getHDShaderForSystem(system: GameSystem): ShaderConfig {
-        val upscale8Bits = ShaderConfig.CUT2(2.0f, 0.8f)
-        val upscale16Bits = ShaderConfig.CUT2(1.5f, 0.8f)
-        val upscale32Bits = ShaderConfig.CUT2(1.0f, 0.8f)
-        val default = ShaderConfig.CUT2(0.5f, 0.8f)
-
-        return when (system.id) {
-            SystemID.GBA -> upscale16Bits
-            SystemID.GBC -> upscale8Bits
-            SystemID.GB -> upscale8Bits
-            SystemID.N64 -> upscale32Bits
-            SystemID.GENESIS -> upscale16Bits
-            SystemID.SEGACD -> upscale16Bits
-            SystemID.NES -> upscale8Bits
-            SystemID.SNES -> upscale16Bits
-            SystemID.FBNEO -> upscale32Bits
-            SystemID.SMS -> upscale8Bits
-            SystemID.PSP -> default
-            SystemID.NDS -> upscale16Bits
-            SystemID.GG -> upscale8Bits
-            SystemID.ATARI2600 -> upscale8Bits
-            SystemID.PSX -> upscale32Bits
-            SystemID.MAME2003PLUS -> upscale32Bits
-            SystemID.ATARI7800 -> upscale8Bits
-            SystemID.PC_ENGINE -> upscale16Bits
-            SystemID.LYNX -> upscale8Bits
-            SystemID.DOS -> upscale32Bits
-            SystemID.NGP -> upscale8Bits
-            SystemID.NGC -> upscale8Bits
-            SystemID.WS -> upscale16Bits
-            SystemID.WSC -> upscale16Bits
-            SystemID.NINTENDO_3DS -> default
-        }
-    }
 
     private suspend fun isAutoSaveEnabled(): Boolean {
         return systemCoreConfig.statesSupported && settingsManager.autoSave()
@@ -1047,6 +978,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
         val autoSaveEnabled = settingsManager.autoSave()
         val filter = settingsManager.screenFilter()
+        val hdMode = settingsManager.hdMode()
+        val forceLegacyHdMode = settingsManager.forceLegacyHdMode()
         val lowLatencyAudio = settingsManager.lowLatencyAudio()
         val enableRumble = settingsManager.enableRumble()
         val directLoad = settingsManager.allowDirectGameLoad()
@@ -1056,8 +989,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             game,
             requestLoadSave && autoSaveEnabled,
             systemCoreConfig,
-            directLoad,
-            system
+            directLoad
         )
 
         loadingStatesFlow
@@ -1070,6 +1002,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 if (loadingState is GameLoader.LoadingState.Ready) {
                     retroGameView = initializeRetroGameView(
                         loadingState.gameData,
+                        hdMode,
+                        forceLegacyHdMode,
                         filter,
                         lowLatencyAudio,
                         systemCoreConfig.rumbleSupported && enableRumble
