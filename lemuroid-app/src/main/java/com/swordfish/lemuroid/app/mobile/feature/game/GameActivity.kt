@@ -82,10 +82,9 @@ import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.flow.shareIn
 import kotlinx.coroutines.flow.takeWhile
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.rx2.asFlow
 import kotlinx.coroutines.withContext
 
-class GameActivity : BaseGameActivity() {
+ class GameActivity : BaseGameActivity() {
     @Inject
     lateinit var sharedPreferences: Lazy<SharedPreferences>
 

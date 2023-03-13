@@ -49,9 +49,9 @@ plugins {
 allprojects {
     repositories {
         google()
-        mavenCentral()
         jcenter()
         mavenLocal()
+        mavenCentral()
         maven { setUrl("https://jitpack.io") }
     }
 
@@ -144,8 +144,8 @@ tasks {
             componentSelection {
                 all {
                     val rejected = listOf("alpha", "beta", "rc", "cr", "m")
-                        .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-]*") }
-                        .any { it.matches(candidate.version) }
+                            .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-]*") }
+                            .any { it.matches(candidate.version) }
                     if (rejected) {
                         reject("Release candidate")
                     }

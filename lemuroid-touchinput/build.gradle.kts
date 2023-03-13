@@ -35,8 +35,6 @@ android {
 dependencies {
     implementation(project(":retrograde-util"))
 
-    implementation(deps.libs.rxJava2)
-    implementation(deps.libs.rxAndroid2)
     implementation(deps.libs.androidx.appcompat.constraintLayout)
     implementation(deps.libs.androidx.appcompat.appcompat)
     implementation(deps.libs.androidx.lifecycle.commonJava8)
