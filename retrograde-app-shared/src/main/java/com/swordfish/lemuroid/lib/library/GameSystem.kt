@@ -511,7 +511,7 @@ data class GameSystem(
                                         )
                                     )
                                 )
-                                //   if (isProVersion) {
+                                   if (isProVersion) {
                                 add(
                                     ExposedSetting(
                                         "gambatte_gbc_color_correction",
@@ -528,7 +528,7 @@ data class GameSystem(
                                         )
                                     )
                                 )
-                                // }
+                                }
                                 add(
                                     ExposedSetting(
                                         "gambatte_dark_filter_level",
@@ -667,7 +667,7 @@ data class GameSystem(
                                         )
                                     )
                                 )
-                                // if (isProVersion) {
+                               //  if (isProVersion) {
                                 add(
                                     ExposedSetting(
                                         "mupen64plus-pak1",
@@ -689,7 +689,7 @@ data class GameSystem(
                                     )
                                 )
                                 //  }
-                                // if (isProVersion) {
+                                //if (isProVersion) {
                                 add(
                                     ExposedSetting(
                                         "mupen64plus-pak2",
