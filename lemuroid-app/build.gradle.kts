@@ -246,10 +246,6 @@ dependencies {
     implementation(deps.libs.okio)
     implementation(deps.libs.retrofit)
     implementation(deps.libs.flowPreferences)
-    implementation(deps.libs.retrofitRxJava2)
-    implementation(deps.libs.rxAndroid2)
-    implementation(deps.libs.rxJava2)
-   implementation(deps.libs.flowPreferences)
     implementation(deps.libs.guava)
     implementation(deps.libs.androidx.documentfile)
     implementation(deps.libs.androidx.leanback.tvProvider)
@@ -276,8 +272,6 @@ dependencies {
 
 
     implementation(deps.libs.flurry.flurry)
-
-//    implementation(deps.libs.koptional)
 
     implementation(deps.libs.gdrive.apiClient)
     implementation(deps.libs.gdrive.apiClientAndroid)

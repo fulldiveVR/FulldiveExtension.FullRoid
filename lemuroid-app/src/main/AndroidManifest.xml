@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ /*
   ~  *  RetrogradeApplicationComponent.kt
   ~  *
@@ -102,7 +101,7 @@
 
         <!-- Leanback activities -->
         <activity
-            android:name=".app.tv.main.MainTVActivity"
+            android:name="com.swordfish.lemuroid.app.tv.main.MainTVActivity"
             android:exported="true"
             android:theme="@style/LemuroidLeanbackTheme">
             <intent-filter>

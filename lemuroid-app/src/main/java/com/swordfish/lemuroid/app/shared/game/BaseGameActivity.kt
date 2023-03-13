@@ -91,7 +91,6 @@ import com.swordfish.libretrodroid.GLRetroView.Companion.MOTION_SOURCE_DPAD
 import com.swordfish.libretrodroid.GLRetroViewData
 import com.swordfish.libretrodroid.Variable
 import com.swordfish.libretrodroid.VirtualFile
-import com.swordfish.libretrodroid.ShaderConfig
 import com.swordfish.radialgamepad.library.math.MathUtils
 import javax.inject.Inject
 import kotlin.math.abs
@@ -989,7 +988,8 @@ abstract class BaseGameActivity : ImmersiveActivity() {
             game,
             requestLoadSave && autoSaveEnabled,
             systemCoreConfig,
-            directLoad
+            directLoad,
+            system
         )
 
         loadingStatesFlow

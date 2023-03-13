@@ -48,6 +48,15 @@ object deps {
         const val activity        = "1.5.1"
         const val libretrodroid   = "0.10.0"
         const val radialgamepad   = "2.0.0"
+
+        const val lottie = "3.5.0"
+        const val flurry = "12.11.0"
+        const val firebase = "29.0.3"
+        const val googleServices = "4.3.8"
+        const val fabric = "2.5.2"
+        const val firebaseAnalytics = "21.0.0"
+        const val firebaseStorage = "19.1.0"
+        const val crashlytics = "18.2.11"
     }
 
     object libs {
@@ -141,6 +150,21 @@ object deps {
             const val apiServicesDrive     = "com.google.apis:google-api-services-drive:v3-rev20210725-${versions.googleApiClient}"
         }
 
+        object flurry {
+            const val flurry = "com.flurry.android:analytics:${versions.flurry}"
+        }
+
+        object firebase {
+            const val firebase = "com.google.firebase:firebase-crashlytics-gradle:${versions.fabric}"
+            const val firebaseAnalytics = "com.google.firebase:firebase-analytics:${versions.firebaseAnalytics}"
+            const val firebaseStorage = "com.google.firebase:firebase-storage-ktx:${versions.firebaseStorage}"
+            const val crashlytics = "com.google.firebase:firebase-crashlytics:${versions.crashlytics}"
+        }
+
+        object googleServices {
+            const val googleServices = "com.google.gms:google-services:${versions.googleServices}"
+        }
+
         const val kotlinxCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
         const val ktlint                   = "com.github.shyiko:ktlint:0.29.0"
         const val okio                     = "com.squareup.okio:okio:2.10.0"
@@ -156,6 +180,9 @@ object deps {
         const val startup                  = "androidx.startup:startup-runtime:1.1.1"
         const val radialgamepad            = "com.github.Swordfish90:RadialGamePad:${versions.radialgamepad}"
         const val libretrodroid            = "com.github.Swordfish90:LibretroDroid:${versions.libretrodroid}"
+
+        const val lottie = "com.airbnb.android:lottie:${versions.lottie}"
+
     }
 
     object plugins {
