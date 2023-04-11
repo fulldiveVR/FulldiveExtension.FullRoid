@@ -32,8 +32,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import com.flurry.sdk.ga
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.discord.ShareDiscordTextGenerator
 import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.GameInteractor
@@ -144,10 +144,19 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
                 activity: MainTVActivity,
                 retrogradeDb: RetrogradeDatabase,
                 shortcutsGenerator: ShortcutsGenerator,
+                shareDiscordTextGenerator: ShareDiscordTextGenerator,
                 gameLauncher: GameLauncher,
                 gameSystemHelper: GameSystemHelper
             ) =
-                GameInteractor(activity, retrogradeDb, true, shortcutsGenerator, gameLauncher, gameSystemHelper)
+                GameInteractor(
+                    activity,
+                    retrogradeDb,
+                    true,
+                    shortcutsGenerator,
+                    shareDiscordTextGenerator,
+                    gameLauncher,
+                    gameSystemHelper
+                )
         }
     }
 }

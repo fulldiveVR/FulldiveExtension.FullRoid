@@ -183,6 +183,10 @@ object deps {
 
         const val lottie = "com.airbnb.android:lottie:${versions.lottie}"
 
+        const val retrofitLogging          = "com.squareup.okhttp3:logging-interceptor:4.6.0"
+        const val gsonAnnotations          = "com.google.code.gson:gson:2.9.0"
+        const val retrofitGsonConverter    = "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+
     }
 
     object plugins {

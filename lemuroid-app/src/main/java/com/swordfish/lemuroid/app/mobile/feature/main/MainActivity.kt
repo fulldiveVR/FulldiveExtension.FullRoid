@@ -36,12 +36,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.flurry.sdk.db
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.elevation.SurfaceColors
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.PopupManager
+import com.swordfish.lemuroid.app.appextension.discord.ShareDiscordTextGenerator
 import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.appextension.launchApp
 import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
@@ -287,9 +287,18 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
                 activity: MainActivity,
                 retrogradeDb: RetrogradeDatabase,
                 shortcutsGenerator: ShortcutsGenerator,
+                shareDiscordTextGenerator: ShareDiscordTextGenerator,
                 gameLauncher: GameLauncher,
                 gameSystemHelper: GameSystemHelperImpl
-            ) = GameInteractor(activity, retrogradeDb, false, shortcutsGenerator, gameLauncher, gameSystemHelper)
+            ) = GameInteractor(
+                activity,
+                retrogradeDb,
+                false,
+                shortcutsGenerator,
+                shareDiscordTextGenerator,
+                gameLauncher,
+                gameSystemHelper
+            )
         }
     }
 }

@@ -60,9 +60,9 @@
     <string name="settings_bios_category_detected">Обнаружено</string>
     <string name="settings_bios_category_not_detected">Потдержка</string>
     <string name="settings_title_reset_settings">Сброс к заводским настройкам</string>
-    <string name="settings_description_reset_settings">Сброс Lemuroid к заводским настройкам</string>
+    <string name="settings_description_reset_settings">Сброс Fullroid к заводским настройкам</string>
     <string name="reset_settings_warning_message_title">Вы уверены?</string>
-    <string name="reset_settings_warning_message_description">Это вернет Lemuroid к заводским настройкам.  Сохранения и Значения будут сохранены</string>
+    <string name="reset_settings_warning_message_description">Это вернет Fullroid к заводским настройкам.  Сохранения и Значения будут сохранены</string>
     <string name="settings_title_save_sync">Облачное сохранение</string>
     <string name="settings_description_save_sync">Резервное копирование и синхронизация ваших сохранений в облаке</string>
     <string name="settings_save_sync_refresh">Ручная синхронизация</string>
@@ -80,7 +80,7 @@
     <string name="game_context_menu_restart">Перезапустить</string>
     <string name="game_context_menu_create_shortcut">Закрепить в лаунчере</string>
     <string name="home_empty_title">Выберите каталог ROM\'ов</string>
-    <string name="home_empty_message">Lemuroid необходимо отсканировать каталог, содержащий файлы ROM\'ов .\nЭто может занять до нескольких минут.</string>
+    <string name="home_empty_message">Fullroid необходимо отсканировать каталог, содержащий файлы ROM\'ов .\nЭто может занять до нескольких минут.</string>
     <string name="home_empty_action">Выберите каталог ROM\'ов</string>
     <string name="game_menu_save">Сохранить</string>
     <string name="game_menu_load">Загрузить</string>
@@ -114,12 +114,12 @@
     <string name="installing_core_notification_message">Это может занять несколько минут</string>
     <string name="game_loader_error_gl_incompatible">Это ядро требует версии OpenGL ES, которая не поддерживается вашим устройством.</string>
     <string name="game_loader_error_load_core">Похоже, ядро Libretro не было загружено. Убедитесь, что ваше устройство подключено к Интернету и попробуйте пересканировать библиотеку. Если проблема сохраняется, то ядро может не поддерживаться на вашем устройстве.</string>
-    <string name="game_loader_error_load_game">При загрузке вашей игры произошла ошибка. Убедитесь, что ROM поддерживается Lemuroid и пересканируйте ваши игры.</string>
+    <string name="game_loader_error_load_game">При загрузке вашей игры произошла ошибка. Убедитесь, что ROM поддерживается Fullroid и пересканируйте ваши игры.</string>
     <string name="game_loader_error_save">Что-то пошло не так с вашим файлом сохранения. Если проблема не исчезает, попробуйте отключить автосохранение.</string>
     <string name="game_loader_error_generic">Произошла ошибка. Попробуйте следующее:\n
         \n\u2022 Отключить автосохранение и перезапустить игру
         \n\u2022 Перейдите в настройки Android и очистите кэш приложения
-        \n\u2022 Перейдите в настройки Lemuroid и выполните заводский сброс
+        \n\u2022 Перейдите в настройки Fullroid и выполните заводский сброс
         \n\nЕсли ни одно из вышеперечисленного не работает, возможно, эта игра/ядро не поддерживается этим устройством.
     </string>
     <string name="game_loader_error_missing_bios">Похоже, вы пропустили требуемый файл BIOS, поместите его в папку с игрой и пересканируйте. Требуемые файлы: %1$s</string>
@@ -142,19 +142,19 @@
     <string name="game_interactory_busy">Дождитесь завершения текущих операций</string>
     <string name="mobile_settings_help">Помощь</string>
     <string name="mobile_settings_support">Поддержка</string>
-    <string name="lemuroid_help_content"><![CDATA[        <b>&#8226;Как мне использовать Lemuroid?</b><br/>
-        Скопируйте все ваши ROM-файлы в каталог на вашем устройстве и выберите его в Lemuroid. Этот каталог имеет доступ к подкаталогам. После завершения сканирования вы должны увидеть ваши игры.<br/><br/>
+    <string name="Fullroid_help_content"><![CDATA[        <b>&#8226;Как мне использовать Fullroid?</b><br/>
+        Скопируйте все ваши ROM-файлы в каталог на вашем устройстве и выберите его в Fullroid. Этот каталог имеет доступ к подкаталогам. После завершения сканирования вы должны увидеть ваши игры.<br/><br/>
         <b>&#8226;Почему мои игры не обнаружены?</b><br/>
         Если ваши игры сжаты, попробуйте распаковать их. Если это не сработало, попробуйте поместить ROM-файлы в отдельные каталоги, по одному для каждой системы со следующими именами: $SYSTEMS.
     ]]></string>
     <string name="lemuroid_crash_disclamer">Похоже, что ядро Libretro столкнулось с неожиданной проблемой. Если проблема не исчезла, пожалуйста, попробуйте следующее:\n
         \n\u2022 Отключите автосохранение и перезапустите игру
         \n\u2022 Перейдите в настройки Android и очистите кэш приложения
-        \n\u2022 Перейдите в настройки Lemuroid и выполните заводский сброс
+        \n\u2022 Перейдите в настройки Fullroid и выполните заводский сброс
         \n\n Если ничего из вышеперечисленного не работает, Возможно, эта игра/ядро не поддерживается этим устройством.
     </string>
     <string name="lemuroid_crash_message">Сообщение об ошибке: %1$s</string>
-    <string name="error_message_incompatible_state">Это сохранение не совместимо с текущей версией ядра. Пожалуйста, загрузите последнюю версию сохранения в игре или воспользуйтесь предыдущей версией Lemuroid.</string>
+    <string name="error_message_incompatible_state">Это сохранение не совместимо с текущей версией ядра. Пожалуйста, загрузите последнюю версию сохранения в игре или воспользуйтесь предыдущей версией Fullroid.</string>
     <string-array name="pref_key_shader_filter_names">
         <item>Автоматически</item>
         <item>Резкий</item>

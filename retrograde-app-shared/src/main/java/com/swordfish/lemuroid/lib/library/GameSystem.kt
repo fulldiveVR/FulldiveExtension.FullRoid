@@ -511,7 +511,6 @@ data class GameSystem(
                                         )
                                     )
                                 )
-                                   if (isProVersion) {
                                 add(
                                     ExposedSetting(
                                         "gambatte_gbc_color_correction",
@@ -528,7 +527,6 @@ data class GameSystem(
                                         )
                                     )
                                 )
-                                }
                                 add(
                                     ExposedSetting(
                                         "gambatte_dark_filter_level",
@@ -781,7 +779,7 @@ data class GameSystem(
                     SystemID.PSP,
                     "Sony - PlayStation Portable",
                     R.string.game_system_title_psp,
-                    R.string.game_system_abbr_psp,
+                     R.string.game_system_abbr_psp,
                     listOf(
                         SystemCoreConfig(
                             CoreID.PPSSPP,

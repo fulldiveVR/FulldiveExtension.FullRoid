@@ -45,7 +45,7 @@ buildscript {
 
 android {
     val versionMajor = 1
-    val versionMinor = 1
+    val versionMinor = 2
     val versionPatch = 2
 
    // namespace "com.swordfish.lemuroid"
@@ -277,6 +277,10 @@ dependencies {
     implementation(deps.libs.gdrive.apiClientAndroid)
     implementation(deps.libs.gdrive.apiServicesDrive)
     implementation(deps.libs.play.playServices)
+
+    implementation(deps.libs.retrofitLogging)
+    implementation(deps.libs.gsonAnnotations)
+    implementation(deps.libs.retrofitGsonConverter)
 }
 
 fun usePlayDynamicFeatures(): Boolean {
