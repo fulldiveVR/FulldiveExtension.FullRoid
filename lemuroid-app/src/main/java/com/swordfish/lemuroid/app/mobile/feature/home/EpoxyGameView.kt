@@ -58,6 +58,7 @@ abstract class EpoxyGameView : EpoxyModelWithHolder<EpoxyGameView.Holder>() {
         holder.itemView?.setOnCreateContextMenuListener(
             GameContextMenuListener(gameInteractor, game)
         )
+        holder.itemView?.setOnClickListener { gameInteractor.onGamePlay(game) }
     }
 
     override fun unbind(holder: Holder) {
@@ -78,7 +79,6 @@ abstract class EpoxyGameView : EpoxyModelWithHolder<EpoxyGameView.Holder>() {
             this.itemView = itemView
             this.titleView = itemView.findViewById(R.id.text)
             this.subtitleView = itemView.findViewById(R.id.subtext)
-            this.coverView = itemView.findViewById(R.id.image)
         }
     }
 }

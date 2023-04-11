@@ -49,6 +49,8 @@ import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.CoreVariablesManager
 import com.swordfish.lemuroid.lib.core.CoresSelection
+import com.swordfish.lemuroid.app.appextension.discord.DiscordApiImpl
+import com.swordfish.lemuroid.app.appextension.discord.DiscordManager
 import com.swordfish.lemuroid.lib.game.GameLoader
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerApp
@@ -407,5 +409,15 @@ abstract class LemuroidApplicationModule {
         fun popupManager(
             context: Context,
         ): PopupManager = PopupManager(context)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun discordApiImpl(): DiscordApiImpl = DiscordApiImpl()
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun discordManager(discordApiImpl: DiscordApiImpl): DiscordManager = DiscordManager(discordApiImpl)
     }
 }

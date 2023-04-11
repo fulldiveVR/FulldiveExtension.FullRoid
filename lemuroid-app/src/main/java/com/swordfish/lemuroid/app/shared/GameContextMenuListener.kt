@@ -37,6 +37,11 @@ class GameContextMenuListener(
         v: View,
         menuInfo: ContextMenu.ContextMenuInfo?
     ) {
+        menu.add(R.string.game_context_menu_share).setOnMenuItemClickListener {
+            gameInteractor.onGameShareDiscord(game)
+            true
+        }
+
         menu.add(R.string.game_context_menu_resume).setOnMenuItemClickListener {
             gameInteractor.onGamePlay(game)
             true

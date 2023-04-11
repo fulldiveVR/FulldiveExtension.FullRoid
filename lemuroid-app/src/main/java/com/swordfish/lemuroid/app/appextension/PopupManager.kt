@@ -30,14 +30,14 @@ class PopupManager(private val context: Context) {
 
     private val client = OkHttpClient()
     private val popupsFlow = listOf(
-        StartAppDialog.InstallBrowser,
+        StartAppDialog.Empty,
+        StartAppDialog.Empty,
+        StartAppDialog.Empty,
         StartAppDialog.RateUs,
+        StartAppDialog.Empty,
+        StartAppDialog.Empty,
+        StartAppDialog.Empty,
         StartAppDialog.InstallBrowser,
-        StartAppDialog.RateUs,
-        StartAppDialog.InstallBrowser,
-        StartAppDialog.RateUs,
-        StartAppDialog.InstallBrowser,
-        StartAppDialog.RateUs,
         StartAppDialog.Empty,
         StartAppDialog.Empty
     )
