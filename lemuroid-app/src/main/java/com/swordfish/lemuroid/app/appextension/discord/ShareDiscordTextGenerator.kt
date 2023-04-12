@@ -25,10 +25,10 @@ import android.widget.TextView
 import android.widget.Toast
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.or
-import com.swordfish.lemuroid.common.coroutines.safeLaunch
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -38,20 +38,21 @@ class ShareDiscordTextGenerator @Inject constructor(
 
     fun shareGame(activityContext: Context, game: Game) {
         showShareDialog(activityContext, game) { content, imageUrl ->
-            GlobalScope.safeLaunch {
-                val shareData = if (imageUrl.isNotEmpty()) {
-                    ShareGameData(content, listOf(ShareEmbeds(ShareImage(imageUrl))))
-                } else {
-                    ShareGameData(content)
-                }
-
-                val result = discordManager.sendMessage(shareData)
-
-                withContext(Dispatchers.Main) {
-                    if (result != null) {
-                        Toast.makeText(activityContext, "Success!", Toast.LENGTH_SHORT).show()
+            GlobalScope.launch {
+                try {
+                    val shareData = if (imageUrl.isNotEmpty()) {
+                        ShareGameData(content, listOf(ShareEmbeds(ShareImage(imageUrl))))
                     } else {
-                        Toast.makeText(activityContext, "Error!", Toast.LENGTH_SHORT).show()
+                        ShareGameData(content)
+                    }
+
+                    discordManager.sendMessage(shareData)
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(activityContext, "Feedback is successfully shared!", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(activityContext, "Error while share  feedback!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

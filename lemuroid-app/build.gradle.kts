@@ -262,8 +262,12 @@ dependencies {
     kapt(deps.libs.dagger.android.processor)
     kapt(deps.libs.dagger.compiler)
 
-    platform("com.google.firebase:firebase-bom:30.1.0")
-    implementation("com.google.firebase:firebase-core:21.0.0")
+    implementation("com.google.android.gms:play-services-measurement-api:21.2.1")
+    implementation("com.google.firebase:firebase-config:21.3.0")
+
+
+    platform("com.google.firebase:firebase-bom:31.4.0")
+    implementation("com.google.firebase:firebase-core:21.1.1")
     implementation(deps.libs.firebase.crashlytics) {
         isTransitive = true
     }

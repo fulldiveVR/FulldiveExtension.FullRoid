@@ -51,6 +51,8 @@ import com.swordfish.lemuroid.lib.core.CoreVariablesManager
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.app.appextension.discord.DiscordApiImpl
 import com.swordfish.lemuroid.app.appextension.discord.DiscordManager
+import com.swordfish.lemuroid.app.appextension.remoteconfig.FirebaseConfigurationFetcher
+import com.swordfish.lemuroid.app.appextension.remoteconfig.IRemoteConfigFetcher
 import com.swordfish.lemuroid.lib.game.GameLoader
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerApp
@@ -413,7 +415,12 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun discordApiImpl(): DiscordApiImpl = DiscordApiImpl()
+        fun remoteConfigFetcher(): IRemoteConfigFetcher = FirebaseConfigurationFetcher()
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun discordApiImpl(remoteConfig: IRemoteConfigFetcher): DiscordApiImpl = DiscordApiImpl(remoteConfig)
 
         @Provides
         @PerApp

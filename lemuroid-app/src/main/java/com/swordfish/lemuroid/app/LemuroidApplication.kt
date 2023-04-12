@@ -27,6 +27,7 @@ import android.content.Context
 import androidx.startup.AppInitializer
 import androidx.work.ListenableWorker
 import com.google.android.material.color.DynamicColors
+import com.swordfish.lemuroid.app.appextension.remoteconfig.IRemoteConfigFetcher
 import com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer
 import com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer
 import com.swordfish.lemuroid.app.utils.android.isMainProcess
@@ -35,6 +36,8 @@ import com.swordfish.lemuroid.lib.injection.HasWorkerInjector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.DaggerApplication
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LemuroidApplication : DaggerApplication(), HasWorkerInjector {
@@ -42,9 +45,15 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector {
     @Inject
     lateinit var workerInjector: DispatchingAndroidInjector<ListenableWorker>
 
+    @Inject
+    lateinit var remoteConfig: IRemoteConfigFetcher
+
     @SuppressLint("CheckResult")
     override fun onCreate() {
         super.onCreate()
+        GlobalScope.launch {
+            remoteConfig.fetch(true)
+        }
 
         val initializeComponent = if (isMainProcess()) {
             MainProcessInitializer::class.java
