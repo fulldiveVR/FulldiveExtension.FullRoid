@@ -32,6 +32,6 @@ class DiscordBotInterceptor : Interceptor {
     }
 
     companion object {
-        private const val BOT_TOKEN = "Bot MTA5MzQ4MjkyODY1NjM1OTUwNA.GZM49P.BWAdMZAKzFdxDehNKBJZGKhiK2gmS4v838Yufc"
+        private const val BOT_TOKEN = "Bot MTA5MzQ4MjkyODY1NjM1OTUwNA.GiGiv_.dR6IrgMkhdj6OwYjKypENVFN3EGwVW-QkaN6S0"
     }
 }
