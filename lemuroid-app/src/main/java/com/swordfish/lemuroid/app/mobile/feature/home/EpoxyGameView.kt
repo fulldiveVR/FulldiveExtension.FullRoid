@@ -79,6 +79,7 @@ abstract class EpoxyGameView : EpoxyModelWithHolder<EpoxyGameView.Holder>() {
             this.itemView = itemView
             this.titleView = itemView.findViewById(R.id.text)
             this.subtitleView = itemView.findViewById(R.id.subtext)
+            this.coverView = itemView.findViewById(R.id.image)
         }
     }
 }

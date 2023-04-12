@@ -21,8 +21,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.webkit.URLUtil
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.or
 import com.swordfish.lemuroid.common.coroutines.safeLaunch
@@ -46,9 +46,12 @@ class ShareDiscordTextGenerator @Inject constructor(
                 }
 
                 val result = discordManager.sendMessage(shareData)
-                if (result != null) {
-                    withContext(Dispatchers.Main) {
+
+                withContext(Dispatchers.Main) {
+                    if (result != null) {
                         Toast.makeText(activityContext, "Success!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(activityContext, "Error!", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -61,52 +64,44 @@ class ShareDiscordTextGenerator @Inject constructor(
         val feedbackEditText = view.findViewById<EditText>(R.id.feedbackEditText)
         val linkEditText = view.findViewById<EditText>(R.id.linkEditText)
 
+        val shareButton = view.findViewById<TextView>(R.id.shareButton)
+
         val dialog = AlertDialog.Builder(context)
             .setView(view)
             .setTitle(R.string.game_context_menu_share)
-            .setPositiveButton(R.string.share_discord_button_title) { _, _ ->
-            }
             .create()
 
-        dialog.setOnShowListener {
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                ?.setTextColor(ContextCompat.getColor(context, R.color.main_color_light))
+        shareButton.setOnClickListener {
+            val name = nameEditText.text.toString()
+            val feedback = feedbackEditText.text.toString()
+            val link = linkEditText.text.toString()
 
-            dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-                ?.setTextColor(ContextCompat.getColor(context, R.color.textColorSecondary))
+            if (name.isEmpty()) {
+                Toast.makeText(context, "Enter your name!", Toast.LENGTH_SHORT).show()
+            } else if (feedback.isEmpty()) {
+                Toast.makeText(context, "Enter your feedback!", Toast.LENGTH_SHORT).show()
+            } else if (link.isNotEmpty() && !URLUtil.isValidUrl(link)) {
+                Toast.makeText(context, "Enter correct  download link!", Toast.LENGTH_SHORT).show()
+            } else {
+                val shareTextPart1 = String.format(
+                    context.getString(R.string.share_discord_text_title_part_1),
+                    name,
+                    game.title,
+                )
 
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                val name = nameEditText.text.toString()
-                val feedback = feedbackEditText.text.toString()
-                val link = linkEditText.text.toString()
-
-                if (name.isEmpty()) {
-                    Toast.makeText(context, "Enter your name!", Toast.LENGTH_SHORT).show()
-                } else if (feedback.isEmpty()) {
-                    Toast.makeText(context, "Enter your feedback!", Toast.LENGTH_SHORT).show()
-                } else if (link.isNotEmpty() && !URLUtil.isValidUrl(link)) {
-                    Toast.makeText(context, "Enter correct  download link!", Toast.LENGTH_SHORT).show()
-                } else {
-                    val shareTextPart1 = String.format(
-                        context.getString(R.string.share_discord_text_title_part_1),
-                        name,
-                        game.title,
+                val shareTextPart2 = if (linkEditText.text.toString().isNotEmpty()) {
+                    String.format(
+                        context.getString(R.string.share_discord_text_title_part_2),
+                        linkEditText.text.toString(),
                     )
+                } else ""
 
-                    val shareTextPart2 = if (linkEditText.text.toString().isNotEmpty()) {
-                        String.format(
-                            context.getString(R.string.share_discord_text_title_part_2),
-                            linkEditText.text.toString(),
-                        )
-                    } else ""
-
-                    val shareText = "$shareTextPart1 $shareTextPart2 ${feedbackEditText.text}"
-                    onPositiveClicked.invoke(
-                        shareText,
-                        game.coverFrontUrl?.replace(" ", "%20").or { "" }
-                    )
-                    dialog.dismiss()
-                }
+                val shareText = "$shareTextPart1 $shareTextPart2 ${feedbackEditText.text}"
+                onPositiveClicked.invoke(
+                    shareText,
+                    game.coverFrontUrl?.replace(" ", "%20").or { "" }
+                )
+                dialog.dismiss()
             }
         }
         dialog.show()

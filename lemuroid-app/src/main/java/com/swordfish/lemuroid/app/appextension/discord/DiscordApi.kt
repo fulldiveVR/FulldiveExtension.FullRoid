@@ -16,6 +16,7 @@
 
 package com.swordfish.lemuroid.app.appextension.discord
 
+import androidx.annotation.Keep
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import okhttp3.OkHttpClient
@@ -57,6 +58,7 @@ class DiscordApiImpl {
     }
 }
 
+@Keep
 data class ShareGameData(
     @SerializedName("content")
     val content: String,
@@ -64,11 +66,13 @@ data class ShareGameData(
     val embeds: List<ShareEmbeds>? = null
 )
 
+@Keep
 data class ShareEmbeds(
     @SerializedName("image")
     val image: ShareImage
 )
 
+@Keep
 data class ShareImage(
     @SerializedName("url")
     val url: String
