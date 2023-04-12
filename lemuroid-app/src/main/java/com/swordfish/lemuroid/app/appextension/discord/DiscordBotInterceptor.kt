@@ -16,22 +16,21 @@
 
 package com.swordfish.lemuroid.app.appextension.discord
 
+import com.swordfish.lemuroid.app.appextension.remoteconfig.IRemoteConfigFetcher
+import com.swordfish.lemuroid.app.appextension.remoteconfig.getDiscordBotToken
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException
+import javax.inject.Inject
 
-class DiscordBotInterceptor : Interceptor {
+class DiscordBotInterceptor @Inject constructor(private val remoteConfig: IRemoteConfigFetcher) : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val requestWithHeaders = originalRequest.newBuilder()
-            .header("Authorization", BOT_TOKEN)
+            .header("Authorization", "Bot ${remoteConfig.getDiscordBotToken()}")
             .build()
         return chain.proceed(requestWithHeaders)
-    }
-
-    companion object {
-        private const val BOT_TOKEN = "Bot MTA5MzQ4MjkyODY1NjM1OTUwNA.GiGiv_.dR6IrgMkhdj6OwYjKypENVFN3EGwVW-QkaN6S0"
     }
 }

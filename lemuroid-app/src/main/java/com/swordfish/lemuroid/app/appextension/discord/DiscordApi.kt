@@ -19,6 +19,7 @@ package com.swordfish.lemuroid.app.appextension.discord
 import androidx.annotation.Keep
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
+import com.swordfish.lemuroid.app.appextension.remoteconfig.IRemoteConfigFetcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,13 +27,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 interface DiscordApi {
     @POST("api/channels/1093485251004735498/messages")
     suspend fun shareGame(@Body shareGameData: ShareGameData): okhttp3.ResponseBody
 }
 
-class DiscordApiImpl {
+class DiscordApiImpl @Inject constructor(private val remoteConfig: IRemoteConfigFetcher) {
     private var discordRetrofit: Retrofit? = null
 
     init {
@@ -51,7 +53,7 @@ class DiscordApiImpl {
         readTimeout(30, TimeUnit.SECONDS)
         connectTimeout(30, TimeUnit.SECONDS)
         writeTimeout(60, TimeUnit.SECONDS)
-        addInterceptor(DiscordBotInterceptor())
+        addInterceptor(DiscordBotInterceptor(remoteConfig))
         addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         })
