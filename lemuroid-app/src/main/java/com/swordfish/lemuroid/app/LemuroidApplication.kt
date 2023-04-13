@@ -51,9 +51,6 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector {
     @SuppressLint("CheckResult")
     override fun onCreate() {
         super.onCreate()
-        GlobalScope.launch {
-            remoteConfig.fetch(true)
-        }
 
         val initializeComponent = if (isMainProcess()) {
             MainProcessInitializer::class.java
@@ -64,6 +61,10 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector {
         AppInitializer.getInstance(this).initializeComponent(initializeComponent)
 
         DynamicColors.applyToActivitiesIfAvailable(this)
+
+        GlobalScope.launch {
+            remoteConfig.fetch(true)
+        }
     }
 
     override fun attachBaseContext(base: Context) {
