@@ -22,5 +22,4 @@ interface IRemoteConfigFetcher {
     fun getRemoteString(value: String): String
     fun getRemoteLong(value: String): Long
     fun getRemoteDouble(value: String): Double
-    fun getAll(): Map<String, String>
 }
