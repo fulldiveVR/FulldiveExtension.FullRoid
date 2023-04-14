@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 interface DiscordApi {
-    @POST("api/channels/1093485251004735498/messages")
+    @POST("api/channels/1012647176721137725/messages")
     suspend fun shareGame(@Body shareGameData: ShareGameData): okhttp3.ResponseBody
 }
 
