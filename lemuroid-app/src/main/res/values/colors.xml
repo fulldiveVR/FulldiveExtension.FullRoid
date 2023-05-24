@@ -26,11 +26,11 @@
 
     <color name="textColorPrimary">#0D1826</color>
     <color name="textColorSecondary">#BABDC1</color>
-    <color name="textColorAccent">#FF9900</color>
+    <color name="textColorAccent">#9883FF</color>
     <color name="backgroundPopup">@color/md_theme_light_inverseSurface</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorTransparent">#00ffffff</color>
-    <color name="backgroundColoredButtonAlpha40">#66FF9900</color>
+    <color name="backgroundColoredButtonAlpha40">#669883FF</color>
     <color name="backgroundPrimaryAlpha40">#66121212</color>
     <color name="backgroundPrimary">#121212</color>
 
