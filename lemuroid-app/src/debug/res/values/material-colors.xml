@@ -21,18 +21,18 @@
   -->
 
 <resources>
-    <color name="main_color">#FF9900</color>
+    <color name="main_color">#9883FF</color>
     <color name="main_color_light">#FCC475</color>
 
     <!-- Generated using material color builder -->
-    <color name="md_theme_light_primary">#FF9900</color>
+    <color name="md_theme_light_primary">#9883FF</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
     <color name="md_theme_light_primaryContainer">#FCC475</color>
-    <color name="md_theme_light_onPrimaryContainer">#FF9900</color>
+    <color name="md_theme_light_onPrimaryContainer">#9883FF</color>
     <color name="md_theme_light_secondary">#80FCC475</color>
     <color name="md_theme_light_onSecondary">#FFFFFF</color>
     <color name="md_theme_light_secondaryContainer">#80FCC475</color>
-    <color name="md_theme_light_onSecondaryContainer">#FF9900</color>
+    <color name="md_theme_light_onSecondaryContainer">#9883FF</color>
     <color name="md_theme_light_tertiary">#39656C</color>
     <color name="md_theme_light_onTertiary">#FFFFFF</color>
     <color name="md_theme_light_tertiaryContainer">#BDEBF3</color>
@@ -54,11 +54,11 @@
     <color name="md_theme_light_shadow">#000000</color>
     <color name="md_theme_light_primaryInverse">#FCC475</color>
     <color name="md_theme_dark_primary">#FCC475</color>
-    <color name="md_theme_dark_onPrimary">#FF9900</color>
-    <color name="md_theme_dark_primaryContainer">#FF9900</color>
+    <color name="md_theme_dark_onPrimary">#9883FF</color>
+    <color name="md_theme_dark_primaryContainer">#9883FF</color>
     <color name="md_theme_dark_onPrimaryContainer">#FCC475</color>
     <color name="md_theme_dark_secondary">#FCC475</color>
-    <color name="md_theme_dark_onSecondary">#FF9900</color>
+    <color name="md_theme_dark_onSecondary">#9883FF</color>
     <color name="md_theme_dark_secondaryContainer">#80FCC475</color>
     <color name="md_theme_dark_onSecondaryContainer">#D4E8D0</color>
     <color name="md_theme_dark_tertiary">#A0CED5</color>
@@ -78,7 +78,7 @@
     <color name="md_theme_dark_outline">#8B9388</color>
     <color name="md_theme_dark_inverseOnSurface">#1A1C19</color>
     <color name="md_theme_dark_inverseSurface">#E2E3DD</color>
-    <color name="md_theme_dark_inversePrimary">#FF9900</color>
+    <color name="md_theme_dark_inversePrimary">#9883FF</color>
     <color name="md_theme_dark_shadow">#000000</color>
-    <color name="md_theme_dark_primaryInverse">#FF9900</color>
+    <color name="md_theme_dark_primaryInverse">#9883FF</color>
 </resources>
