@@ -63,7 +63,6 @@ class ShareDiscordTextGenerator @Inject constructor(
         val view = LayoutInflater.from(context).inflate(R.layout.share_discord_dialog_layout, null)
         val nameEditText = view.findViewById<EditText>(R.id.nameEditText)
         val feedbackEditText = view.findViewById<EditText>(R.id.feedbackEditText)
-        val linkEditText = view.findViewById<EditText>(R.id.linkEditText)
 
         val shareButton = view.findViewById<TextView>(R.id.shareButton)
 
@@ -75,14 +74,11 @@ class ShareDiscordTextGenerator @Inject constructor(
         shareButton.setOnClickListener {
             val name = nameEditText.text.toString()
             val feedback = feedbackEditText.text.toString()
-            val link = linkEditText.text.toString()
 
             if (name.isEmpty()) {
                 Toast.makeText(context, "Enter your name!", Toast.LENGTH_SHORT).show()
             } else if (feedback.isEmpty()) {
                 Toast.makeText(context, "Enter your feedback!", Toast.LENGTH_SHORT).show()
-            } else if (link.isNotEmpty() && !URLUtil.isValidUrl(link)) {
-                Toast.makeText(context, "Enter correct  download link!", Toast.LENGTH_SHORT).show()
             } else {
                 val shareTextPart1 = String.format(
                     context.getString(R.string.share_discord_text_title_part_1),
@@ -90,14 +86,7 @@ class ShareDiscordTextGenerator @Inject constructor(
                     game.title,
                 )
 
-                val shareTextPart2 = if (linkEditText.text.toString().isNotEmpty()) {
-                    String.format(
-                        context.getString(R.string.share_discord_text_title_part_2),
-                        linkEditText.text.toString(),
-                    )
-                } else ""
-
-                val shareText = "$shareTextPart1 $shareTextPart2 ${feedbackEditText.text}"
+                val shareText = "$shareTextPart1 ${feedbackEditText.text}"
                 onPositiveClicked.invoke(
                     shareText,
                     game.coverFrontUrl?.replace(" ", "%20").or { "" }
