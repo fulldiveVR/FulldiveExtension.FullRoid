@@ -24,7 +24,10 @@ package com.swordfish.lemuroid.common
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
 
 fun Bundle?.dump(): String {
@@ -57,4 +60,10 @@ fun Context.shortAnimationDuration(): Int {
 
 fun Context.longAnimationDuration(): Int {
     return resources.getInteger(android.R.integer.config_longAnimTime)
+}
+
+fun Context.displayDetailsSettingsScreen() {
+    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+    intent.data = Uri.fromParts("package", packageName, null)
+    startActivity(intent)
 }
