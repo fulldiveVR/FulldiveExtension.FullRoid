@@ -80,6 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_12dp"
         android:src="@drawable/ic_limited_deal"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/limitedDealTextView" />
