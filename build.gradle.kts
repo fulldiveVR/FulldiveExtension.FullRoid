@@ -52,13 +52,12 @@ plugins {
 
 allprojects {
     repositories {
-        repositories {
-            google()
-            mavenCentral()
-            jcenter()
-            mavenLocal()
-            maven { setUrl("https://jitpack.io") }
-        }
+        google()
+        mavenCentral()
+        jcenter()
+        mavenLocal()
+        maven { setUrl("https://jitpack.io") }
+        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj/multitouchgesturedetector/1.0.0/") }
     }
 
     apply(plugin = "org.jmailen.kotlinter")
@@ -150,8 +149,8 @@ tasks {
             componentSelection {
                 all {
                     val rejected = listOf("alpha", "beta", "rc", "cr", "m")
-                            .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-]*") }
-                            .any { it.matches(candidate.version) }
+                        .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-]*") }
+                        .any { it.matches(candidate.version) }
                     if (rejected) {
                         reject("Release candidate")
                     }

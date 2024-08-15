@@ -22,6 +22,9 @@
 
 repositories {
     jcenter()
+    mavenCentral()
+    google()
+    mavenLocal()
 }
 
 plugins {
