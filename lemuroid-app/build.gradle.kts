@@ -36,6 +36,7 @@ buildscript {
         mavenCentral()
         google()
         mavenLocal()
+        maven { setUrl("https://mvnrepository.com/artifact/com.dinuscxj/multitouchgesturedetector") }
     }
 
     dependencies {
