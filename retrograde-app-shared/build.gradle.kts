@@ -27,6 +27,15 @@ plugins {
     id("kotlinx-serialization")
 }
 
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        google()
+        mavenLocal()
+    }
+}
+
 android {
     kotlinOptions {
         jvmTarget = "17"

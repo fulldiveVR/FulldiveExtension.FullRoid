@@ -35,6 +35,7 @@ buildscript {
         jcenter()
         mavenCentral()
         google()
+        mavenLocal()
     }
 
     dependencies {
