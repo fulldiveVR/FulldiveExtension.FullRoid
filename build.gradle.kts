@@ -57,7 +57,7 @@ allprojects {
         jcenter()
         mavenLocal()
         maven { setUrl("https://jitpack.io") }
-        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj") }
+        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven") }
     }
 
     apply(plugin = "org.jmailen.kotlinter")

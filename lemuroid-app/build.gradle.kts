@@ -36,7 +36,7 @@ buildscript {
         mavenCentral()
         google()
         mavenLocal()
-        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj") }
+        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven") }
     }
 
     dependencies {
