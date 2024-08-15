@@ -33,7 +33,7 @@ buildscript {
         mavenCentral()
         google()
         mavenLocal()
-        maven { setUrl("https://mvnrepository.com/artifact/com.dinuscxj/multitouchgesturedetector") }
+        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj/multitouchgesturedetector/1.0.0/") }
     }
 }
 
