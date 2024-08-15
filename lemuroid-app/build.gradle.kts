@@ -36,7 +36,7 @@ buildscript {
         mavenCentral()
         google()
         mavenLocal()
-        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj/multitouchgesturedetector/1.0.0/") }
+        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj") }
     }
 
     dependencies {

@@ -57,7 +57,7 @@ allprojects {
         jcenter()
         mavenLocal()
         maven { setUrl("https://jitpack.io") }
-        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj/multitouchgesturedetector/1.0.0/") }
+        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj") }
     }
 
     apply(plugin = "org.jmailen.kotlinter")
