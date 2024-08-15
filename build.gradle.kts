@@ -25,12 +25,13 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 buildscript {
     repositories {
-        google()
-        jcenter()
-        mavenLocal()
-        mavenCentral()
-        maven { setUrl("https://mvnrepository.com/artifact/com.dinuscxj/multitouchgesturedetector") }
+        repositories {
+            google()
+            jcenter()
+            mavenCentral()
+        }
     }
+
     dependencies {
         classpath(deps.plugins.android)
         classpath(deps.plugins.navigationSafeArgs)
@@ -51,11 +52,13 @@ plugins {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
-        mavenLocal()
-        mavenCentral()
-        maven { setUrl("https://jitpack.io") }
+        repositories {
+            google()
+            mavenCentral()
+            jcenter()
+            mavenLocal()
+            maven { setUrl("https://jitpack.io") }
+        }
     }
 
     apply(plugin = "org.jmailen.kotlinter")

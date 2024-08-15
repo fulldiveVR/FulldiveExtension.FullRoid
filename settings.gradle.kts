@@ -19,6 +19,13 @@
  *  *
  *
  */
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
 
 include(
     ":retrograde-util",
