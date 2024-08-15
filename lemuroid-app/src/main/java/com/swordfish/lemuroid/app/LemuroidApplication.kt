@@ -25,6 +25,7 @@ package com.swordfish.lemuroid.app
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.startup.AppInitializer
+import androidx.work.Configuration
 import androidx.work.ListenableWorker
 import com.google.android.material.color.DynamicColors
 import com.swordfish.lemuroid.app.appextension.remoteconfig.IRemoteConfigFetcher

@@ -101,7 +101,7 @@ class TVSearchFragment : SearchSupportFragment(), SearchSupportFragment.SearchRe
         val searchAdapter = ArrayObjectAdapter(ListRowPresenter())
 
         val gamePresenter = GamePresenter(
-            resources.getDimensionPixelSize(R.dimen.card_size),
+            resources.getDimensionPixelSize(com.swordfish.lemuroid.lib.R.dimen.card_size),
             gameInteractor,
             coverLoader
         )

@@ -1022,14 +1022,13 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
     private fun displayLoadingState(loadingState: GameLoader.LoadingState) {
         loadingMessageStateFlow.value = when (loadingState) {
-            is GameLoader.LoadingState.LoadingCore -> getString(R.string.game_loading_download_core)
+            is GameLoader.LoadingState.LoadingCore -> getString(com.swordfish.lemuroid.ext.R.string.game_loading_download_core)
             is GameLoader.LoadingState.LoadingGame -> getString(R.string.game_loading_preparing_game)
             else -> ""
         }
     }
 
     private fun displayGameLoaderError(gameError: GameLoaderError, coreConfig: SystemCoreConfig) {
-
         val messageId = when (gameError) {
             is GameLoaderError.GLIncompatible -> getString(R.string.game_loader_error_gl_incompatible)
             is GameLoaderError.Generic -> getString(R.string.game_loader_error_generic)

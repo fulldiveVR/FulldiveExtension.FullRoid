@@ -43,16 +43,18 @@ abstract class TVBaseSettingsActivity : ImmersiveActivity() {
             pref: Preference
         ): Boolean {
             val args = pref.extras
-            val f = childFragmentManager.fragmentFactory.instantiate(
-                requireActivity().classLoader,
-                pref.fragment
-            )
-            f.arguments = args
-            f.setTargetFragment(caller, 0)
+            val f = pref.fragment?.let {
+                childFragmentManager.fragmentFactory.instantiate(
+                    requireActivity().classLoader,
+                    it
+                )
+            }
+            f?.arguments = args
+            f?.setTargetFragment(caller, 0)
             if (f is PreferenceFragmentCompat || f is PreferenceDialogFragmentCompat) {
                 startPreferenceFragment(f)
             } else {
-                startImmersiveFragment(f)
+                f?.let { startImmersiveFragment(it) }
             }
             return true
         }

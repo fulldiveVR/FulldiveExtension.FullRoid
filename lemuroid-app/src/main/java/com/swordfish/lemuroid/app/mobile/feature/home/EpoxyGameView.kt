@@ -36,8 +36,12 @@ import com.swordfish.lemuroid.app.shared.covers.CoverLoader
 import com.swordfish.lemuroid.app.utils.games.GameUtils
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
-@EpoxyModelClass(layout = R.layout.layout_game_recent)
+@EpoxyModelClass
 abstract class EpoxyGameView : EpoxyModelWithHolder<EpoxyGameView.Holder>() {
+
+    override fun getDefaultLayout(): Int {
+        return R.layout.layout_game_recent
+    }
 
     @EpoxyAttribute
     lateinit var game: Game

@@ -189,7 +189,7 @@ class ChannelHandler(
             null
         )
 
-        appContext.getString(R.string.app_name)
+        appContext.getString(com.swordfish.libretrodroid.R.string.app_name)
 
         channels?.use {
             if (it.moveToFirst())

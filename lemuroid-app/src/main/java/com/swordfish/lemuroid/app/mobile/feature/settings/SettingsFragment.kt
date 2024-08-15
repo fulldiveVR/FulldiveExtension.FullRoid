@@ -90,7 +90,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         )
         val settingsViewModel = ViewModelProvider(this, factory)[SettingsViewModel::class.java]
 
-        val currentDirectory: Preference? = findPreference(getString(R.string.pref_key_extenral_folder))
+        val currentDirectory: Preference? = findPreference(getString(com.swordfish.lemuroid.lib.R.string.pref_key_extenral_folder))
         val rescanPreference: Preference? = findPreference(getString(R.string.pref_key_rescan))
         val stopRescanPreference: Preference? = findPreference(getString(R.string.pref_key_stop_rescan))
         val displayBiosPreference: Preference? = findPreference(getString(R.string.pref_key_display_bios_info))
@@ -126,11 +126,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }.getOrNull()
     }
 
-    override fun onPreferenceTreeClick(preference: Preference?): Boolean {
+    override fun onPreferenceTreeClick(preference: Preference): Boolean {
         when (preference?.key) {
             getString(R.string.pref_key_rescan) -> rescanLibrary()
             getString(R.string.pref_key_stop_rescan) -> stopRescanLibrary()
-            getString(R.string.pref_key_extenral_folder) -> handleChangeExternalFolder()
+            getString(com.swordfish.lemuroid.lib.R.string.pref_key_extenral_folder) -> handleChangeExternalFolder()
             getString(R.string.pref_key_open_gamepad_settings) -> handleOpenGamePadSettings()
             getString(R.string.pref_key_open_save_sync_settings) -> handleDisplaySaveSync()
             getString(R.string.pref_key_open_cores_selection) -> handleDisplayCorePage()

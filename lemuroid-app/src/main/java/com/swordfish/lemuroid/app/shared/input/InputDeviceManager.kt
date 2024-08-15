@@ -155,13 +155,13 @@ class InputDeviceManager(
     }
 
     private fun getAllGamePads(): List<InputDevice> {
-        return runCatching {
+        return (runCatching {
             InputDevice.getDeviceIds()
                 .map { InputDevice.getDevice(it) }
                 .filter { it.getLemuroidInputDevice().isSupported() }
-                .filter { it.name !in BLACKLISTED_DEVICES }
-                .sortedBy { it.controllerNumber }
-        }.getOrNull() ?: listOf()
+                .filter { it?.name !in BLACKLISTED_DEVICES }
+                .sortedBy { it?.controllerNumber }
+        }.getOrNull() ?: listOf()) as List<InputDevice>
     }
 
     private data class DeviceStatus(val device: InputDevice, val enabled: Boolean)

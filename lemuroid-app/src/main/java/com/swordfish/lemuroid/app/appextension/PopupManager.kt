@@ -19,6 +19,7 @@ package com.swordfish.lemuroid.app.appextension
 import android.app.Activity
 import android.content.Context
 import com.swordfish.lemuroid.BuildConfig
+import com.swordfish.lemuroid.R
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -30,12 +31,15 @@ class PopupManager(private val context: Context) {
 
     private val client = OkHttpClient()
     private val popupsFlow = listOf(
+        StartAppDialog.FinWize,
         StartAppDialog.Empty,
         StartAppDialog.Empty,
+        StartAppDialog.FinWize,
         StartAppDialog.Empty,
         StartAppDialog.RateUs,
         StartAppDialog.Empty,
         StartAppDialog.Empty,
+        StartAppDialog.FinWize,
         StartAppDialog.Empty,
         StartAppDialog.InstallBrowser,
         StartAppDialog.Empty,
@@ -48,11 +52,30 @@ class PopupManager(private val context: Context) {
         val startCounter = sharedPreferences.getProperty(KEY_START_APP_COUNTER, 0)
         sharedPreferences.setProperty(KEY_START_APP_COUNTER, startCounter + 1)
 
+        val isFinWizePopupClicked = sharedPreferences.getProperty(KEY_IS_FIN_WIZE_CLICKED, false)
         val rateUsDone = sharedPreferences.getProperty(KEY_RATE_US_DONE, false)
         val installBrowserDone = sharedPreferences.getProperty(KEY_INSTALL_BROWSER_DONE, false)
 
         if ((!rateUsDone || !installBrowserDone) && startCounter != 0) {
             when (getShowingPopup(startCounter)) {
+                StartAppDialog.FinWize -> {
+                    if (!isFinWizePopupClicked) {
+                        val snackbar = FinWizeSnackbar()
+                        snackbar.showSnackBar(
+                            activity.findViewById(android.R.id.content),
+                            onOpenFinWizeClicked = {
+                                sharedPreferences.setProperty(KEY_IS_FIN_WIZE_CLICKED, true)
+                                activity.openAppInGooglePlay(FIN_WIZE_APP)
+                                snackbar.dismiss()
+                            },
+                            onCloseClicked = {
+                                snackbar.dismiss()
+                            },
+                            bottomMargin = activity.resources.getDimensionPixelSize(R.dimen.size_48dp)
+                        )
+                    }
+                }
+
                 StartAppDialog.RateUs -> {
                     if (!rateUsDone) {
                         showRateUsDialog(activity) {
@@ -60,6 +83,7 @@ class PopupManager(private val context: Context) {
                         }
                     }
                 }
+
                 StartAppDialog.InstallBrowser -> {
                     if ((!installBrowserDone) && !isBrowserInstalled()) {
                         showInstallBrowserDialog(activity) {
@@ -67,6 +91,7 @@ class PopupManager(private val context: Context) {
                         }
                     }
                 }
+
                 else -> {
                 }
             }
@@ -192,6 +217,7 @@ class PopupManager(private val context: Context) {
                 val diff = startCount - closeCount
                 listOf(2, 5).any { it == diff }
             }
+
             else -> true
         }
     }
@@ -204,6 +230,7 @@ class PopupManager(private val context: Context) {
         const val DISCORD_INVITATION = "https://discord.gg/PZfruqZSfU"
         private const val INBOX_URL = "https://api.fdvr.co/v2/inbox"
         private const val KEY_START_APP_COUNTER = "KEY_START_APP_COUNTER"
+        private const val KEY_IS_FIN_WIZE_CLICKED = "KEY_IS_FIN_WIZE_CLICKED"
         private const val KEY_RATE_US_DONE = "KEY_RATE_US_DONE"
         private const val KEY_INSTALL_BROWSER_DONE = "KEY_INSTALL_BROWSER_DONE"
 
@@ -218,7 +245,11 @@ class PopupManager(private val context: Context) {
 }
 
 sealed class StartAppDialog(val id: String) {
+    object FinWize : StartAppDialog("FinWize")
     object RateUs : StartAppDialog("RateUs")
     object InstallBrowser : StartAppDialog("InstallBrowser")
     object Empty : StartAppDialog("Empty")
 }
+
+const val FIN_WIZE_APP =
+    "ai.invest.stock.market.top.finance.trade.crypto.news.chat.bot.make.money.new.etf.save"

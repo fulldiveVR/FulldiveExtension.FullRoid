@@ -23,26 +23,26 @@
 /* ktlint-disable no-multi-spaces max-line-length */
 object deps {
     object android {
-        const val targetSdkVersion  = 33
-        const val compileSdkVersion = 33
+        const val targetSdkVersion  = 34
+        const val compileSdkVersion = 34
         const val minSdkVersion     = 23
-        const val buildToolsVersion = "30.0.2"
+        const val buildToolsVersion = "34.0.0"
     }
 
     object versions {
         const val dagger          = "2.19"
         const val gms             = "17.0.0"
-        const val kotlin          = "1.6.21"
+        const val kotlin          = "1.9.23"
         const val okHttp          = "4.9.1"
         const val retrofit        = "2.9.0"
-        const val work            = "2.7.1"
-        const val navigation      = "2.3.5"
-        const val lifecycle       = "2.5.1"
+        const val work            = "2.7.0"
+        const val navigation      = "2.5.0"
+        const val lifecycle       = "2.8.4"
         const val leanback        = "1.1.0-rc01"
         const val googleApiClient = "1.32.1"
-        const val paging          = "3.1.1"
-        const val room            = "2.4.2"
-        const val epoxy           = "4.6.3-vinay-compose"
+        const val paging          = "3.3.2"
+        const val room            = "2.6.1"
+        const val epoxy           = "4.0.0-beta3"
         const val serialization   = "1.2.2"
         const val fragment        = "1.5.1"
         const val activity        = "1.5.1"
@@ -58,7 +58,7 @@ object deps {
         const val firebaseStorage = "19.1.0"
         const val crashlytics = "18.2.11"
     }
-
+// 2.8.0
     object libs {
         object androidx {
             object appcompat {
@@ -73,9 +73,9 @@ object deps {
                 const val tvProvider = "androidx.tvprovider:tvprovider:1.0.0"
             }
             object ktx {
-                const val core = "androidx.core:core-ktx:1.8.0"
-                const val coreKtx = "androidx.core:core-ktx:1.8.0"
-                const val collection = "androidx.collection:collection-ktx:1.1.0"
+                const val core = "androidx.core:core-ktx:1.13.1"
+                const val coreKtx = "androidx.core:core-ktx:1.13.1"
+                const val collection = "androidx.collection:collection-ktx:1.4.3"
             }
             object lifecycle {
                 const val commonJava8 = "androidx.lifecycle:lifecycle-common-java8:${versions.lifecycle}"
@@ -84,7 +84,7 @@ object deps {
                 const val reactiveStreams = "android.arch.lifecycle:reactivestreams:1.1.1"
             }
             object preferences {
-                const val preferencesKtx = "androidx.preference:preference-ktx:1.1.1"
+                const val preferencesKtx = "androidx.preference:preference-ktx:1.2.1"
             }
             object paging {
                 const val common = "androidx.paging:paging-common:${versions.paging}"
@@ -190,7 +190,7 @@ object deps {
     }
 
     object plugins {
-        const val android = "com.android.tools.build:gradle:7.1.3"
+        const val android = "com.android.tools.build:gradle:8.5.1"
         const val navigationSafeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.navigation}"
     }
 }

@@ -23,17 +23,16 @@
 package com.swordfish.lemuroid.app.shared.library
 
 import android.content.Context
+import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
-import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
 import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
 import com.swordfish.lemuroid.lib.injection.WorkerKey
-import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import dagger.Binds
@@ -60,9 +59,12 @@ class CoreUpdateWork(
     @Inject
     lateinit var coresSelection: CoresSelection
 
+    init {
+        Log.d("TestB", "CoreUpdateWork init")
+    }
+
     override suspend fun doWork(): Result {
         AndroidWorkerInjection.inject(this)
-
         Timber.i("Starting core update/install work")
 
         val notificationsManager = NotificationsManager(applicationContext)
