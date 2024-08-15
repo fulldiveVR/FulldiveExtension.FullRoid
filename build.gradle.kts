@@ -31,7 +31,7 @@ buildscript {
     dependencies {
         classpath(deps.plugins.android)
         classpath(deps.plugins.navigationSafeArgs)
-        classpath("com.android.tools.build:gradle:7.4.2")
+        classpath("com.android.tools.build:gradle:8.5.1")
         classpath(deps.libs.googleServices.googleServices)
         classpath(deps.libs.firebase.firebase)
     }
@@ -120,8 +120,8 @@ subprojects {
                     dexInProcess = true
                 }
                 compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_1_8
-                    targetCompatibility = JavaVersion.VERSION_1_8
+                    sourceCompatibility = JavaVersion.VERSION_17
+                    targetCompatibility = JavaVersion.VERSION_17
                 }
             }
         }

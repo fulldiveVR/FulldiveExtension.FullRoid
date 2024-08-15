@@ -30,8 +30,12 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.swordfish.lemuroid.R
 
-@EpoxyModelClass(layout = R.layout.layout_home_section)
+@EpoxyModelClass
 abstract class EpoxyHomeSection : EpoxyModelWithHolder<EpoxyHomeSection.Holder>() {
+
+    override fun getDefaultLayout(): Int {
+        return R.layout.layout_home_section
+    }
 
     @EpoxyAttribute
     var title: Int? = null

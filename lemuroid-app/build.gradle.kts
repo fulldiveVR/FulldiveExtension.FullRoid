@@ -22,7 +22,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-android-extensions")
+    id("kotlin-parcelize")
     id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlinx-serialization")
@@ -45,10 +45,17 @@ buildscript {
 
 android {
     val versionMajor = 1
-    val versionMinor = 5
+    val versionMinor = 6
     val versionPatch = 0
 
-   // namespace "com.swordfish.lemuroid"
+    namespace = "com.swordfish.lemuroid"
+    buildFeatures.buildConfig = true
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
 
     defaultConfig {
         versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
@@ -193,7 +200,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
@@ -262,11 +269,11 @@ dependencies {
     kapt(deps.libs.dagger.android.processor)
     kapt(deps.libs.dagger.compiler)
 
-    implementation("com.google.android.gms:play-services-measurement-api:21.2.1")
-    implementation("com.google.firebase:firebase-config:21.3.0")
+    implementation("com.google.android.gms:play-services-measurement-api:22.0.2")
+    implementation("com.google.firebase:firebase-config:22.0.0")
 
 
-    platform("com.google.firebase:firebase-bom:31.4.0")
+    platform("com.google.firebase:firebase-bom:33.1.2")
     implementation("com.google.firebase:firebase-core:21.1.1")
     implementation(deps.libs.firebase.crashlytics) {
         isTransitive = true

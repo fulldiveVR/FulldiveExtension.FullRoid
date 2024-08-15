@@ -14,8 +14,7 @@
   ~  along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.swordfish.lemuroid.ext">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application>
         <activity
             android:name="com.swordfish.lemuroid.app.savesync.ActivateGoogleDriveActivity"

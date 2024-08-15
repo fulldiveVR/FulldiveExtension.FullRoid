@@ -21,10 +21,7 @@
  */
 package com.swordfish.lemuroid.app.utils.livedata
 
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.LiveDataReactiveStreams
-import androidx.lifecycle.Transformations
 
 fun <T, K, S> LiveData<T>.combineLatest(
     other: LiveData<K>,
@@ -37,6 +34,6 @@ fun <T> LiveData<T>.throttle(delayMs: Long): LiveData<T> {
     return ThrottledLiveData(this, delayMs)
 }
 
-fun <T, K> LiveData<T>.map(mapper: (T) -> K): LiveData<K> {
-    return Transformations.map(this, mapper)
-}
+//fun <T, K> LiveData<T>.map(mapper: (T) -> K): LiveData<K> {
+//    return Transformations.map(this, mapper)
+//}

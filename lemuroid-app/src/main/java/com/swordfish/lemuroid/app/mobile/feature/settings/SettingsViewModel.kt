@@ -46,7 +46,7 @@ class SettingsViewModel(
     ) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            val directoryPreference = context.getString(R.string.pref_key_extenral_folder)
+            val directoryPreference = context.getString(com.swordfish.lemuroid.lib.R.string.pref_key_extenral_folder)
             return SettingsViewModel(context, directoryPreference, sharedPreferences) as T
         }
     }

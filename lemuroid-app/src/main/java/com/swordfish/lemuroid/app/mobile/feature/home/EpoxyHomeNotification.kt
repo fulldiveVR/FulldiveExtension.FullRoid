@@ -31,8 +31,12 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.swordfish.lemuroid.R
 
-@EpoxyModelClass(layout = R.layout.layout_home_notification)
+@EpoxyModelClass
 abstract class EpoxyHomeNotification : EpoxyModelWithHolder<EpoxyHomeNotification.Holder>() {
+
+    override fun getDefaultLayout(): Int {
+        return R.layout.layout_home_notification
+    }
 
     @EpoxyAttribute
     var title: Int? = null

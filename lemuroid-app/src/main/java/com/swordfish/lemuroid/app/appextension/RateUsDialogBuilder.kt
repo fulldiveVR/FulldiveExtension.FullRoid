@@ -29,7 +29,9 @@ object RateUsDialogBuilder {
     fun show(activity: Activity, onPositiveClicked: (Int) -> Unit) {
         val view = LayoutInflater.from(activity).inflate(R.layout.rate_us_dialog_layout, null)
         val ratingBar = view.findViewById<AppCompatRatingBar>(R.id.ratingBar)
-        var ratingValue = 0
+        var ratingValue = 5
+        ratingBar.rating = 5F
+
         ratingBar.setOnRatingBarChangeListener { _, value, fromUser ->
             if (fromUser) {
                 ratingValue = value.roundToInt()
@@ -47,7 +49,7 @@ object RateUsDialogBuilder {
 
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                ?.setTextColor(ContextCompat.getColor(activity, R.color.textColorPrimary))
+                ?.setTextColor(ContextCompat.getColor(activity, R.color.colorWhite))
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
                 ?.setTextColor(ContextCompat.getColor(activity, R.color.textColorSecondary))
         }

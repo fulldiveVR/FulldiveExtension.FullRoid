@@ -17,6 +17,7 @@
 package com.swordfish.lemuroid.app.appextension
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -25,7 +26,6 @@ import android.net.Uri
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
-import android.util.Log
 import androidx.core.content.ContextCompat
 import com.swordfish.lemuroid.BuildConfig
 
@@ -73,14 +73,14 @@ fun Context.openAppInGooglePlay(appPackageName: String? = null) {
         startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("market://details?id=$packName")
+                Uri.parse("https://play.google.com/store/apps/details?id=$packName")
             ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         )
-    } catch (anfe: android.content.ActivityNotFoundException) {
+    } catch (anfe: ActivityNotFoundException) {
         startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/details?id=$packName")
+                Uri.parse("market://details?id=$packName")
             ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         )
     }

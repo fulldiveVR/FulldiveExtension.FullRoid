@@ -20,8 +20,6 @@
  *
  */
 
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
-
 plugins {
     id("com.android.library")
     id("kotlin-android")
@@ -31,7 +29,7 @@ plugins {
 
 android {
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
@@ -75,6 +73,9 @@ dependencies {
 }
 
 android {
+
+    namespace = "com.swordfish.lemuroid.lib"
+
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {
@@ -83,7 +84,6 @@ android {
         }
     }
     kotlinOptions {
-        this as KotlinJvmOptions
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }

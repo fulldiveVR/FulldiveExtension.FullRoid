@@ -23,7 +23,6 @@
 package com.swordfish.lemuroid.lib.library
 
 import android.content.SharedPreferences
-import android.util.Log
 import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.assetsmanager.NoAssetsManager
 import com.swordfish.lemuroid.lib.core.assetsmanager.PPSSPPAssetsManager

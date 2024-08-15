@@ -22,9 +22,9 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.swordfish.lemuroid.R
-import kotlinx.android.synthetic.main.layout_pro_popup.view.*
 
 class ProPopupLayout : FrameLayout {
 
@@ -56,6 +56,7 @@ class ProPopupLayout : FrameLayout {
 
         val closeImageView = findViewById<ImageView>(R.id.closeImageView)
         closeImageView.setOnClickListener { hideSnackbar() }
+        val containerLayout = findViewById<ConstraintLayout>(R.id.containerLayout)
         containerLayout.setOnClickListener { onClickListener?.invoke() }
     }
 
