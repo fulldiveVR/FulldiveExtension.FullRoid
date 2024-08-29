@@ -52,15 +52,18 @@ class GameService : Service() {
         return START_NOT_STICKY
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
+
     private fun displayNotification(game: Game?) {
         val notification = NotificationsManager(applicationContext).gameRunningNotification(game)
-        ServiceCompat.startForeground(
-            this,
-            NotificationsManager.GAME_RUNNING_NOTIFICATION_ID,
-            notification,
-            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
-        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            startForeground(
+                NotificationsManager.GAME_RUNNING_NOTIFICATION_ID,
+                notification,
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+            )
+        } else {
+            startForeground(NotificationsManager.GAME_RUNNING_NOTIFICATION_ID, notification)
+        }
     }
 
     private fun hideNotification() {
