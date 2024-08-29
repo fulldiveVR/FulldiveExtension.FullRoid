@@ -25,10 +25,10 @@ package com.swordfish.lemuroid.app.shared.library
 import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
-import androidx.work.ForegroundInfo
 import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
+import com.swordfish.lemuroid.app.utils.android.createSyncForegroundInfo
 import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
@@ -47,7 +47,6 @@ import timber.log.Timber
 class CoreUpdateWork(
     context: Context,
     workerParams: WorkerParameters,
-    private val gameSystemHelper: GameSystemHelperImpl
 ) : CoroutineWorker(context, workerParams) {
 
     @Inject
@@ -59,9 +58,8 @@ class CoreUpdateWork(
     @Inject
     lateinit var coresSelection: CoresSelection
 
-    init {
-        Log.d("TestB", "CoreUpdateWork init")
-    }
+    @Inject
+    lateinit var gameSystemHelper: GameSystemHelperImpl
 
     override suspend fun doWork(): Result {
         AndroidWorkerInjection.inject(this)
@@ -69,10 +67,11 @@ class CoreUpdateWork(
 
         val notificationsManager = NotificationsManager(applicationContext)
 
-        val foregroundInfo = ForegroundInfo(
-            NotificationsManager.CORE_INSTALL_NOTIFICATION_ID,
-            notificationsManager.installingCoresNotification()
-        )
+        val foregroundInfo =
+            createSyncForegroundInfo(
+                NotificationsManager.CORE_INSTALL_NOTIFICATION_ID,
+                notificationsManager.installingCoresNotification(),
+            )
 
         setForegroundAsync(foregroundInfo)
 

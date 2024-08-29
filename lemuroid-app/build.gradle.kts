@@ -35,6 +35,8 @@ buildscript {
         jcenter()
         mavenCentral()
         google()
+        mavenLocal()
+        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven") }
     }
 
     dependencies {
@@ -45,8 +47,8 @@ buildscript {
 
 android {
     val versionMajor = 1
-    val versionMinor = 6
-    val versionPatch = 0
+    val versionMinor = 7
+    val versionPatch = 1
 
     namespace = "com.swordfish.lemuroid"
     buildFeatures.buildConfig = true
