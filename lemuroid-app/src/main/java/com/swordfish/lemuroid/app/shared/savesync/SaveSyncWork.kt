@@ -28,7 +28,6 @@ import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ExistingWorkPolicy
-import androidx.work.ForegroundInfo
 import androidx.work.ListenableWorker
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
@@ -38,6 +37,7 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
+import com.swordfish.lemuroid.app.utils.android.createSyncForegroundInfo
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
 import com.swordfish.lemuroid.lib.injection.WorkerKey
 import com.swordfish.lemuroid.lib.library.findByName
@@ -45,15 +45,14 @@ import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import dagger.Binds
 import dagger.android.AndroidInjector
 import dagger.multibindings.IntoMap
-import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
-
     @Inject
     lateinit var saveSyncManager: SaveSyncManager
 
@@ -69,9 +68,10 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
 
         displayNotification()
 
-        val coresToSync = settingsManager.syncStatesCores()
-            .mapNotNull { findByName(it) }
-            .toSet()
+        val coresToSync =
+            settingsManager.syncStatesCores()
+                .mapNotNull { findByName(it) }
+                .toSet()
 
         try {
             saveSyncManager.sync(coresToSync)
@@ -83,12 +83,13 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
     }
 
     private suspend fun shouldPerformSaveSync(): Boolean {
-        val conditionsToRunThisWork = flow {
-            emit(saveSyncManager.isSupported())
-            emit(saveSyncManager.isConfigured())
-            emit(settingsManager.syncSaves())
-            emit(shouldScheduleThisSync())
-        }
+        val conditionsToRunThisWork =
+            flow {
+                emit(saveSyncManager.isSupported())
+                emit(saveSyncManager.isConfigured())
+                emit(settingsManager.syncSaves())
+                emit(shouldScheduleThisSync())
+            }
 
         return conditionsToRunThisWork.firstOrNull { !it } ?: true
     }
@@ -102,10 +103,11 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
     private fun displayNotification() {
         val notificationsManager = NotificationsManager(applicationContext)
 
-        val foregroundInfo = ForegroundInfo(
-            NotificationsManager.SAVE_SYNC_NOTIFICATION_ID,
-            notificationsManager.saveSyncNotification()
-        )
+        val foregroundInfo =
+            createSyncForegroundInfo(
+                NotificationsManager.SAVE_SYNC_NOTIFICATION_ID,
+                notificationsManager.saveSyncNotification(),
+            )
         setForegroundAsync(foregroundInfo)
     }
 
@@ -122,11 +124,14 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
                 ExistingWorkPolicy.REPLACE,
                 OneTimeWorkRequestBuilder<SaveSyncWork>()
                     .setInputData(inputData)
-                    .build()
+                    .build(),
             )
         }
 
-        fun enqueueAutoWork(applicationContext: Context, delayMinutes: Long = 0) {
+        fun enqueueAutoWork(
+            applicationContext: Context,
+            delayMinutes: Long = 0,
+        ) {
             val inputData: Data = workDataOf(IS_AUTO to true)
 
             WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
@@ -137,11 +142,11 @@ class SaveSyncWork(context: Context, workerParams: WorkerParameters) :
                         Constraints.Builder()
                             .setRequiredNetworkType(NetworkType.UNMETERED)
                             .setRequiresBatteryNotLow(true)
-                            .build()
+                            .build(),
                     )
                     .setInputData(inputData)
                     .setInitialDelay(delayMinutes, TimeUnit.MINUTES)
-                    .build()
+                    .build(),
             )
         }
 
