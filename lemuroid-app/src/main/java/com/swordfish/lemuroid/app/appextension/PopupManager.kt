@@ -19,7 +19,6 @@ package com.swordfish.lemuroid.app.appextension
 import android.app.Activity
 import android.content.Context
 import com.swordfish.lemuroid.BuildConfig
-import com.swordfish.lemuroid.R
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -32,7 +31,7 @@ class PopupManager(private val context: Context) {
     private val client = OkHttpClient()
     private val popupsFlow = listOf(
         StartAppDialog.FinWize,
-        StartAppDialog.Empty,
+        StartAppDialog.FinWize,
         StartAppDialog.Empty,
         StartAppDialog.FinWize,
         StartAppDialog.Empty,
@@ -52,30 +51,11 @@ class PopupManager(private val context: Context) {
         val startCounter = sharedPreferences.getProperty(KEY_START_APP_COUNTER, 0)
         sharedPreferences.setProperty(KEY_START_APP_COUNTER, startCounter + 1)
 
-        val isFinWizePopupClicked = sharedPreferences.getProperty(KEY_IS_FIN_WIZE_CLICKED, false)
         val rateUsDone = sharedPreferences.getProperty(KEY_RATE_US_DONE, false)
         val installBrowserDone = sharedPreferences.getProperty(KEY_INSTALL_BROWSER_DONE, false)
 
-        if ((!rateUsDone || !installBrowserDone) && startCounter != 0) {
+        if ((!rateUsDone || !installBrowserDone)) {
             when (getShowingPopup(startCounter)) {
-                StartAppDialog.FinWize -> {
-                    if (!isFinWizePopupClicked) {
-                        val snackbar = FinWizeSnackbar()
-                        snackbar.showSnackBar(
-                            activity.findViewById(android.R.id.content),
-                            onOpenFinWizeClicked = {
-                                sharedPreferences.setProperty(KEY_IS_FIN_WIZE_CLICKED, true)
-                                activity.openAppInGooglePlay(FIN_WIZE_APP)
-                                snackbar.dismiss()
-                            },
-                            onCloseClicked = {
-                                snackbar.dismiss()
-                            },
-                            bottomMargin = activity.resources.getDimensionPixelSize(R.dimen.size_48dp)
-                        )
-                    }
-                }
-
                 StartAppDialog.RateUs -> {
                     if (!rateUsDone) {
                         showRateUsDialog(activity) {
@@ -179,6 +159,14 @@ class PopupManager(private val context: Context) {
         return result
     }
 
+    fun setFinWizePopupClosed(isClosed: Boolean) {
+        sharedPreferences.setProperty(KEY_IS_FIN_WIZE_CLOSED, isClosed)
+        sharedPreferences.setProperty(
+            KEY_IS_FIN_WIZE_CLOSED_START_COUNTER,
+            getCurrentStartCounter()
+        )
+    }
+
     fun setProVersionPopupClosed(isClosed: Boolean) {
         sharedPreferences.setProperty(KEY_IS_PRO_POPUP_CLOSED, isClosed)
         sharedPreferences.setProperty(
@@ -200,6 +188,10 @@ class PopupManager(private val context: Context) {
         return sharedPreferences.getProperty(KEY_START_APP_COUNTER, 0)
     }
 
+    private fun getFinWizeCloseStartCounter(): Int {
+        return sharedPreferences.getProperty(KEY_IS_FIN_WIZE_CLOSED_START_COUNTER, 0)
+    }
+
     private fun isProVersionPopupClosed(): Boolean {
         return sharedPreferences.getProperty(KEY_IS_PRO_POPUP_CLOSED, false)
     }
@@ -208,11 +200,11 @@ class PopupManager(private val context: Context) {
         return sharedPreferences.getProperty(KEY_IS_PRO_POPUP_CLOSED_START_COUNTER, 0)
     }
 
-    fun isProPopupVisible(): Boolean {
+    fun isFinWizeVisible(): Boolean {
+        val isClosed = sharedPreferences.getProperty(KEY_IS_FIN_WIZE_CLOSED, false)
         return when {
-            isProVersion() -> false
-            isProVersionPopupClosed() -> {
-                val closeCount = getPromoCloseStartCounter()
+            isClosed -> {
+                val closeCount = getFinWizeCloseStartCounter()
                 val startCount = getCurrentStartCounter()
                 val diff = startCount - closeCount
                 listOf(2, 5).any { it == diff }
@@ -222,15 +214,29 @@ class PopupManager(private val context: Context) {
         }
     }
 
+    fun isProPopupVisible(): Boolean {
+        return when {
+            isProVersion() -> false
+            isProVersionPopupClosed() -> {
+                val closeCount = getPromoCloseStartCounter()
+                val startCount = getCurrentStartCounter()
+                val diff = startCount - closeCount
+                listOf(5, 8).any { it == diff }
+            }
+
+            else -> true
+        }
+    }
+
     fun isDiscordPopupVisible(): Boolean {
-        return !isProPopupVisible() && !isDiscordPopupClosed()
+        return !isProPopupVisible() && !isDiscordPopupClosed() && !isFinWizeVisible()
     }
 
     companion object {
         const val DISCORD_INVITATION = "https://discord.gg/PZfruqZSfU"
         private const val INBOX_URL = "https://api.fdvr.co/v2/inbox"
         private const val KEY_START_APP_COUNTER = "KEY_START_APP_COUNTER"
-        private const val KEY_IS_FIN_WIZE_CLICKED = "KEY_IS_FIN_WIZE_CLICKED"
+        private const val KEY_IS_FIN_WIZE_CLOSED = "KEY_IS_FIN_WIZE_CLOSED"
         private const val KEY_RATE_US_DONE = "KEY_RATE_US_DONE"
         private const val KEY_INSTALL_BROWSER_DONE = "KEY_INSTALL_BROWSER_DONE"
 
@@ -239,16 +245,19 @@ class PopupManager(private val context: Context) {
         private const val KEY_IS_PRO_POPUP_CLOSED_START_COUNTER =
             "KEY_IS_PRO_POPUP_CLOSED_START_COUNTER"
 
+        private const val KEY_IS_FIN_WIZE_CLOSED_START_COUNTER =
+            "KEY_IS_FIN_WIZE_CLOSED_START_COUNTER"
+
         private const val BROWSER_PACKAGE_NAME = "com.fulldive.mobile"
         private const val SUCCESS_RATING_VALUE = 4
     }
 }
 
 sealed class StartAppDialog(val id: String) {
-    object FinWize : StartAppDialog("FinWize")
-    object RateUs : StartAppDialog("RateUs")
-    object InstallBrowser : StartAppDialog("InstallBrowser")
-    object Empty : StartAppDialog("Empty")
+    data object FinWize : StartAppDialog("FinWize")
+    data object RateUs : StartAppDialog("RateUs")
+    data object InstallBrowser : StartAppDialog("InstallBrowser")
+    data object Empty : StartAppDialog("Empty")
 }
 
 const val FIN_WIZE_APP =

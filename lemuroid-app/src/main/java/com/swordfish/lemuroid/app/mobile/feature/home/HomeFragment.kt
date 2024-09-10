@@ -43,10 +43,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.Carousel
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.FIN_WIZE_APP
 import com.swordfish.lemuroid.app.appextension.PopupManager
+import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
 import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
 import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.mobile.feature.proinfo.DiscordPopupLayout
+import com.swordfish.lemuroid.app.mobile.feature.proinfo.FinWizeLayout
 import com.swordfish.lemuroid.app.mobile.feature.proinfo.ProPopupLayout
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.covers.CoverLoader
@@ -129,41 +132,71 @@ class HomeFragment : Fragment() {
             }
         }
 
+        val isFinWizeVisible = popupManager.isFinWizeVisible()
         val isProPopupVisible = popupManager.isProPopupVisible()
-        view.findViewById<ProPopupLayout>(R.id.proPopupLayout).apply {
-            this.isVisible = isProPopupVisible
-            if (isProPopupVisible) {
-                popupManager.setProVersionPopupClosed(false)
-                actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_SHOWN)
-            }
-            onClickListener = {
-                actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP)
-                findNavController().navigate(R.id.navigation_pro_tutorial)
-            }
-            onCloseClickListener = {
-                actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
-                popupManager.setProVersionPopupClosed(true)
-            }
-            showSnackbar()
-        }
-
         val isDiscordPopupVisible = popupManager.isDiscordPopupVisible()
-        view.findViewById<DiscordPopupLayout>(R.id.discordPopupLayout).apply {
-            this.isVisible = isDiscordPopupVisible
-            if (isDiscordPopupVisible) {
-                popupManager.setDiscordPopupClosed(false)
-                actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_SHOWN)
+
+        when {
+            isFinWizeVisible -> {
+                view.findViewById<FinWizeLayout>(R.id.finWizeLayout).apply {
+                    this.isVisible = isFinWizeVisible
+                    if (isFinWizeVisible) {
+                        popupManager.setFinWizePopupClosed(false)
+                        actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_SHOWN)
+                    }
+                    onClickListener = {
+                        actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP)
+                        requireActivity().openAppInGooglePlay(FIN_WIZE_APP)
+                        popupManager.setFinWizePopupClosed(true)
+                    }
+                    onCloseClickListener = {
+                        actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
+                        popupManager.setFinWizePopupClosed(true)
+                    }
+                    showSnackbar()
+                }
             }
-            onClickListener = {
-                actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_CLICKED)
-                popupManager.setDiscordPopupClosed(true)
-                startActivity(Intent(Intent.ACTION_VIEW).apply { data = Uri.parse(PopupManager.DISCORD_INVITATION) })
+
+            isProPopupVisible -> {
+                view.findViewById<ProPopupLayout>(R.id.proPopupLayout).apply {
+                    this.isVisible = isProPopupVisible
+                    if (isProPopupVisible) {
+                        popupManager.setProVersionPopupClosed(false)
+                        actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_SHOWN)
+                    }
+                    onClickListener = {
+                        actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP)
+                        findNavController().navigate(R.id.navigation_pro_tutorial)
+                    }
+                    onCloseClickListener = {
+                        actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
+                        popupManager.setProVersionPopupClosed(true)
+                    }
+                    showSnackbar()
+                }
             }
-            onCloseClickListener = {
-                actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_CLOSED)
-                popupManager.setDiscordPopupClosed(true)
+
+            isDiscordPopupVisible -> {
+                view.findViewById<DiscordPopupLayout>(R.id.discordPopupLayout).apply {
+                    this.isVisible = isDiscordPopupVisible
+                    if (isDiscordPopupVisible) {
+                        popupManager.setDiscordPopupClosed(false)
+                        actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_SHOWN)
+                    }
+                    onClickListener = {
+                        actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_CLICKED)
+                        popupManager.setDiscordPopupClosed(true)
+                        startActivity(Intent(Intent.ACTION_VIEW).apply {
+                            data = Uri.parse(PopupManager.DISCORD_INVITATION)
+                        })
+                    }
+                    onCloseClickListener = {
+                        actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_CLOSED)
+                        popupManager.setDiscordPopupClosed(true)
+                    }
+                    showSnackbar()
+                }
             }
-            showSnackbar()
         }
     }
 
@@ -208,6 +241,7 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         homeViewModel.updateNotificationPermission(isNotificationsPermissionGranted())
+        popupManager.onAppStarted(requireActivity())
     }
 
     @dagger.Module
