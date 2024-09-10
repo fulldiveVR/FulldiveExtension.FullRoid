@@ -41,10 +41,10 @@ class FinWizeSnackbar {
                     android.R.color.transparent
                 )
             )
-            val idoAnnouncementCardView = snackView
-                .findViewById<CardView>(R.id.idoAnnouncementCardView)
+            val cardView = snackView
+                .findViewById<CardView>(R.id.cardView)
 
-            idoAnnouncementCardView.setOnClickListener {
+            cardView.setOnClickListener {
                 onOpenFinWizeClicked.invoke()
             }
             val crossButton = snackView.findViewById<ImageView>(R.id.closePopupButton)

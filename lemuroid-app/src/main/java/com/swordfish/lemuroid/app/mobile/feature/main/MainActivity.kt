@@ -97,9 +97,6 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
     @Inject
     lateinit var actionTracker: IActionTracker
 
-    @Inject
-    lateinit var popupManager: PopupManager
-
     private val reviewManager = ReviewManager()
     private var mainViewModel: MainViewModel? = null
 
@@ -109,7 +106,6 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
         window.statusBarColor = SurfaceColors.SURFACE_2.getColor(this)
         setContentView(R.layout.activity_main)
         initializeActivity()
-        popupManager.onAppStarted(this)
     }
 
     override fun activity(): Activity = this
@@ -176,10 +172,12 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
                 displayLemuroidHelp()
                 true
             }
+
             R.id.menu_options_sync -> {
                 SaveSyncWork.enqueueManualWork(this)
                 true
             }
+
             R.id.menu_options_pro -> {
                 if (!launchApp(this, FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)) {
                     actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_TOOLBAR)
@@ -187,6 +185,7 @@ class MainActivity : RetrogradeAppCompatActivity(), BusyActivity {
                 }
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
