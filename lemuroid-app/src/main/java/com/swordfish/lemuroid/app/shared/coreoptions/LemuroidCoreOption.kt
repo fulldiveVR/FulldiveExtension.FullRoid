@@ -28,9 +28,8 @@ import java.io.Serializable
 
 data class LemuroidCoreOption(
     private val exposedSetting: ExposedSetting,
-    private val coreOption: CoreOption
+    private val coreOption: CoreOption,
 ) : Serializable {
-
     fun getKey(): String {
         return exposedSetting.key
     }

@@ -20,6 +20,7 @@
  *
  */
 
+
 plugins {
     id("com.android.library")
     id("kotlin-android")
@@ -27,12 +28,10 @@ plugins {
 }
 
 android {
-
-    namespace = "com.swordfish.lemuroid.ext"
-
     kotlinOptions {
         jvmTarget = "17"
     }
+    namespace = "com.swordfish.lemuroid.ext"
 }
 
 dependencies {

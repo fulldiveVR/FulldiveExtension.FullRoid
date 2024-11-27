@@ -28,7 +28,6 @@ import com.swordfish.lemuroid.BuildConfig
 import timber.log.Timber
 
 class DebugInitializer : Initializer<Unit> {
-
     override fun create(context: Context) {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
@@ -41,7 +40,7 @@ class DebugInitializer : Initializer<Unit> {
             StrictMode.ThreadPolicy.Builder()
                 .detectAll()
                 .penaltyLog()
-                .build()
+                .build(),
         )
     }
 

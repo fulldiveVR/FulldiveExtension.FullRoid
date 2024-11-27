@@ -26,7 +26,6 @@ import android.content.Context
 import androidx.room.Room
 
 class LibretroDBManager(private val context: Context) {
-
     companion object {
         private const val DB_NAME = "libretro-db"
     }

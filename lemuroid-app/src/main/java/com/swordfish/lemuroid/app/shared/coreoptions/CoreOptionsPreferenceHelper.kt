@@ -36,14 +36,13 @@ import com.swordfish.lemuroid.lib.core.CoreVariablesManager
 import com.swordfish.lemuroid.lib.library.CoreID
 
 object CoreOptionsPreferenceHelper {
-
-    private val BOOLEAN_SET = setOf("enabled", "disabled")
+    val BOOLEAN_SET = setOf("enabled", "disabled")
 
     fun addPreferences(
         preferenceScreen: PreferenceScreen,
         systemID: String,
         baseOptions: List<LemuroidCoreOption>,
-        advancedOptions: List<LemuroidCoreOption>
+        advancedOptions: List<LemuroidCoreOption>,
     ) {
         if (baseOptions.isEmpty() && advancedOptions.isEmpty()) {
             return
@@ -63,14 +62,16 @@ object CoreOptionsPreferenceHelper {
         systemID: String,
         coreID: CoreID,
         connectedGamePads: Int,
-        controllers: Map<Int, List<ControllerConfig>>
+        controllers: Map<Int, List<ControllerConfig>>,
     ) {
-        val visibleControllers = (0 until connectedGamePads)
-            .map { it to controllers[it] }
-            .filter { (_, controllers) -> controllers != null && controllers.size >= 2 }
+        val visibleControllers =
+            (0 until connectedGamePads)
+                .map { it to controllers[it] }
+                .filter { (_, controllers) -> controllers != null && controllers.size >= 2 }
 
-        if (visibleControllers.isEmpty())
+        if (visibleControllers.isEmpty()) {
             return
+        }
 
         val context = preferenceScreen.context
         val title = context.getString(R.string.core_settings_category_controllers)
@@ -87,7 +88,7 @@ object CoreOptionsPreferenceHelper {
         context: Context,
         preferenceGroup: PreferenceGroup,
         options: List<LemuroidCoreOption>,
-        systemID: String
+        systemID: String,
     ) {
         options
             .map { convertToPreference(context, it, systemID) }
@@ -97,7 +98,7 @@ object CoreOptionsPreferenceHelper {
     private fun convertToPreference(
         context: Context,
         it: LemuroidCoreOption,
-        systemID: String
+        systemID: String,
     ): Preference {
         return if (it.getEntriesValues().toSet() == BOOLEAN_SET) {
             buildSwitchPreference(context, it, systemID)
@@ -109,7 +110,7 @@ object CoreOptionsPreferenceHelper {
     private fun buildListPreference(
         context: Context,
         it: LemuroidCoreOption,
-        systemID: String
+        systemID: String,
     ): ListPreference {
         val preference = ListPreference(context)
         preference.key = CoreVariablesManager.computeSharedPreferenceKey(it.getKey(), systemID)
@@ -126,7 +127,7 @@ object CoreOptionsPreferenceHelper {
     private fun buildSwitchPreference(
         context: Context,
         it: LemuroidCoreOption,
-        systemID: String
+        systemID: String,
     ): SwitchPreference {
         val preference = SwitchPreference(context)
         preference.key = CoreVariablesManager.computeSharedPreferenceKey(it.getKey(), systemID)
@@ -142,7 +143,7 @@ object CoreOptionsPreferenceHelper {
         systemID: String,
         coreID: CoreID,
         port: Int,
-        controllerConfigs: List<ControllerConfig>
+        controllerConfigs: List<ControllerConfig>,
     ): Preference {
         val preference = ListPreference(context)
         preference.key = ControllerConfigsManager.getSharedPreferencesId(systemID, coreID, port)
@@ -158,7 +159,7 @@ object CoreOptionsPreferenceHelper {
     private fun createCategory(
         context: Context,
         preferenceScreen: PreferenceScreen,
-        title: String
+        title: String,
     ): PreferenceCategory {
         val category = PreferenceCategory(context)
         preferenceScreen.addPreference(category)

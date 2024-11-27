@@ -20,6 +20,8 @@
  *
  */
 
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
+
 plugins {
     id("com.android.library")
     id("kotlin-android")
@@ -29,11 +31,12 @@ plugins {
 
 buildscript {
     repositories {
-        jcenter()
+      //  jcenter()
         mavenCentral()
         google()
         mavenLocal()
         maven { setUrl("https://mirrors.huaweicloud.com/repository/maven") }
+      //  maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj/multitouchgesturedetector/1.0.0/") }
     }
 }
 
@@ -64,7 +67,6 @@ dependencies {
     implementation(deps.libs.androidx.paging.common)
     implementation(deps.libs.androidx.paging.runtime)
     implementation(deps.libs.androidx.room.runtime)
-    implementation(deps.libs.androidx.room.paging)
     implementation(deps.libs.androidx.room.ktx)
     implementation(deps.libs.androidx.room.paging)
     implementation(deps.libs.androidx.documentfile)
@@ -79,13 +81,12 @@ dependencies {
     implementation(deps.libs.multitouchGestures)
     implementation(deps.libs.material)
     implementation(deps.libs.kotlinxCoroutinesAndroid)
+    implementation(deps.libs.flowPreferences)
+
     kapt(deps.libs.androidx.room.compiler)
 }
 
 android {
-
-    namespace = "com.swordfish.lemuroid.lib"
-
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {
@@ -93,7 +94,9 @@ android {
             }
         }
     }
+    namespace = "com.swordfish.lemuroid.lib"
     kotlinOptions {
+        this as KotlinJvmOptions
         jvmTarget = "17"
     }
 }

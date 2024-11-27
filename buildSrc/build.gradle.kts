@@ -21,7 +21,7 @@
  */
 
 repositories {
-    jcenter()
+  //  jcenter()
     mavenCentral()
     google()
     mavenLocal()
@@ -29,7 +29,4 @@ repositories {
 
 plugins {
     `kotlin-dsl`
-}
-
-kotlinDslPluginOptions {
 }

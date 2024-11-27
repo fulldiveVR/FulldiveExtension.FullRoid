@@ -27,23 +27,10 @@ plugins {
 }
 
 android {
-
-    namespace = "com.swordfish.lemuroid.common"
-
     kotlinOptions {
         jvmTarget = "17"
     }
-//
-//    kotlin {
-//        jvmToolchain {
-//            languageVersion.set(JavaLanguageVersion.of("17"))
-//        }
-//    }
-
-//    compileOptions {
-//        sourceCompatibility = JavaVersion.VERSION_17
-//        targetCompatibility = JavaVersion.VERSION_17
-//    }
+    namespace = "com.swordfish.lemuroid.common"
 }
 
 dependencies {

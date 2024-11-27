@@ -28,9 +28,8 @@ data class BaseStorageFile(
     val name: String,
     val size: Long,
     val uri: Uri,
-    val path: String? = null
+    val path: String? = null,
 ) {
-
     val extension: String
         get() = name.substringAfterLast('.', "")
 

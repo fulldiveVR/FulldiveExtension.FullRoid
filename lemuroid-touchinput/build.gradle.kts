@@ -27,11 +27,10 @@ plugins {
 }
 
 android {
-
-    namespace = "com.swordfish.touchinput.controller"
     kotlinOptions {
         jvmTarget = "17"
     }
+    namespace = "com.swordfish.touchinput.controller"
 }
 
 dependencies {

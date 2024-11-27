@@ -58,7 +58,9 @@ class TextDrawable(private val text: String, private val color: Int) : Drawable(
     }
 
     override fun getOpacity(): Int = mPaint.alpha
+
     override fun getIntrinsicWidth(): Int = -1
+
     override fun getIntrinsicHeight(): Int = -1
 
     override fun setAlpha(alpha: Int) {

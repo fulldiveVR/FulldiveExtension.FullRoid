@@ -53,16 +53,21 @@ class TVGameMenuFragment(
     private val currentDisk: Int,
     private val audioEnabled: Boolean,
     private val fastForwardEnabled: Boolean,
-    private val fastForwardSupported: Boolean
+    private val fastForwardSupported: Boolean,
 ) : LeanbackPreferenceFragmentCompat() {
-
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?,
+    ) {
         preferenceManager.preferenceDataStore =
             SharedPreferencesHelper.getSharedPreferencesDataStore(requireContext())
         setPreferencesFromResource(R.xml.tv_game_settings, rootKey)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         GameMenuHelper.setupAudioOption(preferenceScreen, audioEnabled)
@@ -88,8 +93,9 @@ class TVGameMenuFragment(
     }
 
     private fun setupCoreOptions(connectedGamePads: Int) {
-        val coreOptionsScreen = findPreference<PreferenceScreen>(GameMenuHelper.SECTION_CORE_OPTIONS)
-            ?: return
+        val coreOptionsScreen =
+            findPreference<PreferenceScreen>(GameMenuHelper.SECTION_CORE_OPTIONS)
+                ?: return
 
         coreOptionsScreen.removeAll()
 
@@ -97,7 +103,7 @@ class TVGameMenuFragment(
             coreOptionsScreen,
             game.systemId,
             coreOptions.toList(),
-            advancedCoreOptions.toList()
+            advancedCoreOptions.toList(),
         )
 
         CoreOptionsPreferenceHelper.addControllers(
@@ -105,7 +111,7 @@ class TVGameMenuFragment(
             game.systemId,
             systemCoreConfig.coreID,
             connectedGamePads,
-            systemCoreConfig.controllerConfigs
+            systemCoreConfig.controllerConfigs,
         )
     }
 
@@ -119,26 +125,30 @@ class TVGameMenuFragment(
         val slotsInfo = statesManager.getSavedSlotsInfo(game, systemCoreConfig.coreID)
 
         slotsInfo.forEachIndexed { index, saveInfo ->
-            val bitmap = GameMenuHelper.getSaveStateBitmap(
-                requireContext(),
-                statesPreviewManager,
-                saveInfo,
-                game,
-                systemCoreConfig.coreID,
-                index
-            )
+            val bitmap =
+                GameMenuHelper.getSaveStateBitmap(
+                    requireContext(),
+                    statesPreviewManager,
+                    saveInfo,
+                    game,
+                    systemCoreConfig.coreID,
+                    index,
+                )
 
-            if (saveScreen != null)
+            if (saveScreen != null) {
                 GameMenuHelper.addSavePreference(saveScreen, index, saveInfo, bitmap)
+            }
 
-            if (loadScreen != null)
+            if (loadScreen != null) {
                 GameMenuHelper.addLoadPreference(loadScreen, index, saveInfo, bitmap)
+            }
         }
     }
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
-        if (GameMenuHelper.onPreferenceTreeClicked(activity, preference))
+        if (GameMenuHelper.onPreferenceTreeClicked(activity, preference)) {
             return true
+        }
         return super.onPreferenceTreeClick(preference)
     }
 

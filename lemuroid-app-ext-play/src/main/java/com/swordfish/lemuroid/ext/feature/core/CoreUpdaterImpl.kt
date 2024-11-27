@@ -37,7 +37,6 @@ import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
-import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -47,15 +46,18 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.takeWhile
 import retrofit2.Retrofit
+import kotlin.time.Duration.Companion.seconds
 
 class CoreUpdaterImpl(
     private val directoriesManager: DirectoriesManager,
-    retrofit: Retrofit
+    retrofit: Retrofit,
 ) : CoreUpdater {
-
     private val api = retrofit.create(CoreUpdater.CoreManagerApi::class.java)
 
-    override suspend fun downloadCores(context: Context, coreIDs: List<CoreID>) {
+    override suspend fun downloadCores(
+        context: Context,
+        coreIDs: List<CoreID>,
+    ) {
         val installManager = SplitInstallManagerFactory.create(context)
         val installSession = installCores(installManager, coreIDs, context)
 
@@ -71,7 +73,7 @@ class CoreUpdaterImpl(
     private suspend fun installCores(
         installManager: SplitInstallManager,
         coreIDs: List<CoreID>,
-        context: Context
+        context: Context,
     ): Int? {
         val installSession = requestCoresInstall(installManager, coreIDs) ?: return null
 
@@ -92,7 +94,10 @@ class CoreUpdaterImpl(
 
     private fun computePlayModuleName(it: CoreID) = "lemuroid_core_${it.coreName}"
 
-    private suspend fun waitForCompletion(sessionId: Int, installManager: SplitInstallManager) {
+    private suspend fun waitForCompletion(
+        sessionId: Int,
+        installManager: SplitInstallManager,
+    ) {
         installManager.requestProgressFlow()
             .filter { it.sessionId() == sessionId }
             .onEach { log("Session status for id $sessionId updated to $it") }
@@ -104,11 +109,12 @@ class CoreUpdaterImpl(
 
     private suspend fun requestCoresInstall(
         installManager: SplitInstallManager,
-        coreIDs: List<CoreID>
+        coreIDs: List<CoreID>,
     ): Int? {
-        val modulesToInstall = coreIDs
-            .map { computePlayModuleName(it) }
-            .filter { it !in installManager.installedModules }
+        val modulesToInstall =
+            coreIDs
+                .map { computePlayModuleName(it) }
+                .filter { it !in installManager.installedModules }
 
         if (modulesToInstall.isEmpty()) {
             return null
@@ -116,14 +122,18 @@ class CoreUpdaterImpl(
 
         log("Starting request install for the following modules: $modulesToInstall")
 
-        val result = retry(RETRY_ATTEMPTS, RETRY_DELAY) {
-            installManager.requestInstall(modulesToInstall)
-        }
+        val result =
+            retry(RETRY_ATTEMPTS, RETRY_DELAY) {
+                installManager.requestInstall(modulesToInstall)
+            }
 
         return result.getOrNull()
     }
 
-    private suspend fun installAssets(context: Context, coreIDs: List<CoreID>) {
+    private suspend fun installAssets(
+        context: Context,
+        coreIDs: List<CoreID>,
+    ) {
         val sharedPreferences = SharedPreferencesHelper.getSharedPreferences(context.applicationContext)
         coreIDs.asFlow()
             .map { CoreID.getAssetManager(it) }
@@ -131,11 +141,15 @@ class CoreUpdaterImpl(
             .collect()
     }
 
-    private suspend fun cancelPendingInstalls(installManager: SplitInstallManager, currentSession: Int?) {
+    private suspend fun cancelPendingInstalls(
+        installManager: SplitInstallManager,
+        currentSession: Int?,
+    ) {
         log("Starting cancelPendingInstalls")
 
-        val pending = retry(RETRY_ATTEMPTS, RETRY_DELAY) { installManager.requestSessionStates() }
-            .getOrNull() ?: return
+        val pending =
+            retry(RETRY_ATTEMPTS, RETRY_DELAY) { installManager.requestSessionStates() }
+                .getOrNull() ?: return
 
         pending
             .asFlow()
@@ -147,7 +161,10 @@ class CoreUpdaterImpl(
         log("Terminating cancelPendingInstalls")
     }
 
-    private suspend fun cancelPendingInstall(installManager: SplitInstallManager, sessionId: Int) {
+    private suspend fun cancelPendingInstall(
+        installManager: SplitInstallManager,
+        sessionId: Int,
+    ) {
         try {
             installManager.requestCancelInstall(sessionId)
         } catch (e: Throwable) {

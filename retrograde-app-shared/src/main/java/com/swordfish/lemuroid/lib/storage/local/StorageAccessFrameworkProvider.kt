@@ -1,3 +1,47 @@
+/*
+ *
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
+ *
+ */
+
+/*
+ *
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
+ *
+ */
+
 package com.swordfish.lemuroid.lib.storage.local
 
 import android.content.Context
@@ -16,16 +60,15 @@ import com.swordfish.lemuroid.lib.storage.BaseStorageFile
 import com.swordfish.lemuroid.lib.storage.RomFiles
 import com.swordfish.lemuroid.lib.storage.StorageFile
 import com.swordfish.lemuroid.lib.storage.StorageProvider
-import java.io.File
-import java.io.InputStream
-import java.util.zip.ZipInputStream
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
+import java.io.File
+import java.io.InputStream
+import java.util.zip.ZipInputStream
 
 class StorageAccessFrameworkProvider(private val context: Context) : StorageProvider {
-
     override val id: String = "access_framework"
 
     override val name: String = context.getString(R.string.local_storage)
@@ -52,32 +95,35 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
         return preferenceManager.getString(prefString, null)
     }
 
-    private fun traverseDirectoryEntries(rootUri: Uri): Flow<List<BaseStorageFile>> = flow {
-        val directoryDocumentIds = mutableListOf<String>()
-        DocumentsContract.getTreeDocumentId(rootUri)?.let { directoryDocumentIds.add(it) }
+    private fun traverseDirectoryEntries(rootUri: Uri): Flow<List<BaseStorageFile>> =
+        flow {
+            val directoryDocumentIds = mutableListOf<String>()
+            DocumentsContract.getTreeDocumentId(rootUri)?.let { directoryDocumentIds.add(it) }
 
-        while (directoryDocumentIds.isNotEmpty()) {
-            val currentDirectoryDocumentId = directoryDocumentIds.removeAt(0)
+            while (directoryDocumentIds.isNotEmpty()) {
+                val currentDirectoryDocumentId = directoryDocumentIds.removeAt(0)
 
-            val result = runCatching {
-                listBaseStorageFiles(rootUri, currentDirectoryDocumentId)
+                val result =
+                    runCatching {
+                        listBaseStorageFiles(rootUri, currentDirectoryDocumentId)
+                    }
+                if (result.isFailure) {
+                    Timber.e(result.exceptionOrNull(), "Error while listing files")
+                }
+
+                val (files, directories) =
+                    result.getOrDefault(
+                        listOf<BaseStorageFile>() to listOf<String>(),
+                    )
+
+                emit(files)
+                directoryDocumentIds.addAll(directories)
             }
-            if (result.isFailure) {
-                Timber.e(result.exceptionOrNull(), "Error while listing files")
-            }
-
-            val (files, directories) = result.getOrDefault(
-                listOf<BaseStorageFile>() to listOf<String>()
-            )
-
-            emit(files)
-            directoryDocumentIds.addAll(directories)
         }
-    }
 
     private fun listBaseStorageFiles(
         treeUri: Uri,
-        rootDocumentId: String
+        rootDocumentId: String,
     ): Pair<List<BaseStorageFile>, List<String>> {
         val resultFiles = mutableListOf<BaseStorageFile>()
         val resultDirectories = mutableListOf<String>()
@@ -86,12 +132,13 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
 
         Timber.d("Querying files in directory: $childrenUri")
 
-        val projection = arrayOf(
-            DocumentsContract.Document.COLUMN_DOCUMENT_ID,
-            DocumentsContract.Document.COLUMN_DISPLAY_NAME,
-            DocumentsContract.Document.COLUMN_SIZE,
-            DocumentsContract.Document.COLUMN_MIME_TYPE
-        )
+        val projection =
+            arrayOf(
+                DocumentsContract.Document.COLUMN_DOCUMENT_ID,
+                DocumentsContract.Document.COLUMN_DISPLAY_NAME,
+                DocumentsContract.Document.COLUMN_SIZE,
+                DocumentsContract.Document.COLUMN_MIME_TYPE,
+            )
         context.contentResolver.query(childrenUri, projection, null, null, null)?.use {
             while (it.moveToNext()) {
                 val documentId = it.getString(0)
@@ -102,17 +149,18 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
                 if (mimeType == DocumentsContract.Document.MIME_TYPE_DIR) {
                     resultDirectories.add(documentId)
                 } else {
-                    val documentUri = DocumentsContract.buildDocumentUriUsingTree(
-                        treeUri,
-                        documentId
-                    )
+                    val documentUri =
+                        DocumentsContract.buildDocumentUriUsingTree(
+                            treeUri,
+                            documentId,
+                        )
                     resultFiles.add(
                         BaseStorageFile(
                             name = documentName,
                             size = documentSize,
                             uri = documentUri,
-                            path = documentUri.path
-                        )
+                            path = documentUri.path,
+                        ),
                     )
                 }
             }
@@ -124,7 +172,7 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
     override fun getGameRomFiles(
         game: Game,
         dataFiles: List<DataFile>,
-        allowVirtualFiles: Boolean
+        allowVirtualFiles: Boolean,
     ): RomFiles {
         val originalDocumentUri = Uri.parse(game.fileUri)
         val originalDocument = DocumentFile.fromSingleUri(context, originalDocumentUri)!!
@@ -141,27 +189,34 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
     private fun getGameRomFilesStandard(
         game: Game,
         dataFiles: List<DataFile>,
-        originalDocument: DocumentFile
+        originalDocument: DocumentFile,
     ): RomFiles {
         val gameEntry = getGameRomStandard(game, originalDocument)
         val dataEntries = dataFiles.map { getDataFileStandard(game, it) }
         return RomFiles.Standard(listOf(gameEntry) + dataEntries)
     }
 
-    private fun getGameRomFilesZipped(game: Game, originalDocument: DocumentFile): RomFiles {
+    private fun getGameRomFilesZipped(
+        game: Game,
+        originalDocument: DocumentFile,
+    ): RomFiles {
         val cacheFile = GameCacheUtils.getCacheFileForGame(SAF_CACHE_SUBFOLDER, context, game)
         if (cacheFile.exists()) {
             return RomFiles.Standard(listOf(cacheFile))
         }
 
-        val stream = ZipInputStream(
-            context.contentResolver.openInputStream(originalDocument.uri)
-        )
+        val stream =
+            ZipInputStream(
+                context.contentResolver.openInputStream(originalDocument.uri),
+            )
         stream.extractEntryToFile(game.fileName, cacheFile)
         return RomFiles.Standard(listOf(cacheFile))
     }
 
-    private fun getGameRomFilesVirtual(game: Game, dataFiles: List<DataFile>): RomFiles {
+    private fun getGameRomFilesVirtual(
+        game: Game,
+        dataFiles: List<DataFile>,
+    ): RomFiles {
         val gameEntry = getGameRomVirtual(game)
         val dataEntries = dataFiles.map { getDataFileVirtual(it) }
         return RomFiles.Virtual(listOf(gameEntry) + dataEntries)
@@ -170,17 +225,21 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
     private fun getDataFileVirtual(dataFile: DataFile): RomFiles.Virtual.Entry {
         return RomFiles.Virtual.Entry(
             "$VIRTUAL_FILE_PATH/${dataFile.fileName}",
-            context.contentResolver.openFileDescriptor(Uri.parse(dataFile.fileUri), "r")!!
+            context.contentResolver.openFileDescriptor(Uri.parse(dataFile.fileUri), "r")!!,
         )
     }
 
-    private fun getDataFileStandard(game: Game, dataFile: DataFile): File {
-        val cacheFile = GameCacheUtils.getDataFileForGame(
-            SAF_CACHE_SUBFOLDER,
-            context,
-            game,
-            dataFile
-        )
+    private fun getDataFileStandard(
+        game: Game,
+        dataFile: DataFile,
+    ): File {
+        val cacheFile =
+            GameCacheUtils.getDataFileForGame(
+                SAF_CACHE_SUBFOLDER,
+                context,
+                game,
+                dataFile,
+            )
 
         if (cacheFile.exists()) {
             return cacheFile
@@ -194,11 +253,14 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
     private fun getGameRomVirtual(game: Game): RomFiles.Virtual.Entry {
         return RomFiles.Virtual.Entry(
             "$VIRTUAL_FILE_PATH/${game.fileName}",
-            context.contentResolver.openFileDescriptor(Uri.parse(game.fileUri), "r")!!
+            context.contentResolver.openFileDescriptor(Uri.parse(game.fileUri), "r")!!,
         )
     }
 
-    private fun getGameRomStandard(game: Game, originalDocument: DocumentFile): File {
+    private fun getGameRomStandard(
+        game: Game,
+        originalDocument: DocumentFile,
+    ): File {
         val cacheFile = GameCacheUtils.getCacheFileForGame(SAF_CACHE_SUBFOLDER, context, game)
 
         if (cacheFile.exists()) {

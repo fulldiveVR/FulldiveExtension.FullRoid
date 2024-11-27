@@ -35,7 +35,6 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class LemuroidTVApplicationModule {
-
     @PerActivity
     @ContributesAndroidInjector(modules = [MainTVActivity.Module::class])
     abstract fun tvMainActivity(): MainTVActivity

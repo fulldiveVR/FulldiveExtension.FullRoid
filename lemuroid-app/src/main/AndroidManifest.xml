@@ -84,15 +84,16 @@
             android:launchMode="singleInstance"
             android:process=":game"
             android:theme="@style/LemuroidMaterialTheme.Game" />
-        <service
-            android:name="androidx.work.impl.foreground.SystemForegroundService"
-            android:foregroundServiceType="dataSync"
-            tools:node="merge" />
 
         <service
             android:name=".app.mobile.feature.game.GameService"
             android:foregroundServiceType="dataSync"
             android:process=":game" />
+
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            android:foregroundServiceType="dataSync"
+            tools:node="merge" />
 
         <activity
             android:name="com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity"
@@ -109,7 +110,7 @@
 
         <!-- Leanback activities -->
         <activity
-            android:name="com.swordfish.lemuroid.app.tv.main.MainTVActivity"
+            android:name=".app.tv.main.MainTVActivity"
             android:exported="true"
             android:theme="@style/LemuroidLeanbackTheme">
             <intent-filter>
@@ -160,6 +161,7 @@
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
             tools:node="remove" />
+
     </application>
 
 </manifest>

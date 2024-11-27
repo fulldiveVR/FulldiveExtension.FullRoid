@@ -7,9 +7,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.content.pm.ServiceInfo
 import android.os.Binder
-import android.os.Build
 import android.os.IBinder
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.app.ServiceCompat
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
@@ -52,18 +50,14 @@ class GameService : Service() {
         return START_NOT_STICKY
     }
 
-
     private fun displayNotification(game: Game?) {
         val notification = NotificationsManager(applicationContext).gameRunningNotification(game)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            startForeground(
-                NotificationsManager.GAME_RUNNING_NOTIFICATION_ID,
-                notification,
-                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
-            )
-        } else {
-            startForeground(NotificationsManager.GAME_RUNNING_NOTIFICATION_ID, notification)
-        }
+        ServiceCompat.startForeground(
+            this,
+            NotificationsManager.GAME_RUNNING_NOTIFICATION_ID,
+            notification,
+            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+        )
     }
 
     private fun hideNotification() {

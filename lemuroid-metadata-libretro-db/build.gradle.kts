@@ -40,11 +40,9 @@ dependencies {
 }
 
 android {
-
-    namespace = "com.swordfish.lemuroid.metadata.libretrodb"
-    
     resourcePrefix("libretrodb_")
     kotlinOptions {
         jvmTarget = "17"
     }
+    namespace = "com.swordfish.lemuroid.metadata.libretrodb"
 }

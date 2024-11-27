@@ -32,26 +32,21 @@ import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
-import com.swordfish.lemuroid.app.shared.settings.AdvancedSettingsPreferences
-import com.swordfish.lemuroid.app.shared.settings.BiosPreferences
-import com.swordfish.lemuroid.app.shared.settings.CoresSelectionPreferences
-import com.swordfish.lemuroid.app.shared.settings.GamePadPreferencesHelper
 import com.swordfish.lemuroid.app.shared.settings.SaveSyncPreferences
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
 import com.swordfish.lemuroid.common.coroutines.launchOnState
+import com.swordfish.lemuroid.common.coroutines.safeCollect
 import com.swordfish.lemuroid.common.kotlin.NTuple2
-import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
 import dagger.android.support.AndroidSupportInjection
-import javax.inject.Inject
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
 
@@ -73,8 +68,10 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
     @Inject
     lateinit var saveSyncManager: SaveSyncManager
 
-    @Inject
-    lateinit var gameSystemHelper: GameSystemHelperImpl
+    //todo Pro
+//    @Inject
+//    lateinit var gameSystemHelper: GameSystemHelperImpl
+
 
     lateinit var saveSyncPreferences: SaveSyncPreferences
 
@@ -86,15 +83,19 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
         super.onAttach(context)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         launchOnState(Lifecycle.State.CREATED) {
-            val gamePadStatus = combine(
-                inputDeviceManager.getGamePadsObservable(),
-                inputDeviceManager.getEnabledInputsObservable(),
-                ::NTuple2
-            )
+            val gamePadStatus =
+                combine(
+                    inputDeviceManager.getGamePadsObservable(),
+                    inputDeviceManager.getEnabledInputsObservable(),
+                    ::NTuple2,
+                )
 
             gamePadStatus
                 .distinctUntilChanged()
@@ -106,15 +107,28 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
                 .distinctUntilChanged()
                 .collect { refreshGamePadBindingsScreen(it) }
         }
+
+        launchOnState(Lifecycle.State.RESUMED) {
+            getSaveSyncScreen()?.let { screen ->
+                PendingOperationsMonitor(requireContext())
+                    .anySaveOperationInProgress()
+                    .safeCollect { syncInProgress ->
+                        saveSyncPreferences.updatePreferences(screen, syncInProgress)
+                    }
+            }
+        }
     }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+    override fun onCreatePreferences(
+        savedInstanceState: Bundle?,
+        rootKey: String?,
+    ) {
         preferenceManager.preferenceDataStore =
             SharedPreferencesHelper.getSharedPreferencesDataStore(requireContext())
         setPreferencesFromResource(R.xml.tv_settings, rootKey)
 
         getCoresSelectionScreen()?.let {
-            coresSelectionPreferences.addCoresSelectionPreferences(it, GameSystemHelper().all())
+            coresSelectionPreferences.addCoresSelectionPreferences(it)
         }
 
         getBiosInfoPreferenceScreen()?.let {
@@ -135,16 +149,7 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
 
     override fun onResume() {
         super.onResume()
-
         refreshSaveSyncScreen()
-
-        getSaveSyncScreen()?.let { screen ->
-            PendingOperationsMonitor(requireContext())
-                .anySaveOperationInProgress()
-                .observe(this) { syncInProgress ->
-                    saveSyncPreferences.updatePreferences(screen, syncInProgress)
-                }
-        }
     }
 
     private fun getGamePadPreferenceScreen(): PreferenceScreen? {
@@ -169,7 +174,7 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
 
     private fun addGamePadBindingsScreen(
         gamePads: List<InputDevice>,
-        enabledGamePads: List<InputDevice>
+        enabledGamePads: List<InputDevice>,
     ) {
         lifecycleScope.launch {
             getGamePadPreferenceScreen()?.let {
@@ -178,7 +183,7 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
                     requireActivity(),
                     it,
                     gamePads,
-                    enabledGamePads
+                    enabledGamePads,
                 )
             }
         }
@@ -204,9 +209,10 @@ class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
         }
 
         when (preference.key) {
-            getString(R.string.pref_key_reset_gamepad_bindings) -> lifecycleScope.launch {
-                handleResetGamePadBindings()
-            }
+            getString(R.string.pref_key_reset_gamepad_bindings) ->
+                lifecycleScope.launch {
+                    handleResetGamePadBindings()
+                }
             getString(R.string.pref_key_reset_settings) -> handleResetSettings()
         }
         return super.onPreferenceTreeClick(preference)

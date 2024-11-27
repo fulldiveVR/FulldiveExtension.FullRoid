@@ -20,6 +20,28 @@
  *
  */
 
+/*
+ *
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
+ *
+ */
+
 package com.swordfish.touchinput.radial.sensors
 
 import android.content.Context
@@ -31,15 +53,14 @@ import android.view.Surface
 import android.view.WindowManager
 import com.swordfish.lemuroid.common.kotlin.CustomDelegates
 import com.swordfish.lemuroid.common.math.linearInterpolation
-import kotlin.math.abs
-import kotlin.math.sign
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import timber.log.Timber
+import kotlin.math.abs
+import kotlin.math.sign
 
 class TiltSensor(context: Context) : SensorEventListener {
-
     private val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val primaryDisplay = (context.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
 
@@ -101,7 +122,10 @@ class TiltSensor(context: Context) : SensorEventListener {
         return sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR) != null
     }
 
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+    override fun onAccuracyChanged(
+        sensor: Sensor?,
+        accuracy: Int,
+    ) {
         // Do nothing here
     }
 
@@ -126,10 +150,11 @@ class TiltSensor(context: Context) : SensorEventListener {
             restOrientationsBuffer.add(floatArrayOf(yRotation, xRotation))
         } else if (restOrientation == null && restOrientationsBuffer.size >= MEASUREMENTS_BUFFER_SIZE) {
             val restMeasurements = restOrientationsBuffer.drop(1)
-            restOrientation = floatArrayOf(
-                restMeasurements.map { it[0] }.sum() / restMeasurements.size,
-                restMeasurements.map { it[1] }.sum() / restMeasurements.size
-            )
+            restOrientation =
+                floatArrayOf(
+                    restMeasurements.map { it[0] }.sum() / restMeasurements.size,
+                    restMeasurements.map { it[1] }.sum() / restMeasurements.size,
+                )
         } else {
             val x = clamp(applyDeadZone(yRotation - restOrientation!![0], deadZone) / (maxRotation))
             val y = clamp(-applyDeadZone(xRotation - restOrientation!![1], deadZone) / (maxRotation))
@@ -147,14 +172,22 @@ class TiltSensor(context: Context) : SensorEventListener {
         }
     }
 
-    private fun chooseBestAngleRepresentation(x: Float, offset: Float): Float {
+    private fun chooseBestAngleRepresentation(
+        x: Float,
+        offset: Float,
+    ): Float {
         return sequenceOf(x, x + offset, x - offset).minByOrNull { abs(it) }!!
     }
 
-    private fun applyDeadZone(x: Float, deadzone: Float): Float {
+    private fun applyDeadZone(
+        x: Float,
+        deadzone: Float,
+    ): Float {
         return if (abs(x) < deadzone) {
             0f
-        } else x - sign(x) * deadzone
+        } else {
+            x - sign(x) * deadzone
+        }
     }
 
     private fun clamp(x: Float): Float {

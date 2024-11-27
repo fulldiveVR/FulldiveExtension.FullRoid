@@ -29,19 +29,13 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 class GameContextMenuListener(
     private val gameInteractor: GameInteractor,
-    private val game: Game
+    private val game: Game,
 ) : View.OnCreateContextMenuListener {
-
     override fun onCreateContextMenu(
         menu: ContextMenu,
         v: View,
-        menuInfo: ContextMenu.ContextMenuInfo?
+        menuInfo: ContextMenu.ContextMenuInfo?,
     ) {
-        menu.add(R.string.game_context_menu_share).setOnMenuItemClickListener {
-            gameInteractor.onGameShareDiscord(game)
-            true
-        }
-
         menu.add(R.string.game_context_menu_resume).setOnMenuItemClickListener {
             gameInteractor.onGamePlay(game)
             true

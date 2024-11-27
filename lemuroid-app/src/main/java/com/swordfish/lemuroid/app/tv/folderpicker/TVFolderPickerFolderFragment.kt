@@ -36,10 +36,11 @@ class TVFolderPickerFolderFragment : GuidedStepSupportFragment() {
     private lateinit var directory: File
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        directory = File(
-            arguments?.getString(EXTRA_FOLDER)
-                ?: throw IllegalArgumentException("EXTRA_FOLODER cannot be null")
-        )
+        directory =
+            File(
+                arguments?.getString(EXTRA_FOLDER)
+                    ?: throw IllegalArgumentException("EXTRA_FOLODER cannot be null"),
+            )
 
         super.onCreate(savedInstanceState)
     }
@@ -53,7 +54,7 @@ class TVFolderPickerFolderFragment : GuidedStepSupportFragment() {
 
     override fun onCreateButtonActions(
         actions: MutableList<GuidedAction>,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ) {
         super.onCreateButtonActions(actions, savedInstanceState)
 
@@ -61,18 +62,21 @@ class TVFolderPickerFolderFragment : GuidedStepSupportFragment() {
             actions,
             ACTION_CHOOSE,
             resources.getString(R.string.tv_folder_picker_action_choose),
-            ""
+            "",
         )
 
         addAction(
             actions,
             ACTION_CANCEL,
             resources.getString(R.string.tv_folder_picker_action_cancel),
-            ""
+            "",
         )
     }
 
-    override fun onCreateActions(actions: MutableList<GuidedAction>, savedInstanceState: Bundle?) {
+    override fun onCreateActions(
+        actions: MutableList<GuidedAction>,
+        savedInstanceState: Bundle?,
+    ) {
         super.onCreateActions(actions, savedInstanceState)
 
         directory.listFiles()
@@ -85,9 +89,10 @@ class TVFolderPickerFolderFragment : GuidedStepSupportFragment() {
     override fun onGuidedActionClicked(action: GuidedAction) {
         when (action.id) {
             ACTION_CHOOSE -> {
-                val resultIntent = Intent().apply {
-                    putExtra(TVFolderPickerActivity.RESULT_DIRECTORY_PATH, directory.absolutePath)
-                }
+                val resultIntent =
+                    Intent().apply {
+                        putExtra(TVFolderPickerActivity.RESULT_DIRECTORY_PATH, directory.absolutePath)
+                    }
 
                 activity?.setResult(Activity.RESULT_OK, resultIntent)
                 activity?.finish()
@@ -101,14 +106,14 @@ class TVFolderPickerFolderFragment : GuidedStepSupportFragment() {
         actions: MutableList<GuidedAction>,
         id: Long,
         title: String,
-        desc: String
+        desc: String,
     ) {
         actions.add(
             GuidedAction.Builder(activity)
                 .id(id)
                 .title(title)
                 .description(desc)
-                .build()
+                .build(),
         )
     }
 

@@ -38,31 +38,33 @@ import com.swordfish.lemuroid.app.shared.library.LibraryIndexBroadcastReceiver
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 class NotificationsManager(private val applicationContext: Context) {
-
     fun gameRunningNotification(game: Game?): Notification {
         createDefaultNotificationChannel()
 
         val intent = Intent(applicationContext, GameActivity::class.java)
-        val contentIntent = PendingIntent.getActivity(
-            applicationContext,
-            0,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
+        val contentIntent =
+            PendingIntent.getActivity(
+                applicationContext,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
 
-        val title = game?.let {
-            applicationContext.getString(R.string.game_running_notification_title, game.title)
-        } ?: applicationContext.getString(R.string.game_running_notification_title_alternative)
+        val title =
+            game?.let {
+                applicationContext.getString(R.string.game_running_notification_title, game.title)
+            } ?: applicationContext.getString(R.string.game_running_notification_title_alternative)
 
-        val builder = NotificationCompat.Builder(applicationContext, DEFAULT_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_lemuroid_tiny)
-            .setContentTitle(title)
-            .setContentText(applicationContext.getString(R.string.game_running_notification_message))
-            .setPriority(NotificationCompat.PRIORITY_MIN)
-            .setOngoing(true)
-            .setVibrate(null)
-            .setSound(null)
-            .setContentIntent(contentIntent)
+        val builder =
+            NotificationCompat.Builder(applicationContext, DEFAULT_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_lemuroid_tiny)
+                .setContentTitle(title)
+                .setContentText(applicationContext.getString(R.string.game_running_notification_message))
+                .setPriority(NotificationCompat.PRIORITY_MIN)
+                .setOngoing(true)
+                .setVibrate(null)
+                .setSound(null)
+                .setContentIntent(contentIntent)
 
         return builder.build()
     }
@@ -71,26 +73,28 @@ class NotificationsManager(private val applicationContext: Context) {
         createDefaultNotificationChannel()
 
         val broadcastIntent = Intent(applicationContext, LibraryIndexBroadcastReceiver::class.java)
-        val broadcastPendingIntent: PendingIntent = PendingIntent.getBroadcast(
-            applicationContext,
-            0,
-            broadcastIntent,
-            PendingIntent.FLAG_IMMUTABLE
-        )
-
-        val builder = NotificationCompat.Builder(applicationContext, DEFAULT_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_lemuroid_tiny)
-            .setContentTitle(applicationContext.getString(R.string.library_index_notification_title))
-            .setContentText(applicationContext.getString(R.string.library_index_notification_message))
-            .setProgress(100, 0, true)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
-            .addAction(
-                NotificationCompat.Action(
-                    null,
-                    applicationContext.getString(R.string.cancel),
-                    broadcastPendingIntent
-                )
+        val broadcastPendingIntent: PendingIntent =
+            PendingIntent.getBroadcast(
+                applicationContext,
+                0,
+                broadcastIntent,
+                PendingIntent.FLAG_IMMUTABLE,
             )
+
+        val builder =
+            NotificationCompat.Builder(applicationContext, DEFAULT_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_lemuroid_tiny)
+                .setContentTitle(applicationContext.getString(R.string.library_index_notification_title))
+                .setContentText(applicationContext.getString(R.string.library_index_notification_message))
+                .setProgress(100, 0, true)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .addAction(
+                    NotificationCompat.Action(
+                        null,
+                        applicationContext.getString(R.string.cancel),
+                        broadcastPendingIntent,
+                    ),
+                )
 
         return builder.build()
     }
@@ -99,26 +103,36 @@ class NotificationsManager(private val applicationContext: Context) {
         createDefaultNotificationChannel()
 
         val broadcastIntent = Intent(applicationContext, CoreUpdateBroadcastReceiver::class.java)
-        val broadcastPendingIntent: PendingIntent = PendingIntent.getBroadcast(
-            applicationContext,
-            0,
-            broadcastIntent,
-            PendingIntent.FLAG_IMMUTABLE
-        )
-
-        val builder = NotificationCompat.Builder(applicationContext, DEFAULT_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_lemuroid_tiny)
-            .setContentTitle(applicationContext.getString(R.string.installing_core_notification_title))
-            .setContentText(applicationContext.getString(R.string.installing_core_notification_message))
-            .setProgress(100, 0, true)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
-            .addAction(
-                NotificationCompat.Action(
-                    null,
-                    applicationContext.getString(R.string.cancel),
-                    broadcastPendingIntent
-                )
+        val broadcastPendingIntent: PendingIntent =
+            PendingIntent.getBroadcast(
+                applicationContext,
+                0,
+                broadcastIntent,
+                PendingIntent.FLAG_IMMUTABLE,
             )
+
+        val builder =
+            NotificationCompat.Builder(applicationContext, DEFAULT_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_lemuroid_tiny)
+                .setContentTitle(
+                    applicationContext.getString(
+                        com.swordfish.lemuroid.ext.R.string.installing_core_notification_title,
+                    ),
+                )
+                .setContentText(
+                    applicationContext.getString(
+                        com.swordfish.lemuroid.ext.R.string.installing_core_notification_message,
+                    ),
+                )
+                .setProgress(100, 0, true)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .addAction(
+                    NotificationCompat.Action(
+                        null,
+                        applicationContext.getString(R.string.cancel),
+                        broadcastPendingIntent,
+                    ),
+                )
 
         return builder.build()
     }
@@ -126,12 +140,13 @@ class NotificationsManager(private val applicationContext: Context) {
     fun saveSyncNotification(): Notification {
         createDefaultNotificationChannel()
 
-        val builder = NotificationCompat.Builder(applicationContext, DEFAULT_CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_lemuroid_tiny)
-            .setContentTitle(applicationContext.getString(R.string.save_sync_notification_title))
-            .setContentText(applicationContext.getString(R.string.save_sync_notification_message))
-            .setProgress(100, 0, true)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
+        val builder =
+            NotificationCompat.Builder(applicationContext, DEFAULT_CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_lemuroid_tiny)
+                .setContentTitle(applicationContext.getString(R.string.save_sync_notification_title))
+                .setContentText(applicationContext.getString(R.string.save_sync_notification_message))
+                .setProgress(100, 0, true)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
 
         return builder.build()
     }

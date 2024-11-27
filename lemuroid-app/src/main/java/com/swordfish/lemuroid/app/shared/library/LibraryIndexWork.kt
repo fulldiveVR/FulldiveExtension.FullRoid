@@ -30,25 +30,19 @@ import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
 import com.swordfish.lemuroid.app.utils.android.createSyncForegroundInfo
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
 import com.swordfish.lemuroid.lib.injection.WorkerKey
-import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.LemuroidLibrary
 import dagger.Binds
 import dagger.android.AndroidInjector
 import dagger.multibindings.IntoMap
-import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import javax.inject.Inject
 
 class LibraryIndexWork(context: Context, workerParams: WorkerParameters) :
     CoroutineWorker(context, workerParams) {
-
     @Inject
     lateinit var lemuroidLibrary: LemuroidLibrary
-
-    @Inject
-    lateinit var gameSystemHelper: GameSystemHelperImpl
-
 
     override suspend fun doWork(): Result {
         AndroidWorkerInjection.inject(this)
@@ -63,11 +57,12 @@ class LibraryIndexWork(context: Context, workerParams: WorkerParameters) :
 
         setForegroundAsync(foregroundInfo)
 
-        val result = withContext(Dispatchers.IO) {
-            kotlin.runCatching {
-                lemuroidLibrary.indexLibrary(gameSystemHelper)
+        val result =
+            withContext(Dispatchers.IO) {
+                kotlin.runCatching {
+                    lemuroidLibrary.indexLibrary()
+                }
             }
-        }
 
         result.exceptionOrNull()?.let {
             Timber.e("Library indexing work terminated with an exception:", it)

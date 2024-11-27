@@ -21,21 +21,21 @@
  */
 
 import com.android.build.gradle.BaseExtension
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 buildscript {
     repositories {
-        repositories {
-            google()
-            jcenter()
-            mavenCentral()
-        }
+        google()
+      //  jcenter()
+        mavenCentral()
+        mavenLocal()
+       // maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj/multitouchgesturedetector/1.0.0/") }
+         maven { setUrl("https://mirrors.huaweicloud.com/repository/maven") }
     }
 
     dependencies {
         classpath(deps.plugins.android)
         classpath(deps.plugins.navigationSafeArgs)
-        classpath("com.android.tools.build:gradle:8.5.1")
+        classpath(deps.plugins.kotlinGradlePlugin)
         classpath(deps.libs.googleServices.googleServices)
         classpath(deps.libs.firebase.firebase)
     }
@@ -44,27 +44,23 @@ buildscript {
 plugins {
     id("org.jetbrains.kotlin.jvm") version deps.versions.kotlin
     id("com.github.ben-manes.versions") version "0.39.0"
-    id("org.jmailen.kotlinter") version "3.0.2"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.4.0"
-    id("name.remal.check-dependency-updates") version "1.5.0"
-    checkstyle
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
+    id("com.android.test") version "8.4.0" apply false
+    id("org.jetbrains.kotlin.android") version deps.versions.kotlin apply false
+    id("androidx.baselineprofile") version "1.2.3" apply false
+    id("com.android.application") version "8.4.0" apply false
 }
 
 allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
+     //   jcenter()
         mavenLocal()
         maven { setUrl("https://jitpack.io") }
+       // maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj/multitouchgesturedetector/1.0.0/") }
         maven { setUrl("https://mirrors.huaweicloud.com/repository/maven") }
-    }
-
-    apply(plugin = "org.jmailen.kotlinter")
-
-    kotlinter {
-        // We are currently disabling tests for import ordering.
-        disabledRules = arrayOf("import-ordering")
     }
 
     configurations.all {
@@ -85,27 +81,11 @@ allprojects {
 }
 
 subprojects {
-    apply {
-        plugin("checkstyle")
-    }
-
     afterEvaluate {
-        tasks {
-            val checkstyle by creating(Checkstyle::class) {
-                configFile = file("$rootDir/config/checkstyle/checkstyle.xml")
-                classpath = files()
-                source("src")
-            }
-            findByName("check")?.dependsOn(checkstyle)
-        }
-
-        extensions.configure(CheckstyleExtension::class.java) {
-            isIgnoreFailures = false
-            toolVersion = "8.8"
-        }
-
         if (hasProperty("android")) {
             // BaseExtension is common parent for application, library and test modules
+            apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
             extensions.configure(BaseExtension::class.java) {
                 compileSdkVersion(deps.android.compileSdkVersion)
                 buildToolsVersion(deps.android.buildToolsVersion)
@@ -120,9 +100,6 @@ subprojects {
                     disable("InvalidPackage")
                     disable("VectorPath")
                     disable("TrustAllX509TrustManager")
-                }
-                dexOptions {
-                    dexInProcess = true
                 }
                 compileOptions {
                     sourceCompatibility = JavaVersion.VERSION_17
@@ -142,20 +119,5 @@ subprojects {
 tasks {
     "clean"(Delete::class) {
         delete(buildDir)
-    }
-
-    "dependencyUpdates"(DependencyUpdatesTask::class) {
-        resolutionStrategy {
-            componentSelection {
-                all {
-                    val rejected = listOf("alpha", "beta", "rc", "cr", "m")
-                        .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-]*") }
-                        .any { it.matches(candidate.version) }
-                    if (rejected) {
-                        reject("Release candidate")
-                    }
-                }
-            }
-        }
     }
 }

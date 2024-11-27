@@ -32,9 +32,8 @@ data class ControllerConfig(
     val allowTouchOverlay: Boolean = true,
     val mergeDPADAndLeftStickEvents: Boolean = false,
     val libretroDescriptor: String? = null,
-    val libretroId: Int? = null
+    val libretroId: Int? = null,
 ) : Serializable {
-
     fun getTouchControllerConfig(): TouchControllerID.Config {
         return TouchControllerID.getConfig(touchControllerID)
     }

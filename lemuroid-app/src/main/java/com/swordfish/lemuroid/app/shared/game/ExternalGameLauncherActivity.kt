@@ -27,8 +27,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.ImmersiveActivity
@@ -42,17 +40,17 @@ import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeLaunch
 import com.swordfish.lemuroid.common.longAnimationDuration
 import com.swordfish.lemuroid.lib.core.CoresSelection
-import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
-import javax.inject.Inject
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * This activity is used as an entry point when launching games from external shortcuts. This activity
@@ -61,7 +59,6 @@ import kotlinx.coroutines.launch
  */
 @OptIn(FlowPreview::class)
 class ExternalGameLauncherActivity : ImmersiveActivity() {
-
     @Inject
     lateinit var retrogradeDatabase: RetrogradeDatabase
 
@@ -73,9 +70,9 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
 
     @Inject
     lateinit var gameLauncher: GameLauncher
-
-    @Inject
-    lateinit var gameSystemHelper: GameSystemHelperImpl
+//todo Pro
+//    @Inject
+//    lateinit var gameSystemHelper: GameSystemHelperImpl
 
     private val loadingState = MutableStateFlow(true)
 
@@ -84,7 +81,6 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
 
         setContentView(R.layout.activity_loading)
         if (savedInstanceState == null) {
-
             val gameId = intent.data?.pathSegments?.let { it[it.size - 1].toInt() }!!
 
             lifecycleScope.launch {
@@ -114,8 +110,9 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
     private suspend fun loadGame(gameId: Int) {
         waitPendingOperations()
 
-        val game = retrogradeDatabase.gameDao().selectById(gameId)
-            ?: throw IllegalArgumentException("Game not found: $gameId")
+        val game =
+            retrogradeDatabase.gameDao().selectById(gameId)
+                ?: throw IllegalArgumentException("Game not found: $gameId")
 
         delay(animationDuration().toLong())
 
@@ -124,13 +121,12 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
             game,
             true,
             TVHelper.isTV(applicationContext),
-            gameSystemHelper
+          //todo Pro  gameSystemHelper
         )
     }
 
     private suspend fun waitPendingOperations() {
         getLoadingLiveData()
-            .asFlow()
             .filter { !it }
             .first()
     }
@@ -139,11 +135,15 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
         displayErrorDialog(R.string.game_loader_error_load_game, R.string.ok) { finish() }
     }
 
-    private fun getLoadingLiveData(): LiveData<Boolean> {
+    private fun getLoadingLiveData(): Flow<Boolean> {
         return PendingOperationsMonitor(applicationContext).anyOperationInProgress()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?,
+    ) {
         super.onActivityResult(requestCode, resultCode, data)
 
         when (requestCode) {

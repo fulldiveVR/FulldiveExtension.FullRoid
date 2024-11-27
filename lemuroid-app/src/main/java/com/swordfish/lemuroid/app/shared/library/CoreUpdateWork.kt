@@ -23,8 +23,8 @@
 package com.swordfish.lemuroid.app.shared.library
 
 import android.content.Context
-import android.util.Log
 import androidx.work.CoroutineWorker
+import androidx.work.ForegroundInfo
 import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
@@ -33,22 +33,19 @@ import com.swordfish.lemuroid.lib.core.CoreUpdater
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
 import com.swordfish.lemuroid.lib.injection.WorkerKey
-import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import dagger.Binds
 import dagger.android.AndroidInjector
 import dagger.multibindings.IntoMap
-import javax.inject.Inject
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import timber.log.Timber
+import javax.inject.Inject
 
-class CoreUpdateWork(
-    context: Context,
-    workerParams: WorkerParameters,
-) : CoroutineWorker(context, workerParams) {
-
+class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
+    CoroutineWorker(context, workerParams) {
     @Inject
     lateinit var retrogradeDatabase: RetrogradeDatabase
 
@@ -58,11 +55,13 @@ class CoreUpdateWork(
     @Inject
     lateinit var coresSelection: CoresSelection
 
-    @Inject
-    lateinit var gameSystemHelper: GameSystemHelperImpl
+    //todo Pro
+//    @Inject
+//    lateinit var gameSystemHelper: GameSystemHelperImpl
 
     override suspend fun doWork(): Result {
         AndroidWorkerInjection.inject(this)
+
         Timber.i("Starting core update/install work")
 
         val notificationsManager = NotificationsManager(applicationContext)
@@ -76,12 +75,13 @@ class CoreUpdateWork(
         setForegroundAsync(foregroundInfo)
 
         try {
-            val cores = retrogradeDatabase.gameDao().selectSystems()
-                .asFlow()
-                .map { gameSystemHelper.findById(it) }
-                .map { coresSelection.getCoreConfigForSystem(it) }
-                .map { it.coreID }
-                .toList()
+            val cores =
+                retrogradeDatabase.gameDao().selectSystems()
+                    .asFlow()
+                    .map { GameSystem.findById(it) }
+                    .map { coresSelection.getCoreConfigForSystem(it) }
+                    .map { it.coreID }
+                    .toList()
 
             coreUpdater.downloadCores(applicationContext, cores)
         } catch (e: Throwable) {

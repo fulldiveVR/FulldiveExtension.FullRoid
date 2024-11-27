@@ -27,12 +27,10 @@ plugins {
 }
 
 android {
-
-    namespace = "com.swordfish.lemuroid.ext"
-    
     kotlinOptions {
         jvmTarget = "17"
     }
+    namespace = "com.swordfish.lemuroid.ext"
 }
 
 dependencies {

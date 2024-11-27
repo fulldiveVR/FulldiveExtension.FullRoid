@@ -1,3 +1,25 @@
+/*
+ *
+ *  *  RetrogradeApplicationComponent.kt
+ *  *
+ *  *  Copyright (C) 2017 Retrograde Project
+ *  *
+ *  *  This program is free software: you can redistribute it and/or modify
+ *  *  it under the terms of the GNU General Public License as published by
+ *  *  the Free Software Foundation, either version 3 of the License, or
+ *  *  (at your option) any later version.
+ *  *
+ *  *  This program is distributed in the hope that it will be useful,
+ *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  *  GNU General Public License for more details.
+ *  *
+ *  *  You should have received a copy of the GNU General Public License
+ *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  *
+ *
+ */
+
 package com.swordfish.lemuroid.lib.storage.local
 
 import android.content.Context
@@ -6,17 +28,19 @@ import com.swordfish.lemuroid.common.kotlin.toStringCRC32
 import com.swordfish.lemuroid.lib.storage.BaseStorageFile
 import com.swordfish.lemuroid.lib.storage.StorageFile
 import com.swordfish.lemuroid.lib.storage.scanner.SerialScanner
+import timber.log.Timber
 import java.util.zip.ZipEntry
 import java.util.zip.ZipInputStream
-import timber.log.Timber
 
 object DocumentFileParser {
-
     private const val MAX_CHECKED_ENTRIES = 3
     private const val SINGLE_ARCHIVE_THRESHOLD = 0.9
     private const val MAX_SIZE_CRC32 = 1_000_000_000
 
-    fun parseDocumentFile(context: Context, baseStorageFile: BaseStorageFile): StorageFile {
+    fun parseDocumentFile(
+        context: Context,
+        baseStorageFile: BaseStorageFile,
+    ): StorageFile {
         return if (baseStorageFile.extension == "zip") {
             Timber.d("Detected zip file. ${baseStorageFile.name}")
             parseZipFile(context, baseStorageFile)
@@ -26,7 +50,10 @@ object DocumentFileParser {
         }
     }
 
-    private fun parseZipFile(context: Context, baseStorageFile: BaseStorageFile): StorageFile {
+    private fun parseZipFile(
+        context: Context,
+        baseStorageFile: BaseStorageFile,
+    ): StorageFile {
         val inputStream = context.contentResolver.openInputStream(baseStorageFile.uri)
         return ZipInputStream(inputStream).use {
             val gameEntry = findGameEntry(it, baseStorageFile.size)
@@ -43,7 +70,7 @@ object DocumentFileParser {
     private fun parseCompressedGame(
         baseStorageFile: BaseStorageFile,
         entry: ZipEntry,
-        zipInputStream: ZipInputStream
+        zipInputStream: ZipInputStream,
     ): StorageFile {
         Timber.d("Processing zipped entry: ${entry.name}")
 
@@ -56,19 +83,24 @@ object DocumentFileParser {
             diskInfo.serial,
             baseStorageFile.uri,
             baseStorageFile.uri.path,
-            diskInfo.systemID
+            diskInfo.systemID,
         )
     }
 
-    private fun parseStandardFile(context: Context, baseStorageFile: BaseStorageFile): StorageFile {
-        val diskInfo = context.contentResolver.openInputStream(baseStorageFile.uri)
-            ?.let { inputStream -> SerialScanner.extractInfo(baseStorageFile.name, inputStream) }
+    private fun parseStandardFile(
+        context: Context,
+        baseStorageFile: BaseStorageFile,
+    ): StorageFile {
+        val diskInfo =
+            context.contentResolver.openInputStream(baseStorageFile.uri)
+                ?.let { inputStream -> SerialScanner.extractInfo(baseStorageFile.name, inputStream) }
 
-        val crc32 = if (baseStorageFile.size < MAX_SIZE_CRC32 && diskInfo?.serial == null) {
-            context.contentResolver.openInputStream(baseStorageFile.uri)?.calculateCrc32()
-        } else {
-            null
-        }
+        val crc32 =
+            if (baseStorageFile.size < MAX_SIZE_CRC32 && diskInfo?.serial == null) {
+                context.contentResolver.openInputStream(baseStorageFile.uri)?.calculateCrc32()
+            } else {
+                null
+            }
 
         Timber.d("Parsed standard file: $baseStorageFile")
 
@@ -79,7 +111,7 @@ object DocumentFileParser {
             diskInfo?.serial,
             baseStorageFile.uri,
             baseStorageFile.uri.path,
-            diskInfo?.systemID
+            diskInfo?.systemID,
         )
     }
 
@@ -87,7 +119,10 @@ object DocumentFileParser {
        so we are looking for an entry which occupies a large percentage of the archive space.
        This is very fast heuristic to compute and avoids reading the whole stream in most
        scenarios.*/
-    fun findGameEntry(openedInputStream: ZipInputStream, fileSize: Long = -1): ZipEntry? {
+    fun findGameEntry(
+        openedInputStream: ZipInputStream,
+        fileSize: Long = -1,
+    ): ZipEntry? {
         for (i in 0..MAX_CHECKED_ENTRIES) {
             val entry = openedInputStream.nextEntry ?: break
             if (!isGameEntry(entry, fileSize)) continue
@@ -96,7 +131,10 @@ object DocumentFileParser {
         return null
     }
 
-    private fun isGameEntry(entry: ZipEntry, fileSize: Long): Boolean {
+    private fun isGameEntry(
+        entry: ZipEntry,
+        fileSize: Long,
+    ): Boolean {
         if (fileSize <= 0 || entry.compressedSize <= 0) return false
         return (entry.compressedSize.toFloat() / fileSize.toFloat()) > SINGLE_ARCHIVE_THRESHOLD
     }

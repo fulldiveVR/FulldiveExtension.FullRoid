@@ -25,11 +25,10 @@ package com.swordfish.lemuroid.app.tv.home
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
-import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.library.metaSystemID
@@ -44,24 +43,19 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @OptIn(FlowPreview::class)
-class TVHomeViewModel(
-    retrogradeDb: RetrogradeDatabase,
-    appContext: Context,
-    private val gameSystemHelper: GameSystemHelperImpl
-) : ViewModel() {
-
+class TVHomeViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : ViewModel() {
     companion object {
         const val CAROUSEL_MAX_ITEMS = 10
         const val DEBOUNCE_TIME = 100L
     }
 
+    //todo Pro
     class Factory(
         val retrogradeDb: RetrogradeDatabase,
         val appContext: Context,
-        private val gameSystemHelper: GameSystemHelperImpl
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return TVHomeViewModel(retrogradeDb, appContext, gameSystemHelper) as T
+            return TVHomeViewModel(retrogradeDb, appContext) as T
         }
     }
 
@@ -70,7 +64,7 @@ class TVHomeViewModel(
         val recentGames: List<Game> = emptyList(),
         val metaSystems: List<MetaSystemInfo> = emptyList(),
         val indexInProgress: Boolean = false,
-        val scanInProgress: Boolean = false
+        val scanInProgress: Boolean = false,
     )
 
     private val viewStates = MutableStateFlow(HomeViewState())
@@ -84,27 +78,28 @@ class TVHomeViewModel(
         recentGames: List<Game>,
         metaSystems: List<MetaSystemInfo>,
         indexInProgress: Boolean,
-        scanInProgress: Boolean
+        scanInProgress: Boolean,
     ): HomeViewState {
         return HomeViewState(
             favoritesGames,
             recentGames,
             metaSystems,
             indexInProgress,
-            scanInProgress
+            scanInProgress,
         )
     }
 
     init {
         viewModelScope.launch {
-            val uiStatesFlow = combine(
-                favoriteGames(retrogradeDb),
-                recentGames(retrogradeDb),
-                availableSystems(retrogradeDb, appContext),
-                indexingInProgress(appContext),
-                directoryScanInProgress(appContext),
-                ::buildViewState
-            )
+            val uiStatesFlow =
+                combine(
+                    favoriteGames(retrogradeDb),
+                    recentGames(retrogradeDb),
+                    availableSystems(retrogradeDb, appContext),
+                    indexingInProgress(appContext),
+                    directoryScanInProgress(appContext),
+                    ::buildViewState,
+                )
 
             uiStatesFlow
                 .debounce(DEBOUNCE_TIME)
@@ -114,20 +109,20 @@ class TVHomeViewModel(
     }
 
     private fun directoryScanInProgress(appContext: Context) =
-        PendingOperationsMonitor(appContext).isDirectoryScanInProgress().asFlow()
+        PendingOperationsMonitor(appContext).isDirectoryScanInProgress()
 
     private fun indexingInProgress(appContext: Context) =
-        PendingOperationsMonitor(appContext).anyLibraryOperationInProgress().asFlow()
+        PendingOperationsMonitor(appContext).anyLibraryOperationInProgress()
 
     private fun availableSystems(
         retrogradeDb: RetrogradeDatabase,
-        appContext: Context
+        appContext: Context,
     ) = retrogradeDb.gameDao()
         .selectSystemsWithCount()
         .map { systemCounts ->
             systemCounts.asSequence()
                 .filter { (_, count) -> count > 0 }
-                .map { (systemId, count) -> gameSystemHelper.findById(systemId).metaSystemID() to count }
+                .map { (systemId, count) -> GameSystem.findById(systemId).metaSystemID() to count }
                 .groupBy { (metaSystemId, _) -> metaSystemId }
                 .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumBy { it.second }) }
                 .sortedBy { it.getName(appContext) }

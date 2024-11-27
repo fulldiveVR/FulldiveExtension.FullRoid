@@ -22,12 +22,11 @@
 
 
 import android.util.LruCache
-import java.io.IOException
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.io.IOException
 
 object ThrottleFailedThumbnailsInterceptor : Interceptor {
-
     private val failedThumbnailsStatusCode = LruCache<String, Int>(256 * 1024)
 
     override fun intercept(chain: Interceptor.Chain): Response {

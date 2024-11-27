@@ -27,5 +27,5 @@ data class GameMetadata(
     val system: String?,
     val romName: String?,
     val developer: String?,
-    val thumbnail: String?
+    val thumbnail: String?,
 )
