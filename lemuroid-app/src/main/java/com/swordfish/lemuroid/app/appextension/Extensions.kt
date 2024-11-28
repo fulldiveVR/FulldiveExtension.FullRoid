@@ -26,7 +26,15 @@ import android.net.Uri
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.core.content.ContextCompat
+import androidx.core.text.getSpans
 import com.swordfish.lemuroid.BuildConfig
 
 fun Context.getPrivateSharedPreferences(): SharedPreferences {
@@ -110,13 +118,54 @@ fun PackageManager.isFullRoidProInstalled(): Boolean {
     return isPackageInstalled(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
 }
 
-fun isProVersion(): Boolean = BuildConfig.FLAVOR.contains("pro")
+fun isProVersion(): Boolean = BuildConfig.FLAVOR.contains("pro") //todo
 
 fun fromHtmlToSpanned(html: String?): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         Html.fromHtml(html.orEmpty(), Html.FROM_HTML_MODE_LEGACY)
     } else {
         Html.fromHtml(html.orEmpty())
+    }
+}
+
+fun convertSpannedToAnnotatedString(spanned: Spanned): AnnotatedString {
+    return buildAnnotatedString {
+        val text = spanned.toString()
+        append(text)
+
+        val spans = spanned.getSpans<Any>(0, spanned.length)
+        spans.forEach { span ->
+            val start = spanned.getSpanStart(span)
+            val end = spanned.getSpanEnd(span)
+
+            when (span) {
+                is android.text.style.StyleSpan -> {
+                    when (span.style) {
+                        android.graphics.Typeface.BOLD -> {
+                            addStyle(SpanStyle(fontWeight = FontWeight.Bold), start, end)
+                        }
+
+                        android.graphics.Typeface.ITALIC -> {
+                            addStyle(SpanStyle(fontStyle = FontStyle.Italic), start, end)
+                        }
+                    }
+                }
+
+                is android.text.style.ForegroundColorSpan -> {
+                    addStyle(SpanStyle(color = Color(span.foregroundColor)), start, end)
+                }
+
+                is android.text.style.URLSpan -> {
+                    addStringAnnotation(
+                        tag = "URL",
+                        annotation = span.url,
+                        start = start,
+                        end = end
+                    )
+                    addStyle(SpanStyle(color = Color.Blue, textDecoration = TextDecoration.Underline), start, end)
+                }
+            }
+        }
     }
 }
 

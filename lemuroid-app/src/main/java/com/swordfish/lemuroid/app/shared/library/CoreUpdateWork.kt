@@ -27,6 +27,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
+import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
 import com.swordfish.lemuroid.app.utils.android.createSyncForegroundInfo
 import com.swordfish.lemuroid.lib.core.CoreUpdater
@@ -78,7 +79,7 @@ class CoreUpdateWork(context: Context, workerParams: WorkerParameters) :
             val cores =
                 retrogradeDatabase.gameDao().selectSystems()
                     .asFlow()
-                    .map { GameSystem.findById(it) }
+                    .map { GameSystem.findById(it, isProVersion()) }
                     .map { coresSelection.getCoreConfigForSystem(it) }
                     .map { it.coreID }
                     .toList()

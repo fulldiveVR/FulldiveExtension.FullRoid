@@ -54,7 +54,7 @@ object deps {
         // https://developer.android.com/jetpack/compose/bom/bom-mapping
         const val accompanist     = "0.34.0"
 
-        const val lottie = "3.5.0"
+        const val lottie = "6.0.0"
         const val flurry = "14.0.0"
         const val firebase = "29.0.3"
         const val googleServices = "4.3.8"
@@ -214,7 +214,7 @@ object deps {
         const val radialgamepad            = "com.github.Swordfish90:RadialGamePad:${versions.radialgamepad}"
         const val libretrodroid            = "com.github.Swordfish90:LibretroDroid:${versions.libretrodroid}"
 
-        const val lottie = "com.airbnb.android:lottie:${versions.lottie}"
+        const val lottie = "com.airbnb.android:lottie-compose:${versions.lottie}"
 
         const val retrofitLogging          = "com.squareup.okhttp3:logging-interceptor:4.6.0"
         const val gsonAnnotations          = "com.google.code.gson:gson:2.9.0"

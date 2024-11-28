@@ -69,9 +69,9 @@ class CoresSelection(private val sharedPreferencesFactory: Lazy<SharedPreference
         val coreConfig: SystemCoreConfig,
     )
 
-    fun getSelectedCores(): Flow<List<SelectedCore>> {
+    fun getSelectedCores(isProVersion: Boolean): Flow<List<SelectedCore>> {
         val configurableSystems =
-            GameSystem.all()
+            GameSystem.all(isProVersion)
                 .filter { it.systemCoreConfigs.size > 1 }
 
         val configurationFlows =

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.lib.core.CoresSelection
@@ -26,7 +27,7 @@ class CoresSelectionViewModel(
 
     val indexingInProgress = PendingOperationsMonitor(context).anyLibraryOperationInProgress()
 
-    fun getSelectedCores() = coresSelection.getSelectedCores()
+    fun getSelectedCores() = coresSelection.getSelectedCores(isProVersion())
 
     fun changeCore(
         system: GameSystem,

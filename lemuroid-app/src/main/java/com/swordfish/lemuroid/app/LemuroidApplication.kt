@@ -29,6 +29,7 @@ import androidx.work.ListenableWorker
 import coil.ImageLoader
 import coil.ImageLoaderFactory
 import com.google.android.material.color.DynamicColors
+import com.swordfish.lemuroid.app.appextension.remoteconfig.IRemoteConfigFetcher
 import com.swordfish.lemuroid.app.shared.covers.CoverUtils
 import com.swordfish.lemuroid.app.shared.startup.GameProcessInitializer
 import com.swordfish.lemuroid.app.shared.startup.MainProcessInitializer
@@ -44,9 +45,8 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
     @Inject
     lateinit var workerInjector: DispatchingAndroidInjector<ListenableWorker>
 
-    //todo Pro
-//    @Inject
-//    lateinit var remoteConfig: IRemoteConfigFetcher
+    @Inject
+    lateinit var remoteConfig: IRemoteConfigFetcher
 
     @SuppressLint("CheckResult")
     override fun onCreate() {

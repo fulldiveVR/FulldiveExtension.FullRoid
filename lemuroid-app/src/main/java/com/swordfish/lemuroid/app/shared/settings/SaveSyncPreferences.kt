@@ -30,6 +30,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
 import androidx.preference.SwitchPreference
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.shared.savesync.SaveSyncWork
 import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
@@ -121,7 +122,7 @@ class SaveSyncPreferences(private val saveSyncManager: SaveSyncManager) {
             isEnabled = saveSyncManager.isConfigured() && !syncInProgress
             entries =
                 CoreID.values()
-                    .map { saveSyncManager.getDisplayNameForCore(context, it) }
+                    .map { saveSyncManager.getDisplayNameForCore(context, it, isProVersion()) }
                     .toTypedArray()
             entryValues = CoreID.values().map { it.coreName }.toTypedArray()
             isIconSpaceReserved = false

@@ -22,6 +22,16 @@ package com.swordfish.lemuroid.app
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
+import com.swordfish.lemuroid.app.appextension.PopupManager
+import com.swordfish.lemuroid.app.appextension.discord.DiscordApiImpl
+import com.swordfish.lemuroid.app.appextension.discord.DiscordManager
+import com.swordfish.lemuroid.app.appextension.remoteconfig.FirebaseConfigurationFetcher
+import com.swordfish.lemuroid.app.appextension.remoteconfig.IRemoteConfigFetcher
+import com.swordfish.lemuroid.app.fulldive.analytics.FulldiveActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.ITagReader
+import com.swordfish.lemuroid.app.fulldive.analytics.TagReader
+import com.swordfish.lemuroid.app.gamesystem.GameSystemHelper
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.gamemenu.GameMenuActivity
 import com.swordfish.lemuroid.app.mobile.feature.input.GamePadBindingActivity
@@ -48,6 +58,7 @@ import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.game.GameLoader
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerApp
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.LemuroidLibrary
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.dao.GameSearchDao
@@ -133,9 +144,14 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
+        fun gameSystemHelper(): GameSystemHelperImpl = GameSystemHelper()
+
+        @Provides
+        @PerApp
+        @JvmStatic
         fun gameMetadataProvider(libretroDBManager: LibretroDBManager): GameMetadataProvider =
             LibretroDBMetadataProvider(libretroDBManager)
-//todo Pro
+
         @Provides
         @PerApp
         @IntoSet
@@ -365,5 +381,40 @@ abstract class LemuroidApplicationModule {
             settingsManager: SettingsManager,
             inputDeviceManager: InputDeviceManager,
         ) = RumbleManager(context, settingsManager, inputDeviceManager)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun getTagReader(): ITagReader = TagReader()
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun actionTracker(
+            context: Context,
+            tagReader: ITagReader
+        ): IActionTracker = FulldiveActionTracker(context, tagReader)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun popupManager(
+            context: Context,
+        ): PopupManager = PopupManager(context)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun remoteConfigFetcher(): IRemoteConfigFetcher = FirebaseConfigurationFetcher()
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun discordApiImpl(remoteConfig: IRemoteConfigFetcher): DiscordApiImpl = DiscordApiImpl(remoteConfig)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun discordManager(discordApiImpl: DiscordApiImpl): DiscordManager = DiscordManager(discordApiImpl)
     }
 }

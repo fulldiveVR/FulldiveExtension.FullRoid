@@ -59,19 +59,19 @@ class GameLoader(
         class Ready(val gameData: GameData) : LoadingState()
     }
 
-    //todo Pro
     fun load(
         appContext: Context,
         game: Game,
         loadSave: Boolean,
         systemCoreConfig: SystemCoreConfig,
         directLoad: Boolean,
+        isProVersion: Boolean
     ): Flow<LoadingState> =
         flow {
             try {
                 emit(LoadingState.LoadingCore)
 
-                val system = GameSystem.findById(game.systemId)
+                val system = GameSystem.findById(game.systemId, isProVersion)
 
                 if (!isArchitectureSupported(systemCoreConfig)) {
                     throw GameLoaderException(GameLoaderError.UnsupportedArchitecture)

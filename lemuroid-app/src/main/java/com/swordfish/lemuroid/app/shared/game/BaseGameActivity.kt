@@ -40,6 +40,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.BuildConfig
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.shared.GameMenuContract
@@ -191,8 +192,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
         game = intent.getSerializableExtra(EXTRA_GAME) as Game
         systemCoreConfig = intent.getSerializableExtra(EXTRA_SYSTEM_CORE_CONFIG) as SystemCoreConfig
-        //todo Pro
-        system = GameSystem.findById(game.systemId)
+        system = GameSystem.findById(game.systemId, isProVersion())
 
         lifecycleScope.launch {
             loadGame()
@@ -368,6 +368,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                     is RomFiles.Standard -> {
                         gameFilePath = gameFiles.files.first().absolutePath
                     }
+
                     is RomFiles.Virtual -> {
                         gameVirtualFiles =
                             gameFiles.files
@@ -1055,6 +1056,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 requestLoadSave && autoSaveEnabled,
                 systemCoreConfig,
                 directLoad,
+                isProVersion()
             )
 
         loadingStatesFlow
@@ -1093,6 +1095,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                     getString(
                         com.swordfish.lemuroid.ext.R.string.game_loading_download_core,
                     )
+
                 is GameLoader.LoadingState.LoadingGame -> getString(R.string.game_loading_preparing_game)
                 else -> ""
             }
@@ -1108,14 +1111,16 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                 is GameLoaderError.Generic -> getString(R.string.game_loader_error_generic)
                 is GameLoaderError.LoadCore ->
                     getString(
-                        com.swordfish.lemuroid.ext.R.string.game_loader_error_load_core,
+                        R.string.game_loader_error_load_core,
                     )
+
                 is GameLoaderError.LoadGame -> getString(R.string.game_loader_error_load_game)
                 is GameLoaderError.Saves -> getString(R.string.game_loader_error_save)
                 is GameLoaderError.UnsupportedArchitecture ->
                     getString(
                         R.string.game_loader_error_unsupported_architecture,
                     )
+
                 is GameLoaderError.MissingBiosFiles ->
                     getString(
                         R.string.game_loader_error_missing_bios,

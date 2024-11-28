@@ -26,6 +26,7 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
+import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
 import com.swordfish.lemuroid.app.utils.android.createSyncForegroundInfo
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
@@ -60,7 +61,7 @@ class LibraryIndexWork(context: Context, workerParams: WorkerParameters) :
         val result =
             withContext(Dispatchers.IO) {
                 kotlin.runCatching {
-                    lemuroidLibrary.indexLibrary()
+                    lemuroidLibrary.indexLibrary(isProVersion())
                 }
             }
 

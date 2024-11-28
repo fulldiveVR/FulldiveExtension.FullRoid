@@ -50,11 +50,11 @@ class LemuroidLibrary(
     private val gameMetadataProvider: Lazy<GameMetadataProvider>,
     private val biosManager: BiosManager,
 ) {
-    suspend fun indexLibrary() {
+    suspend fun indexLibrary(isProVersion: Boolean) {
         val startedAtMs = System.currentTimeMillis()
 
         try {
-            indexProviders(startedAtMs)
+            indexProviders(startedAtMs, isProVersion)
         } catch (e: Throwable) {
             Timber.e("Library indexing stopped due to exception", e)
         } finally {
@@ -66,11 +66,11 @@ class LemuroidLibrary(
     }
 
     @OptIn(FlowPreview::class)
-    private suspend fun indexProviders(startedAtMs: Long) {
+    private suspend fun indexProviders(startedAtMs: Long, isProVersion: Boolean) {
         val gameMetadata = gameMetadataProvider.get()
         val enabledProviders = storageProviderRegistry.get().enabledProviders
         enabledProviders.asFlow()
-            .flatMapConcat { indexSingleProvider(it, startedAtMs, gameMetadata) }
+            .flatMapConcat { indexSingleProvider(it, startedAtMs, gameMetadata, isProVersion) }
             .collect()
     }
 
@@ -79,11 +79,12 @@ class LemuroidLibrary(
         provider: StorageProvider,
         startedAtMs: Long,
         gameMetadata: GameMetadataProvider,
+        isProVersion: Boolean
     ): Flow<Unit> {
         return provider.listBaseStorageFiles()
             .flatMapConcat { StorageFilesMerger.mergeDataFiles(provider, it).asFlow() }
             .batchWithSizeAndTime(MAX_BUFFER_SIZE, MAX_TIME)
-            .flatMapMerge { processBatch(it, provider, startedAtMs, gameMetadata) }
+            .flatMapMerge { processBatch(it, provider, startedAtMs, gameMetadata, isProVersion) }
     }
 
     private suspend fun processBatch(
@@ -91,6 +92,7 @@ class LemuroidLibrary(
         provider: StorageProvider,
         startedAtMs: Long,
         gameMetadata: GameMetadataProvider,
+        isProVersion: Boolean
     ) = flow<Unit> {
         val entries = batch.map { fetchEntriesFromDatabase(it) }
 
@@ -99,7 +101,7 @@ class LemuroidLibrary(
 
         val newEntries =
             entries.filterIsInstance<ScanEntry.File>()
-                .map { buildEntryFromMetadata(it.file, provider, gameMetadata, startedAtMs) }
+                .map { buildEntryFromMetadata(it.file, provider, gameMetadata, startedAtMs, isProVersion) }
 
         handleNewEntries(newEntries, startedAtMs, provider)
     }
@@ -234,13 +236,14 @@ class LemuroidLibrary(
         provider: StorageProvider,
         metadataProvider: GameMetadataProvider,
         startedAtMs: Long,
+        isProVersion: Boolean
     ): ScanEntry {
         val game =
             sortedFilesForScanning(groupedStorageFile).asFlow()
                 .mapNotNull { safeStorageFile(provider, it) }
                 .mapNotNull { storageFile ->
-                    val metadata = metadataProvider.retrieveMetadata(storageFile)
-                    convertGameMetadataToGame(groupedStorageFile, storageFile, metadata, startedAtMs)
+                    val metadata = metadataProvider.retrieveMetadata(storageFile, isProVersion)
+                    convertGameMetadataToGame(groupedStorageFile, storageFile, metadata, startedAtMs, isProVersion)
                 }
                 .firstOrNull()
 
@@ -280,12 +283,13 @@ class LemuroidLibrary(
         storageFile: StorageFile,
         gameMetadata: GameMetadata?,
         lastIndexedAt: Long,
+        isProVersion: Boolean
     ): Game? {
         if (gameMetadata == null) {
             return null
         }
 
-        val gameSystem = GameSystem.findById(gameMetadata.system!!)
+        val gameSystem = GameSystem.findById(gameMetadata.system!!, isProVersion)
 
         // If the databased matched a data file (as with bin/cue) we force link the primary filename
         val fileName =

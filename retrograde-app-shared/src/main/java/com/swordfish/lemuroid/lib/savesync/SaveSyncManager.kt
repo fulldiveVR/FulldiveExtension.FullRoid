@@ -49,8 +49,9 @@ abstract class SaveSyncManager {
     fun getDisplayNameForCore(
         context: Context,
         coreID: CoreID,
+        isProVersion: Boolean
     ): String {
-        val systems = GameSystem.findSystemForCore(coreID)
+        val systems = GameSystem.findSystemForCore(coreID, isProVersion)
         val systemHasMultipleCores = systems.any { it.systemCoreConfigs.size > 1 }
 
         val chunks =

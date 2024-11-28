@@ -34,6 +34,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.discord.ShareDiscordTextGenerator
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
@@ -52,6 +53,7 @@ import com.swordfish.lemuroid.common.coroutines.safeCollect
 import com.swordfish.lemuroid.common.coroutines.safeLaunch
 import com.swordfish.lemuroid.lib.injection.PerActivity
 import com.swordfish.lemuroid.lib.injection.PerFragment
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import dagger.Provides
 import dagger.android.ContributesAndroidInjector
@@ -152,7 +154,17 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
                 retrogradeDb: RetrogradeDatabase,
                 shortcutsGenerator: ShortcutsGenerator,
                 gameLauncher: GameLauncher,
-            ) = GameInteractor(activity, retrogradeDb, true, shortcutsGenerator, gameLauncher)
+                gameSystemHelper: GameSystemHelperImpl,
+                shareDiscordTextGenerator: ShareDiscordTextGenerator,
+            ) = GameInteractor(
+                activity,
+                retrogradeDb,
+                true,
+                shortcutsGenerator,
+                gameLauncher,
+                gameSystemHelper,
+                shareDiscordTextGenerator
+            )
         }
     }
 }

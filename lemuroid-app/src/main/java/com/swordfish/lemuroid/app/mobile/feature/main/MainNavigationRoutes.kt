@@ -68,6 +68,12 @@ enum class MainRoute(
         parent = SETTINGS,
         showBottomNavigation = false,
     ),
+    PRO_TUTORIAL(
+        route = "settings/protutorial",
+        titleId = R.string.flat_pro_tutorial_top_bar_title,
+        parent = SETTINGS,
+        showBottomNavigation = false,
+    ),
     SETTINGS_ADVANCED(
         route = "settings/advanced",
         titleId = R.string.settings_title_advanced_settings,

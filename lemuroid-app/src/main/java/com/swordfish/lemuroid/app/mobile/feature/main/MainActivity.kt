@@ -45,12 +45,19 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
+import com.swordfish.lemuroid.app.appextension.discord.ShareDiscordTextGenerator
+import com.swordfish.lemuroid.app.appextension.isProVersion
+import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
+import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
+import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesScreen
 import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesScreen
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeScreen
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeViewModel
+import com.swordfish.lemuroid.app.mobile.feature.proinfo.tutorial.ProTutorialScreen
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchScreen
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.advanced.AdvancedSettingsScreen
@@ -82,6 +89,7 @@ import com.swordfish.lemuroid.lib.android.RetrogradeComponentActivity
 import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.injection.PerActivity
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
@@ -120,6 +128,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
     @Inject
     lateinit var inputDeviceManager: InputDeviceManager
+
+    @Inject
+    lateinit var actionTracker: IActionTracker
 
     private val reviewManager = ReviewManager()
 
@@ -194,6 +205,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         onHelpPressed = onHelpPressed,
                         mainUIState = mainUIState,
                         onUpdateQueryString = { mainViewModel.changeQueryString(it) },
+                        isProTutorialNavigationVisible = currentRoute != MainRoute.PRO_TUTORIAL && !isProVersion()
                     )
                 },
                 bottomBar = { MainNavigationBar(currentRoute, navController) },
@@ -207,13 +219,13 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         HomeScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                                viewModel(
-                                    factory =
-                                        HomeViewModel.Factory(
-                                            applicationContext,
-                                            retrogradeDb,
-                                        ),
+                            viewModel(
+                                factory =
+                                HomeViewModel.Factory(
+                                    applicationContext,
+                                    retrogradeDb,
                                 ),
+                            ),
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                         )
@@ -222,9 +234,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         FavoritesScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                                viewModel(
-                                    factory = FavoritesViewModel.Factory(retrogradeDb),
-                                ),
+                            viewModel(
+                                factory = FavoritesViewModel.Factory(retrogradeDb),
+                            ),
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                         )
@@ -233,9 +245,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         SearchScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                                viewModel(
-                                    factory = SearchViewModel.Factory(retrogradeDb),
-                                ),
+                            viewModel(
+                                factory = SearchViewModel.Factory(retrogradeDb),
+                            ),
                             searchQuery = mainUIState.searchQuery,
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
@@ -248,13 +260,13 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             modifier = Modifier.padding(padding),
                             navController = navController,
                             viewModel =
-                                viewModel(
-                                    factory =
-                                        MetaSystemsViewModel.Factory(
-                                            retrogradeDb,
-                                            applicationContext,
-                                        ),
+                            viewModel(
+                                factory =
+                                MetaSystemsViewModel.Factory(
+                                    retrogradeDb,
+                                    applicationContext,
                                 ),
+                            ),
                         )
                     }
                     composable(MainRoute.SYSTEM_GAMES) { entry ->
@@ -262,13 +274,13 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         GamesScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                                viewModel(
-                                    factory =
-                                        GamesViewModel.Factory(
-                                            retrogradeDb,
-                                            MetaSystemID.valueOf(metaSystemId!!),
-                                        ),
+                            viewModel(
+                                factory =
+                                GamesViewModel.Factory(
+                                    retrogradeDb,
+                                    MetaSystemID.valueOf(metaSystemId!!),
                                 ),
+                            ),
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                             onGameFavoriteToggle = onGameFavoriteToggle,
@@ -278,33 +290,52 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         SettingsScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                                viewModel(
-                                    factory =
-                                        SettingsViewModel.Factory(
+                            viewModel(
+                                factory =
+                                SettingsViewModel.Factory(
+                                    applicationContext,
+                                    settingsInteractor,
+                                    saveSyncManager,
+                                    FlowSharedPreferences(
+                                        SharedPreferencesHelper.getLegacySharedPreferences(
                                             applicationContext,
-                                            settingsInteractor,
-                                            saveSyncManager,
-                                            FlowSharedPreferences(
-                                                SharedPreferencesHelper.getLegacySharedPreferences(
-                                                    applicationContext,
-                                                ),
-                                            ),
                                         ),
+                                    ),
                                 ),
+                            ),
                             navController = navController,
+                        )
+                    }
+
+                    composable(MainRoute.PRO_TUTORIAL) {
+                        actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_TOOLBAR)
+                        ProTutorialScreen(
+                            modifier = Modifier.padding(padding),
+                            viewModel =
+                            viewModel(
+                                factory =
+                                AdvancedSettingsViewModel.Factory(
+                                    applicationContext,
+                                    settingsInteractor,
+                                ),
+                            ),
+                            navController = navController,
+                            onBuyProClick = {
+                                openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
+                            }
                         )
                     }
                     composable(MainRoute.SETTINGS_ADVANCED) {
                         AdvancedSettingsScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                                viewModel(
-                                    factory =
-                                        AdvancedSettingsViewModel.Factory(
-                                            applicationContext,
-                                            settingsInteractor,
-                                        ),
+                            viewModel(
+                                factory =
+                                AdvancedSettingsViewModel.Factory(
+                                    applicationContext,
+                                    settingsInteractor,
                                 ),
+                            ),
                             navController = navController,
                         )
                     }
@@ -312,48 +343,48 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         BiosScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                                viewModel(
-                                    factory = BiosSettingsViewModel.Factory(biosManager),
-                                ),
+                            viewModel(
+                                factory = BiosSettingsViewModel.Factory(biosManager),
+                            ),
                         )
                     }
                     composable(MainRoute.SETTINGS_CORES_SELECTION) {
                         CoresSelectionScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                                viewModel(
-                                    factory =
-                                        CoresSelectionViewModel.Factory(
-                                            applicationContext,
-                                            coresSelection,
-                                        ),
+                            viewModel(
+                                factory =
+                                CoresSelectionViewModel.Factory(
+                                    applicationContext,
+                                    coresSelection,
                                 ),
+                            ),
                         )
                     }
                     composable(MainRoute.SETTINGS_INPUT_DEVICES) {
                         InputDevicesSettingsScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                                viewModel(
-                                    factory =
-                                        InputDevicesSettingsViewModel.Factory(
-                                            applicationContext,
-                                            inputDeviceManager,
-                                        ),
+                            viewModel(
+                                factory =
+                                InputDevicesSettingsViewModel.Factory(
+                                    applicationContext,
+                                    inputDeviceManager,
                                 ),
+                            ),
                         )
                     }
                     composable(MainRoute.SETTINGS_SAVE_SYNC) {
                         SaveSyncSettingsScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                                viewModel(
-                                    factory =
-                                        SaveSyncSettingsViewModel.Factory(
-                                            application,
-                                            saveSyncManager,
-                                        ),
+                            viewModel(
+                                factory =
+                                SaveSyncSettingsViewModel.Factory(
+                                    application,
+                                    saveSyncManager,
                                 ),
+                            ),
                         )
                     }
                 }
@@ -377,7 +408,8 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             SystemID.values()
                                 .joinToString(", ") { "<i>${it.dbname}</i>" }
 
-                        getString(R.string.lemuroid_help_content)
+                        String
+                            .format(getString(R.string.lemuroid_help_content), getString(R.string.lemuroid_name))
                             .replace("\$SYSTEMS", systemFolders)
                     }
 
@@ -427,14 +459,6 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 directoriesManager: DirectoriesManager,
             ) = SettingsInteractor(activity, directoriesManager)
 
-//            R.id.menu_options_pro -> {
-//                if (!launchApp(this, FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)) {
-//                    actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_TOOLBAR)
-//                    findNavController(R.id.nav_host_fragment).navigate(R.id.navigation_pro_tutorial)
-//                }
-//                true
-//            }
-            //todo Pro share discord
             @Provides
             @PerActivity
             @JvmStatic
@@ -443,7 +467,17 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 retrogradeDb: RetrogradeDatabase,
                 shortcutsGenerator: ShortcutsGenerator,
                 gameLauncher: GameLauncher,
-            ) = GameInteractor(activity, retrogradeDb, false, shortcutsGenerator, gameLauncher)
+                gameSystemHelper: GameSystemHelperImpl,
+                shareDiscordTextGenerator: ShareDiscordTextGenerator,
+            ) = GameInteractor(
+                activity,
+                retrogradeDb,
+                false,
+                shortcutsGenerator,
+                gameLauncher,
+                gameSystemHelper,
+                shareDiscordTextGenerator
+            )
         }
     }
 }

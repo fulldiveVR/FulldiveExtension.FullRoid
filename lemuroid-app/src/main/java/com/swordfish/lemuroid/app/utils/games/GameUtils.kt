@@ -23,6 +23,7 @@
 package com.swordfish.lemuroid.app.utils.games
 
 import android.content.Context
+import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
@@ -46,7 +47,7 @@ class GameUtils {
             context: Context,
             game: Game,
         ): String {
-            val systemTitleResource = GameSystem.findById(game.systemId).shortTitleResId
+            val systemTitleResource = GameSystem.findById(game.systemId, isProVersion()).shortTitleResId
             return context.getString(systemTitleResource)
         }
     }

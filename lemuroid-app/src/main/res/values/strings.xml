@@ -26,14 +26,9 @@
     <string name="settings_category_advanced">Advanced</string>
     <string name="settings_title_enable_autosave">Autosave state</string>
     <string name="settings_title_enable_touch_feedback">Vibrate on touch</string>
-    <string name="settings_description_enable_autosave">Save state when exiting via game menu</string>
-
     <string name="settings_title_tilt_sensitivity">Tilt sensor sensitivity</string>
     <string name="settings_gamepad_settings">Gamepad settings</string>
     <string name="settings_gamepad_button_name">Button %1$s</string>
-    <string name="settings_title_hd_quality">HD mode quality</string>
-    <string name="settings_description_hd_quality">Adjust the quality of HD mode</string>
-
     <string name="settings_retropad_button_name">RetroPad %1$s</string>
     <string name="settings_retropad_button_unassigned">Unassigned</string>
     <string name="settings_gamepad_category_enabled">Enabled Gamepads</string>
@@ -67,7 +62,6 @@
     <string name="game_context_menu_restart">Restart</string>
     <string name="game_context_menu_create_shortcut">Pin to launcher</string>
     <string name="home_empty_title">Select ROMs directory</string>
-
     <string name="home_empty_message">Roid needs to scan a directory containing ROM files.\nThis might take up to a few minutes.</string>
     <string name="home_empty_action">Select Directory</string>
     <string name="game_menu_save">Save</string>
@@ -206,4 +200,11 @@
     <string name="home_notification_action">Enable</string>
     <string name="flat_finwize_popup_title">Invest smarter with FinWize AI</string>
     <string name="flat_finwize_popup_disclaimer">AI-Powered financial news companion, news summarizer.</string>
+    <string name="flat_pro_tutorial_top_bar_title">Pro Tutorial</string>
+    <string name="settings_title_hd_quality">HD mode quality</string>
+    <string name="settings_description_hd_quality">Adjust the quality of HD mode</string>
+    <string name="back">Back</string>
+    <string name="close">Close</string>
+    <string name="game_page_search_suggestion">Search games</string>
+    <string name="settings_description_enable_autosave">Save state when exiting via game menu</string>
 </resources>

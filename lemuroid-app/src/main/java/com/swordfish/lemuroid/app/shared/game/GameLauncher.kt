@@ -25,7 +25,7 @@ package com.swordfish.lemuroid.app.shared.game
 import android.app.Activity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.lib.core.CoresSelection
-import com.swordfish.lemuroid.lib.library.GameSystem
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -41,10 +41,10 @@ class GameLauncher(
         game: Game,
         loadSave: Boolean,
         leanback: Boolean,
+        gameSystemHelper: GameSystemHelperImpl
     ) {
-        //todo Pro
         GlobalScope.launch {
-            val system = GameSystem.findById(game.systemId)
+            val system = gameSystemHelper.findById(game.systemId)
             val coreConfig = coresSelection.getCoreConfigForSystem(system)
             gameLaunchTaskHandler.handleGameStart(activity.applicationContext)
             BaseGameActivity.launchGame(activity, coreConfig, game, loadSave, leanback)

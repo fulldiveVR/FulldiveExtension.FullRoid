@@ -116,12 +116,12 @@ class NotificationsManager(private val applicationContext: Context) {
                 .setSmallIcon(R.drawable.ic_lemuroid_tiny)
                 .setContentTitle(
                     applicationContext.getString(
-                        com.swordfish.lemuroid.ext.R.string.installing_core_notification_title,
+                       R.string.installing_core_notification_title,
                     ),
                 )
                 .setContentText(
                     applicationContext.getString(
-                        com.swordfish.lemuroid.ext.R.string.installing_core_notification_message,
+                       R.string.installing_core_notification_message,
                     ),
                 )
                 .setProgress(100, 0, true)

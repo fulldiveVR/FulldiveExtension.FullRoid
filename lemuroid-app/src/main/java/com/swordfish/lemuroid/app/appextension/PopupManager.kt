@@ -26,6 +26,10 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
+//share discord
+//add news strings to locale
+//all popups + shared prefs
+
 class PopupManager(private val context: Context) {
 
     private val client = OkHttpClient()
@@ -254,10 +258,10 @@ class PopupManager(private val context: Context) {
 }
 
 sealed class StartAppDialog(val id: String) {
-    data object FinWize : StartAppDialog("FinWize")
-    data object RateUs : StartAppDialog("RateUs")
-    data object InstallBrowser : StartAppDialog("InstallBrowser")
-    data object Empty : StartAppDialog("Empty")
+    object FinWize : StartAppDialog("FinWize")
+    object RateUs : StartAppDialog("RateUs")
+    object InstallBrowser : StartAppDialog("InstallBrowser")
+    object Empty : StartAppDialog("Empty")
 }
 
 const val FIN_WIZE_APP =

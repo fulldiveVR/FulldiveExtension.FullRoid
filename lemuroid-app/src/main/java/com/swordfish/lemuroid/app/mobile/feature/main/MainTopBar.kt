@@ -1,9 +1,11 @@
 package com.swordfish.lemuroid.app.mobile.feature.main
 
 import android.content.Context
+import android.widget.ImageButton
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +22,7 @@ import androidx.compose.material.icons.outlined.CloudSync
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.BottomAppBarDefaults
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -41,6 +44,7 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -55,6 +59,7 @@ fun MainTopBar(
     onHelpPressed: () -> Unit,
     onUpdateQueryString: (String) -> Unit,
     mainUIState: MainViewModel.UiState,
+    isProTutorialNavigationVisible: Boolean
 ) {
     Column {
         LemuroidTopAppBar(
@@ -63,6 +68,7 @@ fun MainTopBar(
             mainUIState = mainUIState,
             onHelpPressed = onHelpPressed,
             onUpdateQueryString = onUpdateQueryString,
+            isProTutorialNavigationVisible = isProTutorialNavigationVisible
         )
 
         AnimatedVisibility(mainUIState.operationInProgress) {
@@ -79,6 +85,7 @@ fun LemuroidTopAppBar(
     mainUIState: MainViewModel.UiState,
     onHelpPressed: () -> Unit,
     onUpdateQueryString: (String) -> Unit,
+    isProTutorialNavigationVisible: Boolean,
 ) {
     val context = LocalContext.current
     val topBarColor =
@@ -97,11 +104,10 @@ fun LemuroidTopAppBar(
                 Text(text = stringResource(route.titleId))
             }
         },
-        colors =
-            TopAppBarDefaults.topAppBarColors(
-                scrolledContainerColor = topBarColor,
-                containerColor = topBarColor,
-            ),
+        colors = TopAppBarDefaults.topAppBarColors(
+            scrolledContainerColor = topBarColor,
+            containerColor = topBarColor,
+        ),
         navigationIcon = {
             AnimatedVisibility(
                 visible = route.parent != null,
@@ -124,6 +130,7 @@ fun LemuroidTopAppBar(
                 saveSyncEnabled = mainUIState.saveSyncEnabled,
                 onHelpPressed = onHelpPressed,
                 operationsInProgress = mainUIState.operationInProgress,
+                isProTutorialNavigationVisible = isProTutorialNavigationVisible
             )
         },
     )
@@ -137,6 +144,7 @@ fun LemuroidTopBarActions(
     saveSyncEnabled: Boolean,
     operationsInProgress: Boolean,
     onHelpPressed: () -> Unit,
+    isProTutorialNavigationVisible: Boolean
 ) {
     Row {
         IconButton(
@@ -154,6 +162,17 @@ fun LemuroidTopBarActions(
             ) {
                 Icon(
                     Icons.Outlined.CloudSync,
+                    stringResource(R.string.save_sync),
+                )
+            }
+        }
+        if (isProTutorialNavigationVisible) {
+            IconButton(
+                //todo -> to pro tutorial
+                onClick = { navController.navigate(MainRoute.PRO_TUTORIAL.route) },
+            ) {
+                Image(
+                    painterResource(R.drawable.ic_pro),
                     stringResource(R.string.save_sync),
                 )
             }
@@ -185,15 +204,15 @@ private fun LemuroidSearchView(
 
     Box(
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .height(56.dp),
+        Modifier
+            .fillMaxWidth()
+            .height(56.dp),
     ) {
         Surface(
             modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(top = 8.dp, bottom = 8.dp, end = 8.dp),
+            Modifier
+                .fillMaxSize()
+                .padding(top = 8.dp, bottom = 8.dp, end = 8.dp),
             shape = RoundedCornerShape(100),
             tonalElevation = 16.dp,
         ) { }
@@ -201,24 +220,24 @@ private fun LemuroidSearchView(
         TextField(
             value = mainUIState.searchQuery,
             modifier =
-                Modifier
-                    .fillMaxSize()
-                    .focusRequester(focusRequester),
+            Modifier
+                .fillMaxSize()
+                .focusRequester(focusRequester),
             textStyle = MaterialTheme.typography.bodyMedium,
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
             onValueChange = { onUpdateQueryString(it) },
             singleLine = true,
             keyboardActions =
-                KeyboardActions(
-                    onDone = { focusManager.clearFocus(true) },
-                ),
+            KeyboardActions(
+                onDone = { focusManager.clearFocus(true) },
+            ),
             colors =
-                TextFieldDefaults.colors(
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                ),
+            TextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+            ),
         )
     }
 }
