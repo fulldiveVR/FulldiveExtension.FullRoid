@@ -118,7 +118,7 @@ fun PackageManager.isFullRoidProInstalled(): Boolean {
     return isPackageInstalled(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
 }
 
-fun isProVersion(): Boolean = BuildConfig.FLAVOR.contains("pro") //todo
+fun isProVersion(): Boolean = BuildConfig.FLAVOR.contains("pro")
 
 fun fromHtmlToSpanned(html: String?): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

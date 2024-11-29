@@ -24,6 +24,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.RestartAlt
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -58,6 +59,7 @@ fun MainGameContextActions(
     onGameRestart: (Game) -> Unit,
     onFavoriteToggle: (Game, Boolean) -> Unit,
     onCreateShortcut: (Game) -> Unit,
+    onShareDiscord: (Game) -> Unit,
 ) {
     val modalSheetState = rememberModalBottomSheetState(true)
     val haptic = LocalHapticFeedback.current
@@ -90,6 +92,7 @@ fun MainGameContextActions(
                 onFavoriteToggle = onFavoriteToggle,
                 shortcutSupported = shortcutSupported,
                 onCreateShortcut = onCreateShortcut,
+                onShareDiscord = onShareDiscord
             )
         }
     }
@@ -104,12 +107,13 @@ private fun ContextActionContent(
     onFavoriteToggle: (Game, Boolean) -> Unit,
     shortcutSupported: Boolean,
     onCreateShortcut: (Game) -> Unit,
+    onShareDiscord: (Game) -> Unit,
 ) {
     Column(
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .windowInsetsPadding(WindowInsets.safeContent.only(WindowInsetsSides.Bottom)),
+        Modifier
+            .fillMaxWidth()
+            .windowInsetsPadding(WindowInsets.safeContent.only(WindowInsetsSides.Bottom)),
     ) {
         ContextActionHeader(game = selectedGame)
         Divider()
@@ -160,6 +164,15 @@ private fun ContextActionContent(
                 },
             )
         }
+
+        ContextActionEntry(
+            label = stringResource(id = R.string.game_context_menu_share),
+            icon = Icons.Default.Share,
+            onClick = {
+                onShareDiscord.invoke(selectedGame)
+                selectedGameState.value = null
+            },
+        )
     }
 }
 
@@ -167,26 +180,26 @@ private fun ContextActionContent(
 private fun ContextActionHeader(game: Game) {
     Row(
         modifier =
-            Modifier.padding(
-                start = 16.dp,
-                top = 8.dp,
-                bottom = 8.dp,
-                end = 16.dp,
-            ),
+        Modifier.padding(
+            start = 16.dp,
+            top = 8.dp,
+            bottom = 8.dp,
+            end = 16.dp,
+        ),
     ) {
         LemuroidSmallGameImage(
             modifier =
-                Modifier
-                    .width(40.dp)
-                    .height(40.dp)
-                    .align(Alignment.CenterVertically),
+            Modifier
+                .width(40.dp)
+                .height(40.dp)
+                .align(Alignment.CenterVertically),
             game = game,
         )
         LemuroidGameTexts(
             modifier =
-                Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp),
+            Modifier
+                .weight(1f)
+                .padding(start = 8.dp),
             game = game,
         )
     }
@@ -201,10 +214,10 @@ private fun ContextActionEntry(
 ) {
     Row(
         modifier =
-            modifier
-                .fillMaxWidth()
-                .clickable(onClick = onClick)
-                .height(56.dp),
+        modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .height(56.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
@@ -229,9 +242,9 @@ private fun FakeScrim(modalSheetState: SheetState) {
     ) {
         Box(
             modifier =
-                Modifier
-                    .fillMaxSize()
-                    .background(BottomSheetDefaults.ScrimColor),
+            Modifier
+                .fillMaxSize()
+                .background(BottomSheetDefaults.ScrimColor),
         )
     }
 }

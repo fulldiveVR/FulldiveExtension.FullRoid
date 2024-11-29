@@ -39,6 +39,8 @@ import com.swordfish.lemuroid.lib.injection.HasWorkerInjector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.DaggerApplication
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderFactory {
@@ -62,6 +64,10 @@ class LemuroidApplication : DaggerApplication(), HasWorkerInjector, ImageLoaderF
         AppInitializer.getInstance(this).initializeComponent(initializeComponent)
 
         DynamicColors.applyToActivitiesIfAvailable(this)
+
+        GlobalScope.launch {
+            remoteConfig.fetch(true)
+        }
     }
 
     override fun attachBaseContext(base: Context) {

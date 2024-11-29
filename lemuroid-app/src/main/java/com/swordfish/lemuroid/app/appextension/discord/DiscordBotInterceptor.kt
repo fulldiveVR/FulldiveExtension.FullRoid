@@ -16,6 +16,7 @@
 
 package com.swordfish.lemuroid.app.appextension.discord
 
+import android.util.Log
 import com.swordfish.lemuroid.app.appextension.remoteconfig.IRemoteConfigFetcher
 import com.swordfish.lemuroid.app.appextension.remoteconfig.getDiscordBotToken
 import okhttp3.Interceptor
@@ -27,6 +28,7 @@ class DiscordBotInterceptor @Inject constructor(private val remoteConfig: IRemot
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
+        Log.d("TestB","getDiscordBotToken: ${remoteConfig.getDiscordBotToken()}")
         val originalRequest = chain.request()
         val requestWithHeaders = originalRequest.newBuilder()
             .header("Authorization", "Bot ${remoteConfig.getDiscordBotToken()}")

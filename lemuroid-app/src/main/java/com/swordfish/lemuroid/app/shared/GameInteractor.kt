@@ -23,7 +23,6 @@
 package com.swordfish.lemuroid.app.shared
 
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.app.appextension.discord.ShareDiscordTextGenerator
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
@@ -41,16 +40,7 @@ class GameInteractor(
     private val shortcutsGenerator: ShortcutsGenerator,
     private val gameLauncher: GameLauncher,
     private val gameSystemHelper: GameSystemHelperImpl,
-    private val shareDiscordTextGenerator: ShareDiscordTextGenerator,
 ) {
-    fun onGameShareDiscord(game: Game) {
-        if (activity.isBusy()) {
-            activity.activity().displayToast(R.string.game_interactory_busy)
-            return
-        }
-        shareDiscordTextGenerator.shareGame(activity.activity(), game)
-    }
-
     fun onGamePlay(game: Game) {
         if (activity.isBusy()) {
             activity.activity().displayToast(R.string.game_interactory_busy)

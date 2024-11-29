@@ -25,6 +25,7 @@ package com.swordfish.lemuroid.app.mobile.feature.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
@@ -46,7 +47,9 @@ import androidx.navigation.compose.rememberNavController
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
+import com.swordfish.lemuroid.app.appextension.discord.DiscordManager
 import com.swordfish.lemuroid.app.appextension.discord.ShareDiscordTextGenerator
+import com.swordfish.lemuroid.app.appextension.discord.ShowShareDialog
 import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
 import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
@@ -132,6 +135,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
     @Inject
     lateinit var actionTracker: IActionTracker
 
+    @Inject
+    lateinit var shareDiscordTextGenerator: ShareDiscordTextGenerator
+
     private val reviewManager = ReviewManager()
 
     private val mainViewModel: MainViewModel by viewModels {
@@ -165,6 +171,11 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             val infoDialogDisplayed =
                 remember {
                     mutableStateOf(false)
+                }
+
+            val shareDiscordDialogDisplayed =
+                remember {
+                    mutableStateOf<Game?>(null)
                 }
 
             LaunchedEffect(currentRoute) {
@@ -399,7 +410,28 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     gameInteractor.onFavoriteToggle(game, isFavorite)
                 },
                 onCreateShortcut = { gameInteractor.onCreateShortcut(it) },
+                onShareDiscord = { shareDiscordDialogDisplayed.value = it }
             )
+
+            val game = shareDiscordDialogDisplayed.value
+            if (game != null) {
+                ShowShareDialog(
+                    game = game,
+                    onPositiveClicked = { content, imageUrl ->
+                        shareDiscordTextGenerator.shareGame(
+                            content,
+                            imageUrl,
+                            onSuccess = {
+                                Toast.makeText(this, "Feedback is successfully shared!", Toast.LENGTH_SHORT).show()
+                            },
+                            onError = {
+                                Toast.makeText(this, "Error while share  feedback!", Toast.LENGTH_SHORT).show()
+                            }
+                        )
+                    },
+                    onDismissRequest = { shareDiscordDialogDisplayed.value = null }
+                )
+            }
 
             if (infoDialogDisplayed.value) {
                 val message =
@@ -468,15 +500,13 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 shortcutsGenerator: ShortcutsGenerator,
                 gameLauncher: GameLauncher,
                 gameSystemHelper: GameSystemHelperImpl,
-                shareDiscordTextGenerator: ShareDiscordTextGenerator,
             ) = GameInteractor(
                 activity,
                 retrogradeDb,
                 false,
                 shortcutsGenerator,
                 gameLauncher,
-                gameSystemHelper,
-                shareDiscordTextGenerator
+                gameSystemHelper
             )
         }
     }

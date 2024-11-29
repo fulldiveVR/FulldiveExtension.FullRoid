@@ -155,7 +155,6 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
                 shortcutsGenerator: ShortcutsGenerator,
                 gameLauncher: GameLauncher,
                 gameSystemHelper: GameSystemHelperImpl,
-                shareDiscordTextGenerator: ShareDiscordTextGenerator,
             ) = GameInteractor(
                 activity,
                 retrogradeDb,
@@ -163,7 +162,6 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
                 shortcutsGenerator,
                 gameLauncher,
                 gameSystemHelper,
-                shareDiscordTextGenerator
             )
         }
     }
