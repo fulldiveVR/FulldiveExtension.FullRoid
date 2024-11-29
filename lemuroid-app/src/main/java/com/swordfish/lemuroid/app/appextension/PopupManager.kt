@@ -26,10 +26,6 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
-//share discord
-//add news strings to locale
-//all popups + shared prefs
-
 class PopupManager(private val context: Context) {
 
     private val client = OkHttpClient()
@@ -205,35 +201,22 @@ class PopupManager(private val context: Context) {
     }
 
     fun isFinWizeVisible(): Boolean {
-        val isClosed = sharedPreferences.getProperty(KEY_IS_FIN_WIZE_CLOSED, false)
-        return when {
-            isClosed -> {
-                val closeCount = getFinWizeCloseStartCounter()
-                val startCount = getCurrentStartCounter()
-                val diff = startCount - closeCount
-                listOf(2, 5).any { it == diff }
-            }
-
-            else -> true
-        }
+        val startCount = getCurrentStartCounter()
+        return startCount % 2 == 0
     }
 
     fun isProPopupVisible(): Boolean {
+        val startCount = getCurrentStartCounter()
         return when {
             isProVersion() -> false
-            isProVersionPopupClosed() -> {
-                val closeCount = getPromoCloseStartCounter()
-                val startCount = getCurrentStartCounter()
-                val diff = startCount - closeCount
-                listOf(5, 8).any { it == diff }
-            }
-
-            else -> true
+            startCount % 3 == 0 -> true
+            else -> false
         }
     }
 
     fun isDiscordPopupVisible(): Boolean {
-        return !isProPopupVisible() && !isDiscordPopupClosed() && !isFinWizeVisible()
+        val startCount = getCurrentStartCounter()
+        return startCount % 2 == 1
     }
 
     companion object {

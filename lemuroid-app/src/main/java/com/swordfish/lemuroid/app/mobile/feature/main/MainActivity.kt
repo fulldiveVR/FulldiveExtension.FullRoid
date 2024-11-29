@@ -24,6 +24,7 @@ package com.swordfish.lemuroid.app.mobile.feature.main
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.setContent
@@ -46,7 +47,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.FIN_WIZE_APP
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
+import com.swordfish.lemuroid.app.appextension.PopupManager
 import com.swordfish.lemuroid.app.appextension.discord.DiscordManager
 import com.swordfish.lemuroid.app.appextension.discord.ShareDiscordTextGenerator
 import com.swordfish.lemuroid.app.appextension.discord.ShowShareDialog
@@ -60,6 +63,9 @@ import com.swordfish.lemuroid.app.mobile.feature.games.GamesScreen
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeScreen
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeViewModel
+import com.swordfish.lemuroid.app.mobile.feature.proinfo.DiscordPopupLayout
+import com.swordfish.lemuroid.app.mobile.feature.proinfo.FinWizeLayout
+import com.swordfish.lemuroid.app.mobile.feature.proinfo.ProPopupLayout
 import com.swordfish.lemuroid.app.mobile.feature.proinfo.tutorial.ProTutorialScreen
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchScreen
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchViewModel
@@ -138,6 +144,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
     @Inject
     lateinit var shareDiscordTextGenerator: ShareDiscordTextGenerator
 
+    @Inject
+    lateinit var popupManager: PopupManager
+
     private val reviewManager = ReviewManager()
 
     private val mainViewModel: MainViewModel by viewModels {
@@ -167,6 +176,26 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 currentDestination?.route
                     ?.let { MainRoute.findByRoute(it) }
                     ?: MainRoute.HOME
+
+            val isFinWizeVisible = remember {
+                mutableStateOf(false)
+            }
+            val isProPopupVisible = remember {
+                mutableStateOf(false)
+            }
+            val isDiscordPopupVisible = remember {
+                mutableStateOf(false)
+            }
+            if (currentRoute == MainRoute.HOME) {
+                popupManager.onAppStarted(this@MainActivity)
+                isFinWizeVisible.value = popupManager.isFinWizeVisible()
+                isProPopupVisible.value = popupManager.isProPopupVisible()
+                isDiscordPopupVisible.value = popupManager.isDiscordPopupVisible()
+            } else {
+                isFinWizeVisible.value = false
+                isProPopupVisible.value = false
+                isDiscordPopupVisible.value = false
+            }
 
             val infoDialogDisplayed =
                 remember {
@@ -240,7 +269,58 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                         )
+                        when {
+                            isFinWizeVisible.value -> {
+                                actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_SHOWN)
+                                FinWizeLayout(
+                                    onClick = {
+                                        actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP)
+                                        this@MainActivity.openAppInGooglePlay(FIN_WIZE_APP)
+                                        isFinWizeVisible.value = false
+                                    },
+                                    onCloseClick = {
+                                        actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
+                                        isFinWizeVisible.value = false
+                                    }
+                                )
+                            }
+
+                            isProPopupVisible.value && !isFinWizeVisible.value -> {
+                                actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_SHOWN)
+                                ProPopupLayout(
+                                    onClick = {
+                                        actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP)
+                                        navController.navigateToRoute(MainRoute.PRO_TUTORIAL)
+                                        isProPopupVisible.value = false
+                                    },
+                                    onCloseClick = {
+                                        actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
+                                        isProPopupVisible.value = false
+                                    }
+                                )
+                            }
+
+                            isDiscordPopupVisible.value && !isFinWizeVisible.value && !isProPopupVisible.value -> {
+                                actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_SHOWN)
+                                DiscordPopupLayout(
+                                    onClick = {
+                                        actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_CLICKED)
+                                        startActivity(Intent(Intent.ACTION_VIEW).apply {
+                                            data = Uri.parse(PopupManager.DISCORD_INVITATION)
+                                        })
+                                        isDiscordPopupVisible.value = false
+                                    },
+                                    onCloseClick = {
+                                        actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_CLOSED)
+                                        isDiscordPopupVisible.value = false
+                                    }
+                                )
+                            }
+
+                            else -> Unit
+                        }
                     }
+
                     composable(MainRoute.FAVORITES) {
                         FavoritesScreen(
                             modifier = Modifier.padding(padding),
@@ -399,64 +479,67 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         )
                     }
                 }
-            }
 
-            MainGameContextActions(
-                selectedGameState = selectedGameState,
-                shortcutSupported = gameInteractor.supportShortcuts(),
-                onGamePlay = { gameInteractor.onGamePlay(it) },
-                onGameRestart = { gameInteractor.onGameRestart(it) },
-                onFavoriteToggle = { game: Game, isFavorite: Boolean ->
-                    gameInteractor.onFavoriteToggle(game, isFavorite)
-                },
-                onCreateShortcut = { gameInteractor.onCreateShortcut(it) },
-                onShareDiscord = { shareDiscordDialogDisplayed.value = it }
-            )
-
-            val game = shareDiscordDialogDisplayed.value
-            if (game != null) {
-                ShowShareDialog(
-                    game = game,
-                    onPositiveClicked = { content, imageUrl ->
-                        shareDiscordTextGenerator.shareGame(
-                            content,
-                            imageUrl,
-                            onSuccess = {
-                                Toast.makeText(this, "Feedback is successfully shared!", Toast.LENGTH_SHORT).show()
-                            },
-                            onError = {
-                                Toast.makeText(this, "Error while share  feedback!", Toast.LENGTH_SHORT).show()
-                            }
-                        )
+                MainGameContextActions(
+                    selectedGameState = selectedGameState,
+                    shortcutSupported = gameInteractor.supportShortcuts(),
+                    onGamePlay = { gameInteractor.onGamePlay(it) },
+                    onGameRestart = { gameInteractor.onGameRestart(it) },
+                    onFavoriteToggle = { game: Game, isFavorite: Boolean ->
+                        gameInteractor.onFavoriteToggle(game, isFavorite)
                     },
-                    onDismissRequest = { shareDiscordDialogDisplayed.value = null }
+                    onCreateShortcut = { gameInteractor.onCreateShortcut(it) },
+                    onShareDiscord = { shareDiscordDialogDisplayed.value = it }
                 )
-            }
 
-            if (infoDialogDisplayed.value) {
-                val message =
-                    remember {
+                val game = shareDiscordDialogDisplayed.value
+                if (game != null) {
+                    ShowShareDialog(
+                        game = game,
+                        onPositiveClicked = { content, imageUrl ->
+                            shareDiscordTextGenerator.shareGame(
+                                content,
+                                imageUrl,
+                                onSuccess = {
+                                    Toast.makeText(this, "Feedback is successfully shared!", Toast.LENGTH_SHORT)
+                                        .show()
+                                },
+                                onError = {
+                                    Toast.makeText(this, "Error while share  feedback!", Toast.LENGTH_SHORT).show()
+                                }
+                            )
+                        },
+                        onDismissRequest = { shareDiscordDialogDisplayed.value = null }
+                    )
+                }
+
+                if (infoDialogDisplayed.value) {
+                    val message = remember {
                         val systemFolders =
                             SystemID.values()
                                 .joinToString(", ") { "<i>${it.dbname}</i>" }
 
                         String
-                            .format(getString(R.string.lemuroid_help_content), getString(R.string.lemuroid_name))
+                            .format(
+                                getString(R.string.lemuroid_help_content),
+                                getString(R.string.lemuroid_name)
+                            )
                             .replace("\$SYSTEMS", systemFolders)
                     }
 
-                AlertDialog(
-                    text = { HtmlText(text = message) },
-                    onDismissRequest = { infoDialogDisplayed.value = false },
-                    confirmButton = { },
-                )
+                    AlertDialog(
+                        text = { HtmlText(text = message) },
+                        onDismissRequest = { infoDialogDisplayed.value = false },
+                        confirmButton = { },
+                    )
+                }
             }
         }
     }
 
     override fun activity(): Activity = this
 
-    override fun isBusy(): Boolean = mainViewModel.state.value?.operationInProgress ?: false
+    override fun isBusy(): Boolean = mainViewModel.state.value.operationInProgress
 
     override fun onActivityResult(
         requestCode: Int,

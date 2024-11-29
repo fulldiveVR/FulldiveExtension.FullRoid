@@ -25,11 +25,9 @@ import com.android.build.gradle.BaseExtension
 buildscript {
     repositories {
         google()
-      //  jcenter()
         mavenCentral()
         mavenLocal()
-       // maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj/multitouchgesturedetector/1.0.0/") }
-         maven { setUrl("https://mirrors.huaweicloud.com/repository/maven") }
+        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven") }
     }
 
     dependencies {
@@ -56,10 +54,8 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-     //   jcenter()
         mavenLocal()
         maven { setUrl("https://jitpack.io") }
-       // maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj/multitouchgesturedetector/1.0.0/") }
         maven { setUrl("https://mirrors.huaweicloud.com/repository/maven") }
     }
 

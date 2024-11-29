@@ -207,4 +207,5 @@
     <string name="close">Close</string>
     <string name="game_page_search_suggestion">Search games</string>
     <string name="settings_description_enable_autosave">Save state when exiting via game menu</string>
+    <string name="flat_pro_popup_title">Don\'t miss out on our SALE!</string>
 </resources>

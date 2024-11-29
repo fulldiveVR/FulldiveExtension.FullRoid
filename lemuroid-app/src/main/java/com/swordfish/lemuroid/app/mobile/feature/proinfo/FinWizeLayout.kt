@@ -1,68 +1,95 @@
 package com.swordfish.lemuroid.app.mobile.feature.proinfo
 
-import android.content.Context
-import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.widget.FrameLayout
-import android.widget.ImageView
-import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.swordfish.lemuroid.R
 
-class FinWizeLayout : FrameLayout {
+@Composable
+fun FinWizeLayout(
+    onClick: () -> Unit,
+    onCloseClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
 
-    var onClickListener: (() -> Unit)? = null
-    var onCloseClickListener: (() -> Unit)? = null
-
-    private val animator = NavigationPanelAnimator()
-
-    constructor(context: Context) : super(context) {
-        initLayout()
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        initLayout()
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
+            .padding(bottom = 80.dp)
+            .background(Color.Transparent)
+            .clickable { onClick() }
     ) {
-        initLayout()
-    }
-
-
-    private fun initLayout() {
-        val inflater = context
-            .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.layout_fin_wize, this, true)
-
-        val closeImageView = findViewById<ImageView>(R.id.closePopupButton)
-        closeImageView.setOnClickListener { hideSnackbar() }
-        val containerLayout = findViewById<ConstraintLayout>(R.id.containerLayout)
-        containerLayout.setOnClickListener {
-            onClickListener?.invoke()
-            hideSnackbar()
+        Card(
+            shape = RoundedCornerShape(8.dp),
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .align(Alignment.BottomCenter),
+            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+            colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.backgroundPopup)),
+        ) {
+            Row(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_fin_wize_logo),
+                    contentDescription = stringResource(R.string.flat_finwize_popup_title),
+                    modifier = Modifier.size(40.dp),
+                    tint = Color.Unspecified
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(R.string.flat_finwize_popup_title),
+                            fontSize = 14.sp,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.weight(1f)
+                        )
+                        Box(
+                            modifier = Modifier
+                                .clickable { onCloseClick() }
+                                .padding(start = 12.dp, bottom = 12.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(R.drawable.ic_cross),
+                                contentDescription = stringResource(R.string.flat_finwize_popup_title),
+                                modifier = Modifier.size(12.dp),
+                                tint = Color.Unspecified
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = stringResource(R.string.flat_finwize_popup_disclaimer),
+                        fontSize = 14.sp,
+                        color = Color.White
+                    )
+                }
+            }
         }
-    }
-
-    fun showSnackbar() {
-        val cardView = findViewById<CardView>(R.id.cardView)
-        cardView.isVisible = true
-        animator.show(cardView)
-    }
-
-    private fun hideSnackbar() {
-        onCloseClickListener?.invoke()
-        val cardView = findViewById<CardView>(R.id.cardView)
-        animator.hide(
-            cardView,
-            endAction = {
-                cardView.isVisible = false
-            },
-            hideDirection = NavigationPanelAnimator.HIDE_TO_BOTTOM
-        )
     }
 }

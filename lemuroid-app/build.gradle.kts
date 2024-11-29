@@ -37,7 +37,6 @@ buildscript {
         google()
         mavenLocal()
         maven { setUrl("https://mirrors.huaweicloud.com/repository/maven") }
-       // maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/com/dinuscxj/multitouchgesturedetector/1.0.0/") }
     }
 
     dependencies {
@@ -49,7 +48,7 @@ buildscript {
 android {
     val versionMajor = 1
     val versionMinor = 7
-    val versionPatch = 3
+    val versionPatch = 5
 
     namespace = "com.swordfish.lemuroid"
     buildFeatures.buildConfig = true
