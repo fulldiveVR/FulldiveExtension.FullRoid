@@ -28,10 +28,8 @@ fun FinWizeLayout(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-
             .padding(bottom = 80.dp)
             .background(Color.Transparent)
-            .clickable { onClick() }
     ) {
         Card(
             shape = RoundedCornerShape(8.dp),
@@ -39,7 +37,8 @@ fun FinWizeLayout(
                 .padding(16.dp)
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .align(Alignment.BottomCenter),
+                .align(Alignment.BottomCenter)
+                .clickable { onClick() },
             elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
             colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.backgroundPopup)),
         ) {

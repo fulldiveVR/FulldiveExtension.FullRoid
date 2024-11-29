@@ -32,7 +32,6 @@ plugins {
 
 buildscript {
     repositories {
-      //  jcenter()
         mavenCentral()
         google()
         mavenLocal()
@@ -48,7 +47,7 @@ buildscript {
 android {
     val versionMajor = 1
     val versionMinor = 7
-    val versionPatch = 5
+    val versionPatch = 6
 
     namespace = "com.swordfish.lemuroid"
     buildFeatures.buildConfig = true
