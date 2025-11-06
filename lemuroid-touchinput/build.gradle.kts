@@ -1,48 +1,49 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("kotlinx-serialization")
+    id("kotlin-parcelize")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
     kotlinOptions {
         jvmTarget = "17"
+        freeCompilerArgs += listOf(
+            "-Xcontext-receivers"
+        )
     }
     namespace = "com.swordfish.touchinput.controller"
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = deps.versions.kotlinExtension
+    }
 }
 
 dependencies {
     implementation(project(":retrograde-util"))
+
+    implementation(platform(deps.libs.androidx.compose.composeBom))
+    implementation(deps.libs.androidx.compose.geometry)
+    implementation(deps.libs.androidx.compose.runtime)
+    implementation(deps.libs.androidx.compose.material3)
 
     implementation(deps.libs.androidx.appcompat.constraintLayout)
     implementation(deps.libs.androidx.appcompat.appcompat)
     implementation(deps.libs.androidx.lifecycle.commonJava8)
     implementation(deps.libs.material)
     implementation(deps.libs.androidx.preferences.preferencesKtx)
+    implementation(deps.libs.flowPreferences)
+    implementation(deps.libs.kotlin.serialization)
+    implementation(deps.libs.kotlin.serializationJson)
 
-    api(deps.libs.radialgamepad)
+    api(deps.libs.padkit)
+    api(deps.libs.collectionsImmutable)
 
     implementation(kotlin(deps.libs.kotlin.stdlib))
 

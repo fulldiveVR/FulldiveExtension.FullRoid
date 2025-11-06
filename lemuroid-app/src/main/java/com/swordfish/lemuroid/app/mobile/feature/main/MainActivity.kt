@@ -24,10 +24,13 @@ package com.swordfish.lemuroid.app.mobile.feature.main
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -50,7 +53,6 @@ import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.FIN_WIZE_APP
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.PopupManager
-import com.swordfish.lemuroid.app.appextension.discord.DiscordManager
 import com.swordfish.lemuroid.app.appextension.discord.ShareDiscordTextGenerator
 import com.swordfish.lemuroid.app.appextension.discord.ShowShareDialog
 import com.swordfish.lemuroid.app.appextension.isProVersion
@@ -154,6 +156,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            SystemBarStyle.dark(Color.TRANSPARENT),
+            SystemBarStyle.dark(Color.TRANSPARENT)
+        )
         super.onCreate(savedInstanceState)
 
         GlobalScope.safeLaunch {
@@ -259,13 +265,14 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         HomeScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                            viewModel(
-                                factory =
-                                HomeViewModel.Factory(
-                                    applicationContext,
-                                    retrogradeDb,
+                                viewModel(
+                                    factory =
+                                        HomeViewModel.Factory(
+                                            applicationContext,
+                                            retrogradeDb,
+                                            coresSelection
+                                        ),
                                 ),
-                            ),
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                         )
@@ -325,9 +332,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         FavoritesScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                            viewModel(
-                                factory = FavoritesViewModel.Factory(retrogradeDb),
-                            ),
+                                viewModel(
+                                    factory = FavoritesViewModel.Factory(retrogradeDb),
+                                ),
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                         )
@@ -336,9 +343,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         SearchScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                            viewModel(
-                                factory = SearchViewModel.Factory(retrogradeDb),
-                            ),
+                                viewModel(
+                                    factory = SearchViewModel.Factory(retrogradeDb),
+                                ),
                             searchQuery = mainUIState.searchQuery,
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
@@ -351,13 +358,13 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             modifier = Modifier.padding(padding),
                             navController = navController,
                             viewModel =
-                            viewModel(
-                                factory =
-                                MetaSystemsViewModel.Factory(
-                                    retrogradeDb,
-                                    applicationContext,
+                                viewModel(
+                                    factory =
+                                        MetaSystemsViewModel.Factory(
+                                            retrogradeDb,
+                                            applicationContext,
+                                        ),
                                 ),
-                            ),
                         )
                     }
                     composable(MainRoute.SYSTEM_GAMES) { entry ->
@@ -365,13 +372,13 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         GamesScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                            viewModel(
-                                factory =
-                                GamesViewModel.Factory(
-                                    retrogradeDb,
-                                    MetaSystemID.valueOf(metaSystemId!!),
+                                viewModel(
+                                    factory =
+                                        GamesViewModel.Factory(
+                                            retrogradeDb,
+                                            MetaSystemID.valueOf(metaSystemId!!),
+                                        ),
                                 ),
-                            ),
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                             onGameFavoriteToggle = onGameFavoriteToggle,
@@ -381,19 +388,19 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         SettingsScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                            viewModel(
-                                factory =
-                                SettingsViewModel.Factory(
-                                    applicationContext,
-                                    settingsInteractor,
-                                    saveSyncManager,
-                                    FlowSharedPreferences(
-                                        SharedPreferencesHelper.getLegacySharedPreferences(
+                                viewModel(
+                                    factory =
+                                        SettingsViewModel.Factory(
                                             applicationContext,
+                                            settingsInteractor,
+                                            saveSyncManager,
+                                            FlowSharedPreferences(
+                                                SharedPreferencesHelper.getLegacySharedPreferences(
+                                                    applicationContext,
+                                                ),
+                                            ),
                                         ),
-                                    ),
                                 ),
-                            ),
                             navController = navController,
                         )
                     }
@@ -403,13 +410,13 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         ProTutorialScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                            viewModel(
-                                factory =
-                                AdvancedSettingsViewModel.Factory(
-                                    applicationContext,
-                                    settingsInteractor,
+                                viewModel(
+                                    factory =
+                                        AdvancedSettingsViewModel.Factory(
+                                            applicationContext,
+                                            settingsInteractor,
+                                        ),
                                 ),
-                            ),
                             navController = navController,
                             onBuyProClick = {
                                 openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
@@ -420,13 +427,13 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         AdvancedSettingsScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                            viewModel(
-                                factory =
-                                AdvancedSettingsViewModel.Factory(
-                                    applicationContext,
-                                    settingsInteractor,
+                                viewModel(
+                                    factory =
+                                        AdvancedSettingsViewModel.Factory(
+                                            applicationContext,
+                                            settingsInteractor,
+                                        ),
                                 ),
-                            ),
                             navController = navController,
                         )
                     }
@@ -434,48 +441,48 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         BiosScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                            viewModel(
-                                factory = BiosSettingsViewModel.Factory(biosManager),
-                            ),
+                                viewModel(
+                                    factory = BiosSettingsViewModel.Factory(biosManager),
+                                ),
                         )
                     }
                     composable(MainRoute.SETTINGS_CORES_SELECTION) {
                         CoresSelectionScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                            viewModel(
-                                factory =
-                                CoresSelectionViewModel.Factory(
-                                    applicationContext,
-                                    coresSelection,
+                                viewModel(
+                                    factory =
+                                        CoresSelectionViewModel.Factory(
+                                            applicationContext,
+                                            coresSelection,
+                                        ),
                                 ),
-                            ),
                         )
                     }
                     composable(MainRoute.SETTINGS_INPUT_DEVICES) {
                         InputDevicesSettingsScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                            viewModel(
-                                factory =
-                                InputDevicesSettingsViewModel.Factory(
-                                    applicationContext,
-                                    inputDeviceManager,
+                                viewModel(
+                                    factory =
+                                        InputDevicesSettingsViewModel.Factory(
+                                            applicationContext,
+                                            inputDeviceManager,
+                                        ),
                                 ),
-                            ),
                         )
                     }
                     composable(MainRoute.SETTINGS_SAVE_SYNC) {
                         SaveSyncSettingsScreen(
                             modifier = Modifier.padding(padding),
                             viewModel =
-                            viewModel(
-                                factory =
-                                SaveSyncSettingsViewModel.Factory(
-                                    application,
-                                    saveSyncManager,
+                                viewModel(
+                                    factory =
+                                        SaveSyncSettingsViewModel.Factory(
+                                            application,
+                                            saveSyncManager,
+                                        ),
                                 ),
-                            ),
                         )
                     }
                 }
@@ -514,18 +521,15 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 }
 
                 if (infoDialogDisplayed.value) {
-                    val message = remember {
-                        val systemFolders =
-                            SystemID.values()
-                                .joinToString(", ") { "<i>${it.dbname}</i>" }
+                    val message =
+                        remember {
+                            val systemFolders =
+                                SystemID.values()
+                                    .joinToString(", ") { "<i>${it.dbname}</i>" }
 
-                        String
-                            .format(
-                                getString(R.string.lemuroid_help_content),
-                                getString(R.string.lemuroid_name)
-                            )
-                            .replace("\$SYSTEMS", systemFolders)
-                    }
+                            getString(R.string.lemuroid_help_content)
+                                .replace("\$SYSTEMS", systemFolders)
+                        }
 
                     AlertDialog(
                         text = { HtmlText(text = message) },

@@ -49,7 +49,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TVSettingsFragment : LeanbackPreferenceFragmentCompat() {
-
     @Inject
     lateinit var settingsInteractor: SettingsInteractor
 

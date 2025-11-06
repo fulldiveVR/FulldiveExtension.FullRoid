@@ -51,11 +51,12 @@ fun ShowShareDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 16.dp),
-                    colors = TextFieldDefaults.textFieldColors(
-                        focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                        unfocusedIndicatorColor = colorResource(id = R.color.textColorSecondary),
-                        focusedTextColor = colorResource(id = R.color.colorWhite),
-                        containerColor = Color.Transparent
+                    colors = TextFieldDefaults.colors(
+                        //fftf
+//                        focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+//                        unfocusedIndicatorColor = colorResource(id = R.color.textColorSecondary),
+//                        focusedTextColor = colorResource(id = R.color.colorWhite),
+//                        containerColor = Color.Transparent
                     ),
                     placeholder = { Text(text = stringResource(id = R.string.share_discord_dialog_enter_name)) },
                 )
@@ -66,11 +67,12 @@ fun ShowShareDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 16.dp),
-                    colors = TextFieldDefaults.textFieldColors(
-                        focusedIndicatorColor = MaterialTheme.colorScheme.primary,
-                        unfocusedIndicatorColor = colorResource(id = R.color.textColorSecondary),
-                        focusedTextColor = colorResource(id = R.color.colorWhite),
-                        containerColor = Color.Transparent
+                    colors = TextFieldDefaults.colors(
+                        //fftf
+//                        focusedIndicatorColor = MaterialTheme.colorScheme.primary,
+//                        unfocusedIndicatorColor = colorResource(id = R.color.textColorSecondary),
+//                        focusedTextColor = colorResource(id = R.color.colorWhite),
+//                        containerColor = Color.Transparent
                     ),
                     placeholder = { Text(text = stringResource(id = R.string.share_discord_dialog_enter_feedback)) },
                 )

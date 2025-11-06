@@ -111,9 +111,9 @@ private fun ContextActionContent(
 ) {
     Column(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .windowInsetsPadding(WindowInsets.safeContent.only(WindowInsetsSides.Bottom)),
+            Modifier
+                .fillMaxWidth()
+                .windowInsetsPadding(WindowInsets.safeContent.only(WindowInsetsSides.Bottom)),
     ) {
         ContextActionHeader(game = selectedGame)
         Divider()
@@ -180,26 +180,26 @@ private fun ContextActionContent(
 private fun ContextActionHeader(game: Game) {
     Row(
         modifier =
-        Modifier.padding(
-            start = 16.dp,
-            top = 8.dp,
-            bottom = 8.dp,
-            end = 16.dp,
-        ),
+            Modifier.padding(
+                start = 16.dp,
+                top = 8.dp,
+                bottom = 8.dp,
+                end = 16.dp,
+            ),
     ) {
         LemuroidSmallGameImage(
             modifier =
-            Modifier
-                .width(40.dp)
-                .height(40.dp)
-                .align(Alignment.CenterVertically),
+                Modifier
+                    .width(40.dp)
+                    .height(40.dp)
+                    .align(Alignment.CenterVertically),
             game = game,
         )
         LemuroidGameTexts(
             modifier =
-            Modifier
-                .weight(1f)
-                .padding(start = 8.dp),
+                Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp),
             game = game,
         )
     }
@@ -214,10 +214,10 @@ private fun ContextActionEntry(
 ) {
     Row(
         modifier =
-        modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .height(56.dp),
+            modifier
+                .fillMaxWidth()
+                .clickable(onClick = onClick)
+                .height(56.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
@@ -242,9 +242,9 @@ private fun FakeScrim(modalSheetState: SheetState) {
     ) {
         Box(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .background(BottomSheetDefaults.ScrimColor),
+                Modifier
+                    .fillMaxSize()
+                    .background(BottomSheetDefaults.ScrimColor),
         )
     }
 }

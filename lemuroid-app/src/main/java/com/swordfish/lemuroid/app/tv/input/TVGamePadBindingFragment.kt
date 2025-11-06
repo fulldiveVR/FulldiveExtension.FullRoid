@@ -33,7 +33,7 @@ class TVGamePadBindingFragment : GuidedStepSupportFragment() {
         actions: MutableList<GuidedAction>,
         id: Long,
         title: String,
-        desc: String
+        desc: String,
     ) {
         actions.add(
             GuidedAction.Builder(activity)

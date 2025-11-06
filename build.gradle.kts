@@ -1,25 +1,3 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 import com.android.build.gradle.BaseExtension
 
 buildscript {
@@ -29,7 +7,6 @@ buildscript {
         mavenLocal()
         maven { setUrl("https://mirrors.huaweicloud.com/repository/maven") }
     }
-
     dependencies {
         classpath(deps.plugins.android)
         classpath(deps.plugins.navigationSafeArgs)
@@ -41,13 +18,14 @@ buildscript {
 
 plugins {
     id("org.jetbrains.kotlin.jvm") version deps.versions.kotlin
-    id("com.github.ben-manes.versions") version "0.39.0"
+    id("com.github.ben-manes.versions") version "0.51.0"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.4.0"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
-    id("com.android.test") version "8.4.0" apply false
+    id("com.android.test") version "8.13.0" apply false
     id("org.jetbrains.kotlin.android") version deps.versions.kotlin apply false
-    id("androidx.baselineprofile") version "1.2.3" apply false
+    id("androidx.baselineprofile") version "1.2.4" apply false
     id("com.android.application") version "8.4.0" apply false
+    id("org.jetbrains.kotlin.plugin.compose") version deps.versions.kotlin apply false
 }
 
 allprojects {

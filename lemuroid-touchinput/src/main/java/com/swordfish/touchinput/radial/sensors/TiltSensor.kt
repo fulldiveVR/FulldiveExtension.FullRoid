@@ -1,47 +1,3 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 package com.swordfish.touchinput.radial.sensors
 
 import android.content.Context
@@ -53,9 +9,12 @@ import android.view.Surface
 import android.view.WindowManager
 import com.swordfish.lemuroid.common.kotlin.CustomDelegates
 import com.swordfish.lemuroid.common.math.linearInterpolation
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import kotlin.math.abs
 import kotlin.math.sign
@@ -104,12 +63,14 @@ class TiltSensor(context: Context) : SensorEventListener {
 
     private fun pause() {
         sensorManager.unregisterListener(this)
+        sendRestPosition()
     }
 
     private fun stop() {
         pause()
         restOrientation = null
         restOrientationsBuffer.clear()
+        sendRestPosition()
     }
 
     fun setSensitivity(sensitivity: Float) {
@@ -135,6 +96,13 @@ class TiltSensor(context: Context) : SensorEventListener {
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
+    private fun sendRestPosition() {
+        GlobalScope.launch {
+            tiltEvents.emit(floatArrayOf(0f, 0f))
+        }
+    }
+
     private fun onNewRotationVector(rotationVector: FloatArray) {
         SensorManager.getRotationMatrixFromVector(rotationMatrix, rotationVector)
 
@@ -143,8 +111,8 @@ class TiltSensor(context: Context) : SensorEventListener {
         SensorManager.remapCoordinateSystem(rotationMatrix, xAxis, yAxis, remappedRotationMatrix)
         SensorManager.getOrientation(remappedRotationMatrix, orientationAngles)
 
-        val xRotation = chooseBestAngleRepresentation(orientationAngles[1], Math.PI.toFloat())
-        val yRotation = chooseBestAngleRepresentation(orientationAngles[2], Math.PI.toFloat())
+        val xRotation = chooseBestAngleRepresentation(orientationAngles[1], PI)
+        val yRotation = chooseBestAngleRepresentation(orientationAngles[2], PI)
 
         if (restOrientation == null && restOrientationsBuffer.size < MEASUREMENTS_BUFFER_SIZE) {
             restOrientationsBuffer.add(floatArrayOf(yRotation, xRotation))
@@ -172,10 +140,7 @@ class TiltSensor(context: Context) : SensorEventListener {
         }
     }
 
-    private fun chooseBestAngleRepresentation(
-        x: Float,
-        offset: Float,
-    ): Float {
+    private fun chooseBestAngleRepresentation(x: Float, offset: Float): Float {
         return sequenceOf(x, x + offset, x - offset).minByOrNull { abs(it) }!!
     }
 
@@ -199,5 +164,6 @@ class TiltSensor(context: Context) : SensorEventListener {
         const val MEASUREMENTS_BUFFER_SIZE = 5
         val MAX_MAX_ROTATION = Math.toRadians(20.0).toFloat()
         val MIN_MAX_ROTATION = Math.toRadians(2.5).toFloat()
+        val PI = Math.PI.toFloat()
     }
 }

@@ -1,38 +1,16 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 /* ktlint-disable no-multi-spaces max-line-length */
 object deps {
     object android {
-        const val targetSdkVersion  = 34
-        const val compileSdkVersion = 34
+        const val targetSdkVersion  = 35
+        const val compileSdkVersion = 35
         const val minSdkVersion     = 23
-        const val buildToolsVersion = "34.0.0"
+        const val buildToolsVersion = "35.0.0"
     }
 
     object versions {
         const val dagger          = "2.19"
         const val gms             = "17.0.0"
-        const val kotlin          = "1.8.20"
+        const val kotlin          = "2.0.21"
         const val okHttp          = "4.9.1"
         const val retrofit        = "2.9.0"
         const val work            = "2.9.0"
@@ -41,14 +19,16 @@ object deps {
         const val leanback        = "1.1.0-rc01"
         const val googleApiClient = "1.32.1"
         const val paging          = "3.2.1"
-        const val room            = "2.5.2"
+        const val room            = "2.6.1"
         const val epoxy           = "4.0.0-beta3"
         const val serialization   = "1.2.2"
         const val fragment        = "1.5.1"
         const val activity        = "1.7.2"
-        const val libretrodroid   = "0.12.1"
+        const val libretrodroid   = "0.13.0"
         const val radialgamepad   = "2.0.0"
         const val composeBom      = "2024.02.02"
+        const val kotlinExtension = "1.4.6"
+        const val padkit          = "1.0.0-beta1"
 
         // Make sure this is compatible with current bom versions:
         // https://developer.android.com/jetpack/compose/bom/bom-mapping
@@ -125,6 +105,11 @@ object deps {
                 const val extendedIcons = "androidx.compose.material:material-icons-extended"
                 const val tooling = "androidx.compose.ui:ui-tooling"
                 const val toolingPreview = "androidx.compose.ui:ui-tooling-preview"
+                const val geometry = "androidx.compose.ui:ui-geometry"
+                const val runtime = "androidx.compose.runtime:runtime"
+                const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.1.0"
+                const val unit = "androidx.compose.ui:ui-unit-android"
+                const val ui = "androidx.compose.ui:ui"
 
                 object accompanist {
                     const val systemUiController = "com.google.accompanist:accompanist-systemuicontroller:${versions.accompanist}"
@@ -153,11 +138,6 @@ object deps {
             const val stdlib = "stdlib"
             const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-core:${versions.serialization}"
             const val serializationJson = "org.jetbrains.kotlinx:kotlinx-serialization-json:${versions.serialization}"
-        }
-        object epoxy {
-            const val expoxy = "com.airbnb.android:epoxy:${versions.epoxy}"
-            const val paging = "com.airbnb.android:epoxy-paging:${versions.epoxy}"
-            const val processor = "com.airbnb.android:epoxy-processor:${versions.epoxy}"
         }
         object play {
             const val review = "com.google.android.play:review:2.0.0"
@@ -206,12 +186,12 @@ object deps {
         const val flowPreferences          = "com.fredporciuncula:flow-preferences:1.8.0"
         const val timber                   = "com.jakewharton.timber:timber:5.0.1"
         const val material                 = "com.google.android.material:material:1.6.1"
-        const val multitouchGestures       = "com.dinuscxj:multitouchgesturedetector:1.0.0"
         const val guava                    = "com.google.guava:guava:30.1.1-android"
         const val harmony                  = "com.frybits.harmony:harmony:1.1.9"
         const val startup                  = "androidx.startup:startup-runtime:1.1.1"
         const val composeHtmlText          = "de.charlex.compose.material3:material3-html-text:2.0.0-beta01"
-        const val radialgamepad            = "com.github.Swordfish90:RadialGamePad:${versions.radialgamepad}"
+        const val collectionsImmutable     = "org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.8"
+        const val padkit                   = "io.github.swordfish90:padkit:${versions.padkit}"
         const val libretrodroid            = "com.github.Swordfish90:LibretroDroid:${versions.libretrodroid}"
 
         const val lottie = "com.airbnb.android:lottie-compose:${versions.lottie}"
@@ -219,7 +199,6 @@ object deps {
         const val retrofitLogging          = "com.squareup.okhttp3:logging-interceptor:4.6.0"
         const val gsonAnnotations          = "com.google.code.gson:gson:2.9.0"
         const val retrofitGsonConverter    = "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
-
     }
 
     object plugins {

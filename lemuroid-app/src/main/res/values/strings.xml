@@ -29,14 +29,18 @@
     <string name="settings_title_tilt_sensitivity">Tilt sensor sensitivity</string>
     <string name="settings_gamepad_settings">Gamepad settings</string>
     <string name="settings_gamepad_button_name">Button %1$s</string>
+    <string name="settings_title_ambient_mode">Ambient mode</string>
+    <string name="settings_description_ambient_mode">Dynamically colors the background based on game visuals</string>
     <string name="settings_retropad_button_name">RetroPad %1$s</string>
     <string name="settings_retropad_button_unassigned">Unassigned</string>
     <string name="settings_gamepad_category_enabled">Enabled Gamepads</string>
     <string name="settings_gamepad_category_general">General</string>
     <string name="settings_gamepad_title_reset_bindings">Reset bindings</string>
     <string name="settings_gamepad_title_game_menu">Menu</string>
+
     <string name="settings_title_open_cores_selection">Change Cores</string>
     <string name="settings_description_open_cores_selection">Select which core is associated to a system</string>
+
     <string name="settings_title_display_bios_info">BIOS</string>
     <string name="settings_description_display_bios_info">Display detected and supported BIOS files</string>
     <string name="settings_bios_category_detected">Detected</string>
@@ -61,6 +65,9 @@
     <string name="game_context_menu_resume">Resume</string>
     <string name="game_context_menu_restart">Restart</string>
     <string name="game_context_menu_create_shortcut">Pin to launcher</string>
+    <string name="home_microphone_title">Enable microphone</string>
+    <string name="home_microphone_message">Nintendo DS games can use the microphone to provide some functionalities.</string>
+    <string name="home_microphone_action">Enable</string>
     <string name="home_empty_title">Select ROMs directory</string>
     <string name="home_empty_message">Roid needs to scan a directory containing ROM files.\nThis might take up to a few minutes.</string>
     <string name="home_empty_action">Select Directory</string>
@@ -75,9 +82,14 @@
     <string name="game_menu_mute_audio">Mute</string>
     <string name="game_menu_fast_forward">Fast-Forward</string>
     <string name="game_menu_change_disk_disk">Disk %1$s</string>
+    <string name="game_menu_tilt_sensor">Tilt Sensor</string>
+
     <string name="game_loading_preparing_game">Preparing game&#x2026;</string>
     <string name="game_toast_settings_button_using_gamepad">Gamepad detected. Access settings menu with %1$s.</string>
     <string name="game_toast_load_state_failed">Cannot load this state</string>
+    <string name="game_toast_quick_save_loaded">Quick loaded</string>
+    <string name="game_toast_quick_save_saved">Quick saved</string>
+
     <string name="empty_view_default">No Items</string>
     <string name="core_settings_title">Core Settings</string>
     <string name="core_settings_category_preferences">Preferences</string>
@@ -113,6 +125,8 @@
     <string name="tv_home_section_recents">Recent</string>
     <string name="tv_home_section_systems">Systems</string>
     <string name="tv_home_section_settings">Settings</string>
+    <string name="shortcut_binding_update_title">Associate \"Shortcut %1$s\"</string>
+    <string name="shortcut_binding_update_description">Press the first, then second button to bind a combo on your \"%1$s\"</string>
     <string name="tv_search_results">Games</string>
     <string name="tv_game_message_missing_gamepad">Gamepads are required to play. Please connect one.</string>
     <string name="game_edit_touch_controls_error_not_visible">Disconnect your pad to edit your touch controls</string>
@@ -129,7 +143,7 @@
     <string name="rate_us_title">Rate us</string>
     <string name="install_browser_title">Sync with Wize Browser and get rewards</string>
     <string name="install_browser_description">Thank you for trying our Full apps, we feature many more great apps such as a browser that rewards you cash when you browse, check it out!</string>
-    <string name="rate_us_description">Do you like Wize Browser? We would love to hear your feedback and make the app better for you.</string>
+    <string name="rate_us_description">Do you like FullRoid? We would love to hear your feedback and make the app better for you.</string>
     <string-array name="pref_key_shader_filter_names">
         <item>Auto</item>
         <item>Sharp</item>
@@ -208,4 +222,11 @@
     <string name="game_page_search_suggestion">Search games</string>
     <string name="settings_description_enable_autosave">Save state when exiting via game menu</string>
     <string name="flat_pro_popup_title">Don\'t miss out on our SALE!</string>
+    <string name="tilt_configuration_disabled">Disabled</string>
+    <string name="tilt_configuration_cross">DPAD</string>
+    <string name="tilt_configuration_analog_left">Left Analog</string>
+    <string name="tilt_configuration_analog_right">Right Analog</string>
+    <string name="tilt_configuration_buttons_l_r">L - R</string>
+    <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
+    <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
 </resources>
