@@ -17,6 +17,7 @@ include(
     ":lemuroid-app-ext-free",
     ":lemuroid-app-ext-play",
     ":bundled-cores",
+    ":baselineprofile"
 )
 
 project(":bundled-cores").projectDir = File("lemuroid-cores/bundled-cores")

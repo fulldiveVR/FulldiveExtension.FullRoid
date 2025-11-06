@@ -1,24 +1,3 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -26,6 +5,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("kotlinx-serialization")
     id("androidx.baselineprofile")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.firebase.crashlytics")
     id("com.google.gms.google-services")
 }
@@ -46,8 +26,8 @@ buildscript {
 
 android {
     val versionMajor = 1
-    val versionMinor = 7
-    val versionPatch = 6
+    val versionMinor = 8
+    val versionPatch = 0
 
     namespace = "com.swordfish.lemuroid"
     buildFeatures.buildConfig = true
@@ -69,6 +49,7 @@ android {
             mappingFileUploadEnabled = false
         }
     }
+    flavorDimensions += listOf("opensource", "cores")
 
     if (usePlayDynamicFeatures()) {
         println("Building Google Play version. Bundling dynamic features.")
@@ -99,7 +80,6 @@ android {
     }
 
     // Since some dependencies are closed source we make a completely free as in free speech variant.
-    flavorDimensions("opensource", "cores")
 
     productFlavors {
 
@@ -208,7 +188,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.6"
+        kotlinCompilerExtensionVersion = deps.versions.kotlinExtension
     }
 
     kotlinOptions {
@@ -222,6 +202,9 @@ dependencies {
     implementation(project(":retrograde-app-shared"))
     implementation(project(":lemuroid-metadata-libretro-db"))
     implementation(project(":lemuroid-touchinput"))
+
+    "baselineProfile"(project(":baselineprofile"))
+    implementation(deps.libs.androidx.profileInstaller)
 
     "bundleImplementation"(project(":bundled-cores"))
 
@@ -245,10 +228,7 @@ dependencies {
     implementation(deps.libs.arch.work.runtimeKtx)
     implementation(deps.libs.androidx.lifecycle.commonJava8)
     implementation(deps.libs.androidx.lifecycle.reactiveStreams)
-    implementation(deps.libs.epoxy.expoxy)
-    implementation(deps.libs.epoxy.paging)
 
-    kapt(deps.libs.epoxy.processor)
     kapt(deps.libs.androidx.lifecycle.processor)
 
     implementation(deps.libs.androidx.leanback.leanback)
@@ -279,6 +259,7 @@ dependencies {
 
     implementation(platform(deps.libs.androidx.compose.composeBom))
     implementation(deps.libs.androidx.compose.material3)
+    implementation(deps.libs.androidx.compose.constraintLayout)
     debugImplementation(deps.libs.androidx.compose.tooling)
     implementation(deps.libs.androidx.compose.toolingPreview)
     implementation(deps.libs.androidx.compose.extendedIcons)
@@ -297,13 +278,13 @@ dependencies {
     implementation(deps.libs.libretrodroid)
     implementation(deps.libs.lottie)
     // Uncomment this when using a local aar file.
-    //implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
+    // implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     kapt(deps.libs.dagger.android.processor)
     kapt(deps.libs.dagger.compiler)
 
-    implementation("com.google.android.gms:play-services-measurement-api:22.0.2")
-    implementation("com.google.firebase:firebase-config:22.0.0")
+    implementation("com.google.android.gms:play-services-measurement-api:23.0.0")
+    implementation("com.google.firebase:firebase-config:23.0.1")
 
 
     platform("com.google.firebase:firebase-bom:33.1.2")

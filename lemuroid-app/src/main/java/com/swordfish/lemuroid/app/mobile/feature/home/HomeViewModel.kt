@@ -1,25 +1,3 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 package com.swordfish.lemuroid.app.mobile.feature.home
 
 import android.Manifest
@@ -30,15 +8,18 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher
+import com.swordfish.lemuroid.common.coroutines.combine
+import com.swordfish.lemuroid.lib.core.CoresSelection
+import com.swordfish.lemuroid.lib.core.CoresSelection.SelectedCore
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
@@ -47,6 +28,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     appContext: Context,
     retrogradeDb: RetrogradeDatabase,
+    private val coresSelection: CoresSelection
 ) : ViewModel() {
     companion object {
         const val CAROUSEL_MAX_ITEMS = 10
@@ -56,9 +38,10 @@ class HomeViewModel(
     class Factory(
         val appContext: Context,
         val retrogradeDb: RetrogradeDatabase,
+        val coresSelection: CoresSelection,
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return HomeViewModel(appContext, retrogradeDb) as T
+            return HomeViewModel(appContext, retrogradeDb, coresSelection) as T
         }
     }
 
@@ -67,11 +50,13 @@ class HomeViewModel(
         val recentGames: List<Game> = emptyList(),
         val discoveryGames: List<Game> = emptyList(),
         val indexInProgress: Boolean = true,
-        val showNoPermissionNotification: Boolean = false,
-        val showNoGamesNotification: Boolean = false,
+        val showNoNotificationPermissionCard: Boolean = false,
+        val showNoMicrophonePermissionCard: Boolean = false,
+        val showNoGamesCard: Boolean = false,
     )
 
-    private val notificationsEnabledState = MutableStateFlow(true)
+    private val microphonePermissionEnabledState = MutableStateFlow(true)
+    private val notificationsPermissionEnabledState = MutableStateFlow(true)
     private val uiStates = MutableStateFlow(UIState())
 
     fun getViewStates(): Flow<UIState> {
@@ -82,8 +67,9 @@ class HomeViewModel(
         StorageFrameworkPickerLauncher.pickFolder(context)
     }
 
-    fun updateNotificationPermission(context: Context) {
-        notificationsEnabledState.value = isNotificationsPermissionGranted(context)
+    fun updatePermissions(context: Context) {
+        notificationsPermissionEnabledState.value = isNotificationsPermissionGranted(context)
+        microphonePermissionEnabledState.value = isMicrophonePermissionGranted(context)
     }
 
     private fun isNotificationsPermissionGranted(context: Context): Boolean {
@@ -100,21 +86,37 @@ class HomeViewModel(
         return permissionResult == PackageManager.PERMISSION_GRANTED
     }
 
+    private fun isMicrophonePermissionGranted(context: Context): Boolean {
+        val permissionResult =
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.RECORD_AUDIO,
+            )
+
+        return permissionResult == PackageManager.PERMISSION_GRANTED
+    }
+
     private fun buildViewState(
         favoritesGames: List<Game>,
         recentGames: List<Game>,
         discoveryGames: List<Game>,
         indexInProgress: Boolean,
-        notificationsEnabled: Boolean,
+        notificationsPermissionEnabled: Boolean,
+        microphonePermissionEnabled: Boolean,
+        selectedCores: List<SelectedCore>,
     ): UIState {
         val noGames = recentGames.isEmpty() && favoritesGames.isEmpty() && discoveryGames.isEmpty()
+        val coreCanUseMicrophone = selectedCores
+            .any { it.coreConfig.supportsMicrophone }
+
         return UIState(
-            favoritesGames,
-            recentGames,
-            discoveryGames,
-            indexInProgress,
-            !notificationsEnabled,
-            noGames,
+            favoritesGames = favoritesGames,
+            recentGames = recentGames,
+            discoveryGames = discoveryGames,
+            indexInProgress = indexInProgress,
+            showNoNotificationPermissionCard = !notificationsPermissionEnabled,
+            showNoMicrophonePermissionCard = !microphonePermissionEnabled && coreCanUseMicrophone,
+            showNoGamesCard = noGames,
         )
     }
 
@@ -126,7 +128,9 @@ class HomeViewModel(
                     recentGames(retrogradeDb),
                     discoveryGames(retrogradeDb),
                     indexingInProgress(appContext),
-                    notificationsEnabledState,
+                    notificationsPermissionEnabledState,
+                    microphonePermissionEnabledState,
+                    coresSelection.getSelectedCores(isProVersion()),
                     ::buildViewState,
                 )
 

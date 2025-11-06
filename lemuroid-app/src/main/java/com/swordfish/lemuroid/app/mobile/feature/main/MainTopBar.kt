@@ -34,6 +34,8 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -88,10 +90,7 @@ fun LemuroidTopAppBar(
     isProTutorialNavigationVisible: Boolean,
 ) {
     val context = LocalContext.current
-    val topBarColor =
-        MaterialTheme.colorScheme.surfaceColorAtElevation(
-            BottomAppBarDefaults.ContainerElevation,
-        )
+    val topBarColor = BottomAppBarDefaults.containerColor
 
     TopAppBar(
         title = {
@@ -204,15 +203,15 @@ private fun LemuroidSearchView(
 
     Box(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .height(56.dp),
+            Modifier
+                .fillMaxWidth()
+                .height(56.dp),
     ) {
         Surface(
             modifier =
-            Modifier
-                .fillMaxSize()
-                .padding(top = 8.dp, bottom = 8.dp, end = 8.dp),
+                Modifier
+                    .fillMaxSize()
+                    .padding(top = 8.dp, bottom = 8.dp, end = 8.dp),
             shape = RoundedCornerShape(100),
             tonalElevation = 16.dp,
         ) { }
@@ -220,24 +219,24 @@ private fun LemuroidSearchView(
         TextField(
             value = mainUIState.searchQuery,
             modifier =
-            Modifier
-                .fillMaxSize()
-                .focusRequester(focusRequester),
+                Modifier
+                    .fillMaxSize()
+                    .focusRequester(focusRequester),
             textStyle = MaterialTheme.typography.bodyMedium,
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
             onValueChange = { onUpdateQueryString(it) },
             singleLine = true,
             keyboardActions =
-            KeyboardActions(
-                onDone = { focusManager.clearFocus(true) },
-            ),
+                KeyboardActions(
+                    onDone = { focusManager.clearFocus(true) },
+                ),
             colors =
-            TextFieldDefaults.colors(
-                focusedContainerColor = Color.Transparent,
-                unfocusedContainerColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-            ),
+                TextFieldDefaults.colors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                ),
         )
     }
 }

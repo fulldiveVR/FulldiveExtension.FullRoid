@@ -1,29 +1,8 @@
-/*
- *
- *  *  RetrogradeApplicationComponent.kt
- *  *
- *  *  Copyright (C) 2017 Retrograde Project
- *  *
- *  *  This program is free software: you can redistribute it and/or modify
- *  *  it under the terms of the GNU General Public License as published by
- *  *  the Free Software Foundation, either version 3 of the License, or
- *  *  (at your option) any later version.
- *  *
- *  *  This program is distributed in the hope that it will be useful,
- *  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  *  GNU General Public License for more details.
- *  *
- *  *  You should have received a copy of the GNU General Public License
- *  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *  *
- *
- */
-
 plugins {
     id("com.android.library")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -31,10 +10,23 @@ android {
         jvmTarget = "17"
     }
     namespace = "com.swordfish.lemuroid.common"
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = deps.versions.kotlinExtension
+    }
 }
 
 dependencies {
     api(deps.libs.timber)
+
+    implementation(platform(deps.libs.androidx.compose.composeBom))
+    implementation(deps.libs.androidx.compose.runtime)
+    implementation(deps.libs.androidx.compose.unit)
+    implementation(deps.libs.androidx.compose.ui)
 
     implementation(deps.libs.androidx.appcompat.appcompat)
     implementation(deps.libs.androidx.appcompat.recyclerView)

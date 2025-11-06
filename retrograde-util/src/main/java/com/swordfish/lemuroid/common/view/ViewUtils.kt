@@ -58,3 +58,7 @@ fun ProgressBar.animateProgress(
         start()
     }
 }
+
+fun View.disableTouchEvents() {
+    this.setOnTouchListener { _, _ -> true }
+}

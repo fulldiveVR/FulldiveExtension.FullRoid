@@ -65,7 +65,7 @@ enum class MainRoute(
     SETTINGS(
         route = "settings/home",
         titleId = R.string.title_settings,
-        parent = SETTINGS,
+//        parent = SETTINGS,    //fftf
         showBottomNavigation = false,
     ),
     PRO_TUTORIAL(
