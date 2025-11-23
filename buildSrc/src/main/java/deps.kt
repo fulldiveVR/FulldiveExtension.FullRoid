@@ -1,7 +1,7 @@
 /* ktlint-disable no-multi-spaces max-line-length */
 object deps {
     object android {
-        const val targetSdkVersion  = 34
+        const val targetSdkVersion  = 35
         const val compileSdkVersion = 35
         const val minSdkVersion     = 23
         const val buildToolsVersion = "34.0.0"
@@ -23,7 +23,7 @@ object deps {
         const val serialization   = "1.2.2"
         const val fragment        = "1.5.1"
         const val activity        = "1.7.2"
-        const val libretrodroid   = "0.13.0"
+        const val libretrodroid   = "2f2aff771"
         const val composeBom      = "2024.02.02"
         const val kotlinExtension = "1.4.6"
         const val padkit          = "1.0.0-beta1"

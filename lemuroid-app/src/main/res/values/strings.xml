@@ -37,8 +37,8 @@
     <string name="settings_description_hd_mode">Apply post-processing upscaling filter</string>
     <string name="settings_description_hd_quality">Adjust the quality of HD mode</string>
 
-    <string name="settings_title_ambient_mode">Ambient mode</string>
-    <string name="settings_description_ambient_mode">Dynamically colors the background based on game visuals</string>
+    <string name="settings_title_immersive_mode">Immersive mode</string>
+    <string name="settings_description_immersive_mode">Dynamically colors the background based on game visuals</string>
 
     <string name="settings_title_gamepad_settings">External devices</string>
     <string name="settings_description_gamepad_settings">Configure external gamepads and keyboards</string>
@@ -52,6 +52,7 @@
 
     <string name="settings_title_open_cores_selection">Change Cores</string>
     <string name="settings_description_open_cores_selection">Select which core is associated to a system</string>
+    <string name="settings_core_selection_ds_info">DeSmuME is deprecated and will be removed in one of the next updates. Save your progress inside the game, then switch to melonDS. In-game saves will load automatically in melonDS, but save states can only be used with the core that created them.</string>
 
     <string name="settings_title_display_bios_info">BIOS</string>
     <string name="settings_description_display_bios_info">Display detected and supported BIOS files</string>
@@ -107,6 +108,10 @@
     <string name="home_empty_title">Select ROMs directory</string>
     <string name="home_empty_message">Lemuroid needs to scan a directory containing ROM files.\nThis might take up to a few minutes.</string>
     <string name="home_empty_action">Select Directory</string>
+
+    <string name="home_notification_desmume_deprecated_title">DeSmuME is being retired</string>
+    <string name="home_notification_desmume_deprecated_message">Save in-game, then switch to melonDS to keep your progress. Save states won\’t transfer and will remain usable only in DeSmuME.</string>
+    <string name="home_notification_desmume_deprecated_action">Switch to melonDS</string>
 
     <string name="game_menu_save">Save</string>
     <string name="game_menu_load">Load</string>
