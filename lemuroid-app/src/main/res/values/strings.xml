@@ -231,8 +231,6 @@
     <string name="home_notification_title">Enable notifications</string>
     <string name="home_notification_message">Fullroid uses notifications to let you know when a game or operation is running in background.</string>
     <string name="home_notification_action">Enable</string>
-    <string name="flat_finwize_popup_title">Invest smarter with FinWize AI</string>
-    <string name="flat_finwize_popup_disclaimer">AI-Powered financial news companion, news summarizer.</string>
     <string name="flat_pro_tutorial_top_bar_title">Pro Tutorial</string>
     <string name="flat_pro_popup_title">Don\'t miss out on our SALE!</string>
     <string name="tilt_configuration_disabled">Disabled</string>
