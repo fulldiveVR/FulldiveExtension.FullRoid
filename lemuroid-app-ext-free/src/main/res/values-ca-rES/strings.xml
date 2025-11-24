@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ /*
-  ~  *  RetrogradeApplicationComponent.kt
-  ~  *
-  ~  *  Copyright (C) 2017 Retrograde Project
-  ~  *
-  ~  *  This program is free software: you can redistribute it and/or modify
-  ~  *  it under the terms of the GNU General Public License as published by
-  ~  *  the Free Software Foundation, either version 3 of the License, or
-  ~  *  (at your option) any later version.
-  ~  *
-  ~  *  This program is distributed in the hope that it will be useful,
-  ~  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~  *  GNU General Public License for more details.
-  ~  *
-  ~  *  You should have received a copy of the GNU General Public License
-  ~  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  ~  *
-  ~  */
-  -->
-
 <resources>
     <string name="game_loading_download_core">Descarregant nucli…</string>
+    <string name="installing_core_notification_title">Actualitzant els nuclis</string>
+    <string name="installing_core_notification_message">Això pot trigar uns minuts</string>
+    <string name="game_loader_error_load_core">El nucli de Libretro no s\'ha carregat. Assegureu-vos que el dispositiu estigui connectat a Internet i intenteu tornar a escanejar la vostra biblioteca. Si el problema persisteix, és possible que aquest nucli no sigui compatible amb el dispositiu.</string>
 </resources>

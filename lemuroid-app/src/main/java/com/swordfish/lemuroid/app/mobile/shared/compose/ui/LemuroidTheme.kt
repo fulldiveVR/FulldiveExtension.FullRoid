@@ -1,14 +1,13 @@
 package com.swordfish.lemuroid.app.mobile.shared.compose.ui
 
 import android.os.Build
-import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import androidx.compose.ui.platform.LocalContext
 
 private val LightColorScheme =
     lightColorScheme(
@@ -78,35 +77,19 @@ private val DarkColorScheme =
 
 @Composable
 fun AppTheme(
-    themeSystemUi: Boolean = true,
-    // Let's currently force the dark theme (in the future isSystemInDarkTheme())
     darkTheme: Boolean = true,
     content: @Composable () -> Unit,
 ) {
     val dynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
     val colors =
         when {
-//            dynamicColor && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
-//            dynamicColor && !darkTheme -> dynamicLightColorScheme(LocalContext.current)
+            dynamicColor && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
+            dynamicColor && !darkTheme -> dynamicLightColorScheme(LocalContext.current)
             darkTheme -> DarkColorScheme
             else -> LightColorScheme
         }
 
     MaterialTheme(colorScheme = colors) {
-        val statusBarColor =
-            MaterialTheme.colorScheme.surfaceColorAtElevation(
-                BottomAppBarDefaults.ContainerElevation,
-            )
-
-        if (themeSystemUi) {
-            val systemUiController = rememberSystemUiController()
-
-            SideEffect {
-                systemUiController.setSystemBarsColor(statusBarColor, !darkTheme)
-                systemUiController.systemBarsDarkContentEnabled = !darkTheme
-            }
-        }
-
         content()
     }
 }

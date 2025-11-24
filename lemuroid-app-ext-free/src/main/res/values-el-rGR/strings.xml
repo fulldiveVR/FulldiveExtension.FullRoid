@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ /*
-  ~  *  RetrogradeApplicationComponent.kt
-  ~  *
-  ~  *  Copyright (C) 2017 Retrograde Project
-  ~  *
-  ~  *  This program is free software: you can redistribute it and/or modify
-  ~  *  it under the terms of the GNU General Public License as published by
-  ~  *  the Free Software Foundation, either version 3 of the License, or
-  ~  *  (at your option) any later version.
-  ~  *
-  ~  *  This program is distributed in the hope that it will be useful,
-  ~  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~  *  GNU General Public License for more details.
-  ~  *
-  ~  *  You should have received a copy of the GNU General Public License
-  ~  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  ~  *
-  ~  */
-  -->
-
-<resources></resources>
+<resources>
+    <string name="game_loading_download_core">Λήψη πυρήνα…</string>
+    <string name="installing_core_notification_title">Ενημέρωση Πυρήνων</string>
+    <string name="installing_core_notification_message">H διαδικασία ίσως διαρκέσει μερικά λεπτά</string>
+    <string name="game_loader_error_load_core">Ο πυρήνας του Libretro δεν φορτώθηκε. Βεβαιωθείτε ότι η συσκευή σας είναι συνδεδεμένη στο διαδίκτυο και προσπαθήστε να σαρώσετε ξανά τη βιβλιοθήκη σας. Εάν το πρόβλημα επιμείνει, αυτός ο πυρήνας μπορεί να μην υποστηρίζεται στη συσκευή σας.</string>
+</resources>

@@ -22,6 +22,7 @@
 
 package com.swordfish.lemuroid.app.tv
 
+import android.content.SharedPreferences
 import com.swordfish.lemuroid.app.tv.folderpicker.TVFolderPickerActivity
 import com.swordfish.lemuroid.app.tv.folderpicker.TVFolderPickerLauncher
 import com.swordfish.lemuroid.app.tv.game.TVGameActivity
@@ -31,8 +32,11 @@ import com.swordfish.lemuroid.app.tv.input.TVGamePadShortcutBindingActivity
 import com.swordfish.lemuroid.app.tv.main.MainTVActivity
 import com.swordfish.lemuroid.app.tv.settings.TVSettingsActivity
 import com.swordfish.lemuroid.lib.injection.PerActivity
+import com.swordfish.lemuroid.lib.injection.PerApp
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
+import dagger.Provides
 
 @Module
 abstract class LemuroidTVApplicationModule {

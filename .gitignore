@@ -21,3 +21,4 @@ release.jks
 ../googlekey.txt
 ../google-services.json
 
+.kotlin/sessions/*.salive

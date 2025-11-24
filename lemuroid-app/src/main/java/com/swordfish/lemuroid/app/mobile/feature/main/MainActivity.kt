@@ -270,11 +270,12 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                         HomeViewModel.Factory(
                                             applicationContext,
                                             retrogradeDb,
-                                            coresSelection
+                                            coresSelection,
                                         ),
                                 ),
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
+                            onOpenCoreSelection = { navController.navigateToRoute(MainRoute.SETTINGS_CORES_SELECTION) },
                         )
                         when {
                             isFinWizeVisible.value -> {
@@ -543,7 +544,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
     override fun activity(): Activity = this
 
-    override fun isBusy(): Boolean = mainViewModel.state.value.operationInProgress
+    override fun isBusy(): Boolean = mainViewModel.state.value.operationInProgress ?: false
 
     override fun onActivityResult(
         requestCode: Int,

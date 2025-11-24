@@ -15,7 +15,6 @@ import com.swordfish.lemuroid.app.shared.input.InputKey
 import com.swordfish.lemuroid.app.shared.input.RetroKey
 import com.swordfish.lemuroid.app.shared.input.ShortcutBindingUpdater
 import com.swordfish.lemuroid.app.shared.input.lemuroiddevice.getLemuroidInputDevice
-import com.swordfish.lemuroid.app.shared.settings.GameShortcut
 import com.swordfish.lemuroid.app.shared.settings.GameShortcutType
 import com.swordfish.lemuroid.app.tv.input.TVGamePadBindingActivity
 import com.swordfish.lemuroid.app.tv.input.TVGamePadShortcutBindingActivity
@@ -120,7 +119,7 @@ class GamePadPreferencesHelper(private val inputDeviceManager: InputDeviceManage
         preferenceScreen: PreferenceScreen,
         inputDevice: InputDevice,
     ) {
-        val inverseBindings: Map<RetroKey, InputKey> =
+        val inverseBindings =
             inputDeviceManager.getCurrentBindings(inputDevice)
                 .map { it.value to it.key }
                 .toMap()
@@ -133,6 +132,19 @@ class GamePadPreferencesHelper(private val inputDeviceManager: InputDeviceManage
                 preference?.summaryProvider =
                     Preference.SummaryProvider<Preference> {
                         InputKey(boundKey).displayName()
+                    }
+            }
+
+        val shortcuts = inputDeviceManager.getCurrentShortcuts(inputDevice)
+            .associateBy { it.type }
+
+        GameShortcutType.entries
+            .forEach { type ->
+                val preferenceKey = InputDeviceManager.computeGameShortcutPreference(inputDevice, type)
+                val preference = preferenceScreen.findPreference<Preference>(preferenceKey)
+                preference?.summaryProvider =
+                    Preference.SummaryProvider<Preference> {
+                        shortcuts[type]?.name ?: ""
                     }
             }
     }
@@ -183,7 +195,6 @@ class GamePadPreferencesHelper(private val inputDeviceManager: InputDeviceManage
         inputDevice: InputDevice,
         type: GameShortcutType,
     ): Preference? {
-        GameShortcut.getDefault(inputDevice, type) ?: return null
         val preference = Preference(context)
         preference.key = InputDeviceManager.computeGameShortcutPreference(inputDevice, type)
         preference.title = type.displayName()
