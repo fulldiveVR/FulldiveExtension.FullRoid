@@ -25,8 +25,30 @@ package com.swordfish.lemuroid.app.mobile.feature.main
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import androidx.activity.SystemBarStyle
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
@@ -50,6 +72,26 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesScreen
+import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesViewModel
+import com.swordfish.lemuroid.app.mobile.feature.games.GamesScreen
+import com.swordfish.lemuroid.app.mobile.feature.games.GamesViewModel
+import com.swordfish.lemuroid.app.mobile.feature.home.HomeScreen
+import com.swordfish.lemuroid.app.mobile.feature.home.HomeViewModel
+import com.swordfish.lemuroid.app.mobile.feature.search.SearchScreen
+import com.swordfish.lemuroid.app.mobile.feature.search.SearchViewModel
+import com.swordfish.lemuroid.app.mobile.feature.settings.advanced.AdvancedSettingsScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.advanced.AdvancedSettingsViewModel
+import com.swordfish.lemuroid.app.mobile.feature.settings.bios.BiosScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.bios.BiosSettingsViewModel
+import com.swordfish.lemuroid.app.mobile.feature.settings.coreselection.CoresSelectionScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.coreselection.CoresSelectionViewModel
+import com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel
+import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevicesSettingsScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevicesSettingsViewModel
+import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsViewModel
 import com.swordfish.lemuroid.app.appextension.FIN_WIZE_APP
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.PopupManager
@@ -100,8 +142,8 @@ import com.swordfish.lemuroid.lib.android.RetrogradeComponentActivity
 import com.swordfish.lemuroid.lib.bios.BiosManager
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.injection.PerActivity
-import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.MetaSystemID
+import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -270,64 +312,14 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                         HomeViewModel.Factory(
                                             applicationContext,
                                             retrogradeDb,
-                                            coresSelection
+                                            coresSelection,
                                         ),
                                 ),
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
+                            onOpenCoreSelection = { navController.navigateToRoute(MainRoute.SETTINGS_CORES_SELECTION) },
                         )
-                        when {
-                            isFinWizeVisible.value -> {
-                                actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_SHOWN)
-                                FinWizeLayout(
-                                    onClick = {
-                                        actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP)
-                                        this@MainActivity.openAppInGooglePlay(FIN_WIZE_APP)
-                                        isFinWizeVisible.value = false
-                                    },
-                                    onCloseClick = {
-                                        actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
-                                        isFinWizeVisible.value = false
-                                    }
-                                )
-                            }
-
-                            isProPopupVisible.value && !isFinWizeVisible.value -> {
-                                actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_SHOWN)
-                                ProPopupLayout(
-                                    onClick = {
-                                        actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP)
-                                        navController.navigateToRoute(MainRoute.PRO_TUTORIAL)
-                                        isProPopupVisible.value = false
-                                    },
-                                    onCloseClick = {
-                                        actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
-                                        isProPopupVisible.value = false
-                                    }
-                                )
-                            }
-
-                            isDiscordPopupVisible.value && !isFinWizeVisible.value && !isProPopupVisible.value -> {
-                                actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_SHOWN)
-                                DiscordPopupLayout(
-                                    onClick = {
-                                        actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_CLICKED)
-                                        startActivity(Intent(Intent.ACTION_VIEW).apply {
-                                            data = Uri.parse(PopupManager.DISCORD_INVITATION)
-                                        })
-                                        isDiscordPopupVisible.value = false
-                                    },
-                                    onCloseClick = {
-                                        actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_CLOSED)
-                                        isDiscordPopupVisible.value = false
-                                    }
-                                )
-                            }
-
-                            else -> Unit
-                        }
                     }
-
                     composable(MainRoute.FAVORITES) {
                         FavoritesScreen(
                             modifier = Modifier.padding(padding),
@@ -404,25 +396,6 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             navController = navController,
                         )
                     }
-
-                    composable(MainRoute.PRO_TUTORIAL) {
-                        actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_TOOLBAR)
-                        ProTutorialScreen(
-                            modifier = Modifier.padding(padding),
-                            viewModel =
-                                viewModel(
-                                    factory =
-                                        AdvancedSettingsViewModel.Factory(
-                                            applicationContext,
-                                            settingsInteractor,
-                                        ),
-                                ),
-                            navController = navController,
-                            onBuyProClick = {
-                                openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
-                            }
-                        )
-                    }
                     composable(MainRoute.SETTINGS_ADVANCED) {
                         AdvancedSettingsScreen(
                             modifier = Modifier.padding(padding),
@@ -486,64 +459,42 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         )
                     }
                 }
+            }
 
-                MainGameContextActions(
-                    selectedGameState = selectedGameState,
-                    shortcutSupported = gameInteractor.supportShortcuts(),
-                    onGamePlay = { gameInteractor.onGamePlay(it) },
-                    onGameRestart = { gameInteractor.onGameRestart(it) },
-                    onFavoriteToggle = { game: Game, isFavorite: Boolean ->
-                        gameInteractor.onFavoriteToggle(game, isFavorite)
-                    },
-                    onCreateShortcut = { gameInteractor.onCreateShortcut(it) },
-                    onShareDiscord = { shareDiscordDialogDisplayed.value = it }
+            MainGameContextActions(
+                selectedGameState = selectedGameState,
+                shortcutSupported = gameInteractor.supportShortcuts(),
+                onGamePlay = { gameInteractor.onGamePlay(it) },
+                onGameRestart = { gameInteractor.onGameRestart(it) },
+                onFavoriteToggle = { game: Game, isFavorite: Boolean ->
+                    gameInteractor.onFavoriteToggle(game, isFavorite)
+                },
+                onCreateShortcut = { gameInteractor.onCreateShortcut(it) },
+            )
+
+            if (infoDialogDisplayed.value) {
+                val message =
+                    remember {
+                        val systemFolders =
+                            SystemID.values()
+                                .joinToString(", ") { "<i>${it.dbname}</i>" }
+
+                        getString(R.string.lemuroid_help_content)
+                            .replace("\$SYSTEMS", systemFolders)
+                    }
+
+                AlertDialog(
+                    text = { HtmlText(text = message) },
+                    onDismissRequest = { infoDialogDisplayed.value = false },
+                    confirmButton = { },
                 )
-
-                val game = shareDiscordDialogDisplayed.value
-                if (game != null) {
-                    ShowShareDialog(
-                        game = game,
-                        onPositiveClicked = { content, imageUrl ->
-                            shareDiscordTextGenerator.shareGame(
-                                content,
-                                imageUrl,
-                                onSuccess = {
-                                    Toast.makeText(this, "Feedback is successfully shared!", Toast.LENGTH_SHORT)
-                                        .show()
-                                },
-                                onError = {
-                                    Toast.makeText(this, "Error while share  feedback!", Toast.LENGTH_SHORT).show()
-                                }
-                            )
-                        },
-                        onDismissRequest = { shareDiscordDialogDisplayed.value = null }
-                    )
-                }
-
-                if (infoDialogDisplayed.value) {
-                    val message =
-                        remember {
-                            val systemFolders =
-                                SystemID.values()
-                                    .joinToString(", ") { "<i>${it.dbname}</i>" }
-
-                            getString(R.string.lemuroid_help_content)
-                                .replace("\$SYSTEMS", systemFolders)
-                        }
-
-                    AlertDialog(
-                        text = { HtmlText(text = message) },
-                        onDismissRequest = { infoDialogDisplayed.value = false },
-                        confirmButton = { },
-                    )
-                }
             }
         }
     }
 
     override fun activity(): Activity = this
 
-    override fun isBusy(): Boolean = mainViewModel.state.value.operationInProgress
+    override fun isBusy(): Boolean = mainViewModel.state.value.operationInProgress ?: false
 
     override fun onActivityResult(
         requestCode: Int,

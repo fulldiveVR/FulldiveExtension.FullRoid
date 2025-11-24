@@ -1,8 +1,8 @@
 package com.swordfish.lemuroid.app.shared.game
 
 import android.app.Activity
-import android.content.Intent
 import android.content.SharedPreferences
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MotionEvent
@@ -11,8 +11,6 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import com.swordfish.lemuroid.BuildConfig
-import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
@@ -25,7 +23,6 @@ import com.swordfish.lemuroid.app.shared.game.viewmodel.GameViewModelSideEffects
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.rumble.RumbleManager
 import com.swordfish.lemuroid.app.shared.settings.ControllerConfigsManager
-import com.swordfish.lemuroid.app.shared.settings.HDModeQuality
 import com.swordfish.lemuroid.app.tv.game.TVGameActivity
 import com.swordfish.lemuroid.common.animationDuration
 import com.swordfish.lemuroid.common.coroutines.launchOnState
@@ -42,7 +39,6 @@ import com.swordfish.lemuroid.lib.saves.SavesManager
 import com.swordfish.lemuroid.lib.saves.StatesManager
 import com.swordfish.lemuroid.lib.saves.StatesPreviewManager
 import com.swordfish.touchinput.radial.sensors.TiltConfiguration
-import dagger.Lazy
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -89,8 +85,6 @@ abstract class BaseGameActivity : ImmersiveActivity() {
 
     private lateinit var baseGameScreenViewModel: BaseGameScreenViewModel
 
-    private var defaultExceptionHandler: Thread.UncaughtExceptionHandler? = Thread.getDefaultUncaughtExceptionHandler()
-
     private val startGameTime = System.currentTimeMillis()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,6 +94,36 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         game = intent.getSerializableExtra(EXTRA_GAME) as Game
         systemCoreConfig = intent.getSerializableExtra(EXTRA_SYSTEM_CORE_CONFIG) as SystemCoreConfig
         system = GameSystem.findById(game.systemId, isProVersion())
+
+        val viewModel by viewModels<BaseGameScreenViewModel> {
+            BaseGameScreenViewModel.Factory(
+                applicationContext,
+                game,
+                settingsManager,
+                inputDeviceManager,
+                controllerConfigsManager,
+                system,
+                systemCoreConfig,
+                sharedPreferences.get(),
+                statesManager,
+                statesPreviewManager,
+                legacySavesManager,
+                coreVariablesManager,
+                rumbleManager,
+            )
+        }
+
+        baseGameScreenViewModel = viewModel
+
+        lifecycle.addObserver(baseGameScreenViewModel)
+
+        setContent {
+            AppTheme {
+                BaseGameScreen(viewModel = baseGameScreenViewModel) {
+                    GameScreen(viewModel)
+                }
+            }
+        }
 
         val viewModel by viewModels<BaseGameScreenViewModel> {
             BaseGameScreenViewModel.Factory(
@@ -156,7 +180,6 @@ abstract class BaseGameActivity : ImmersiveActivity() {
     private fun setUpExceptionsHandler() {
         Thread.setDefaultUncaughtExceptionHandler { thread, exception ->
             performUnexpectedErrorFinish(exception)
-            defaultExceptionHandler?.uncaughtException(thread, exception)
         }
     }
 
@@ -195,10 +218,16 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                     GameMenuContract.EXTRA_CURRENT_DISK,
                     baseGameScreenViewModel.retroGameView.retroGameView?.getCurrentDisk() ?: 0
                 )
-                this.putExtra(GameMenuContract.EXTRA_DISKS, baseGameScreenViewModel.retroGameView.retroGameView?.getAvailableDisks() ?: 0)
+                this.putExtra(
+                    GameMenuContract.EXTRA_DISKS,
+                    baseGameScreenViewModel.retroGameView.retroGameView?.getAvailableDisks() ?: 0
+                )
                 this.putExtra(GameMenuContract.EXTRA_GAME, game)
                 this.putExtra(GameMenuContract.EXTRA_SYSTEM_CORE_CONFIG, systemCoreConfig)
-                this.putExtra(GameMenuContract.EXTRA_AUDIO_ENABLED, baseGameScreenViewModel.retroGameView.retroGameView?.audioEnabled)
+                this.putExtra(
+                    GameMenuContract.EXTRA_AUDIO_ENABLED,
+                    baseGameScreenViewModel.retroGameView.retroGameView?.audioEnabled
+                )
                 this.putExtra(GameMenuContract.EXTRA_FAST_FORWARD_SUPPORTED, system.fastForwardSupport)
                 this.putExtra(
                     GameMenuContract.EXTRA_FAST_FORWARD,
@@ -233,6 +262,7 @@ abstract class BaseGameActivity : ImmersiveActivity() {
                         it.currentTiltConfiguration,
                         it.tiltConfigurations
                     )
+
                     is GameViewModelSideEffects.UiEffect.ShowToast -> displayToast(it.message)
                     is GameViewModelSideEffects.UiEffect.SuccessfulFinish -> performSuccessfulActivityFinish()
                     is GameViewModelSideEffects.UiEffect.FailureFinish -> performErrorFinish(it.message)

@@ -75,21 +75,26 @@ class InputDeviceManager(
 
     private fun getShortcutBindingsFlow(device: InputDevice): Flow<List<GameShortcut>> {
         val flows =
-            GameShortcutType.values().map { type ->
+            GameShortcutType.entries.map { type ->
                 flowSharedPreferences.getString(computeGameShortcutPreference(device, type))
                     .asFlow()
-                    .mapNotNull { preference ->
-                        if (preference.isEmpty()) return@mapNotNull GameShortcut.getDefault(device, type)
-                        val decoded = runCatching { Json.decodeFromString(bindingsComboSerializer, preference) }
-                        val combo = decoded.getOrNull() ?: return@mapNotNull GameShortcut.getDefault(device, type)
-                        GameShortcut(type = type, keys = setOf(combo.first.keyCode, combo.second.keyCode))
-                    }
+                    .map { parseShortcutPreference(it, device, type) }
             }
         return if (flows.isEmpty()) {
             flowOf(emptyList())
         } else {
-            combine(flows) { it.toList() }
+            combine(flows) { shortcuts -> shortcuts.mapNotNull { it } }
         }.flowOn(Dispatchers.IO)
+    }
+
+    private fun parseShortcutPreference(preference: String?, device: InputDevice, type: GameShortcutType): GameShortcut? {
+        return if (preference.isNullOrEmpty()) {
+            GameShortcut.getDefault(device, type)
+        } else {
+            val decoded = runCatching { Json.decodeFromString(bindingsComboSerializer, preference) }
+            val combo = decoded.getOrNull() ?: return GameShortcut.getDefault(device, type)
+            GameShortcut(type = type, keys = setOf(combo.first.keyCode, combo.second.keyCode))
+        }
     }
 
     suspend fun getCurrentBindings(inputDevice: InputDevice): Map<InputKey, RetroKey> {
@@ -100,6 +105,15 @@ class InputDeviceManager(
                     "",
                 )
             parseBindingsPreference(preference, inputDevice)
+        }
+    }
+
+    suspend fun getCurrentShortcuts(inputDevice: InputDevice): List<GameShortcut> {
+        return withContext(Dispatchers.IO) {
+            GameShortcutType.entries.mapNotNull { type ->
+                val preference = sharedPreferences.getString(computeGameShortcutPreference(inputDevice, type), "")
+                parseShortcutPreference(preference, inputDevice, type)
+            }
         }
     }
 
@@ -130,9 +144,21 @@ class InputDeviceManager(
 
         val sharedPreferencesContent = Json.encodeToString(bindingsMapSerializer, bindings.toMap())
 
-        sharedPreferences.edit()
-            .putString(computeKeyBindingGamePadPreference(inputDevice), sharedPreferencesContent)
-            .commit()
+        sharedPreferences.edit(commit = true) {
+            putString(computeKeyBindingGamePadPreference(inputDevice), sharedPreferencesContent)
+        }
+    }
+
+    suspend fun updateShortcutBinding(
+        inputDevice: InputDevice,
+        shortcutType: GameShortcutType,
+        inputKeys: Pair<InputKey, InputKey>,
+    ) = withContext(Dispatchers.IO) {
+        sharedPreferences.edit(commit = true) {
+            val key = computeGameShortcutPreference(inputDevice, shortcutType)
+            val value = Json.encodeToString(bindingsComboSerializer, inputKeys)
+            putString(key, value)
+        }
     }
 
     suspend fun updateShortcutBinding(
@@ -149,11 +175,11 @@ class InputDeviceManager(
 
     suspend fun resetAllBindings() =
         withContext(Dispatchers.IO) {
-            val editor = sharedPreferences.edit()
+             sharedPreferences.edit(commit = true) {
             sharedPreferences.all.keys
                 .filter { it.startsWith(GAME_PAD_BINDING_PREFERENCE_BASE_KEY) }
-                .forEach { editor.remove(it) }
-            editor.commit()
+                .forEach { remove(it) }
+            }
         }
 
     fun getGamePadsObservable(): Flow<List<InputDevice>> {

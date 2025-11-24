@@ -279,6 +279,7 @@ class GameViewModelInput(
                 val port = ports(device)
                 val bindKeyCode = bindings(device)[InputKey(keyCode)]?.keyCode ?: keyCode
 
+                // fftf, may be not actual
                 if (bindKeyCode == KeyEvent.KEYCODE_BACK && action == KeyEvent.ACTION_DOWN) {
                     sideEffects.requestSuccessfulFinish()
                     return@safeCollect

@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ /*
-  ~  *  RetrogradeApplicationComponent.kt
-  ~  *
-  ~  *  Copyright (C) 2017 Retrograde Project
-  ~  *
-  ~  *  This program is free software: you can redistribute it and/or modify
-  ~  *  it under the terms of the GNU General Public License as published by
-  ~  *  the Free Software Foundation, either version 3 of the License, or
-  ~  *  (at your option) any later version.
-  ~  *
-  ~  *  This program is distributed in the hope that it will be useful,
-  ~  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~  *  GNU General Public License for more details.
-  ~  *
-  ~  *  You should have received a copy of the GNU General Public License
-  ~  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  ~  *
-  ~  */
+  ~ strings.xml
+  ~
+  ~ Copyright (C) 2017 Retrograde Project
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~  You should have received a copy of the GNU General Public License
+  ~  along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <resources>
     <string name="gdrive_sign_in_failed">Accesso a Google non riuscito: %s (%s)</string>
@@ -29,4 +26,10 @@
     <string name="gdrive_connected_none_summary">Non configurato</string>
     <string name="gdrive_last_sync_completed">Ultima sincronizzazione: %s</string>
     <string name="game_loading_download_core">Scaricamento core…</string>
+    <string name="installing_core_notification_title">Aggiornamento core da Play</string>
+    <string name="installing_core_notification_message">Controlla l\'applicazione Google Play Store per conoscere lo stato attuale</string>
+    <string name="game_loader_error_load_core">Il core Libretro non è stato caricato. Prova quanto segue:\n
+        \n\u2022 Attiva la connessione internet e riscansiona i tuoi giochi
+        \n\u2022 Assicurati che Google Play Store sia installato ed in esecuzione
+        \n\u2022 Attendi che le operazioni in sospeso nell\'app di Google Play Store siano completate</string>
 </resources>

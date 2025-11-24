@@ -65,6 +65,7 @@ import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.dao.GameSearchDao
 import com.swordfish.lemuroid.lib.library.db.dao.Migrations
 import com.swordfish.lemuroid.lib.library.metadata.GameMetadataProvider
+import com.swordfish.lemuroid.lib.migration.DesmumeMigrationHandler
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.saves.SavesCoherencyEngine
 import com.swordfish.lemuroid.lib.saves.SavesManager
@@ -273,6 +274,7 @@ abstract class LemuroidApplicationModule {
             savesCoherencyEngine: SavesCoherencyEngine,
             directoriesManager: DirectoriesManager,
             biosManager: BiosManager,
+            desmumeMigrationHandler: DesmumeMigrationHandler,
         ) = GameLoader(
             lemuroidLibrary,
             statesManager,
@@ -282,6 +284,7 @@ abstract class LemuroidApplicationModule {
             savesCoherencyEngine,
             directoriesManager,
             biosManager,
+            desmumeMigrationHandler,
         )
 
         @Provides
@@ -305,7 +308,10 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun coresSelection(sharedPreferences: Lazy<SharedPreferences>) = CoresSelection(sharedPreferences)
+        fun coresSelection(
+            sharedPreferences: Lazy<SharedPreferences>,
+            desmumeMigrationHandler: DesmumeMigrationHandler,
+        ) = CoresSelection(sharedPreferences, desmumeMigrationHandler)
 
         @Provides
         @PerApp
@@ -327,6 +333,11 @@ abstract class LemuroidApplicationModule {
             context: Context,
             directoriesManager: DirectoriesManager,
         ) = SaveSyncManagerImpl(context, directoriesManager)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun desmumeMigrationHandler(directoriesManager: DirectoriesManager) = DesmumeMigrationHandler(directoriesManager)
 
         @Provides
         @PerApp
