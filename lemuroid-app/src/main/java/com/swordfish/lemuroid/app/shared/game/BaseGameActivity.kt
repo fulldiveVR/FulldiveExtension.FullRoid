@@ -46,6 +46,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.system.exitProcess
+import dagger.Lazy
 
 @OptIn(DelicateCoroutinesApi::class)
 abstract class BaseGameActivity : ImmersiveActivity() {
@@ -94,36 +95,6 @@ abstract class BaseGameActivity : ImmersiveActivity() {
         game = intent.getSerializableExtra(EXTRA_GAME) as Game
         systemCoreConfig = intent.getSerializableExtra(EXTRA_SYSTEM_CORE_CONFIG) as SystemCoreConfig
         system = GameSystem.findById(game.systemId, isProVersion())
-
-        val viewModel by viewModels<BaseGameScreenViewModel> {
-            BaseGameScreenViewModel.Factory(
-                applicationContext,
-                game,
-                settingsManager,
-                inputDeviceManager,
-                controllerConfigsManager,
-                system,
-                systemCoreConfig,
-                sharedPreferences.get(),
-                statesManager,
-                statesPreviewManager,
-                legacySavesManager,
-                coreVariablesManager,
-                rumbleManager,
-            )
-        }
-
-        baseGameScreenViewModel = viewModel
-
-        lifecycle.addObserver(baseGameScreenViewModel)
-
-        setContent {
-            AppTheme {
-                BaseGameScreen(viewModel = baseGameScreenViewModel) {
-                    GameScreen(viewModel)
-                }
-            }
-        }
 
         val viewModel by viewModels<BaseGameScreenViewModel> {
             BaseGameScreenViewModel.Factory(

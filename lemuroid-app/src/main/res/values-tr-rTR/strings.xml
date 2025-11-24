@@ -48,7 +48,7 @@
     <string name="settings_bios_category_detected">Algılanan</string>
     <string name="settings_bios_category_not_detected">Desteklenen</string>
     <string name="settings_title_reset_settings">Fabrika ayarlarına sıfırla</string>
-    <string name="settings_description_reset_settings">Lemuroid\'i fabrika ayarlarına sıfırla</string>
+    <string name="settings_description_reset_settings">Fulldroid\'i fabrika ayarlarına sıfırla</string>
     <string name="settings_title_advanced_settings">Gelişmiş Ayarlar</string>
     <string name="settings_description_advanced_settings">Gelişmiş ayarları göster</string>
     <string name="settings_title_low_latency_audio">Düşük gecikmeli sesi tercih et</string>
@@ -60,7 +60,7 @@
     <string name="settings_title_enable_device_rumble">Cihaz titreşimi</string>
     <string name="settings_description_enable_device_rumble">Kontrolcü bağlı değilken cihazı titreştir</string>
     <string name="reset_settings_warning_message_title">emin misiniz?</string>
-    <string name="reset_settings_warning_message_description">Bu Lemuroid\'i fabrika ayarlarına sıfırlayacak. Kayıtlar ve Durumlar korunacak.</string>
+    <string name="reset_settings_warning_message_description">Bu Fulldroid\'i fabrika ayarlarına sıfırlayacak. Kayıtlar ve Durumlar korunacak.</string>
     <string name="settings_title_save_sync">Bulut Depolama</string>
     <string name="settings_description_save_sync">Bulutta kayıtlarınızı yedekleyin ve senkronize edin</string>
     <string name="settings_save_sync_refresh">Manuel Senkronize</string>
@@ -78,10 +78,10 @@
     <string name="game_context_menu_restart">Yeniden Başlat</string>
     <string name="game_context_menu_create_shortcut">Ana Ekrana Sabitle</string>
     <string name="home_notification_title">Bildirimleri Aç</string>
-    <string name="home_notification_message">Lemuroid, bir oyun veya işlemin arka planda çalıştığını size bildirmek için bildirimleri kullanır.</string>
+    <string name="home_notification_message">Fulldroid, bir oyun veya işlemin arka planda çalıştığını size bildirmek için bildirimleri kullanır.</string>
     <string name="home_notification_action">Aç</string>
     <string name="home_empty_title">ROMların konumunu seç</string>
-    <string name="home_empty_message">Lemuroid\'in ROM dosyalarını içeren bir dizini taraması gerekiyor.\n Bu birkaç dakika sürebilir.</string>
+    <string name="home_empty_message">Fulldroid\'in ROM dosyalarını içeren bir dizini taraması gerekiyor.\n Bu birkaç dakika sürebilir.</string>
     <string name="home_empty_action">Konum seç</string>
     <string name="game_menu_save">Kaydet</string>
     <string name="game_menu_load">Yükle</string>
@@ -112,13 +112,13 @@
     <string name="game_running_notification_title_alternative">Oyun çalışıyor</string>
     <string name="game_running_notification_message">Oyunu kaydettiğinizden emin olun</string>
     <string name="game_loader_error_gl_incompatible">Bu çekirdek cihazınız tarafından desteklenmeyen bir OpenGL ES versiyonunu gerektiriyor.</string>
-    <string name="game_loader_error_load_game">Oyununuzu yüklerken kötü bir şey oldu. ROM\'un Lemuroid tarafından desteklendiğinden emin olun ve oyunlarınızı yeniden tarayın.</string>
+    <string name="game_loader_error_load_game">Oyununuzu yüklerken kötü bir şey oldu. ROM\'un Fulldroid tarafından desteklendiğinden emin olun ve oyunlarınızı yeniden tarayın.</string>
     <string name="game_loader_error_save">Kayıt dosyası ile kötü bir şey oldu. Eğer sorun devam ediyorsa, otomatik kayıtı devre dışı bırakmayı deneyin.</string>
     <string name="game_loader_error_unsupported_architecture">Bu Çekirdek cihazınız tarafından desteklenmiyor.</string>
     <string name="game_loader_error_generic">Kötü bir şey oldu. Aşağıdakileri deneyin:\n
         \n\u2022 Otomatik kayıtı devre dışı bırakın ve oyunu yeniden çalıştırın
         \n\u2022 Android ayarlarına gidin ve uygulama önbelleğini temizleyin
-        \n\u2022 Lemuroid ayarlarına gidin ve fabrika ayarı sıfırlaması yapın
+        \n\u2022 Fulldroid ayarlarına gidin ve fabrika ayarı sıfırlaması yapın
         \n\n Eğer yukarıdakilerin hiçbiri çalışmıyorsa, bu Oyun/Çekirdek bu cihazı desteklenmiyor olabilir.
     </string>
     <string name="game_loader_error_missing_bios">Görünüşe göre gerekli olan BIOS\'unuz eksik. ROM\'unuza ekleyin ve yeniden tarayın. Gerekli dosyalar: %1$s</string>
@@ -143,18 +143,18 @@
     <string name="game_interactory_busy">çalışmakta olan işlemlerin bitmesini bekleyin!</string>
     <string name="mobile_settings_help">Yardım</string>
     <string name="mobile_settings_support">Destek</string>
-    <string name="lemuroid_help_content"><![CDATA[        <b>&#8226;Lemuroid\'i nasıl kullanırım?</b></b>
-        Tüm ROMları bir klasör içinde kopyalayın ve Lemuroid içinde seçin. Bu klasörün alt klasör olmasına izin verilebilir. Tarama tamamlandıktan sonra oyunlarınızı görmelisiniz.<br/><br/>
+    <string name="lemuroid_help_content"><![CDATA[        <b>&#8226;Fulldroid\'i nasıl kullanırım?</b></b>
+        Tüm ROMları bir klasör içinde kopyalayın ve Fulldroid içinde seçin. Bu klasörün alt klasör olmasına izin verilebilir. Tarama tamamlandıktan sonra oyunlarınızı görmelisiniz.<br/><br/>
         <b>&#8226; Neden oyunlarım tespit edilmedi?</b><br/>
         Eğer oyunlarınız sıkıştırılmışsa, çıkartmayı deneyin. Eğer bu çalışmıyorsa ROMları ayrı klasöre koyun, aşağıdaki adlara sahip her sistem için bir tane: $SYSTEMS.
     ]]></string>
     <string name="lemuroid_crash_disclamer">Görünüşe göre Libretro çekirdeği beklenmedik bir sorunla karşılaştı. Eğer kalıcıysa şunları deneyin:\n
         \n\u2022 Otomatik kayıtı devre dışı bırakın ve oyunu yeniden çalıştırın
         \n\u2022 Android ayarlarına gidin ve uygulama önbelleğini temizleyin
-        \n\u2022 Lemuroid ayarlarına gidin ve fabrika ayarı sıfırlaması yapın
+        \n\u2022 Fulldroid ayarlarına gidin ve fabrika ayarı sıfırlaması yapın
         \n\n Eğer yukarıdakilerin hiçbiri çalışmıyorsa, bu Oyun/Çekirdek bu cihazı desteklemiyor olabilir.
     </string>
-    <string name="error_message_incompatible_state">Bu kayıt durumu mevcut çekirdek sürümüyle mevcut değil. Lütfen en son oyun içi kayıtı yükleyin veya önceki Lemuroid versiyonunu kullanın.</string>
+    <string name="error_message_incompatible_state">Bu kayıt durumu mevcut çekirdek sürümüyle mevcut değil. Lütfen en son oyun içi kayıtı yükleyin veya önceki Fulldroid versiyonunu kullanın.</string>
     <string name="shader_filter_names_auto">Otomatik</string>
     <string name="shader_filter_names_sharp">Keskin</string>
     <string name="shader_filter_names_smooth">Yumuşak</string>

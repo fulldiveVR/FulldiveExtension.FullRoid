@@ -161,18 +161,6 @@ class InputDeviceManager(
         }
     }
 
-    suspend fun updateShortcutBinding(
-        inputDevice: InputDevice,
-        shortcutType: GameShortcutType,
-        inputKeys: Pair<InputKey, InputKey>,
-    ) = withContext(Dispatchers.IO) {
-        sharedPreferences.edit(commit = true) {
-            val key = computeGameShortcutPreference(inputDevice, shortcutType)
-            val value = Json.encodeToString(bindingsComboSerializer, inputKeys)
-            putString(key, value)
-        }
-    }
-
     suspend fun resetAllBindings() =
         withContext(Dispatchers.IO) {
              sharedPreferences.edit(commit = true) {

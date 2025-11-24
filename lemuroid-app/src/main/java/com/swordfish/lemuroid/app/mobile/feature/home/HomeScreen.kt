@@ -116,14 +116,15 @@ private fun HomeScreen(
                 enabled = !state.indexInProgress,
             )
         }
-        AnimatedVisibility(state.showNoMicrophonePermissionCard) {
-            HomeNotification(
-                titleId = R.string.home_microphone_title,
-                messageId = R.string.home_microphone_message,
-                actionId = R.string.home_microphone_action,
-                onAction = onEnableMicrophoneClicked,
-            )
-        }
+        // Microphone permission card removed - incomplete feature from merge
+        // AnimatedVisibility(state.showNoMicrophonePermissionCard) {
+        //     HomeNotification(
+        //         titleId = R.string.home_microphone_title,
+        //         messageId = R.string.home_microphone_message,
+        //         actionId = R.string.home_microphone_action,
+        //         onAction = onEnableMicrophoneClicked,
+        //     )
+        // }
         AnimatedVisibility(state.showDesmumeDeprecatedCard) {
             HomeNotification(
                 titleId = R.string.home_notification_desmume_deprecated_title,

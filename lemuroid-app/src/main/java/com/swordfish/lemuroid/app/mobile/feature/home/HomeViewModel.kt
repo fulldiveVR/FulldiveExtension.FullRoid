@@ -172,25 +172,12 @@ class HomeViewModel(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun microphoneNotification(db: RetrogradeDatabase): Flow<Boolean> {
-        return microphonePermissionEnabledState
-            .flatMapLatest { isMicrophoneEnabled ->
-                if (isMicrophoneEnabled) {
-                    flowOf(false)
-                } else {
-                    combine(
-                        coresSelection.getSelectedCores(isProVersion()),
-                        dsGamesCount(db)
-                    ) { cores, dsCount ->
-                        cores.any { it.coreConfig.supportsMicrophone } &&
-                        dsCount > 0
-                    }
-                }
-            .distinctUntilChanged()
-        }
+        // Microphone feature disabled - incomplete from merge
+        return flowOf(false)
     }
 
     private fun desmumeWarningNotification(): Flow<Boolean> {
-        return coresSelection.getSelectedCores()
+        return coresSelection.getSelectedCores(isProVersion())
             .map { cores -> cores.any { it.coreConfig.coreID == CoreID.DESMUME } }
             .distinctUntilChanged()
     }
