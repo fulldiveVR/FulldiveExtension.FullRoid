@@ -50,7 +50,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.app.appextension.FIN_WIZE_APP
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.PopupManager
 import com.swordfish.lemuroid.app.appextension.discord.ShareDiscordTextGenerator
@@ -66,7 +65,6 @@ import com.swordfish.lemuroid.app.mobile.feature.games.GamesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeScreen
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeViewModel
 import com.swordfish.lemuroid.app.mobile.feature.proinfo.DiscordPopupLayout
-import com.swordfish.lemuroid.app.mobile.feature.proinfo.FinWizeLayout
 import com.swordfish.lemuroid.app.mobile.feature.proinfo.ProPopupLayout
 import com.swordfish.lemuroid.app.mobile.feature.proinfo.tutorial.ProTutorialScreen
 import com.swordfish.lemuroid.app.mobile.feature.search.SearchScreen
@@ -183,9 +181,6 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     ?.let { MainRoute.findByRoute(it) }
                     ?: MainRoute.HOME
 
-            val isFinWizeVisible = remember {
-                mutableStateOf(false)
-            }
             val isProPopupVisible = remember {
                 mutableStateOf(false)
             }
@@ -194,11 +189,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             }
             if (currentRoute == MainRoute.HOME) {
                 popupManager.onAppStarted(this@MainActivity)
-                isFinWizeVisible.value = popupManager.isFinWizeVisible()
                 isProPopupVisible.value = popupManager.isProPopupVisible()
                 isDiscordPopupVisible.value = popupManager.isDiscordPopupVisible()
             } else {
-                isFinWizeVisible.value = false
                 isProPopupVisible.value = false
                 isDiscordPopupVisible.value = false
             }
@@ -278,22 +271,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             onOpenCoreSelection = { navController.navigateToRoute(MainRoute.SETTINGS_CORES_SELECTION) },
                         )
                         when {
-                            isFinWizeVisible.value -> {
-                                actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_SHOWN)
-                                FinWizeLayout(
-                                    onClick = {
-                                        actionTracker.logAction(TrackerConstants.EVENT_PRO_TUTORIAL_OPENED_FROM_PRO_POPUP)
-                                        this@MainActivity.openAppInGooglePlay(FIN_WIZE_APP)
-                                        isFinWizeVisible.value = false
-                                    },
-                                    onCloseClick = {
-                                        actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_CLOSED)
-                                        isFinWizeVisible.value = false
-                                    }
-                                )
-                            }
-
-                            isProPopupVisible.value && !isFinWizeVisible.value -> {
+                            isProPopupVisible.value -> {
                                 actionTracker.logAction(TrackerConstants.EVENT_PRO_POPUP_SHOWN)
                                 ProPopupLayout(
                                     onClick = {
@@ -308,7 +286,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                 )
                             }
 
-                            isDiscordPopupVisible.value && !isFinWizeVisible.value && !isProPopupVisible.value -> {
+                            isDiscordPopupVisible.value  && !isProPopupVisible.value -> {
                                 actionTracker.logAction(TrackerConstants.EVENT_DISCORD_POPUP_SHOWN)
                                 DiscordPopupLayout(
                                     onClick = {

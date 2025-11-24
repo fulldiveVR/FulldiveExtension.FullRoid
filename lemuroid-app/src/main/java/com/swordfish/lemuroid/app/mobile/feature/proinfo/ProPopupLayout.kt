@@ -62,7 +62,7 @@ fun ProPopupLayout(
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_promo_fullroid),
-                    contentDescription = stringResource(R.string.flat_finwize_popup_title),
+                    contentDescription = stringResource(R.string.settings_open_pro_tutorial),
                     modifier = Modifier.size(40.dp),
                     tint = Color.Unspecified
                 )
@@ -87,7 +87,7 @@ fun ProPopupLayout(
                         ) {
                             Icon(
                                 painter = painterResource(R.drawable.ic_cross),
-                                contentDescription = stringResource(R.string.flat_finwize_popup_title),
+                                contentDescription = stringResource(R.string.close),
                                 modifier = Modifier.size(12.dp),
                                 tint = Color.Unspecified
                             )

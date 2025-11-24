@@ -159,14 +159,6 @@ class PopupManager(private val context: Context) {
         return result
     }
 
-    fun setFinWizePopupClosed(isClosed: Boolean) {
-        sharedPreferences.setProperty(KEY_IS_FIN_WIZE_CLOSED, isClosed)
-        sharedPreferences.setProperty(
-            KEY_IS_FIN_WIZE_CLOSED_START_COUNTER,
-            getCurrentStartCounter()
-        )
-    }
-
     fun setProVersionPopupClosed(isClosed: Boolean) {
         sharedPreferences.setProperty(KEY_IS_PRO_POPUP_CLOSED, isClosed)
         sharedPreferences.setProperty(
@@ -188,21 +180,12 @@ class PopupManager(private val context: Context) {
         return sharedPreferences.getProperty(KEY_START_APP_COUNTER, 0)
     }
 
-    private fun getFinWizeCloseStartCounter(): Int {
-        return sharedPreferences.getProperty(KEY_IS_FIN_WIZE_CLOSED_START_COUNTER, 0)
-    }
-
     private fun isProVersionPopupClosed(): Boolean {
         return sharedPreferences.getProperty(KEY_IS_PRO_POPUP_CLOSED, false)
     }
 
     private fun getPromoCloseStartCounter(): Int {
         return sharedPreferences.getProperty(KEY_IS_PRO_POPUP_CLOSED_START_COUNTER, 0)
-    }
-
-    fun isFinWizeVisible(): Boolean {
-        val startCount = getCurrentStartCounter()
-        return startCount % 2 == 0
     }
 
     fun isProPopupVisible(): Boolean {
@@ -241,7 +224,6 @@ class PopupManager(private val context: Context) {
 }
 
 sealed class StartAppDialog(val id: String) {
-    object FinWize : StartAppDialog("FinWize")
     object RateUs : StartAppDialog("RateUs")
     object InstallBrowser : StartAppDialog("InstallBrowser")
     object Empty : StartAppDialog("Empty")

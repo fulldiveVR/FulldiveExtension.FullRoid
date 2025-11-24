@@ -75,7 +75,7 @@ fun DiscordPopupLayout(
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_game),
-                    contentDescription = stringResource(R.string.flat_finwize_popup_title),
+                    contentDescription = "",
                     modifier = Modifier.size(40.dp),
                     tint = Color.Unspecified
                 )
@@ -100,7 +100,7 @@ fun DiscordPopupLayout(
                         ) {
                             Icon(
                                 painter = painterResource(R.drawable.ic_cross),
-                                contentDescription = stringResource(R.string.flat_finwize_popup_title),
+                                contentDescription = stringResource(R.string.close),
                                 modifier = Modifier.size(12.dp),
                                 tint = Color.Unspecified
                             )
