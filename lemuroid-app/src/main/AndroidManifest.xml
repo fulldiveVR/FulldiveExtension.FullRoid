@@ -70,7 +70,6 @@
 
         <service
             android:name=".app.mobile.feature.game.GameService"
-            android:foregroundServiceType="dataSync"
             android:process=":game" />
 
         <service

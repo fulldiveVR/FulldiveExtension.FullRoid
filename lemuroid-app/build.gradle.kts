@@ -27,7 +27,7 @@ buildscript {
 android {
     val versionMajor = 1
     val versionMinor = 8
-    val versionPatch = 3
+    val versionPatch = 4
 
     namespace = "com.swordfish.lemuroid"
     buildFeatures.buildConfig = true

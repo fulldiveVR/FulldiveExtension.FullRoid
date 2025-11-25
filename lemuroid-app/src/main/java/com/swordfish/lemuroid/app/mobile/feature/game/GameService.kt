@@ -5,11 +5,9 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.content.pm.ServiceInfo
 import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.app.ServiceCompat
 import com.swordfish.lemuroid.app.mobile.shared.NotificationsManager
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
@@ -52,11 +50,9 @@ class GameService : Service() {
 
     private fun displayNotification(game: Game?) {
         val notification = NotificationsManager(applicationContext).gameRunningNotification(game)
-        ServiceCompat.startForeground(
-            this,
+        NotificationManagerCompat.from(this).notify(
             NotificationsManager.GAME_RUNNING_NOTIFICATION_ID,
-            notification,
-            ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC,
+            notification
         )
     }
 

@@ -29,6 +29,8 @@
         android:name="com.fulldive.extension.fullroid.access.read"
         android:protectionLevel="signature" />
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" tools:node="remove"/>
+
     <uses-feature
         android:name="android.software.leanback"
         android:required="false" />
@@ -39,6 +41,10 @@
         <package android:name="com.fulldive.extension.fullroid.pro" />
     </queries>
     <application>
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            tools:node="remove" />
+
         <provider
             android:name=".app.appextension.FulldiveContentProvider"
             android:authorities="com.fulldive.extension.fullroid.FulldiveContentProvider"

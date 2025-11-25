@@ -38,7 +38,7 @@ class NotificationsManager(private val applicationContext: Context) {
                 .setSmallIcon(R.drawable.ic_lemuroid_tiny)
                 .setContentTitle(title)
                 .setContentText(applicationContext.getString(R.string.game_running_notification_message))
-                .setPriority(NotificationCompat.PRIORITY_MIN)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setOngoing(true)
                 .setVibrate(null)
                 .setSound(null)
@@ -132,7 +132,7 @@ class NotificationsManager(private val applicationContext: Context) {
     private fun createDefaultNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = applicationContext.getString(R.string.notification_channel_name)
-            val importance = NotificationManager.IMPORTANCE_MIN
+            val importance = NotificationManager.IMPORTANCE_LOW
             val mChannel = NotificationChannel(DEFAULT_CHANNEL_ID, name, importance)
             val notificationManager =
                 ContextCompat.getSystemService(applicationContext, NotificationManager::class.java)
