@@ -10,16 +10,17 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.app.mobile.feature.game.GameActivity
 import com.swordfish.lemuroid.app.shared.library.CoreUpdateBroadcastReceiver
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexBroadcastReceiver
-import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 class NotificationsManager(private val applicationContext: Context) {
-    fun gameRunningNotification(game: Game?): Notification {
+    fun gameRunningNotification(gameIntent: Intent): Notification {
         createDefaultNotificationChannel()
 
-        val intent = Intent(applicationContext, GameActivity::class.java)
+        val intent =
+            Intent(gameIntent).apply {
+                addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            }
         val contentIntent =
             PendingIntent.getActivity(
                 applicationContext,
@@ -28,10 +29,7 @@ class NotificationsManager(private val applicationContext: Context) {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
             )
 
-        val title =
-            game?.let {
-                applicationContext.getString(R.string.game_running_notification_title, game.title)
-            } ?: applicationContext.getString(R.string.game_running_notification_title_alternative)
+        val title = applicationContext.getString(R.string.game_running_notification_title_alternative)
 
         val builder =
             NotificationCompat.Builder(applicationContext, DEFAULT_CHANNEL_ID)

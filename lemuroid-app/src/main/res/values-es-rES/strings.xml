@@ -120,7 +120,6 @@
     <string name="library_index_notification_message">Esto puede tardar unos minutos</string>
     <string name="save_sync_notification_title">Sincronización de partidas en la nube en progreso</string>
     <string name="save_sync_notification_message">Esto puede tardar unos minutos</string>
-    <string name="game_running_notification_title">%1$s se está ejecutando</string>
     <string name="game_running_notification_title_alternative">El juego se está ejecutando</string>
     <string name="game_running_notification_message">Asegúrate de guardar tu progreso</string>
     <string name="game_loader_error_gl_incompatible">Este núcleo requiere una versión de OpenGL ES que no es compatible con tu dispositivo.</string>
@@ -155,6 +154,7 @@
     <string name="tv_game_message_missing_gamepad">Se requiere un mando para jugar. Por favor, conecta uno.</string>
     <string name="game_edit_touch_controls_error_not_visible">Desconecta el mando para editar los controles táctiles</string>
     <string name="game_interactory_busy">Espera a que se completen las operaciones pendientes</string>
+    <string name="game_interactor_notification_permission_required">Por favor, activa las notificaciones de Inicio para continuar</string>
     <string name="mobile_settings_help">Ayuda</string>
     <string name="mobile_settings_support">Soporte</string>
     <string name="lemuroid_help_content"><![CDATA[        <b>&#8226;¿Cómo usar Lemuroid?</b><br/>
