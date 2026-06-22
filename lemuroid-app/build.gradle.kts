@@ -134,6 +134,33 @@ android {
         }
     }
 
+    // Rename the .aab (App Bundle) outputs to match the .apk naming convention above.
+    // AGP names bundles "<projectName>-<flavor>-<buildType>.aab" (e.g. lemuroid-app-pro-release.aab);
+    // the variant output API only controls .apk names, so we rename the bundle file directly.
+    applicationVariants.all {
+        val variant = this
+        // Resolve everything at configuration time so the doLast action only captures
+        // serializable values (a File and a String) — required for the configuration cache.
+        val baseName = if (variant.flavorName.contains("pro")) {
+            "FullRoid-v${android.defaultConfig.versionName} X-${variant.buildType.name}"
+        } else {
+            "FullRoid-v${android.defaultConfig.versionName}-${variant.buildType.name}"
+        }
+        val capitalizedName = variant.name.replaceFirstChar { it.uppercase() }
+        val bundleDir = layout.buildDirectory.dir("outputs/bundle/${variant.name}").get().asFile
+        tasks.matching { it.name == "bundle$capitalizedName" }.configureEach {
+            doLast {
+                bundleDir.listFiles { file -> file.extension == "aab" }?.forEach { aab ->
+                    val target = File(bundleDir, "$baseName.aab")
+                    if (aab != target) {
+                        aab.copyTo(target, overwrite = true)
+                        aab.delete()
+                    }
+                }
+            }
+        }
+    }
+
     lint {
         disable += setOf("MissingTranslation", "ExtraTranslation", "EnsureInitializerMetadata")
     }
