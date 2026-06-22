@@ -39,6 +39,7 @@ import com.swordfish.lemuroid.app.utils.android.settings.LemuroidSettingsSwitch
 import com.swordfish.lemuroid.app.utils.android.settings.booleanPreferenceState
 import com.swordfish.lemuroid.app.utils.android.settings.indexPreferenceState
 import com.swordfish.lemuroid.app.utils.android.settings.intPreferenceState
+import com.swordfish.lemuroid.app.utils.android.stringListResource
 
 @Composable
 fun AdvancedSettingsScreen(
@@ -127,6 +128,16 @@ private fun GeneralSettings(
             state = booleanPreferenceState(R.string.pref_key_allow_direct_game_load, true),
             title = { Text(text = stringResource(id = R.string.settings_title_direct_game_load)) },
             subtitle = { Text(text = stringResource(id = R.string.settings_description_direct_game_load)) },
+        )
+        LemuroidSettingsList(
+            state =
+                indexPreferenceState(
+                    R.string.pref_key_libretro_vfs_mode,
+                    "optimal",
+                    stringListResource(R.array.pref_key_libretro_vfs_mode_values).toList(),
+                ),
+            title = { Text(text = stringResource(id = R.string.settings_title_libretro_vfs_mode)) },
+            items = stringListResource(R.array.pref_key_libretro_vfs_mode_display_names),
         )
         LemuroidSettingsMenuLink(
             title = { Text(text = stringResource(id = R.string.settings_title_reset_settings)) },

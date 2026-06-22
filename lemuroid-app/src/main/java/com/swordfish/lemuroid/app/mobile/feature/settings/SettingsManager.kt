@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.settings.HDModeQuality
+import com.swordfish.lemuroid.lib.library.LibretroVFSMode
 import com.swordfish.lemuroid.common.math.Fraction
 import com.swordfish.lemuroid.lib.storage.cache.CacheCleaner
 import dagger.Lazy
@@ -55,6 +56,20 @@ class SettingsManager(private val context: Context, sharedPreferences: Lazy<Shar
         )
 
     suspend fun allowDirectGameLoad() = booleanPreference(R.string.pref_key_allow_direct_game_load, true)
+
+    // When true, scan for new games on every app launch. When false, the automatic scan runs only
+    // if the library is still empty (covers first launch); changing the games folder always forces
+    // a rescan regardless of this setting.
+    suspend fun scanOnAppStartup() = booleanPreference(R.string.pref_key_scan_on_app_startup, true)
+
+    // Libretro VFS lets cores read game files directly instead of copying them to cache first
+    // (saves disk space and load time), but can be unstable on some cores/devices. "Optimal"
+    // (default) enables VFS only for cores known to be stable with it; "On" forces it everywhere
+    // capable; "Off" always uses the safe cached-file path.
+    suspend fun libretroVFSMode() =
+        LibretroVFSMode.parse(
+            stringPreference(R.string.pref_key_libretro_vfs_mode, LibretroVFSMode.VALUE_OPTIMAL),
+        )
 
     suspend fun citraExperimentalSaveStates() = booleanPreference(R.string.pref_key_citra_experimental_save_states, false)
 

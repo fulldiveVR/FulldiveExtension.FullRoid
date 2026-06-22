@@ -73,9 +73,11 @@ class PendingOperationsMonitor(private val appContext: Context) {
     }
 
     private fun isJobRunning(workInfos: List<WorkInfo>): Boolean {
+        // Count only RUNNING, not ENQUEUED: an enqueued-but-not-started job kept the "scanning"
+        // indicator stuck on, making indexing feel constant/endless even when idle.
         return workInfos
             .map { it.state }
-            .any { it in listOf(WorkInfo.State.RUNNING, WorkInfo.State.ENQUEUED) }
+            .any { it == WorkInfo.State.RUNNING }
     }
 
     private fun isPeriodicJobRunning(workInfos: List<WorkInfo>): Boolean {

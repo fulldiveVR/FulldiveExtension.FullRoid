@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.isFullRoidProInstalled
@@ -19,7 +20,9 @@ import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
+import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
+import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
 import com.swordfish.lemuroid.app.tv.channel.ChannelUpdateWork
@@ -40,12 +43,19 @@ import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @OptIn(DelicateCoroutinesApi::class)
 class MainTVActivity : BaseTVActivity(), BusyActivity {
     @Inject
     lateinit var gameLaunchTaskHandler: GameLaunchTaskHandler
+
+    @Inject
+    lateinit var retrogradeDatabase: RetrogradeDatabase
+
+    @Inject
+    lateinit var settingsManager: SettingsManager
 
     var mainViewModel: MainTVViewModel? = null
 
@@ -72,6 +82,18 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
             mainViewModel?.inProgress?.safeCollect {
                 findViewById<View>(R.id.tv_loading).isVisible = it
             }
+        }
+
+        // Scan the library and update cores when the app UI is opened (not on every process start),
+        // so launching a game via shortcut doesn't trigger a scan. The scan is gated by the
+        // "scan on every startup" setting (KEEP avoids stacking scans).
+        lifecycleScope.launch {
+            LibraryIndexScheduler.scheduleStartupLibrarySync(
+                applicationContext,
+                settingsManager.scanOnAppStartup(),
+                retrogradeDatabase.gameDao().countScannedGames(),
+            )
+            LibraryIndexScheduler.scheduleCoreUpdate(applicationContext)
         }
 
         ensureLegacyStoragePermissionsIfNeeded()

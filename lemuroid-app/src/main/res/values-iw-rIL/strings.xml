@@ -217,4 +217,10 @@
   <string name="webview_open_roomcord">פתח את Roomcord</string>
   <string name="webview_launch_roomcord">הפעל את Roomcord</string>
     <string name="game_menu_game_speed">מהירות המשחק</string>
+    <string name="settings_title_libretro_vfs_mode">טעינת משחקים ללא העתקה למטמון</string>
+    <string name="settings_libretro_vfs_mode_off">כבוי (תמיד להעתיק)</string>
+    <string name="settings_libretro_vfs_mode_optimal">אופטימלי (מומלץ)</string>
+    <string name="settings_libretro_vfs_mode_on">דלוק (כל הליבות הנתמכות)</string>
+    <string name="settings_title_scan_on_app_startup">סריקת משחקים חדשים בכל הפעלה</string>
+    <string name="settings_description_scan_on_app_startup">כאשר כבוי, סורק רק בהפעלה הראשונה או לאחר שינוי תיקיית המשחקים. השתמש בלחצן הסריקה מחדש לרענון ידני.</string>
 </resources>

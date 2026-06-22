@@ -68,6 +68,14 @@
     <string name="settings_title_direct_game_load">Direct game load</string>
     <string name="settings_description_direct_game_load">(Experimental) Reduce loading time and cache usage on supported consoles.</string>
 
+    <string name="settings_title_scan_on_app_startup">Scan for new games on every startup</string>
+    <string name="settings_description_scan_on_app_startup">When off, scans only on first launch or after changing the games folder. Use the rescan button to refresh manually.</string>
+
+    <string name="settings_title_libretro_vfs_mode">Load games without copying to cache</string>
+    <string name="settings_libretro_vfs_mode_off">Off (always copy)</string>
+    <string name="settings_libretro_vfs_mode_optimal">Optimal (recommended)</string>
+    <string name="settings_libretro_vfs_mode_on">On (all supported cores)</string>
+
     <string name="settings_category_experimental">Experimental</string>
     <string name="settings_title_citra_experimental_save_states">3DS Save States (Experimental)</string>
     <string name="settings_description_citra_experimental_save_states">(Experimental) Enable manual save and load states for Nintendo 3DS games. Auto-save is not supported. States may be unstable or use significant storage.</string>

@@ -277,4 +277,10 @@
   <string name="webview_open_roomcord">Abrir Roomcord</string>
   <string name="webview_launch_roomcord">Iniciar Roomcord</string>
     <string name="game_menu_game_speed">Velocidad del juego</string>
+    <string name="settings_title_libretro_vfs_mode">Cargar juegos sin copiarlos a la caché</string>
+    <string name="settings_libretro_vfs_mode_off">Desactivado (copiar siempre)</string>
+    <string name="settings_libretro_vfs_mode_optimal">Óptimo (recomendado)</string>
+    <string name="settings_libretro_vfs_mode_on">Activado (todos los núcleos compatibles)</string>
+    <string name="settings_title_scan_on_app_startup">Buscar juegos nuevos en cada inicio</string>
+    <string name="settings_description_scan_on_app_startup">Cuando está desactivado, solo escanea en el primer inicio o tras cambiar la carpeta de juegos. Usa el botón de volver a escanear para actualizar manualmente.</string>
 </resources>

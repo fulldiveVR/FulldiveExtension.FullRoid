@@ -70,6 +70,9 @@ interface GameDao {
     @Query("SELECT DISTINCT systemId FROM games ORDER BY systemId ASC")
     suspend fun selectSystems(): List<String>
 
+    @Query("SELECT count(*) FROM games WHERE isCatalogGame = 0")
+    suspend fun countScannedGames(): Int
+
     @Query("SELECT count(*) count, systemId systemId FROM games GROUP BY systemId")
     fun selectSystemsWithCount(): Flow<List<SystemCount>>
 

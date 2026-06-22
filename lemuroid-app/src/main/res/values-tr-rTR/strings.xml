@@ -256,4 +256,10 @@
   <string name="webview_open_roomcord">Roomcord\'u aç</string>
   <string name="webview_launch_roomcord">Roomcord\'u başlat</string>
     <string name="game_menu_game_speed">Oyun hızı</string>
+    <string name="settings_title_libretro_vfs_mode">Oyunları önbelleğe kopyalamadan yükle</string>
+    <string name="settings_libretro_vfs_mode_off">Kapalı (her zaman kopyala)</string>
+    <string name="settings_libretro_vfs_mode_optimal">En iyi (önerilir)</string>
+    <string name="settings_libretro_vfs_mode_on">Açık (desteklenen tüm çekirdekler)</string>
+    <string name="settings_title_scan_on_app_startup">Her başlatmada yeni oyunları tara</string>
+    <string name="settings_description_scan_on_app_startup">Kapalıyken yalnızca ilk açılışta veya oyun klasörü değiştirildikten sonra tarar. Elle yenilemek için yeniden tarama düğmesini kullanın.</string>
 </resources>

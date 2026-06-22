@@ -277,4 +277,10 @@
   <string name="webview_open_roomcord">Roomcord openen</string>
   <string name="webview_launch_roomcord">Roomcord starten</string>
     <string name="game_menu_game_speed">Spelsnelheid</string>
+    <string name="settings_title_libretro_vfs_mode">Games laden zonder naar cache te kopiëren</string>
+    <string name="settings_libretro_vfs_mode_off">Uit (altijd kopiëren)</string>
+    <string name="settings_libretro_vfs_mode_optimal">Optimaal (aanbevolen)</string>
+    <string name="settings_libretro_vfs_mode_on">Aan (alle ondersteunde cores)</string>
+    <string name="settings_title_scan_on_app_startup">Bij elke start naar nieuwe games zoeken</string>
+    <string name="settings_description_scan_on_app_startup">Indien uit, wordt alleen gescand bij de eerste start of na het wijzigen van de gamesmap. Gebruik de knop opnieuw scannen om handmatig te verversen.</string>
 </resources>

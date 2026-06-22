@@ -96,6 +96,7 @@ class GameViewModelRetroGameView(
         val lowLatencyAudio = settingsManager.lowLatencyAudio()
         val enableRumble = settingsManager.enableRumble()
         val directLoad = settingsManager.allowDirectGameLoad()
+        val libretroVFSMode = settingsManager.libretroVFSMode()
         val enableImmersiveMode = settingsManager.enableImmersiveMode()
 
         val hasMicrophonePermission =
@@ -113,6 +114,7 @@ class GameViewModelRetroGameView(
                 requestLoadSave && autoSaveEnabled,
                 systemCoreConfig,
                 directLoad,
+                libretroVFSMode,
                 isProVersion()
             )
 

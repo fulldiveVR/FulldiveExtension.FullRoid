@@ -258,4 +258,10 @@
   <string name="webview_open_roomcord">開啟 Roomcord</string>
   <string name="webview_launch_roomcord">啟動 Roomcord</string>
     <string name="game_menu_game_speed">遊戲速度</string>
+    <string name="settings_title_libretro_vfs_mode">載入遊戲時不複製到快取</string>
+    <string name="settings_libretro_vfs_mode_off">關閉（一律複製）</string>
+    <string name="settings_libretro_vfs_mode_optimal">最佳（建議）</string>
+    <string name="settings_libretro_vfs_mode_on">開啟（所有支援的核心）</string>
+    <string name="settings_title_scan_on_app_startup">每次啟動時掃描新遊戲</string>
+    <string name="settings_description_scan_on_app_startup">關閉時，僅在首次啟動或變更遊戲資料夾後掃描。使用重新掃描按鈕手動重新整理。</string>
 </resources>

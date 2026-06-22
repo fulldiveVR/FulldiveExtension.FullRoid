@@ -259,4 +259,10 @@
   <string name="webview_open_roomcord">Отвори Roomcord</string>
   <string name="webview_launch_roomcord">Покрени Roomcord</string>
     <string name="game_menu_game_speed">Брзина игре</string>
+    <string name="settings_title_libretro_vfs_mode">Учитавај игре без копирања у кеш</string>
+    <string name="settings_libretro_vfs_mode_off">Искључено (увек копирај)</string>
+    <string name="settings_libretro_vfs_mode_optimal">Оптимално (препоручено)</string>
+    <string name="settings_libretro_vfs_mode_on">Укључено (сва подржана језгра)</string>
+    <string name="settings_title_scan_on_app_startup">Тражи нове игре при сваком покретању</string>
+    <string name="settings_description_scan_on_app_startup">Када је искључено, скенира само при првом покретању или након промене фасцикле са играма. Користите дугме за поновно скенирање за ручно освежавање.</string>
 </resources>

@@ -19,6 +19,8 @@
     <string name="pref_key_enable_device_rumble" translatable="false">enable_device_rumble</string>
     <string name="pref_key_max_cache_size" translatable="false">max_cache_size_bytes</string>
     <string name="pref_key_allow_direct_game_load" translatable="false">allow_direct_game_load</string>
+    <string name="pref_key_libretro_vfs_mode" translatable="false">libretro_vfs_mode</string>
+    <string name="pref_key_scan_on_app_startup" translatable="false">scan_on_app_startup</string>
     <string name="pref_key_citra_experimental_save_states" translatable="false">citra_experimental_save_states</string>
     <string name="pref_key_enable_ambient_mode" translatable="false">enable_ambient_mode</string>
     <string name="pref_key_enable_immersive_mode" translatable="false">enable_immersive_mode</string>
@@ -58,5 +60,17 @@
         <item>@string/shader_filter_names_smooth</item>
         <item>@string/shader_filter_names_crt</item>
         <item>@string/shader_filter_names_lcd</item>
+    </string-array>
+
+    <string-array translatable="false" name="pref_key_libretro_vfs_mode_values">
+        <item>off</item>
+        <item>optimal</item>
+        <item>on</item>
+    </string-array>
+
+    <string-array translatable="false" name="pref_key_libretro_vfs_mode_display_names">
+        <item>@string/settings_libretro_vfs_mode_off</item>
+        <item>@string/settings_libretro_vfs_mode_optimal</item>
+        <item>@string/settings_libretro_vfs_mode_on</item>
     </string-array>
 </resources>

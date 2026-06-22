@@ -277,4 +277,10 @@
   <string name="webview_open_roomcord">Roomcord 열기</string>
   <string name="webview_launch_roomcord">Roomcord 실행</string>
     <string name="game_menu_game_speed">게임 속도</string>
+    <string name="settings_title_libretro_vfs_mode">캐시에 복사하지 않고 게임 불러오기</string>
+    <string name="settings_libretro_vfs_mode_off">끔 (항상 복사)</string>
+    <string name="settings_libretro_vfs_mode_optimal">최적 (권장)</string>
+    <string name="settings_libretro_vfs_mode_on">켬 (지원되는 모든 코어)</string>
+    <string name="settings_title_scan_on_app_startup">시작할 때마다 새 게임 검색</string>
+    <string name="settings_description_scan_on_app_startup">꺼져 있으면 첫 실행 시 또는 게임 폴더를 변경한 후에만 검색합니다. 수동으로 새로 고치려면 다시 검색 버튼을 사용하세요.</string>
 </resources>

@@ -255,4 +255,10 @@
   <string name="webview_open_roomcord">Mở Roomcord</string>
   <string name="webview_launch_roomcord">Khởi chạy Roomcord</string>
     <string name="game_menu_game_speed">Tốc độ trò chơi</string>
+    <string name="settings_title_libretro_vfs_mode">Tải trò chơi mà không sao chép vào bộ nhớ đệm</string>
+    <string name="settings_libretro_vfs_mode_off">Tắt (luôn sao chép)</string>
+    <string name="settings_libretro_vfs_mode_optimal">Tối ưu (khuyến nghị)</string>
+    <string name="settings_libretro_vfs_mode_on">Bật (tất cả lõi được hỗ trợ)</string>
+    <string name="settings_title_scan_on_app_startup">Quét trò chơi mới mỗi lần khởi động</string>
+    <string name="settings_description_scan_on_app_startup">Khi tắt, chỉ quét ở lần khởi động đầu tiên hoặc sau khi thay đổi thư mục trò chơi. Dùng nút quét lại để làm mới thủ công.</string>
 </resources>

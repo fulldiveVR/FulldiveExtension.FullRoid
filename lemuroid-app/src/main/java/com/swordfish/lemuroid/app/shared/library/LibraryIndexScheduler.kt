@@ -31,14 +31,34 @@ object LibraryIndexScheduler {
     val CORE_UPDATE_WORK_ID: String = CoreUpdateWork::class.java.simpleName
     val LIBRARY_INDEX_WORK_ID: String = LibraryIndexWork::class.java.simpleName
 
-    fun scheduleLibrarySync(applicationContext: Context) {
+    // Default KEEP so the automatic per-launch sync never stacks a new scan on top of one that is
+    // already enqueued/running. APPEND_OR_REPLACE used to chain a fresh scan on every launch, which
+    // made scanning feel constant and could leave the appended successor BLOCKED forever if the
+    // running scan was cancelled. Explicit user-initiated rescans pass REPLACE to force a fresh run.
+    fun scheduleLibrarySync(
+        applicationContext: Context,
+        existingWorkPolicy: ExistingWorkPolicy = ExistingWorkPolicy.KEEP,
+    ) {
         WorkManager.getInstance(applicationContext)
             .beginUniqueWork(
                 LIBRARY_INDEX_WORK_ID,
-                ExistingWorkPolicy.APPEND_OR_REPLACE,
+                existingWorkPolicy,
                 OneTimeWorkRequestBuilder<LibraryIndexWork>().build(),
             )
             .enqueue()
+    }
+
+    // Automatic scan triggered when the app UI is opened. Honors the "scan on every startup"
+    // setting: if disabled, it only scans when the library is still empty (first launch / cleared).
+    // Folder changes force a rescan through their own REPLACE call, independent of this.
+    fun scheduleStartupLibrarySync(
+        applicationContext: Context,
+        scanOnEveryStartup: Boolean,
+        scannedGamesCount: Int,
+    ) {
+        if (scanOnEveryStartup || scannedGamesCount == 0) {
+            scheduleLibrarySync(applicationContext)
+        }
     }
 
     fun scheduleCoreUpdate(applicationContext: Context) {

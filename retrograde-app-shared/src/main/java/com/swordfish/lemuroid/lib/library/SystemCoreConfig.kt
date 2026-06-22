@@ -15,7 +15,13 @@ data class SystemCoreConfig(
     val requiredBIOSFiles: List<String> = listOf(),
     val regionalBIOSFiles: Map<String, String> = mapOf(),
     val statesVersion: Int = 0,
+    // Whether the core is *capable* of loading games through libretro VFS at all.
     val supportsLibretroVFS: Boolean = false,
+    // Whether libretro VFS is considered stable for this core. Cores known to crash with VFS
+    // (e.g. PCSX ReARMed, fdsan double-close in retro_vfs_file_close_impl) set this to false so
+    // the "Optimal" VFS mode keeps them on the safe cached-file path while still allowing VFS
+    // for the rest. Ignored in "On" (force VFS) and "Off" (never VFS) modes.
+    val libretroVFSStable: Boolean = true,
     val skipDuplicateFrames: Boolean = true,
     val supportedOnlyArchitectures: Set<String>? = null,
     val supportsMicrophone: Boolean = false,

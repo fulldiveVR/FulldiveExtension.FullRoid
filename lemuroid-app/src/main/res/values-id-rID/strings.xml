@@ -96,4 +96,10 @@
   <string name="webview_open_roomcord">Buka Roomcord</string>
   <string name="webview_launch_roomcord">Jalankan Roomcord</string>
     <string name="game_menu_game_speed">Kecepatan game</string>
+    <string name="settings_title_libretro_vfs_mode">Muat gim tanpa menyalin ke cache</string>
+    <string name="settings_libretro_vfs_mode_off">Mati (selalu salin)</string>
+    <string name="settings_libretro_vfs_mode_optimal">Optimal (disarankan)</string>
+    <string name="settings_libretro_vfs_mode_on">Aktif (semua core yang didukung)</string>
+    <string name="settings_title_scan_on_app_startup">Pindai gim baru setiap kali memulai</string>
+    <string name="settings_description_scan_on_app_startup">Saat nonaktif, hanya memindai pada peluncuran pertama atau setelah mengubah folder gim. Gunakan tombol pindai ulang untuk menyegarkan secara manual.</string>
 </resources>

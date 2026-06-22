@@ -29,6 +29,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.leanback.app.BrowseSupportFragment
+import androidx.work.ExistingWorkPolicy
 import androidx.leanback.widget.ArrayObjectAdapter
 import androidx.leanback.widget.ClassPresenterSelector
 import androidx.leanback.widget.DiffCallback
@@ -100,6 +101,7 @@ class TVHomeFragment : BrowseSupportFragment() {
                             TVSettingType.RESCAN ->
                                 LibraryIndexScheduler.scheduleLibrarySync(
                                     requireContext().applicationContext,
+                                    ExistingWorkPolicy.REPLACE,
                                 )
                             TVSettingType.CHOOSE_DIRECTORY -> launchFolderPicker()
                             TVSettingType.SETTINGS -> launchTVSettings()
