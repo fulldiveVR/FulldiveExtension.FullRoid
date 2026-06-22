@@ -275,4 +275,10 @@
   <string name="webview_open_roomcord">Avaa Roomcord</string>
   <string name="webview_launch_roomcord">Käynnistä Roomcord</string>
     <string name="game_menu_game_speed">Pelin nopeus</string>
+    <string name="settings_title_libretro_vfs_mode">Lataa pelit kopioimatta välimuistiin</string>
+    <string name="settings_libretro_vfs_mode_off">Pois (kopioi aina)</string>
+    <string name="settings_libretro_vfs_mode_optimal">Optimaalinen (suositus)</string>
+    <string name="settings_libretro_vfs_mode_on">Päällä (kaikki tuetut ytimet)</string>
+    <string name="settings_title_scan_on_app_startup">Etsi uusia pelejä joka käynnistyksellä</string>
+    <string name="settings_description_scan_on_app_startup">Kun pois päältä, etsii vain ensimmäisellä käynnistyksellä tai pelikansion vaihtamisen jälkeen. Päivitä manuaalisesti uudelleenskannauspainikkeella.</string>
 </resources>

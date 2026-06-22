@@ -27,6 +27,7 @@ import com.swordfish.lemuroid.lib.core.CoreVariablesManager
 import com.swordfish.lemuroid.lib.library.CoreID
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.LemuroidLibrary
+import com.swordfish.lemuroid.lib.library.LibretroVFSMode
 import com.swordfish.lemuroid.lib.library.SystemCoreConfig
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -67,6 +68,7 @@ class GameLoader(
         loadSave: Boolean,
         systemCoreConfig: SystemCoreConfig,
         directLoad: Boolean,
+        libretroVFSMode: LibretroVFSMode,
         isProVersion: Boolean
     ): Flow<LoadingState> =
         flow {
@@ -93,7 +95,13 @@ class GameLoader(
 
                 val gameFiles =
                     runCatching {
-                        val useVFS = systemCoreConfig.supportsLibretroVFS && directLoad
+                        val vfsAllowedByMode =
+                            when (libretroVFSMode) {
+                                LibretroVFSMode.OFF -> false
+                                LibretroVFSMode.ON -> true
+                                LibretroVFSMode.OPTIMAL -> systemCoreConfig.libretroVFSStable
+                            }
+                        val useVFS = systemCoreConfig.supportsLibretroVFS && directLoad && vfsAllowedByMode
                         val dataFiles = retrogradeDatabase.dataFileDao().selectDataFilesForGame(game.id)
                         lemuroidLibrary.getGameFiles(game, dataFiles, useVFS)
                     }.getOrElse { throw it }

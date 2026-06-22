@@ -277,4 +277,10 @@
   <string name="webview_open_roomcord">Åpne Roomcord</string>
   <string name="webview_launch_roomcord">Start Roomcord</string>
     <string name="game_menu_game_speed">Spillhastighet</string>
+    <string name="settings_title_libretro_vfs_mode">Last inn spill uten å kopiere til buffer</string>
+    <string name="settings_libretro_vfs_mode_off">Av (kopier alltid)</string>
+    <string name="settings_libretro_vfs_mode_optimal">Optimal (anbefalt)</string>
+    <string name="settings_libretro_vfs_mode_on">På (alle støttede kjerner)</string>
+    <string name="settings_title_scan_on_app_startup">Søk etter nye spill ved hver oppstart</string>
+    <string name="settings_description_scan_on_app_startup">Når av, skannes det bare ved første oppstart eller etter at spillmappen er endret. Bruk skann på nytt-knappen for å oppdatere manuelt.</string>
 </resources>

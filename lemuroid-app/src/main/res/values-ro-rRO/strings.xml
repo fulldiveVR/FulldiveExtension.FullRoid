@@ -265,4 +265,10 @@
   <string name="webview_open_roomcord">Deschide Roomcord</string>
   <string name="webview_launch_roomcord">Lansează Roomcord</string>
     <string name="game_menu_game_speed">Viteza jocului</string>
+    <string name="settings_title_libretro_vfs_mode">Încarcă jocurile fără a le copia în cache</string>
+    <string name="settings_libretro_vfs_mode_off">Dezactivat (copiază mereu)</string>
+    <string name="settings_libretro_vfs_mode_optimal">Optim (recomandat)</string>
+    <string name="settings_libretro_vfs_mode_on">Activat (toate nucleele acceptate)</string>
+    <string name="settings_title_scan_on_app_startup">Caută jocuri noi la fiecare pornire</string>
+    <string name="settings_description_scan_on_app_startup">Când este dezactivat, scanează doar la prima pornire sau după schimbarea folderului de jocuri. Folosește butonul de rescanare pentru a actualiza manual.</string>
 </resources>

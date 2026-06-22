@@ -782,6 +782,12 @@ data class GameSystem(
                             ),
                             rumbleSupported = true,
                             supportsLibretroVFS = true,
+                            // PCSX ReARMed closes the VFS file descriptor with a bare close() in
+                            // retro_vfs_file_close_impl, which trips fdsan (double-close / ownership
+                            // mismatch on the ParcelFileDescriptor) and aborts the process while
+                            // loading PSX games (notably multi-file .cue/.bin/.m3u). Marked unstable
+                            // so "Optimal" VFS mode routes PSX through the safe cached-file path.
+                            libretroVFSStable = false,
                             skipDuplicateFrames = false,
                         ),
                     ),

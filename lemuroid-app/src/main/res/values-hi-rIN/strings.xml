@@ -96,4 +96,10 @@
   <string name="webview_open_roomcord">Roomcord खोलें</string>
   <string name="webview_launch_roomcord">Roomcord लॉन्च करें</string>
     <string name="game_menu_game_speed">गेम स्पीड</string>
+    <string name="settings_title_libretro_vfs_mode">गेम को कैश में कॉपी किए बिना लोड करें</string>
+    <string name="settings_libretro_vfs_mode_off">बंद (हमेशा कॉपी करें)</string>
+    <string name="settings_libretro_vfs_mode_optimal">इष्टतम (अनुशंसित)</string>
+    <string name="settings_libretro_vfs_mode_on">चालू (सभी समर्थित कोर)</string>
+    <string name="settings_title_scan_on_app_startup">हर बार शुरू होने पर नए गेम स्कैन करें</string>
+    <string name="settings_description_scan_on_app_startup">बंद होने पर, केवल पहली बार शुरू होने पर या गेम फ़ोल्डर बदलने के बाद स्कैन करता है. मैन्युअल रूप से ताज़ा करने के लिए रीस्कैन बटन का उपयोग करें.</string>
 </resources>

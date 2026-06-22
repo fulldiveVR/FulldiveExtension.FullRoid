@@ -2,6 +2,7 @@ package com.swordfish.lemuroid.app.mobile.feature.settings.general
 
 import android.net.Uri
 import androidx.compose.material3.AlertDialog
+import androidx.work.ExistingWorkPolicy
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -233,10 +234,15 @@ private fun RomsSettings(
         } else {
             LemuroidSettingsMenuLink(
                 title = { Text(text = stringResource(id = R.string.rescan)) },
-                onClick = { LibraryIndexScheduler.scheduleLibrarySync(context) },
+                onClick = { LibraryIndexScheduler.scheduleLibrarySync(context, ExistingWorkPolicy.REPLACE) },
                 enabled = !indexingInProgress,
             )
         }
+        LemuroidSettingsSwitch(
+            state = booleanPreferenceState(R.string.pref_key_scan_on_app_startup, true),
+            title = { Text(text = stringResource(R.string.settings_title_scan_on_app_startup)) },
+            subtitle = { Text(text = stringResource(R.string.settings_description_scan_on_app_startup)) },
+        )
         LemuroidSettingsSwitch(
             state = showCatalogState,
             title = { Text(text = stringResource(R.string.settings_show_catalog_title)) },

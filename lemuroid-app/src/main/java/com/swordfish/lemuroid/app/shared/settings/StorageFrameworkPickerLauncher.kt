@@ -29,6 +29,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
+import androidx.work.ExistingWorkPolicy
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.tv.folderpicker.TVFolderPickerLauncher
@@ -121,7 +122,7 @@ class StorageFrameworkPickerLauncher : RetrogradeActivity() {
     }
 
     private fun startLibraryIndexWork() {
-        LibraryIndexScheduler.scheduleLibrarySync(applicationContext)
+        LibraryIndexScheduler.scheduleLibrarySync(applicationContext, ExistingWorkPolicy.REPLACE)
     }
 
     // Samsung restricts ACTION_OPEN_DOCUMENT_TREE on Android 10+ (scoped storage):

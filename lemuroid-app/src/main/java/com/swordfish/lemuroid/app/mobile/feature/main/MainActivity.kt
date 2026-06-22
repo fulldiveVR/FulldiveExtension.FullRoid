@@ -93,6 +93,8 @@ import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSetti
 import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.catalog.CatalogSyncWork
+import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
+import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsScreen
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsViewModel
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
@@ -120,8 +122,10 @@ import com.swordfish.lemuroid.lib.citra.Citra3DSKeysManager
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import dagger.Provides
 import de.charlex.compose.material3.HtmlText
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
@@ -136,6 +140,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
     @Inject
     lateinit var retrogradeDb: RetrogradeDatabase
+
+    @Inject
+    lateinit var settingsManager: SettingsManager
 
     @Inject
     lateinit var gameInteractor: GameInteractor
@@ -187,6 +194,18 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
         InstallAttributionReporter.reportIfNeeded(applicationContext, GlobalScope)
 
         CatalogSyncWork.schedule(applicationContext)
+
+        // Scan the library and update cores when the app UI is opened (not on every process start),
+        // so launching a game via shortcut doesn't trigger a scan. The scan is gated by the
+        // "scan on every startup" setting (KEEP avoids stacking scans).
+        lifecycleScope.launch {
+            LibraryIndexScheduler.scheduleStartupLibrarySync(
+                applicationContext,
+                settingsManager.scanOnAppStartup(),
+                retrogradeDb.gameDao().countScannedGames(),
+            )
+            LibraryIndexScheduler.scheduleCoreUpdate(applicationContext)
+        }
 
         setContent {
             val navController = rememberNavController()

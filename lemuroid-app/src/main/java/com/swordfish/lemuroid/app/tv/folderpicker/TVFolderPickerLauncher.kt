@@ -26,6 +26,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.work.ExistingWorkPolicy
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.ImmersiveActivity
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
@@ -67,7 +68,7 @@ class TVFolderPickerLauncher : ImmersiveActivity() {
     }
 
     private fun startLibraryIndexWork() {
-        LibraryIndexScheduler.scheduleLibrarySync(applicationContext)
+        LibraryIndexScheduler.scheduleLibrarySync(applicationContext, ExistingWorkPolicy.REPLACE)
     }
 
     companion object {
