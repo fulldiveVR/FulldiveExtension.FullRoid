@@ -271,4 +271,6 @@
     <string name="settings_libretro_vfs_mode_on">Activat (toate nucleele acceptate)</string>
     <string name="settings_title_scan_on_app_startup">Caută jocuri noi la fiecare pornire</string>
     <string name="settings_description_scan_on_app_startup">Când este dezactivat, scanează doar la prima pornire sau după schimbarea folderului de jocuri. Folosește butonul de rescanare pentru a actualiza manual.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Controlere fizice de la Jucătorul 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Menține Jucătorul 1 pe controlerul de pe ecran și conectează controlerele fizice începând cu Jucătorul 2</string>
 </resources>

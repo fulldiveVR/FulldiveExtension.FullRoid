@@ -284,4 +284,6 @@
     <string name="settings_libretro_vfs_mode_on">オン（対応するすべてのコア）</string>
     <string name="settings_title_scan_on_app_startup">起動するたびに新しいゲームをスキャン</string>
     <string name="settings_description_scan_on_app_startup">オフの場合、初回起動時またはゲームフォルダーの変更後にのみスキャンします。手動で更新するには再スキャンボタンを使用してください。</string>
+    <string name="settings_gamepad_title_reserve_first_port">物理コントローラーをプレイヤー2から</string>
+    <string name="settings_gamepad_description_reserve_first_port">プレイヤー1を画面上のコントローラーのままにし、物理コントローラーをプレイヤー2から接続します</string>
 </resources>

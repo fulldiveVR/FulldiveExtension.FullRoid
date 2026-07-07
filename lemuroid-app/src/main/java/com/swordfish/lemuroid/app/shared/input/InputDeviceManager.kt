@@ -7,6 +7,7 @@ import android.view.InputDevice
 import android.view.KeyEvent
 import androidx.core.content.edit
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
+import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.input.lemuroiddevice.getLemuroidInputDevice
 import com.swordfish.lemuroid.app.shared.settings.GameShortcut
 import com.swordfish.lemuroid.app.shared.settings.GameShortcutType
@@ -57,13 +58,24 @@ class InputDeviceManager(
     }
 
     fun getGamePadsPortMapperObservable(): Flow<(InputDevice?) -> Int?> {
-        return getEnabledInputsObservable().map { gamePads ->
+        return combine(
+            getEnabledInputsObservable(),
+            getReserveFirstPortObservable(),
+        ) { gamePads, reserveFirstPort ->
+            val offset = if (reserveFirstPort) 1 else 0
             val portMappings =
                 gamePads
-                    .mapIndexed { index, inputDevice -> inputDevice.id to index }
+                    .mapIndexed { index, inputDevice -> inputDevice.id to (index + offset) }
                     .toMap()
-            return@map { inputDevice -> portMappings[inputDevice?.id] }
+            return@combine { inputDevice -> portMappings[inputDevice?.id] }
         }
+    }
+
+    // When enabled, physical controllers are assigned starting from port 1 (Player 2), leaving
+    // port 0 (Player 1) for the on-screen virtual controller.
+    fun getReserveFirstPortObservable(): Flow<Boolean> {
+        val key = context.getString(R.string.pref_key_gamepad_reserve_first_port)
+        return flowSharedPreferences.getBoolean(key, false).asFlow()
     }
 
     private fun getBindingsFlow(inputDevice: InputDevice): Flow<Map<InputKey, RetroKey>> {

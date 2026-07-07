@@ -102,4 +102,6 @@
     <string name="settings_libretro_vfs_mode_on">चालू (सभी समर्थित कोर)</string>
     <string name="settings_title_scan_on_app_startup">हर बार शुरू होने पर नए गेम स्कैन करें</string>
     <string name="settings_description_scan_on_app_startup">बंद होने पर, केवल पहली बार शुरू होने पर या गेम फ़ोल्डर बदलने के बाद स्कैन करता है. मैन्युअल रूप से ताज़ा करने के लिए रीस्कैन बटन का उपयोग करें.</string>
+    <string name="settings_gamepad_title_reserve_first_port">फ़िज़िकल कंट्रोलर प्लेयर 2 से</string>
+    <string name="settings_gamepad_description_reserve_first_port">प्लेयर 1 को ऑन-स्क्रीन कंट्रोलर पर रखें और फ़िज़िकल कंट्रोलर प्लेयर 2 से जोड़ें</string>
 </resources>

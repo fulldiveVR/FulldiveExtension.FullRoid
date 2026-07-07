@@ -283,4 +283,6 @@
     <string name="settings_libretro_vfs_mode_on">Activado (todos los núcleos compatibles)</string>
     <string name="settings_title_scan_on_app_startup">Buscar juegos nuevos en cada inicio</string>
     <string name="settings_description_scan_on_app_startup">Cuando está desactivado, solo escanea en el primer inicio o tras cambiar la carpeta de juegos. Usa el botón de volver a escanear para actualizar manualmente.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Mandos físicos desde el Jugador 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Mantén al Jugador 1 en el mando en pantalla y conecta los mandos físicos a partir del Jugador 2</string>
 </resources>

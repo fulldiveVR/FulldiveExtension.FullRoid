@@ -106,8 +106,14 @@ class GameViewModelTouchControls(
     }
 
     fun isTouchControllerVisible(): Flow<Boolean> {
-        return inputs.getEnabledInputDevices()
-            .map { it.isEmpty() }
+        return combine(
+            inputs.getEnabledInputDevices(),
+            inputs.getReserveFirstPortObservable(),
+        ) { devices, reserveFirstPort ->
+            // Keep the on-screen controller (Player 1) visible when physical controllers are
+            // reserved for Player 2 and up.
+            reserveFirstPort || devices.isEmpty()
+        }
     }
 
     fun getTouchControllerConfig(): Flow<ControllerConfig> {

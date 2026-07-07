@@ -281,4 +281,6 @@
     <string name="settings_libretro_vfs_mode_on">Päällä (kaikki tuetut ytimet)</string>
     <string name="settings_title_scan_on_app_startup">Etsi uusia pelejä joka käynnistyksellä</string>
     <string name="settings_description_scan_on_app_startup">Kun pois päältä, etsii vain ensimmäisellä käynnistyksellä tai pelikansion vaihtamisen jälkeen. Päivitä manuaalisesti uudelleenskannauspainikkeella.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Fyysiset ohjaimet pelaajasta 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Pidä pelaaja 1 näytön ohjaimessa ja yhdistä fyysiset ohjaimet pelaajasta 2 alkaen</string>
 </resources>

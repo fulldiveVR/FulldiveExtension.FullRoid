@@ -36,4 +36,6 @@
     <string name="settings_libretro_vfs_mode_on">On (all supported cores)</string>
     <string name="settings_title_scan_on_app_startup">Scan for new games on every startup</string>
     <string name="settings_description_scan_on_app_startup">When off, scans only on first launch or after changing the games folder. Use the rescan button to refresh manually.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Physical controllers from Player 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Keep Player 1 on the on-screen controller and connect physical controllers starting from Player 2</string>
 </resources>

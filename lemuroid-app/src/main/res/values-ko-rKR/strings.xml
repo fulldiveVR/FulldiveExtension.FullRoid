@@ -283,4 +283,6 @@
     <string name="settings_libretro_vfs_mode_on">켬 (지원되는 모든 코어)</string>
     <string name="settings_title_scan_on_app_startup">시작할 때마다 새 게임 검색</string>
     <string name="settings_description_scan_on_app_startup">꺼져 있으면 첫 실행 시 또는 게임 폴더를 변경한 후에만 검색합니다. 수동으로 새로 고치려면 다시 검색 버튼을 사용하세요.</string>
+    <string name="settings_gamepad_title_reserve_first_port">실물 컨트롤러를 플레이어 2부터</string>
+    <string name="settings_gamepad_description_reserve_first_port">플레이어 1을 화면 컨트롤러로 유지하고 실물 컨트롤러를 플레이어 2부터 연결합니다</string>
 </resources>

@@ -283,4 +283,6 @@
     <string name="settings_libretro_vfs_mode_on">Wł. (wszystkie obsługiwane rdzenie)</string>
     <string name="settings_title_scan_on_app_startup">Skanuj w poszukiwaniu nowych gier przy każdym uruchomieniu</string>
     <string name="settings_description_scan_on_app_startup">Gdy wyłączone, skanuje tylko przy pierwszym uruchomieniu lub po zmianie folderu gier. Użyj przycisku ponownego skanowania, aby odświeżyć ręcznie.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Fizyczne kontrolery od gracza 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Zostaw gracza 1 na kontrolerze ekranowym i podłączaj fizyczne kontrolery od gracza 2</string>
 </resources>

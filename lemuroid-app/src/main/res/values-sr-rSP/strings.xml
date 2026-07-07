@@ -265,4 +265,6 @@
     <string name="settings_libretro_vfs_mode_on">Укључено (сва подржана језгра)</string>
     <string name="settings_title_scan_on_app_startup">Тражи нове игре при сваком покретању</string>
     <string name="settings_description_scan_on_app_startup">Када је искључено, скенира само при првом покретању или након промене фасцикле са играма. Користите дугме за поновно скенирање за ручно освежавање.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Физички контролери од играча 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Задржите играча 1 на екранском контролеру и повежите физичке контролере почев од играча 2</string>
 </resources>

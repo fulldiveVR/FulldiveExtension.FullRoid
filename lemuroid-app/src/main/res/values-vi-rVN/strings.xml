@@ -261,4 +261,6 @@
     <string name="settings_libretro_vfs_mode_on">Bật (tất cả lõi được hỗ trợ)</string>
     <string name="settings_title_scan_on_app_startup">Quét trò chơi mới mỗi lần khởi động</string>
     <string name="settings_description_scan_on_app_startup">Khi tắt, chỉ quét ở lần khởi động đầu tiên hoặc sau khi thay đổi thư mục trò chơi. Dùng nút quét lại để làm mới thủ công.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Tay cầm vật lý từ Người chơi 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Giữ Người chơi 1 trên tay cầm trên màn hình và kết nối tay cầm vật lý bắt đầu từ Người chơi 2</string>
 </resources>

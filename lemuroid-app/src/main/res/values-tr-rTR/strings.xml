@@ -262,4 +262,6 @@
     <string name="settings_libretro_vfs_mode_on">Açık (desteklenen tüm çekirdekler)</string>
     <string name="settings_title_scan_on_app_startup">Her başlatmada yeni oyunları tara</string>
     <string name="settings_description_scan_on_app_startup">Kapalıyken yalnızca ilk açılışta veya oyun klasörü değiştirildikten sonra tarar. Elle yenilemek için yeniden tarama düğmesini kullanın.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Fiziksel kumandalar 2. Oyuncudan</string>
+    <string name="settings_gamepad_description_reserve_first_port">1. Oyuncuyu ekran kumandasında tutun ve fiziksel kumandaları 2. Oyuncudan itibaren bağlayın</string>
 </resources>

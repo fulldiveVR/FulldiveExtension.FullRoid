@@ -283,4 +283,6 @@
     <string name="settings_libretro_vfs_mode_on">Attivato (tutti i core supportati)</string>
     <string name="settings_title_scan_on_app_startup">Cerca nuovi giochi a ogni avvio</string>
     <string name="settings_description_scan_on_app_startup">Quando disattivato, esegue la scansione solo al primo avvio o dopo aver cambiato la cartella dei giochi. Usa il pulsante di nuova scansione per aggiornare manualmente.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Controller fisici dal Giocatore 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Mantieni il Giocatore 1 sul controller a schermo e collega i controller fisici a partire dal Giocatore 2</string>
 </resources>

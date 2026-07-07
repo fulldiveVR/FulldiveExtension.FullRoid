@@ -102,4 +102,6 @@
     <string name="settings_libretro_vfs_mode_on">Aan (alle ondersteunde kerne)</string>
     <string name="settings_title_scan_on_app_startup">Soek vir nuwe speletjies elke keer met begin</string>
     <string name="settings_description_scan_on_app_startup">Wanneer af, soek dit net met die eerste begin of nadat die speletjie-vouer verander is. Gebruik die herskandeer-knoppie om handmatig te verfris.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Fisiese beheerders vanaf Speler 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Hou Speler 1 op die skermbeheerder en koppel fisiese beheerders vanaf Speler 2</string>
 </resources>

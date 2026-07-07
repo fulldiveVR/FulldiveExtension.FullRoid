@@ -189,4 +189,6 @@
     <string name="settings_libretro_vfs_mode_on">Activat (tots els nuclis compatibles)</string>
     <string name="settings_title_scan_on_app_startup">Cerca jocs nous a cada inici</string>
     <string name="settings_description_scan_on_app_startup">Quan està desactivat, només escaneja al primer inici o després de canviar la carpeta de jocs. Fes servir el botó de tornar a escanejar per actualitzar manualment.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Controls físics des del Jugador 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Mantén el Jugador 1 al comandament en pantalla i connecta els controls físics a partir del Jugador 2</string>
 </resources>

@@ -283,4 +283,6 @@
     <string name="settings_libretro_vfs_mode_on">Вкл. (все поддерживаемые ядра)</string>
     <string name="settings_title_scan_on_app_startup">Сканировать новые игры при каждом запуске</string>
     <string name="settings_description_scan_on_app_startup">Если выключено, сканирование выполняется только при первом запуске или после смены папки с играми. Для ручного обновления используйте кнопку пересканирования.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Физические контроллеры со второго игрока</string>
+    <string name="settings_gamepad_description_reserve_first_port">Оставить первого игрока на экранном контроллере, а физические подключать начиная со второго игрока</string>
 </resources>

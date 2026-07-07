@@ -283,4 +283,6 @@
     <string name="settings_libretro_vfs_mode_on">Ενεργό (όλοι οι υποστηριζόμενοι πυρήνες)</string>
     <string name="settings_title_scan_on_app_startup">Σάρωση για νέα παιχνίδια σε κάθε εκκίνηση</string>
     <string name="settings_description_scan_on_app_startup">Όταν είναι απενεργοποιημένο, σαρώνει μόνο στην πρώτη εκκίνηση ή μετά την αλλαγή του φακέλου παιχνιδιών. Χρησιμοποιήστε το κουμπί επανασάρωσης για χειροκίνητη ανανέωση.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Φυσικά χειριστήρια από τον Παίκτη 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Κρατά τον Παίκτη 1 στο χειριστήριο οθόνης και συνδέει τα φυσικά χειριστήρια ξεκινώντας από τον Παίκτη 2</string>
 </resources>

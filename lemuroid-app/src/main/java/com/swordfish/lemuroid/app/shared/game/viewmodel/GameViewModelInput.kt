@@ -18,6 +18,7 @@ import com.swordfish.lemuroid.common.coroutines.launchOnState
 import com.swordfish.lemuroid.common.coroutines.safeCollect
 import com.swordfish.lemuroid.common.kotlin.NTuple2
 import com.swordfish.lemuroid.common.kotlin.NTuple4
+import com.swordfish.lemuroid.common.kotlin.NTuple5
 import com.swordfish.lemuroid.common.kotlin.filterNotNullValues
 import com.swordfish.lemuroid.common.kotlin.toIndexedMap
 import com.swordfish.lemuroid.common.kotlin.zipOnKeys
@@ -200,6 +201,10 @@ class GameViewModelInput(
         return inputDeviceManager.getEnabledInputsObservable()
     }
 
+    fun getReserveFirstPortObservable(): Flow<Boolean> {
+        return inputDeviceManager.getReserveFirstPortObservable()
+    }
+
     private fun updateControllers(controllers: Map<Int, ControllerConfig>) {
         retroGameView.retroGameView
             ?.getControllers()?.toIndexedMap()
@@ -294,16 +299,21 @@ class GameViewModelInput(
                 inputDeviceManager.getGamePadsPortMapperObservable(),
                 inputDeviceManager.getInputBindingsObservable(),
                 filteredKeyEvents,
-                ::NTuple4,
+                inputDeviceManager.getReserveFirstPortObservable(),
+                ::NTuple5,
             )
 
         combinedObservable
             .onStart { pressedKeys.clear() }
             .onCompletion { pressedKeys.clear() }
-            .safeCollect { (shortcuts, ports, bindings, event) ->
+            .safeCollect { (shortcuts, ports, bindings, event, reserveFirstPort) ->
                 val (device, action, keyCode) = event
                 val port = ports(device)
                 val bindKeyCode = bindings(device)[InputKey(keyCode)]?.keyCode ?: keyCode
+
+                // Shortcuts (menu, quick save/load, fast forward) follow the first physical
+                // controller. When port 0 is reserved for the virtual pad it becomes port 1.
+                val shortcutPort = if (reserveFirstPort) 1 else 0
 
                 // fftf, may be not actual
                 if (bindKeyCode == KeyEvent.KEYCODE_BACK && action == KeyEvent.ACTION_DOWN) {
@@ -311,7 +321,7 @@ class GameViewModelInput(
                     return@safeCollect
                 }
 
-                if (port == 0) {
+                if (port == shortcutPort) {
                     if (bindKeyCode == KeyEvent.KEYCODE_BUTTON_MODE && action == KeyEvent.ACTION_DOWN) {
                         sideEffects.showMenu(tilt, this)
                         return@safeCollect
