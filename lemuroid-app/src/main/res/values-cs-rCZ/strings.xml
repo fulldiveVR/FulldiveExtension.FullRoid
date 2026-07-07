@@ -282,4 +282,6 @@
     <string name="settings_libretro_vfs_mode_on">Zapnuto (všechna podporovaná jádra)</string>
     <string name="settings_title_scan_on_app_startup">Hledat nové hry při každém spuštění</string>
     <string name="settings_description_scan_on_app_startup">Když je vypnuto, prohledává jen při prvním spuštění nebo po změně složky her. Pro ruční obnovení použijte tlačítko opětovného prohledání.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Fyzické ovladače od hráče 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Ponechá hráče 1 na ovladači na obrazovce a fyzické ovladače připojí počínaje hráčem 2</string>
 </resources>

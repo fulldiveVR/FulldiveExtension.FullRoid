@@ -282,4 +282,6 @@
     <string name="settings_libretro_vfs_mode_on">开启（所有支持的核心）</string>
     <string name="settings_title_scan_on_app_startup">每次启动时扫描新游戏</string>
     <string name="settings_description_scan_on_app_startup">关闭时，仅在首次启动或更改游戏文件夹后扫描。使用重新扫描按钮手动刷新。</string>
+    <string name="settings_gamepad_title_reserve_first_port">实体手柄从玩家 2 开始</string>
+    <string name="settings_gamepad_description_reserve_first_port">让玩家 1 保持使用屏幕手柄，实体手柄从玩家 2 开始连接</string>
 </resources>

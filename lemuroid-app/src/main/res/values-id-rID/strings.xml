@@ -102,4 +102,6 @@
     <string name="settings_libretro_vfs_mode_on">Aktif (semua core yang didukung)</string>
     <string name="settings_title_scan_on_app_startup">Pindai gim baru setiap kali memulai</string>
     <string name="settings_description_scan_on_app_startup">Saat nonaktif, hanya memindai pada peluncuran pertama atau setelah mengubah folder gim. Gunakan tombol pindai ulang untuk menyegarkan secara manual.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Kontroler fisik mulai dari Pemain 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Biarkan Pemain 1 di kontroler layar dan sambungkan kontroler fisik mulai dari Pemain 2</string>
 </resources>

@@ -223,4 +223,6 @@
     <string name="settings_libretro_vfs_mode_on">דלוק (כל הליבות הנתמכות)</string>
     <string name="settings_title_scan_on_app_startup">סריקת משחקים חדשים בכל הפעלה</string>
     <string name="settings_description_scan_on_app_startup">כאשר כבוי, סורק רק בהפעלה הראשונה או לאחר שינוי תיקיית המשחקים. השתמש בלחצן הסריקה מחדש לרענון ידני.</string>
+    <string name="settings_gamepad_title_reserve_first_port">בקרים פיזיים מהשחקן 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">השאר את שחקן 1 בבקר שעל המסך וחבר בקרים פיזיים החל משחקן 2</string>
 </resources>

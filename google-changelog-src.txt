@@ -1,7 +1,3 @@
 What's New:
 
-• Game Speed Control: Speed up gameplay with selectable 1x / 2x / 4x / 8x, from the in-game menu or a gamepad shortcut
-• Updated N3DS Emulation: Newer core with better performance and compatibility
-• More 3DS Settings: Resolution, graphics API, region & language, screen layout, audio mode and more
-• Android TV Fix: Adding a games folder now works on devices without a system file picker
-• Various bug fixes and stability improvements
+• Physical Controllers as Player 2: Optionally connect physical controllers starting from Player 2 while Player 1 stays on the on-screen controller — the virtual pad no longer disappears when a gamepad is plugged in

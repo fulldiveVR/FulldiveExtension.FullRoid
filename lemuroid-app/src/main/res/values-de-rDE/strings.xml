@@ -283,4 +283,6 @@
     <string name="settings_libretro_vfs_mode_on">Ein (alle unterstützten Cores)</string>
     <string name="settings_title_scan_on_app_startup">Bei jedem Start nach neuen Spielen suchen</string>
     <string name="settings_description_scan_on_app_startup">Wenn deaktiviert, wird nur beim ersten Start oder nach dem Ändern des Spieleordners gescannt. Nutze die Schaltfläche zum erneuten Scannen, um manuell zu aktualisieren.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Physische Controller ab Spieler 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Behält Spieler 1 auf dem Bildschirm-Controller und verbindet physische Controller ab Spieler 2</string>
 </resources>

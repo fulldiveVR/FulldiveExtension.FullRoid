@@ -140,4 +140,6 @@
     <string name="settings_libretro_vfs_mode_on">Be (minden támogatott mag)</string>
     <string name="settings_title_scan_on_app_startup">Új játékok keresése minden indításkor</string>
     <string name="settings_description_scan_on_app_startup">Kikapcsolva csak az első indításkor vagy a játékmappa módosítása után keres. A kézi frissítéshez használd az újrakeresés gombot.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Fizikai vezérlők a 2. játékostól</string>
+    <string name="settings_gamepad_description_reserve_first_port">Az 1. játékos a képernyőn megjelenő vezérlőn marad, a fizikai vezérlők a 2. játékostól kezdődnek</string>
 </resources>

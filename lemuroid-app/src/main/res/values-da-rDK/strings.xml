@@ -283,4 +283,6 @@
     <string name="settings_libretro_vfs_mode_on">Til (alle understøttede kerner)</string>
     <string name="settings_title_scan_on_app_startup">Søg efter nye spil ved hver opstart</string>
     <string name="settings_description_scan_on_app_startup">Når slået fra, scannes der kun ved første start eller efter ændring af spilmappen. Brug genscan-knappen for at opdatere manuelt.</string>
+    <string name="settings_gamepad_title_reserve_first_port">Fysiske controllere fra spiller 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">Behold spiller 1 på skærmcontrolleren, og tilslut fysiske controllere fra spiller 2</string>
 </resources>

@@ -1,223 +1,191 @@
 <en-US>
 What's New:
 
-• Faster Game Loading: Load supported games without copying to cache (VFS mode) — choose Off, Optimal or On
-• Scan on Startup: Optionally check for new games each time the app opens
+• Physical Controllers as Player 2: Optionally connect physical controllers starting from Player 2 while Player 1 stays on the on-screen controller — the virtual pad no longer disappears when a gamepad is plugged in
 </en-US>
 
 <zh-CN>
 更新内容：
 
-• 更快加载游戏：无需复制到缓存即可加载支持的游戏（VFS 模式）——可选 关闭、最佳 或 开启
-• 启动时扫描：可选择在每次启动应用时扫描新游戏
+• 实体手柄作为玩家 2：可选让实体手柄从玩家 2 开始连接，玩家 1 继续使用屏幕手柄——接入手柄时屏幕手柄不再消失
 </zh-CN>
 
 <zh-TW>
 更新內容：
 
-• 更快載入遊戲：無需複製到快取即可載入支援的遊戲（VFS 模式）——可選 關閉、最佳 或 開啟
-• 啟動時掃描：可選擇在每次啟動應用程式時掃描新遊戲
+• 實體控制器作為玩家 2：可選讓實體控制器從玩家 2 開始連接，玩家 1 繼續使用螢幕控制器——接上控制器時螢幕控制器不再消失
 </zh-TW>
 
 <hi-IN>
 नया क्या है:
 
-• तेज़ गेम लोडिंग: समर्थित गेम्स को कैश में कॉपी किए बिना लोड करें (VFS मोड) — बंद, इष्टतम या चालू चुनें
-• स्टार्टअप पर स्कैन: ऐप खुलने पर हर बार नए गेम्स की जाँच करने का विकल्प
+• फ़िज़िकल कंट्रोलर प्लेयर 2 के रूप में: वैकल्पिक रूप से फ़िज़िकल कंट्रोलर प्लेयर 2 से जोड़ें और प्लेयर 1 ऑन-स्क्रीन कंट्रोलर पर बना रहे — गेमपैड जोड़ने पर वर्चुअल पैड अब गायब नहीं होता
 </hi-IN>
 
 <es-ES>
 Novedades:
 
-• Carga de juegos más rápida: Carga los juegos compatibles sin copiarlos a la caché (modo VFS) — elige Desactivado, Óptimo o Activado
-• Escaneo al iniciar: Busca nuevos juegos cada vez que se abre la app (opcional)
+• Mandos físicos como Jugador 2: Conecta los mandos físicos a partir del Jugador 2 y mantén al Jugador 1 en el mando en pantalla (opcional); el mando virtual ya no desaparece al conectar un mando
 </es-ES>
 
 <ar>
 ما الجديد:
 
-• تحميل أسرع للألعاب: تحميل الألعاب المدعومة دون نسخها إلى ذاكرة التخزين المؤقت (وضع VFS) — اختر إيقاف أو الأمثل أو تشغيل
-• الفحص عند بدء التشغيل: خيار للبحث عن ألعاب جديدة في كل مرة يُفتح فيها التطبيق
+• أجهزة التحكم الفعلية كلاعب ثانٍ: خيار لتوصيل أجهزة التحكم الفعلية بدءًا من اللاعب 2 مع إبقاء اللاعب 1 على وحدة التحكم التي تظهر على الشاشة — لم تعد وحدة التحكم الافتراضية تختفي عند توصيل ذراع تحكم
 </ar>
 
 <pt-BR>
 Novidades:
 
-• Carregamento de jogos mais rápido: Carregue jogos compatíveis sem copiá-los para o cache (modo VFS) — escolha Desativado, Ótimo ou Ativado
-• Verificar ao iniciar: Procure novos jogos sempre que o app for aberto (opcional)
+• Controles físicos como Jogador 2: Conecte os controles físicos a partir do Jogador 2 e mantenha o Jogador 1 no controle na tela (opcional); o controle virtual não some mais ao conectar um gamepad
 </pt-BR>
 
 <id>
 Apa yang Baru:
 
-• Pemuatan Game Lebih Cepat: Muat game yang didukung tanpa menyalin ke cache (mode VFS) — pilih Mati, Optimal, atau Aktif
-• Pindai saat Mulai: Opsi untuk memindai game baru setiap kali aplikasi dibuka
+• Kontroler fisik sebagai Pemain 2: Opsi menyambungkan kontroler fisik mulai dari Pemain 2 dan tetap menjaga Pemain 1 di kontroler layar — kontroler virtual tidak lagi hilang saat gamepad disambungkan
 </id>
 
 <ru-RU>
 Что нового:
 
-• Быстрая загрузка игр: запуск поддерживаемых игр без копирования в кэш (режим VFS) — выбор Выкл., Оптимально или Вкл.
-• Сканирование при запуске: возможность искать новые игры при каждом открытии приложения
+• Физические контроллеры как Игрок 2: возможность подключать физические контроллеры начиная со второго игрока, оставляя первого на экранном контроллере — виртуальный пад больше не пропадает при подключении геймпада
 </ru-RU>
 
 <ja-JP>
 新機能:
 
-• ゲームの読み込みを高速化: 対応ゲームをキャッシュにコピーせず読み込み（VFS モード）——オフ／最適／オンを選択
-• 起動時にスキャン: アプリ起動のたびに新しいゲームを検索（任意）
+• 物理コントローラーをプレイヤー2に: 物理コントローラーをプレイヤー2から接続し、プレイヤー1を画面上のコントローラーのままにできます（任意）。ゲームパッド接続時に画面上のパッドが消えなくなりました
 </ja-JP>
 
 <de-DE>
 Neues:
 
-• Schnelleres Laden von Spielen: Unterstützte Spiele laden, ohne sie in den Cache zu kopieren (VFS-Modus) — wähle Aus, Optimal oder An
-• Beim Start scannen: Bei jedem Öffnen der App optional nach neuen Spielen suchen
+• Physische Controller ab Spieler 2: Verbinde physische Controller optional ab Spieler 2 und behalte Spieler 1 auf dem Bildschirm-Controller — der virtuelle Controller verschwindet nicht mehr, wenn ein Gamepad angeschlossen wird
 </de-DE>
 
 <fr-FR>
 Nouveautés :
 
-• Chargement des jeux plus rapide : Chargez les jeux compatibles sans les copier dans le cache (mode VFS) — choisissez Désactivé, Optimal ou Activé
-• Analyse au démarrage : Recherchez de nouveaux jeux à chaque ouverture de l'application (optionnel)
+• Manettes physiques en Joueur 2 : Connectez les manettes physiques à partir du Joueur 2 et gardez le Joueur 1 sur la manette à l'écran (optionnel) ; la manette virtuelle ne disparaît plus lorsqu'une manette est branchée
 </fr-FR>
 
 <ko-KR>
 새로운 기능:
 
-• 더 빠른 게임 로딩: 지원되는 게임을 캐시에 복사하지 않고 로드 (VFS 모드) — 끄기, 최적, 켜기 중 선택
-• 시작 시 검색: 앱을 열 때마다 새 게임을 검색하는 옵션
+• 실물 컨트롤러를 플레이어 2로: 실물 컨트롤러를 플레이어 2부터 연결하고 플레이어 1은 화면 컨트롤러로 유지하는 옵션 — 게임패드를 연결해도 화면 컨트롤러가 더 이상 사라지지 않습니다
 </ko-KR>
 
 <tr-TR>
 Yenilikler:
 
-• Daha Hızlı Oyun Yükleme: Desteklenen oyunları önbelleğe kopyalamadan yükleyin (VFS modu) — Kapalı, En İyi veya Açık seçin
-• Başlangıçta Tara: Uygulama her açıldığında yeni oyunları tarama seçeneği
+• Fiziksel kumandalar 2. Oyuncu olarak: Fiziksel kumandaları 2. Oyuncudan itibaren bağlayın ve 1. Oyuncuyu ekran kumandasında tutun (isteğe bağlı); kumanda takıldığında sanal kumanda artık kaybolmuyor
 </tr-TR>
 
 <vi>
 Có gì mới:
 
-• Tải game nhanh hơn: Tải các game được hỗ trợ mà không cần sao chép vào bộ nhớ đệm (chế độ VFS) — chọn Tắt, Tối ưu hoặc Bật
-• Quét khi khởi động: Tùy chọn quét game mới mỗi khi mở ứng dụng
+• Tay cầm vật lý làm Người chơi 2: Tùy chọn kết nối tay cầm vật lý bắt đầu từ Người chơi 2 và giữ Người chơi 1 trên tay cầm trên màn hình — tay cầm ảo không còn biến mất khi cắm gamepad
 </vi>
 
 <it-IT>
 Novità:
 
-• Caricamento giochi più veloce: Carica i giochi supportati senza copiarli nella cache (modalità VFS) — scegli Disattivato, Ottimale o Attivato
-• Scansione all'avvio: Cerca nuovi giochi a ogni apertura dell'app (opzionale)
+• Controller fisici come Giocatore 2: Collega i controller fisici a partire dal Giocatore 2 e mantieni il Giocatore 1 sul controller a schermo (opzionale); il controller virtuale non scompare più quando colleghi un gamepad
 </it-IT>
 
 <pl-PL>
 Co nowego:
 
-• Szybsze ładowanie gier: Wczytuj obsługiwane gry bez kopiowania do pamięci podręcznej (tryb VFS) — wybierz Wył., Optymalny lub Wł.
-• Skanowanie przy starcie: Opcjonalne wyszukiwanie nowych gier przy każdym uruchomieniu aplikacji
+• Fizyczne kontrolery jako Gracz 2: Opcjonalnie podłączaj fizyczne kontrolery od gracza 2 i zostaw gracza 1 na kontrolerze ekranowym — wirtualny pad nie znika już po podłączeniu gamepada
 </pl-PL>
 
 <uk>
 Що нового:
 
-• Швидше завантаження ігор: запуск підтримуваних ігор без копіювання в кеш (режим VFS) — вибір Вимк., Оптимально або Увімк.
-• Сканування під час запуску: можливість шукати нові ігри під час кожного відкриття застосунку
+• Фізичні контролери як Гравець 2: можливість підключати фізичні контролери починаючи з гравця 2, залишаючи гравця 1 на екранному контролері — віртуальний пад більше не зникає під час підключення геймпада
 </uk>
 
 <cs-CZ>
 Co je nového:
 
-• Rychlejší načítání her: Načítejte podporované hry bez kopírování do mezipaměti (režim VFS) — zvolte Vypnuto, Optimální nebo Zapnuto
-• Skenování při spuštění: Volitelné hledání nových her při každém spuštění aplikace
+• Fyzické ovladače jako hráč 2: Volitelně připojte fyzické ovladače počínaje hráčem 2 a hráče 1 ponechte na ovladači na obrazovce — virtuální ovladač už po připojení gamepadu nezmizí
 </cs-CZ>
 
 <da-DK>
 Hvad er nyt:
 
-• Hurtigere spilindlæsning: Indlæs understøttede spil uden at kopiere til cachen (VFS-tilstand) — vælg Fra, Optimal eller Til
-• Scan ved opstart: Søg efter nye spil, hver gang appen åbnes (valgfrit)
+• Fysiske controllere som spiller 2: Tilslut valgfrit fysiske controllere fra spiller 2, og behold spiller 1 på skærmcontrolleren — den virtuelle controller forsvinder ikke længere, når en controller tilsluttes
 </da-DK>
 
 <el-GR>
 Τι νέο υπάρχει:
 
-• Ταχύτερη φόρτωση παιχνιδιών: Φορτώστε τα υποστηριζόμενα παιχνίδια χωρίς αντιγραφή στην κρυφή μνήμη (λειτουργία VFS) — επιλέξτε Απενεργοποίηση, Βέλτιστο ή Ενεργοποίηση
-• Σάρωση κατά την εκκίνηση: Προαιρετική αναζήτηση νέων παιχνιδιών σε κάθε άνοιγμα της εφαρμογής
+• Φυσικά χειριστήρια ως Παίκτης 2: Προαιρετικά συνδέστε φυσικά χειριστήρια ξεκινώντας από τον Παίκτη 2 και κρατήστε τον Παίκτη 1 στο χειριστήριο οθόνης — το εικονικό χειριστήριο δεν εξαφανίζεται πλέον όταν συνδέετε ένα gamepad
 </el-GR>
 
 <fi-FI>
 Mitä uutta:
 
-• Nopeampi pelien lataus: Lataa tuetut pelit ilman välimuistiin kopiointia (VFS-tila) — valitse Pois, Optimaalinen tai Päällä
-• Skannaus käynnistyksen yhteydessä: Etsi uusia pelejä joka kerta, kun sovellus avataan (valinnainen)
+• Fyysiset ohjaimet pelaajana 2: Yhdistä fyysiset ohjaimet valinnaisesti pelaajasta 2 alkaen ja pidä pelaaja 1 näytön ohjaimessa — virtuaaliohjain ei enää katoa, kun ohjain liitetään
 </fi-FI>
 
 <hu-HU>
 Újdonságok:
 
-• Gyorsabb játékbetöltés: Töltsd be a támogatott játékokat gyorsítótárba másolás nélkül (VFS mód) — válassz Ki, Optimális vagy Be lehetőséget
-• Keresés indításkor: Új játékok keresése az alkalmazás minden indításakor (opcionális)
+• Fizikai vezérlők 2. játékosként: Csatlakoztasd a fizikai vezérlőket a 2. játékostól, az 1. játékos pedig a képernyőn megjelenő vezérlőn marad (opcionális); a virtuális vezérlő már nem tűnik el gamepad csatlakoztatásakor
 </hu-HU>
 
 <iw-IL>
 מה חדש:
 
-• טעינת משחקים מהירה יותר: טען משחקים נתמכים ללא העתקה למטמון (מצב VFS) — בחר כבוי, אופטימלי או פועל
-• סריקה בהפעלה: אפשרות לחפש משחקים חדשים בכל פתיחה של האפליקציה
+• בקרים פיזיים כשחקן 2: אפשרות לחבר בקרים פיזיים החל משחקן 2 ולהשאיר את שחקן 1 בבקר שעל המסך — הבקר הווירטואלי כבר לא נעלם כשמחברים בקר
 </iw-IL>
 
 <nl-NL>
 Wat is nieuw:
 
-• Sneller spellen laden: Laad ondersteunde spellen zonder ze naar de cache te kopiëren (VFS-modus) — kies Uit, Optimaal of Aan
-• Scannen bij opstarten: Optioneel zoeken naar nieuwe spellen bij elke start van de app
+• Fysieke controllers als speler 2: Verbind fysieke controllers optioneel vanaf speler 2 en houd speler 1 op de schermcontroller — de virtuele controller verdwijnt niet meer wanneer je een gamepad aansluit
 </nl-NL>
 
 <no-NO>
 Hva er nytt:
 
-• Raskere spillinnlasting: Last inn støttede spill uten å kopiere til hurtigbufferen (VFS-modus) — velg Av, Optimal eller På
-• Skann ved oppstart: Søk etter nye spill hver gang appen åpnes (valgfritt)
+• Fysiske kontrollere som spiller 2: Koble til fysiske kontrollere fra spiller 2, og behold spiller 1 på skjermkontrolleren (valgfritt); den virtuelle kontrolleren forsvinner ikke lenger når en kontroller kobles til
 </no-NO>
 
 <pt-PT>
 Novidades:
 
-• Carregamento de jogos mais rápido: Carregue jogos compatíveis sem os copiar para a cache (modo VFS) — escolha Desativado, Ótimo ou Ativado
-• Análise no arranque: Procure novos jogos sempre que a aplicação é aberta (opcional)
+• Comandos físicos como Jogador 2: Ligue os comandos físicos a partir do Jogador 2 e mantenha o Jogador 1 no comando no ecrã (opcional); o comando virtual já não desaparece ao ligar um comando
 </pt-PT>
 
 <ro>
 Ce este nou:
 
-• Încărcare mai rapidă a jocurilor: Încarcă jocurile compatibile fără a le copia în cache (mod VFS) — alege Oprit, Optim sau Pornit
-• Scanare la pornire: Caută jocuri noi de fiecare dată când aplicația este deschisă (opțional)
+• Controlere fizice ca Jucătorul 2: Conectează controlerele fizice începând cu Jucătorul 2 și menține Jucătorul 1 pe controlerul de pe ecran (opțional); controlerul virtual nu mai dispare când conectezi un gamepad
 </ro>
 
 <sr>
 Шта је ново:
 
-• Брже учитавање игара: Учитавајте подржане игре без копирања у кеш (VFS режим) — изаберите Искључено, Оптимално или Укључено
-• Скенирање при покретању: Опционо тражење нових игара при сваком покретању апликације
+• Физички контролери као играч 2: Опционо повежите физичке контролере почев од играча 2 и задржите играча 1 на екранском контролеру — виртуелни контролер више не нестаје када прикључите гејмпад
 </sr>
 
 <sv-SE>
 Nyheter:
 
-• Snabbare spelinläsning: Läs in spel som stöds utan att kopiera till cachen (VFS-läge) — välj Av, Optimal eller På
-• Sökning vid start: Sök efter nya spel varje gång appen öppnas (valfritt)
+• Fysiska handkontroller som spelare 2: Anslut valfritt fysiska handkontroller från spelare 2 och behåll spelare 1 på skärmkontrollen — den virtuella kontrollen försvinner inte längre när en handkontroll ansluts
 </sv-SE>
 
 <af>
 Wat is nuut:
 
-• Vinniger spellaai: Laai ondersteunde speletjies sonder om na die kas te kopieer (VFS-modus) — kies Af, Optimaal of Aan
-• Skandeer met begin: Soek opsioneel vir nuwe speletjies elke keer wat die app oopmaak
+• Fisiese beheerders as Speler 2: Koppel opsioneel fisiese beheerders vanaf Speler 2 en hou Speler 1 op die skermbeheerder — die virtuele beheerder verdwyn nie meer wanneer 'n speelbeheerder ingeprop word nie
 </af>
 
 <ca>
 Novetats:
 
-• Càrrega de jocs més ràpida: Carrega els jocs compatibles sense copiar-los a la memòria cau (mode VFS) — tria Desactivat, Òptim o Activat
-• Escaneig en iniciar: Cerca nous jocs cada vegada que s'obre l'aplicació (opcional)
+• Controls físics com a Jugador 2: Connecta els controls físics a partir del Jugador 2 i mantén el Jugador 1 al comandament en pantalla (opcional); el comandament virtual ja no desapareix en connectar un comandament
 </ca>

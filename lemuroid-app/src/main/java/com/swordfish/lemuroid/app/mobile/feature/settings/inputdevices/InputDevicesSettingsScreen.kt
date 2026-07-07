@@ -111,6 +111,15 @@ private fun EnabledDeviceCategory(state: InputDevicesSettingsViewModel.State) {
 @Composable
 private fun GeneralOptionsCategory(viewModel: InputDevicesSettingsViewModel) {
     LemuroidCardSettingsGroup(title = { Text(text = stringResource(R.string.settings_gamepad_category_general)) }) {
+        LemuroidSettingsSwitch(
+            state =
+                booleanPreferenceState(
+                    id = R.string.pref_key_gamepad_reserve_first_port,
+                    default = false,
+                ),
+            title = { Text(text = stringResource(R.string.settings_gamepad_title_reserve_first_port)) },
+            subtitle = { Text(text = stringResource(R.string.settings_gamepad_description_reserve_first_port)) },
+        )
         LemuroidSettingsMenuLink(
             title = { Text(text = stringResource(R.string.settings_gamepad_title_reset_bindings)) },
             onClick = { viewModel.resetAllBindings() },

@@ -283,4 +283,6 @@
     <string name="settings_libretro_vfs_mode_on">تشغيل (جميع الأنوية المدعومة)</string>
     <string name="settings_title_scan_on_app_startup">البحث عن ألعاب جديدة عند كل تشغيل</string>
     <string name="settings_description_scan_on_app_startup">عند الإيقاف، يفحص فقط عند أول تشغيل أو بعد تغيير مجلد الألعاب. استخدم زر إعادة الفحص للتحديث يدويًا.</string>
+    <string name="settings_gamepad_title_reserve_first_port">أجهزة التحكم الفعلية من اللاعب 2</string>
+    <string name="settings_gamepad_description_reserve_first_port">أبقِ اللاعب 1 على وحدة التحكم التي تظهر على الشاشة ووصّل أجهزة التحكم الفعلية بدءًا من اللاعب 2</string>
 </resources>
