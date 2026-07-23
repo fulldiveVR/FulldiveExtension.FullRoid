@@ -316,6 +316,7 @@
     <string name="web_games_see_all">All</string>
     <string name="web_games_search_hint">Search games</string>
     <string name="web_games_empty">No games available</string>
+    <string name="web_games_syncing">Loading catalog…</string>
     <string name="web_games_free_badge">FREE</string>
     <string name="web_games_pro_badge">PRO</string>
     <string name="home_filter_all">All</string>

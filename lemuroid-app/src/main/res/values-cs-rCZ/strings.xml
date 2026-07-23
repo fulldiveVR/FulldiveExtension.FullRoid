@@ -288,6 +288,7 @@
     <string name="web_games_see_all">Vše</string>
     <string name="web_games_search_hint">Hledat hry</string>
     <string name="web_games_empty">Nejsou dostupné žádné hry</string>
+    <string name="web_games_syncing">Načítání katalogu…</string>
     <string name="web_games_free_badge">ZDARMA</string>
     <string name="web_games_locked_badge">Uzamčeno</string>
     <string name="web_game_loading">Načítání…</string>

@@ -289,6 +289,7 @@
     <string name="web_games_see_all">Alla</string>
     <string name="web_games_search_hint">Sök spel</string>
     <string name="web_games_empty">Inga spel tillgängliga</string>
+    <string name="web_games_syncing">Laddar katalog…</string>
     <string name="web_games_free_badge">GRATIS</string>
     <string name="web_games_locked_badge">Låst</string>
     <string name="web_game_loading">Läser in…</string>

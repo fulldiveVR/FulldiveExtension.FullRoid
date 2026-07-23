@@ -42,6 +42,7 @@
     <string name="web_games_see_all">All</string>
     <string name="web_games_search_hint">Search games</string>
     <string name="web_games_empty">No games available</string>
+    <string name="web_games_syncing">Loading catalog…</string>
     <string name="web_games_free_badge">FREE</string>
     <string name="web_games_locked_badge">Locked</string>
     <string name="web_game_loading">Loading…</string>

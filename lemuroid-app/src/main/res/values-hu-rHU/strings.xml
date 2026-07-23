@@ -146,6 +146,7 @@
     <string name="web_games_see_all">Összes</string>
     <string name="web_games_search_hint">Játékok keresése</string>
     <string name="web_games_empty">Nincs elérhető játék</string>
+    <string name="web_games_syncing">Katalógus betöltése…</string>
     <string name="web_games_free_badge">INGYENES</string>
     <string name="web_games_locked_badge">Zárolva</string>
     <string name="web_game_loading">Betöltés…</string>

@@ -288,6 +288,7 @@
     <string name="web_games_see_all">全部</string>
     <string name="web_games_search_hint">搜索游戏</string>
     <string name="web_games_empty">没有可用的游戏</string>
+    <string name="web_games_syncing">正在加载目录…</string>
     <string name="web_games_free_badge">免费</string>
     <string name="web_games_locked_badge">已锁定</string>
     <string name="web_game_loading">加载中…</string>

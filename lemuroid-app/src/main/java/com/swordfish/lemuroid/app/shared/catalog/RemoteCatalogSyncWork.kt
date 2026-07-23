@@ -30,6 +30,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import com.swordfish.lemuroid.lib.injection.AndroidWorkerInjection
 import com.swordfish.lemuroid.lib.injection.WorkerKey
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
@@ -75,13 +76,38 @@ class RemoteCatalogSyncWork(context: Context, workerParams: WorkerParameters) :
         }
     }
 
-    private suspend fun sync() {
-        val body = httpGet("${WebCatalogConfig.CATALOG_URL}?t=${System.currentTimeMillis()}")
-        val root = JSONObject(body)
-        val gamesArray = root.optJSONArray("games") ?: return
+    /**
+     * Best-effort progress publish. WorkManager rejects a setProgress whose async write is
+     * still in flight when the worker completes (or is cancelled), so we swallow that —
+     * progress is cosmetic; the sync result must never fail because of it.
+     */
+    private suspend fun reportProgress(pct: Int) {
+        runCatching { setProgress(workDataOf(PROGRESS_KEY to pct)) }
+    }
 
+    private suspend fun sync() {
         val prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         val dao = retrogradeDb.gameDao()
+
+        val storedVersion = prefs.getString(WebCatalogConfig.PREF_CATALOG_VERSION, null)
+        val dbHasGames = runCatching { dao.selectAllWebGames().isNotEmpty() }.getOrDefault(false)
+
+        // Surface progress (the nav ring + the empty-catalog screen) ONLY when the user is
+        // actually waiting on the catalog to populate — i.e. it's empty (first install /
+        // recovery). A routine version-check on an already-populated catalog runs silently:
+        // it still downloads the manifest to compare versions, but the ring never appears,
+        // so a slow/deferred background run (WorkManager can defer for minutes on some
+        // OEMs) can't look "stuck" on an ordinary launch.
+        val report = !dbHasGames
+        if (report) reportProgress(0)
+
+        val body = httpGet("${WebCatalogConfig.CATALOG_URL}?t=${System.currentTimeMillis()}") { pct ->
+            // Reserve the tail of the bar for the DB write; the manifest download is the
+            // bulk of the wait on a cold first sync.
+            if (report) reportProgress(pct * 90 / 100)
+        }
+        val root = JSONObject(body)
+        val gamesArray = root.optJSONArray("games") ?: return
 
         // Skip when the catalog version is unchanged. The version pref is written only
         // AFTER a full replace succeeds (see below), so a version match guarantees the
@@ -89,8 +115,6 @@ class RemoteCatalogSyncWork(context: Context, workerParams: WorkerParameters) :
         // to touch the DB again (avoids re-running the transaction / re-rendering the grid
         // on every launch). When the version differs we do one atomic replace.
         val fetchedVersion = root.optString("version")
-        val storedVersion = prefs.getString(WebCatalogConfig.PREF_CATALOG_VERSION, null)
-        val dbHasGames = runCatching { dao.selectAllWebGames().isNotEmpty() }.getOrDefault(false)
         // Skip only if the version matches AND the DB still holds games. The dbHasGames
         // guard re-syncs if anything wiped the web catalog (e.g. a bundled-catalog cleanup)
         // even when the version is unchanged.
@@ -155,6 +179,15 @@ class RemoteCatalogSyncWork(context: Context, workerParams: WorkerParameters) :
             return
         }
 
+        // Reaching here means we're actually (re)building the catalog — a first sync OR a
+        // real version change. Surface the replace phase (it's fast, no network wait) so a
+        // genuine content update briefly shows the ring too; only the routine "version
+        // unchanged" check above stays fully silent (it returns before this). We stop at
+        // 95 and let the UI animate the ring home to 100% on completion — reporting 100
+        // right before returning Result races WorkManager's "progress must finish before
+        // completion" check (IllegalStateException) and is pointless anyway.
+        reportProgress(95)
+
         // One atomic transaction: replace the whole web set + evict stale. No partial
         // state, no huge IN() bind list, correct tiers, single Room emission.
         dao.replaceWebCatalog(games, now)
@@ -168,14 +201,35 @@ class RemoteCatalogSyncWork(context: Context, workerParams: WorkerParameters) :
         Timber.i("RemoteCatalogSync: replaced catalog=${games.size} free=${games.count { it.isFreeTier }}")
     }
 
-    private fun httpGet(url: String): String {
+    private suspend fun httpGet(url: String, onProgress: suspend (Int) -> Unit = {}): String {
         val conn = (URL(url).openConnection() as HttpURLConnection).apply {
             connectTimeout = 15000
             readTimeout = 30000
             setRequestProperty("Cache-Control", "no-cache")
         }
         try {
-            return conn.inputStream.bufferedReader().readText()
+            conn.connect()
+            val total = conn.contentLength.toLong()
+            val out = java.io.ByteArrayOutputStream(if (total > 0) total.toInt() else 65536)
+            val buf = ByteArray(16384)
+            var read = 0L
+            var lastPct = -1
+            conn.inputStream.use { input ->
+                while (true) {
+                    val n = input.read(buf)
+                    if (n < 0) break
+                    out.write(buf, 0, n)
+                    read += n
+                    if (total > 0) {
+                        val pct = (read * 100 / total).toInt().coerceIn(0, 100)
+                        if (pct != lastPct) {
+                            lastPct = pct
+                            onProgress(pct)
+                        }
+                    }
+                }
+            }
+            return out.toString("UTF-8")
         } finally {
             conn.disconnect()
         }
@@ -197,25 +251,29 @@ class RemoteCatalogSyncWork(context: Context, workerParams: WorkerParameters) :
 
     companion object {
         private const val PERIODIC_WORK_NAME = "web_catalog_sync_periodic"
-        private const val ONESHOT_WORK_NAME = "web_catalog_sync_oneshot"
+        const val ONESHOT_WORK_NAME = "web_catalog_sync_oneshot"
+
+        /** Progress in [0, 100] published while the catalog is syncing. */
+        const val PROGRESS_KEY = "progress"
 
         fun schedule(context: Context) {
-            // Single sync on launch. Deliberately NOT a periodic + oneshot pair: two
-            // separate unique works both fire RemoteCatalogSyncWork and can run
-            // concurrently, racing on the upsert/deleteWebGamesNotIn pass and briefly
-            // wiping games (catalog flickers empty then repopulates). One unique oneshot
-            // with KEEP guarantees at most one running sync; the version-check in sync()
-            // makes it a no-op when the catalog is unchanged. Launch-based refresh is
-            // enough (the app is opened regularly).
-            // REPLACE (not KEEP): a finished unique oneshot won't re-run under KEEP, so the
-            // catalog would never refresh after the first sync. REPLACE cancels any prior
-            // run and starts fresh each launch — still a single unique work (no concurrent
-            // race), and the atomic replaceWebCatalog transaction rolls back cleanly if a
-            // launch cancels a sync mid-flight. The version-check in sync() keeps it cheap.
+            // Single unique oneshot on launch. Deliberately NOT a periodic + oneshot pair:
+            // two separate unique works both fire RemoteCatalogSyncWork and can run
+            // concurrently, racing on the replace pass and briefly wiping games.
+            //
+            // KEEP (not REPLACE): schedule() runs on every launch and can be invoked several
+            // times in quick succession (Application init, MainActivity (re)creation, a
+            // process restart under memory pressure). REPLACE *cancels the running sync and
+            // restarts it* on each of those calls — the download never finishes, its progress
+            // resets to 0 every time, and the ring appears stuck at 0 until the churn settles
+            // (observed: JobCancellationException x3 in ~9s). KEEP is a no-op while a sync is
+            // still ENQUEUED/RUNNING (so rapid re-calls don't disturb it), yet a COMPLETED
+            // unique work is not "pending", so the next launch enqueues a fresh sync — the
+            // catalog still refreshes. The version-check in sync() keeps each run cheap.
             WorkManager.getInstance(context)
                 .enqueueUniqueWork(
                     ONESHOT_WORK_NAME,
-                    ExistingWorkPolicy.REPLACE,
+                    ExistingWorkPolicy.KEEP,
                     OneTimeWorkRequestBuilder<RemoteCatalogSyncWork>()
                         .setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, TimeUnit.SECONDS)
                         .build(),

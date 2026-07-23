@@ -229,6 +229,7 @@
     <string name="web_games_see_all">הכול</string>
     <string name="web_games_search_hint">חיפוש משחקים</string>
     <string name="web_games_empty">אין משחקים זמינים</string>
+    <string name="web_games_syncing">טוען קטלוג…</string>
     <string name="web_games_free_badge">חינם</string>
     <string name="web_games_locked_badge">נעול</string>
     <string name="web_game_loading">טוען…</string>

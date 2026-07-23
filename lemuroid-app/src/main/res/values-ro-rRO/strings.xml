@@ -277,6 +277,7 @@
     <string name="web_games_see_all">Toate</string>
     <string name="web_games_search_hint">Caută jocuri</string>
     <string name="web_games_empty">Niciun joc disponibil</string>
+    <string name="web_games_syncing">Se încarcă catalogul…</string>
     <string name="web_games_free_badge">GRATIS</string>
     <string name="web_games_locked_badge">Blocat</string>
     <string name="web_game_loading">Se încarcă…</string>

@@ -287,6 +287,7 @@
     <string name="web_games_see_all">Kaikki</string>
     <string name="web_games_search_hint">Hae pelejä</string>
     <string name="web_games_empty">Ei pelejä saatavilla</string>
+    <string name="web_games_syncing">Ladataan luetteloa…</string>
     <string name="web_games_free_badge">ILMAINEN</string>
     <string name="web_games_locked_badge">Lukittu</string>
     <string name="web_game_loading">Ladataan…</string>

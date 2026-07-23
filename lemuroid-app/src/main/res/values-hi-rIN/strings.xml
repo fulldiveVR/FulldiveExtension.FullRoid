@@ -108,6 +108,7 @@
     <string name="web_games_see_all">सभी</string>
     <string name="web_games_search_hint">गेम खोजें</string>
     <string name="web_games_empty">कोई गेम उपलब्ध नहीं</string>
+    <string name="web_games_syncing">कैटलॉग लोड हो रहा है…</string>
     <string name="web_games_free_badge">मुफ़्त</string>
     <string name="web_games_locked_badge">लॉक किया गया</string>
     <string name="web_game_loading">लोड हो रहा है…</string>

@@ -108,6 +108,7 @@
     <string name="web_games_see_all">Semua</string>
     <string name="web_games_search_hint">Cari game</string>
     <string name="web_games_empty">Tidak ada game tersedia</string>
+    <string name="web_games_syncing">Memuat katalog…</string>
     <string name="web_games_free_badge">GRATIS</string>
     <string name="web_games_locked_badge">Terkunci</string>
     <string name="web_game_loading">Memuat…</string>

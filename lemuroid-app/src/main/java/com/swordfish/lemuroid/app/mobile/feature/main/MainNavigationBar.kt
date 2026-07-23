@@ -23,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Forum
 import androidx.compose.material.icons.filled.SportsEsports
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -33,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -40,6 +42,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.Brand
+import com.swordfish.lemuroid.app.shared.catalog.rememberSmoothCatalogProgress
 
 @Composable
 fun MainNavigationBar(
@@ -97,9 +100,13 @@ private fun ModernNavigationBar(
             }
         }
 
-        // Raised gradient gamepad button — the built-in games Catalog.
+        // Raised gradient gamepad button — the built-in games Catalog. Shows a ring
+        // while the web-games catalog is syncing (smoothly filled, always to 100%).
+        val ring = rememberSmoothCatalogProgress()
         CenterGamepadButton(
             modifier = Modifier.align(Alignment.TopCenter),
+            syncing = ring.visible,
+            progress = ring.progress,
             onClick = { navController.navigateTab(MainRoute.WEB_GAMES) },
         )
     }
@@ -173,23 +180,45 @@ private fun NavBarItem(
 @Composable
 private fun CenterGamepadButton(
     modifier: Modifier = Modifier,
+    syncing: Boolean = false,
+    progress: Float = 0f,
     onClick: () -> Unit,
 ) {
+    // Outer box is sized to fit the progress ring so the button doesn't shift when it
+    // appears; the ring is drawn concentric to the 58dp button.
     Box(
-        modifier = modifier
-            .size(58.dp)
-            .shadow(10.dp, CircleShape)
-            .clip(CircleShape)
-            .background(Brand.gradient)
-            .clickable(onClick = onClick),
+        modifier = modifier.size(70.dp),
         contentAlignment = Alignment.Center,
     ) {
-        Icon(
-            imageVector = Icons.Filled.SportsEsports,
-            contentDescription = stringResource(R.string.web_games_title),
-            tint = Color.White,
-            modifier = Modifier.size(28.dp),
-        )
+        Box(
+            modifier = Modifier
+                .size(58.dp)
+                .shadow(10.dp, CircleShape)
+                .clip(CircleShape)
+                .background(Brand.gradient)
+                .clickable(onClick = onClick),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(
+                imageVector = Icons.Filled.SportsEsports,
+                contentDescription = stringResource(R.string.web_games_title),
+                tint = Color.White,
+                modifier = Modifier.size(28.dp),
+            )
+        }
+        // Already smoothly animated by rememberSmoothCatalogProgress(); just render it.
+        // White arc over a dim track = high contrast against the dark bar so the fill is
+        // clearly visible (an accent-on-accent ring reads as a static full circle).
+        if (syncing) {
+            CircularProgressIndicator(
+                progress = { progress },
+                modifier = Modifier.size(70.dp),
+                color = Color.White,
+                trackColor = Color.White.copy(alpha = 0.22f),
+                strokeWidth = 3.5.dp,
+                strokeCap = StrokeCap.Round,
+            )
+        }
     }
 }
 
