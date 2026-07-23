@@ -119,6 +119,10 @@ abstract class LemuroidApplicationModule {
     abstract fun gameActivity(): GameActivity
 
     @PerActivity
+    @ContributesAndroidInjector
+    abstract fun webGameActivity(): com.swordfish.lemuroid.app.mobile.feature.webgame.WebGameActivity
+
+    @PerActivity
     @ContributesAndroidInjector(modules = [GameMenuActivity.Module::class])
     abstract fun gameMenuActivity(): GameMenuActivity
 
@@ -151,7 +155,13 @@ abstract class LemuroidApplicationModule {
         fun retrogradeDb(app: LemuroidApplication) =
             Room.databaseBuilder(app, RetrogradeDatabase::class.java, RetrogradeDatabase.DB_NAME)
                 .addCallback(GameSearchDao.CALLBACK)
-                .addMigrations(GameSearchDao.MIGRATION, Migrations.VERSION_8_9, Migrations.VERSION_9_10, Migrations.VERSION_10_11)
+                .addMigrations(
+                    GameSearchDao.MIGRATION,
+                    Migrations.VERSION_8_9,
+                    Migrations.VERSION_9_10,
+                    Migrations.VERSION_10_11,
+                    Migrations.VERSION_11_12,
+                )
                 .fallbackToDestructiveMigration()
                 .build()
 

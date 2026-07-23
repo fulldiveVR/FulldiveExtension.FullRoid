@@ -284,4 +284,19 @@
     <string name="settings_description_scan_on_app_startup">Když je vypnuto, prohledává jen při prvním spuštění nebo po změně složky her. Pro ruční obnovení použijte tlačítko opětovného prohledání.</string>
     <string name="settings_gamepad_title_reserve_first_port">Fyzické ovladače od hráče 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Ponechá hráče 1 na ovladači na obrazovce a fyzické ovladače připojí počínaje hráčem 2</string>
+    <string name="web_games_title">Hry</string>
+    <string name="web_games_see_all">Vše</string>
+    <string name="web_games_search_hint">Hledat hry</string>
+    <string name="web_games_empty">Nejsou dostupné žádné hry</string>
+    <string name="web_games_free_badge">ZDARMA</string>
+    <string name="web_games_locked_badge">Uzamčeno</string>
+    <string name="web_game_loading">Načítání…</string>
+    <string name="web_game_loading_percent">Načítání… %1$d%%</string>
+    <string name="web_game_loading_mb">Načítání… %1$d MB</string>
+    <string name="web_game_load_failed">Hru se nepodařilo načíst. Zkontrolujte připojení.</string>
+    <string name="home_filter_all">Vše</string>
+    <string name="home_filter_games">Hry</string>
+    <string name="home_filter_catalog">Katalog</string>
+    <string name="home_filter_recent">Nedávné</string>
+    <string name="home_filter_new">Nové</string>
 </resources>

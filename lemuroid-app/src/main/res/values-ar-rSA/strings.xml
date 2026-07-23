@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">عند الإيقاف، يفحص فقط عند أول تشغيل أو بعد تغيير مجلد الألعاب. استخدم زر إعادة الفحص للتحديث يدويًا.</string>
     <string name="settings_gamepad_title_reserve_first_port">أجهزة التحكم الفعلية من اللاعب 2</string>
     <string name="settings_gamepad_description_reserve_first_port">أبقِ اللاعب 1 على وحدة التحكم التي تظهر على الشاشة ووصّل أجهزة التحكم الفعلية بدءًا من اللاعب 2</string>
+    <string name="web_games_title">الألعاب</string>
+    <string name="web_games_see_all">الكل</string>
+    <string name="web_games_search_hint">ابحث عن الألعاب</string>
+    <string name="web_games_empty">لا توجد ألعاب متاحة</string>
+    <string name="web_games_free_badge">مجاني</string>
+    <string name="web_games_locked_badge">مقفل</string>
+    <string name="web_game_loading">جارٍ التحميل…</string>
+    <string name="web_game_loading_percent">جارٍ التحميل… %1$d%%</string>
+    <string name="web_game_loading_mb">جارٍ التحميل… %1$d ميغابايت</string>
+    <string name="web_game_load_failed">تعذّر تحميل اللعبة. تحقق من اتصالك.</string>
+    <string name="home_filter_all">الكل</string>
+    <string name="home_filter_games">الألعاب</string>
+    <string name="home_filter_catalog">الكتالوج</string>
+    <string name="home_filter_recent">الأخيرة</string>
+    <string name="home_filter_new">جديد</string>
 </resources>

@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">När av söks endast vid första start eller efter att spelmappen ändrats. Använd knappen för omsökning för att uppdatera manuellt.</string>
     <string name="settings_gamepad_title_reserve_first_port">Fysiska handkontroller från spelare 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Behåll spelare 1 på skärmkontrollen och anslut fysiska handkontroller från spelare 2</string>
+    <string name="web_games_title">Spel</string>
+    <string name="web_games_see_all">Alla</string>
+    <string name="web_games_search_hint">Sök spel</string>
+    <string name="web_games_empty">Inga spel tillgängliga</string>
+    <string name="web_games_free_badge">GRATIS</string>
+    <string name="web_games_locked_badge">Låst</string>
+    <string name="web_game_loading">Läser in…</string>
+    <string name="web_game_loading_percent">Läser in… %1$d%%</string>
+    <string name="web_game_loading_mb">Läser in… %1$d MB</string>
+    <string name="web_game_load_failed">Det gick inte att läsa in spelet. Kontrollera din anslutning.</string>
+    <string name="home_filter_all">Alla</string>
+    <string name="home_filter_games">Spel</string>
+    <string name="home_filter_catalog">Katalog</string>
+    <string name="home_filter_recent">Senaste</string>
+    <string name="home_filter_new">Nya</string>
 </resources>

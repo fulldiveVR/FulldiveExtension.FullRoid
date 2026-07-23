@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">Wenn deaktiviert, wird nur beim ersten Start oder nach dem Ändern des Spieleordners gescannt. Nutze die Schaltfläche zum erneuten Scannen, um manuell zu aktualisieren.</string>
     <string name="settings_gamepad_title_reserve_first_port">Physische Controller ab Spieler 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Behält Spieler 1 auf dem Bildschirm-Controller und verbindet physische Controller ab Spieler 2</string>
+    <string name="web_games_title">Spiele</string>
+    <string name="web_games_see_all">Alle</string>
+    <string name="web_games_search_hint">Spiele suchen</string>
+    <string name="web_games_empty">Keine Spiele verfügbar</string>
+    <string name="web_games_free_badge">GRATIS</string>
+    <string name="web_games_locked_badge">Gesperrt</string>
+    <string name="web_game_loading">Wird geladen…</string>
+    <string name="web_game_loading_percent">Wird geladen… %1$d%%</string>
+    <string name="web_game_loading_mb">Wird geladen… %1$d MB</string>
+    <string name="web_game_load_failed">Spiel konnte nicht geladen werden. Überprüfe deine Verbindung.</string>
+    <string name="home_filter_all">Alle</string>
+    <string name="home_filter_games">Spiele</string>
+    <string name="home_filter_catalog">Katalog</string>
+    <string name="home_filter_recent">Zuletzt</string>
+    <string name="home_filter_new">Neu</string>
 </resources>

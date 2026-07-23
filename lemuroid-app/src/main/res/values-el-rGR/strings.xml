@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">Όταν είναι απενεργοποιημένο, σαρώνει μόνο στην πρώτη εκκίνηση ή μετά την αλλαγή του φακέλου παιχνιδιών. Χρησιμοποιήστε το κουμπί επανασάρωσης για χειροκίνητη ανανέωση.</string>
     <string name="settings_gamepad_title_reserve_first_port">Φυσικά χειριστήρια από τον Παίκτη 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Κρατά τον Παίκτη 1 στο χειριστήριο οθόνης και συνδέει τα φυσικά χειριστήρια ξεκινώντας από τον Παίκτη 2</string>
+    <string name="web_games_title">Παιχνίδια</string>
+    <string name="web_games_see_all">Όλα</string>
+    <string name="web_games_search_hint">Αναζήτηση παιχνιδιών</string>
+    <string name="web_games_empty">Δεν υπάρχουν διαθέσιμα παιχνίδια</string>
+    <string name="web_games_free_badge">ΔΩΡΕΑΝ</string>
+    <string name="web_games_locked_badge">Κλειδωμένο</string>
+    <string name="web_game_loading">Φόρτωση…</string>
+    <string name="web_game_loading_percent">Φόρτωση… %1$d%%</string>
+    <string name="web_game_loading_mb">Φόρτωση… %1$d MB</string>
+    <string name="web_game_load_failed">Δεν ήταν δυνατή η φόρτωση του παιχνιδιού. Ελέγξτε τη σύνδεσή σας.</string>
+    <string name="home_filter_all">Όλα</string>
+    <string name="home_filter_games">Παιχνίδια</string>
+    <string name="home_filter_catalog">Κατάλογος</string>
+    <string name="home_filter_recent">Πρόσφατα</string>
+    <string name="home_filter_new">Νέα</string>
 </resources>

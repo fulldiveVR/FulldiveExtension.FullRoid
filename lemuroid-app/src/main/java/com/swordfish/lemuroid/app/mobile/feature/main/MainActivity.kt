@@ -71,6 +71,7 @@ import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesScreen
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.catalog.CatalogDetailScreen
+import com.swordfish.lemuroid.app.mobile.feature.webgames.WebGamesScreen
 import com.swordfish.lemuroid.app.mobile.feature.webview.WebViewActivity
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeScreen
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeViewModel
@@ -93,6 +94,7 @@ import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSetti
 import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.catalog.CatalogSyncWork
+import com.swordfish.lemuroid.app.shared.catalog.RemoteCatalogSyncWork
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsScreen
@@ -194,6 +196,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
         InstallAttributionReporter.reportIfNeeded(applicationContext, GlobalScope)
 
         CatalogSyncWork.schedule(applicationContext)
+        RemoteCatalogSyncWork.schedule(applicationContext)
 
         // Scan the library and update cores when the app UI is opened (not on every process start),
         // so launching a game via shortcut doesn't trigger a scan. The scan is gated by the
@@ -308,35 +311,24 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             } else {
                                 navController.navigate(MainRoute.PRO_TUTORIAL.route)
                             }
-                        }
+                        },
                     )
                 },
-                bottomBar = { MainNavigationBar(currentRoute, navController) },
-                floatingActionButton = {
-                    // Compact, always-available entry to Roomcord on Home, shown only when the
-                    // bottom promo banners are not occupying the screen.
-                    if (currentRoute == MainRoute.HOME &&
-                        !isProPopupVisible.value &&
-                        !isRoomcordPopupVisible.value
-                    ) {
-                        FloatingActionButton(
-                            onClick = {
-                                actionTracker.logAction(TrackerConstants.EVENT_ROOMCORD_FAB_CLICKED)
-                                startActivity(
-                                    WebViewActivity.newIntent(
-                                        context = this@MainActivity,
-                                        url = FulldiveConfigs.ROOMCORD_ROOM_URL_GAMES,
-                                        title = getString(R.string.roomcord_webview_title),
-                                    ),
-                                )
-                            },
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.SportsEsports,
-                                contentDescription = stringResource(R.string.popup_more_games_title),
+                bottomBar = {
+                    MainNavigationBar(
+                        currentRoute = currentRoute,
+                        navController = navController,
+                        onChatClick = {
+                            actionTracker.logAction(TrackerConstants.EVENT_ROOMCORD_FAB_CLICKED)
+                            startActivity(
+                                WebViewActivity.newIntent(
+                                    context = this@MainActivity,
+                                    url = FulldiveConfigs.ROOMCORD_ROOM_URL_GAMES,
+                                    title = getString(R.string.roomcord_webview_title),
+                                ),
                             )
-                        }
-                    }
+                        },
+                    )
                 },
             ) { padding ->
                 NavHost(
@@ -425,10 +417,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                     factory = SearchViewModel.Factory(retrogradeDb),
                                 ),
                             searchQuery = mainUIState.searchQuery,
+                            onUpdateQuery = { mainViewModel.changeQueryString(it) },
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                             onGameFavoriteToggle = onGameFavoriteToggle,
-                            onResetSearchQuery = { mainViewModel.changeQueryString("") },
                         )
                     }
                     composable(MainRoute.SYSTEMS) {
@@ -443,6 +435,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                             applicationContext,
                                         ),
                                 ),
+                            retrogradeDb = retrogradeDb,
+                            onGameClick = onGameClick,
+                            onGameLongClick = onGameLongClick,
+                            onGameFavoriteToggle = onGameFavoriteToggle,
                         )
                     }
                     composable(MainRoute.SYSTEM_GAMES) { entry ->
@@ -572,10 +568,16 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     composable(MainRoute.CATALOG_DETAIL) { entry ->
                         val gameId = entry.arguments?.getInt("gameId") ?: return@composable
                         CatalogDetailScreen(
+                            modifier = Modifier.padding(padding),
                             gameId = gameId,
                             retrogradeDb = retrogradeDb,
                             onPlayClicked = { game -> gameInteractor.onGamePlay(game) },
-                            onNavigateBack = { navController.popBackStack() },
+                        )
+                    }
+                    composable(MainRoute.WEB_GAMES) {
+                        WebGamesScreen(
+                            modifier = Modifier.padding(padding),
+                            webGamesFlow = retrogradeDb.gameDao().selectWebCatalogGames(),
                         )
                     }
                 }

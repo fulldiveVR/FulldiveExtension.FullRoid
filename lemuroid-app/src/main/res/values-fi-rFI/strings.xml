@@ -283,4 +283,19 @@
     <string name="settings_description_scan_on_app_startup">Kun pois päältä, etsii vain ensimmäisellä käynnistyksellä tai pelikansion vaihtamisen jälkeen. Päivitä manuaalisesti uudelleenskannauspainikkeella.</string>
     <string name="settings_gamepad_title_reserve_first_port">Fyysiset ohjaimet pelaajasta 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Pidä pelaaja 1 näytön ohjaimessa ja yhdistä fyysiset ohjaimet pelaajasta 2 alkaen</string>
+    <string name="web_games_title">Pelit</string>
+    <string name="web_games_see_all">Kaikki</string>
+    <string name="web_games_search_hint">Hae pelejä</string>
+    <string name="web_games_empty">Ei pelejä saatavilla</string>
+    <string name="web_games_free_badge">ILMAINEN</string>
+    <string name="web_games_locked_badge">Lukittu</string>
+    <string name="web_game_loading">Ladataan…</string>
+    <string name="web_game_loading_percent">Ladataan… %1$d%%</string>
+    <string name="web_game_loading_mb">Ladataan… %1$d MB</string>
+    <string name="web_game_load_failed">Pelin lataaminen epäonnistui. Tarkista yhteytesi.</string>
+    <string name="home_filter_all">Kaikki</string>
+    <string name="home_filter_games">Pelit</string>
+    <string name="home_filter_catalog">Luettelo</string>
+    <string name="home_filter_recent">Viimeisimmät</string>
+    <string name="home_filter_new">Uudet</string>
 </resources>

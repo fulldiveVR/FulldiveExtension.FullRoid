@@ -7,6 +7,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val LightColorScheme =
@@ -75,19 +76,31 @@ private val DarkColorScheme =
         scrim = md_theme_dark_scrim,
     )
 
+// Modern fixed brand palette. Dynamic color (Material You) is intentionally disabled so
+// the gradient identity stays consistent across devices (see Brand + docs/plans/home-redesign.md).
+private val BrandDarkColorScheme =
+    DarkColorScheme.copy(
+        primary = Brand.Accent,
+        onPrimary = Color.White,
+        secondary = Brand.Start,
+        tertiary = Brand.End,
+        background = Brand.Background,
+        onBackground = Brand.OnSurface,
+        surface = Brand.Surface,
+        onSurface = Brand.OnSurface,
+        surfaceVariant = Brand.SurfaceElevated,
+        onSurfaceVariant = Brand.OnSurfaceVariant,
+        outline = Brand.Outline,
+        outlineVariant = Brand.Outline,
+        surfaceTint = Brand.Accent,
+    )
+
 @Composable
 fun AppTheme(
     darkTheme: Boolean = true,
     content: @Composable () -> Unit,
 ) {
-    val dynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-    val colors =
-        when {
-            dynamicColor && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
-            dynamicColor && !darkTheme -> dynamicLightColorScheme(LocalContext.current)
-            darkTheme -> DarkColorScheme
-            else -> LightColorScheme
-        }
+    val colors = if (darkTheme) BrandDarkColorScheme else LightColorScheme
 
     MaterialTheme(colorScheme = colors) {
         content()

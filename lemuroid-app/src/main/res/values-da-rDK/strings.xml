@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">Når slået fra, scannes der kun ved første start eller efter ændring af spilmappen. Brug genscan-knappen for at opdatere manuelt.</string>
     <string name="settings_gamepad_title_reserve_first_port">Fysiske controllere fra spiller 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Behold spiller 1 på skærmcontrolleren, og tilslut fysiske controllere fra spiller 2</string>
+    <string name="web_games_title">Spil</string>
+    <string name="web_games_see_all">Alle</string>
+    <string name="web_games_search_hint">Søg spil</string>
+    <string name="web_games_empty">Ingen spil tilgængelige</string>
+    <string name="web_games_free_badge">GRATIS</string>
+    <string name="web_games_locked_badge">Låst</string>
+    <string name="web_game_loading">Indlæser…</string>
+    <string name="web_game_loading_percent">Indlæser… %1$d%%</string>
+    <string name="web_game_loading_mb">Indlæser… %1$d MB</string>
+    <string name="web_game_load_failed">Spillet kunne ikke indlæses. Tjek din forbindelse.</string>
+    <string name="home_filter_all">Alle</string>
+    <string name="home_filter_games">Spil</string>
+    <string name="home_filter_catalog">Katalog</string>
+    <string name="home_filter_recent">Seneste</string>
+    <string name="home_filter_new">Nye</string>
 </resources>

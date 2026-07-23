@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">Якщо вимкнено, сканування виконується лише під час першого запуску або після зміни теки з іграми. Для ручного оновлення скористайтеся кнопкою повторного сканування.</string>
     <string name="settings_gamepad_title_reserve_first_port">Фізичні контролери з гравця 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Залиште гравця 1 на екранному контролері та підключайте фізичні контролери починаючи з гравця 2</string>
+    <string name="web_games_title">Ігри</string>
+    <string name="web_games_see_all">Усі</string>
+    <string name="web_games_search_hint">Пошук ігор</string>
+    <string name="web_games_empty">Немає доступних ігор</string>
+    <string name="web_games_free_badge">БЕЗКОШТОВНО</string>
+    <string name="web_games_locked_badge">Заблоковано</string>
+    <string name="web_game_loading">Завантаження…</string>
+    <string name="web_game_loading_percent">Завантаження… %1$d%%</string>
+    <string name="web_game_loading_mb">Завантаження… %1$d МБ</string>
+    <string name="web_game_load_failed">Не вдалося завантажити гру. Перевірте з\'єднання.</string>
+    <string name="home_filter_all">Усі</string>
+    <string name="home_filter_games">Ігри</string>
+    <string name="home_filter_catalog">Каталог</string>
+    <string name="home_filter_recent">Нещодавні</string>
+    <string name="home_filter_new">Нові</string>
 </resources>

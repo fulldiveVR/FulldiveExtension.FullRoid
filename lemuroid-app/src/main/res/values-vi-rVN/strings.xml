@@ -263,4 +263,19 @@
     <string name="settings_description_scan_on_app_startup">Khi tắt, chỉ quét ở lần khởi động đầu tiên hoặc sau khi thay đổi thư mục trò chơi. Dùng nút quét lại để làm mới thủ công.</string>
     <string name="settings_gamepad_title_reserve_first_port">Tay cầm vật lý từ Người chơi 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Giữ Người chơi 1 trên tay cầm trên màn hình và kết nối tay cầm vật lý bắt đầu từ Người chơi 2</string>
+    <string name="web_games_title">Trò chơi</string>
+    <string name="web_games_see_all">Tất cả</string>
+    <string name="web_games_search_hint">Tìm trò chơi</string>
+    <string name="web_games_empty">Không có trò chơi nào</string>
+    <string name="web_games_free_badge">MIỄN PHÍ</string>
+    <string name="web_games_locked_badge">Đã khóa</string>
+    <string name="web_game_loading">Đang tải…</string>
+    <string name="web_game_loading_percent">Đang tải… %1$d%%</string>
+    <string name="web_game_loading_mb">Đang tải… %1$d MB</string>
+    <string name="web_game_load_failed">Không thể tải trò chơi. Kiểm tra kết nối của bạn.</string>
+    <string name="home_filter_all">Tất cả</string>
+    <string name="home_filter_games">Trò chơi</string>
+    <string name="home_filter_catalog">Danh mục</string>
+    <string name="home_filter_recent">Gần đây</string>
+    <string name="home_filter_new">Mới</string>
 </resources>

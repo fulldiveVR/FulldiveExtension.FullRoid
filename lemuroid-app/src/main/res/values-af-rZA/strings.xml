@@ -104,4 +104,19 @@
     <string name="settings_description_scan_on_app_startup">Wanneer af, soek dit net met die eerste begin of nadat die speletjie-vouer verander is. Gebruik die herskandeer-knoppie om handmatig te verfris.</string>
     <string name="settings_gamepad_title_reserve_first_port">Fisiese beheerders vanaf Speler 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Hou Speler 1 op die skermbeheerder en koppel fisiese beheerders vanaf Speler 2</string>
+    <string name="web_games_title">Speletjies</string>
+    <string name="web_games_see_all">Alle</string>
+    <string name="web_games_search_hint">Soek speletjies</string>
+    <string name="web_games_empty">Geen speletjies beskikbaar nie</string>
+    <string name="web_games_free_badge">GRATIS</string>
+    <string name="web_games_locked_badge">Gesluit</string>
+    <string name="web_game_loading">Laai tans…</string>
+    <string name="web_game_loading_percent">Laai tans… %1$d%%</string>
+    <string name="web_game_loading_mb">Laai tans… %1$d MB</string>
+    <string name="web_game_load_failed">Kon nie die speletjie laai nie. Gaan jou verbinding na.</string>
+    <string name="home_filter_all">Alle</string>
+    <string name="home_filter_games">Speletjies</string>
+    <string name="home_filter_catalog">Katalogus</string>
+    <string name="home_filter_recent">Onlangs</string>
+    <string name="home_filter_new">Nuut</string>
 </resources>

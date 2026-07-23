@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">Cuando está desactivado, solo escanea en el primer inicio o tras cambiar la carpeta de juegos. Usa el botón de volver a escanear para actualizar manualmente.</string>
     <string name="settings_gamepad_title_reserve_first_port">Mandos físicos desde el Jugador 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Mantén al Jugador 1 en el mando en pantalla y conecta los mandos físicos a partir del Jugador 2</string>
+    <string name="web_games_title">Juegos</string>
+    <string name="web_games_see_all">Todos</string>
+    <string name="web_games_search_hint">Buscar juegos</string>
+    <string name="web_games_empty">No hay juegos disponibles</string>
+    <string name="web_games_free_badge">GRATIS</string>
+    <string name="web_games_locked_badge">Bloqueado</string>
+    <string name="web_game_loading">Cargando…</string>
+    <string name="web_game_loading_percent">Cargando… %1$d%%</string>
+    <string name="web_game_loading_mb">Cargando… %1$d MB</string>
+    <string name="web_game_load_failed">No se pudo cargar el juego. Comprueba tu conexión.</string>
+    <string name="home_filter_all">Todos</string>
+    <string name="home_filter_games">Juegos</string>
+    <string name="home_filter_catalog">Catálogo</string>
+    <string name="home_filter_recent">Recientes</string>
+    <string name="home_filter_new">Nuevos</string>
 </resources>

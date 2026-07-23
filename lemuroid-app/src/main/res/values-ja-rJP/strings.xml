@@ -286,4 +286,19 @@
     <string name="settings_description_scan_on_app_startup">オフの場合、初回起動時またはゲームフォルダーの変更後にのみスキャンします。手動で更新するには再スキャンボタンを使用してください。</string>
     <string name="settings_gamepad_title_reserve_first_port">物理コントローラーをプレイヤー2から</string>
     <string name="settings_gamepad_description_reserve_first_port">プレイヤー1を画面上のコントローラーのままにし、物理コントローラーをプレイヤー2から接続します</string>
+    <string name="web_games_title">ゲーム</string>
+    <string name="web_games_see_all">すべて</string>
+    <string name="web_games_search_hint">ゲームを検索</string>
+    <string name="web_games_empty">利用できるゲームがありません</string>
+    <string name="web_games_free_badge">無料</string>
+    <string name="web_games_locked_badge">ロック中</string>
+    <string name="web_game_loading">読み込み中…</string>
+    <string name="web_game_loading_percent">読み込み中… %1$d%%</string>
+    <string name="web_game_loading_mb">読み込み中… %1$d MB</string>
+    <string name="web_game_load_failed">ゲームを読み込めませんでした。接続を確認してください。</string>
+    <string name="home_filter_all">すべて</string>
+    <string name="home_filter_games">ゲーム</string>
+    <string name="home_filter_catalog">カタログ</string>
+    <string name="home_filter_recent">最近</string>
+    <string name="home_filter_new">新着</string>
 </resources>

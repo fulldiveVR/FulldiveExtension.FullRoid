@@ -312,4 +312,21 @@
     <string name="catalog_read_more">Read more</string>
     <string name="catalog_more_info">More info</string>
     <string name="catalog_play">Play</string>
+    <string name="web_games_title">Games</string>
+    <string name="web_games_see_all">All</string>
+    <string name="web_games_search_hint">Search games</string>
+    <string name="web_games_empty">No games available</string>
+    <string name="web_games_free_badge">FREE</string>
+    <string name="web_games_pro_badge">PRO</string>
+    <string name="home_filter_all">All</string>
+    <string name="home_filter_games">Games</string>
+    <string name="home_filter_catalog">Catalog</string>
+    <string name="home_filter_recent">Recent</string>
+    <string name="home_filter_new">New</string>
+    <string name="nav_chat">Chat</string>
+    <string name="web_games_locked_badge">Locked</string>
+    <string name="web_game_loading">Loading…</string>
+    <string name="web_game_loading_percent">Loading… %1$d%%</string>
+    <string name="web_game_loading_mb">Loading… %1$d MB</string>
+    <string name="web_game_load_failed">Couldn\'t load the game. Check your connection.</string>
 </resources>

@@ -104,4 +104,19 @@
     <string name="settings_description_scan_on_app_startup">बंद होने पर, केवल पहली बार शुरू होने पर या गेम फ़ोल्डर बदलने के बाद स्कैन करता है. मैन्युअल रूप से ताज़ा करने के लिए रीस्कैन बटन का उपयोग करें.</string>
     <string name="settings_gamepad_title_reserve_first_port">फ़िज़िकल कंट्रोलर प्लेयर 2 से</string>
     <string name="settings_gamepad_description_reserve_first_port">प्लेयर 1 को ऑन-स्क्रीन कंट्रोलर पर रखें और फ़िज़िकल कंट्रोलर प्लेयर 2 से जोड़ें</string>
+    <string name="web_games_title">गेम</string>
+    <string name="web_games_see_all">सभी</string>
+    <string name="web_games_search_hint">गेम खोजें</string>
+    <string name="web_games_empty">कोई गेम उपलब्ध नहीं</string>
+    <string name="web_games_free_badge">मुफ़्त</string>
+    <string name="web_games_locked_badge">लॉक किया गया</string>
+    <string name="web_game_loading">लोड हो रहा है…</string>
+    <string name="web_game_loading_percent">लोड हो रहा है… %1$d%%</string>
+    <string name="web_game_loading_mb">लोड हो रहा है… %1$d MB</string>
+    <string name="web_game_load_failed">गेम लोड नहीं हो सका. अपना कनेक्शन जांचें.</string>
+    <string name="home_filter_all">सभी</string>
+    <string name="home_filter_games">गेम</string>
+    <string name="home_filter_catalog">कैटलॉग</string>
+    <string name="home_filter_recent">हाल के</string>
+    <string name="home_filter_new">नए</string>
 </resources>

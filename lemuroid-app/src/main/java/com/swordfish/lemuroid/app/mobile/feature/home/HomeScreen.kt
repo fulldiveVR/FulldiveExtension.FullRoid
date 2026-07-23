@@ -4,10 +4,15 @@ import android.Manifest
 import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -16,13 +21,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.LocalActivity
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -30,28 +35,37 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import com.swordfish.lemuroid.R
-import com.swordfish.lemuroid.app.appextension.isProVersion
-import com.swordfish.lemuroid.app.appextension.isRoomcordInstalled
-import com.swordfish.lemuroid.app.mobile.shared.compose.ui.CatalogLockedDialog
+import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
+import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
+import com.swordfish.lemuroid.app.mobile.feature.webgames.WebGameCard
+import com.swordfish.lemuroid.app.mobile.feature.webgames.canPlayWebGame
+import com.swordfish.lemuroid.app.mobile.feature.webgames.launchWebGame
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.Brand
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.BrandSearchField
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameCard
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameImage
+import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.app.utils.android.ComposableLifecycle
-import com.swordfish.lemuroid.app.utils.android.settings.booleanPreferenceState
 import com.swordfish.lemuroid.common.displayDetailsSettingsScreen
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import com.swordfish.lemuroid.lib.library.metaSystemID
 
 @Composable
 fun HomeScreen(
@@ -67,9 +81,7 @@ fun HomeScreen(
 
     ComposableLifecycle { _, event ->
         when (event) {
-            Lifecycle.Event.ON_RESUME -> {
-                viewModel.updatePermissions(applicationContext)
-            }
+            Lifecycle.Event.ON_RESUME -> viewModel.updatePermissions(applicationContext)
             else -> { }
         }
     }
@@ -83,232 +95,274 @@ fun HomeScreen(
             }
         }
 
-    val state = viewModel.getViewStates().collectAsState(HomeViewModel.UIState())
-    HomeScreen(
-        modifier,
-        state.value,
-        viewModel.localRomsDirectory,
-        onGameClick,
-        onGameLongClick,
-        onOpenCoreSelection,
-        onCatalogGameClicked,
-        {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                return@HomeScreen
-            }
+    val state = viewModel.getViewStates().collectAsState(HomeViewModel.UIState()).value
+    val installedGames = viewModel.installedGames.collectAsState(emptyList()).value
+    val catalogGames = viewModel.catalogGames.collectAsState(emptyList()).value
+    val playedGames = viewModel.playedGames.collectAsState(emptyList()).value
+    val newlyAddedGames = viewModel.newlyAddedGames.collectAsState(emptyList()).value
+    val systems = viewModel.availableMetaSystems.collectAsState(emptyList()).value
 
-            permissionsLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+    HomeContent(
+        modifier = modifier,
+        state = state,
+        localRomsDirectory = viewModel.localRomsDirectory,
+        installedGames = installedGames,
+        catalogGames = catalogGames,
+        playedGames = playedGames,
+        newlyAddedGames = newlyAddedGames,
+        systems = systems,
+        onGameClicked = onGameClick,
+        onGameLongClick = onGameLongClick,
+        onOpenCoreSelection = onOpenCoreSelection,
+        onCatalogGameClicked = onCatalogGameClicked,
+        onEnableNotificationsClicked = {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                permissionsLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
         },
-        { permissionsLauncher.launch(Manifest.permission.RECORD_AUDIO) },
-        { viewModel.changeLocalStorageFolder(context) },
-    ) // TODO COMPOSE We need to understand what's going to happen here.
+        onSetDirectoryClicked = { viewModel.changeLocalStorageFolder(context) },
+    )
 }
 
+private const val KEY_ALL = "all"
+private const val KEY_RECENT = "recent"
+private const val KEY_NEW = "new"
+private const val KEY_CATALOG = "catalog"
+
 @Composable
-private fun HomeScreen(
+private fun HomeContent(
     modifier: Modifier = Modifier,
     state: HomeViewModel.UIState,
     localRomsDirectory: String,
+    installedGames: List<Game>,
+    catalogGames: List<Game>,
+    playedGames: List<Game>,
+    newlyAddedGames: List<Game>,
+    systems: List<MetaSystemInfo>,
     onGameClicked: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onOpenCoreSelection: () -> Unit,
     onCatalogGameClicked: (Game) -> Unit,
     onEnableNotificationsClicked: () -> Unit,
-    onEnableMicrophoneClicked: () -> Unit,
     onSetDirectoryClicked: () -> Unit,
 ) {
     val context = LocalContext.current
-    val showCatalogState = booleanPreferenceState(R.string.pref_key_show_catalog, true)
-    val canToggleCatalog = isProVersion() || context.isRoomcordInstalled()
-    val showLockedDialog = remember { mutableStateOf(false) }
+    val selectedKey = rememberSaveable { mutableStateOf(KEY_ALL) }
+    val searchQuery = rememberSaveable { mutableStateOf("") }
 
-    // If free user lost Roomcord access, restore catalog visibility
-    if (!canToggleCatalog && !showCatalogState.value) {
-        showCatalogState.value = true
+    // "Recent" and "New" chips only exist when they have content.
+    val hasRecent = playedGames.isNotEmpty()
+    val hasNew = newlyAddedGames.isNotEmpty()
+
+    // Keep selection valid if the available chips change (e.g. Recent/New emptied).
+    val validKeys = remember(systems, hasRecent, hasNew) {
+        buildSet {
+            add(KEY_ALL)
+            if (hasRecent) add(KEY_RECENT)
+            if (hasNew) add(KEY_NEW)
+            add(KEY_CATALOG)
+            addAll(systems.map { it.metaSystem.name })
+        }
     }
+    if (selectedKey.value !in validKeys) selectedKey.value = KEY_ALL
 
-    if (showLockedDialog.value) {
-        CatalogLockedDialog(onDismiss = { showLockedDialog.value = false })
-    }
+    // "All": the user's own games first, then the catalog. Recent/New/Catalog use their
+    // own pre-sorted source flows (played = newest first, new = latest added first,
+    // catalog = bundled-then-free-web first). No global re-sort — ordering is intrinsic.
+    val games =
+        when (val key = selectedKey.value) {
+            KEY_ALL -> installedGames + catalogGames
+            KEY_RECENT -> playedGames
+            KEY_NEW -> newlyAddedGames
+            KEY_CATALOG -> catalogGames
+            else -> {
+                val meta = systems.firstOrNull { it.metaSystem.name == key }?.metaSystem
+                (installedGames + catalogGames).filter { g ->
+                    meta != null &&
+                        GameSystem.findByIdOrNull(g.systemId, isProVersion = true)?.metaSystemID() == meta
+                }
+            }
+        }.let { base ->
+            val query = searchQuery.value.trim()
+            if (query.isEmpty()) base
+            else base.filter { it.title.contains(query, ignoreCase = true) }
+        }
 
-    Column(
-        modifier =
-            modifier
-                .verticalScroll(rememberScrollState())
-                .padding(top = 16.dp, bottom = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+    val fullSpan: androidx.compose.foundation.lazy.grid.LazyGridItemSpanScope.() -> GridItemSpan =
+        { GridItemSpan(maxLineSpan) }
+
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 108.dp),
+        modifier = modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        AnimatedVisibility(state.showNoNotificationPermissionCard) {
-            HomeNotification(
-                titleId = R.string.home_notification_title,
-                messageId = R.string.home_notification_message,
-                actionId = R.string.home_notification_action,
-                onAction = onEnableNotificationsClicked,
+        item(span = fullSpan) {
+            BrandSearchField(
+                query = searchQuery.value,
+                onQueryChange = { searchQuery.value = it },
+                placeholder = stringResource(R.string.web_games_search_hint),
             )
         }
-        AnimatedVisibility(state.showNoGamesCard) {
-            HomeNotification(
-                titleId = R.string.home_empty_title,
-                messageId = R.string.home_empty_message,
-                actionId = R.string.home_empty_action,
-                onAction = onSetDirectoryClicked,
-                enabled = !state.indexInProgress,
-                extraText = stringResource(R.string.home_empty_local_path, localRomsDirectory),
+        item(span = fullSpan) {
+            HomeFilterChips(
+                systems = systems,
+                hasRecent = hasRecent,
+                hasNew = hasNew,
+                selectedKey = selectedKey.value,
+                onSelected = { selectedKey.value = it },
             )
         }
-        // Microphone permission card removed - incomplete feature from merge
-        // AnimatedVisibility(state.showNoMicrophonePermissionCard) {
-        //     HomeNotification(
-        //         titleId = R.string.home_microphone_title,
-        //         messageId = R.string.home_microphone_message,
-        //         actionId = R.string.home_microphone_action,
-        //         onAction = onEnableMicrophoneClicked,
-        //     )
-        // }
-        AnimatedVisibility(state.showDesmumeDeprecatedCard) {
-            HomeNotification(
-                titleId = R.string.home_notification_desmume_deprecated_title,
-                messageId = R.string.home_notification_desmume_deprecated_message,
-                actionId = R.string.home_notification_desmume_deprecated_action,
-                onAction = onOpenCoreSelection,
-            )
+        if (state.showNoNotificationPermissionCard) {
+            item(span = fullSpan) {
+                HomeNotification(
+                    titleId = R.string.home_notification_title,
+                    messageId = R.string.home_notification_message,
+                    actionId = R.string.home_notification_action,
+                    onAction = onEnableNotificationsClicked,
+                )
+            }
         }
-        HomeRow(
-            stringResource(id = R.string.recent),
-            state.recentGames,
-            onGameClicked,
-            onGameLongClick,
-        )
-        HomeRow(
-            stringResource(id = R.string.favorites),
-            state.favoritesGames,
-            onGameClicked,
-            onGameLongClick,
-        )
-        HomeRow(
-            stringResource(id = R.string.discover),
-            state.discoveryGames,
-            onGameClicked,
-            onGameLongClick,
-        )
-        if (showCatalogState.value) {
-            CatalogRow(
-                title = stringResource(id = R.string.catalog_title),
-                games = state.catalogGames,
-                onGameClicked = onCatalogGameClicked,
+        if (state.showNoGamesCard && selectedKey.value == KEY_ALL) {
+            item(span = fullSpan) {
+                HomeNotification(
+                    titleId = R.string.home_empty_title,
+                    messageId = R.string.home_empty_message,
+                    actionId = R.string.home_empty_action,
+                    onAction = onSetDirectoryClicked,
+                    enabled = !state.indexInProgress,
+                    extraText = stringResource(R.string.home_empty_local_path, localRomsDirectory),
+                )
+            }
+        }
+        if (state.showDesmumeDeprecatedCard) {
+            item(span = fullSpan) {
+                HomeNotification(
+                    titleId = R.string.home_notification_desmume_deprecated_title,
+                    messageId = R.string.home_notification_desmume_deprecated_message,
+                    actionId = R.string.home_notification_desmume_deprecated_action,
+                    onAction = onOpenCoreSelection,
+                )
+            }
+        }
+
+        items(games, key = { "${it.id}_${it.isCatalogGame}" }) { game ->
+            GameGridCard(
+                game = game,
+                context = context,
+                onGameClicked = onGameClicked,
                 onGameLongClick = onGameLongClick,
-                onHideClicked = {
-                    if (canToggleCatalog) {
-                        showCatalogState.value = false
+                onCatalogGameClicked = onCatalogGameClicked,
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun GameGridCard(
+    game: Game,
+    context: android.content.Context,
+    onGameClicked: (Game) -> Unit,
+    onGameLongClick: (Game) -> Unit,
+    onCatalogGameClicked: (Game) -> Unit,
+) {
+    when {
+        game.webGameSlug != null -> {
+            val locked = !canPlayWebGame(context, game)
+            WebGameCard(
+                game = game,
+                locked = locked,
+                onClick = {
+                    if (locked) {
+                        context.openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
                     } else {
-                        showLockedDialog.value = true
+                        launchWebGame(context, game)
                     }
                 },
             )
         }
+        game.isCatalogGame -> {
+            CatalogGameCard(
+                game = game,
+                onClick = { onCatalogGameClicked(game) },
+                onLongClick = { onGameLongClick(game) },
+            )
+        }
+        else -> {
+            LemuroidGameCard(
+                game = game,
+                onClick = { onGameClicked(game) },
+                onLongClick = { onGameLongClick(game) },
+            )
+        }
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun HomeRow(
-    title: String,
-    games: List<Game>,
-    onGameClicked: (Game) -> Unit,
-    onGameLongClick: (Game) -> Unit,
+private fun HomeFilterChips(
+    systems: List<MetaSystemInfo>,
+    hasRecent: Boolean,
+    hasNew: Boolean,
+    selectedKey: String,
+    onSelected: (String) -> Unit,
 ) {
-    if (games.isEmpty()) {
-        return
+    val context = LocalContext.current
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        FilterChip(stringResource(R.string.home_filter_all), selectedKey == KEY_ALL) { onSelected(KEY_ALL) }
+        if (hasRecent) {
+            FilterChip(stringResource(R.string.home_filter_recent), selectedKey == KEY_RECENT) { onSelected(KEY_RECENT) }
+        }
+        if (hasNew) {
+            FilterChip(stringResource(R.string.home_filter_new), selectedKey == KEY_NEW) { onSelected(KEY_NEW) }
+        }
+        FilterChip(stringResource(R.string.home_filter_catalog), selectedKey == KEY_CATALOG) { onSelected(KEY_CATALOG) }
+        systems.forEach { system ->
+            val key = system.metaSystem.name
+            FilterChip(system.getName(context), selectedKey == key) { onSelected(key) }
+        }
     }
+}
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+@Composable
+private fun FilterChip(
+    label: String,
+    active: Boolean,
+    onClick: () -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .clip(RoundedCornerShape(50))
+            .then(
+                if (active) {
+                    Modifier.background(Brand.gradient)
+                } else {
+                    Modifier
+                        .background(Brand.SurfaceElevated)
+                        .border(1.dp, Brand.Outline, RoundedCornerShape(50))
+                },
+            )
+            .clickable(onClick = onClick)
+            .padding(horizontal = 18.dp, vertical = 9.dp),
+        contentAlignment = Alignment.Center,
+    ) {
         Text(
-            text = title,
-            style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp),
+            text = label,
+            style = MaterialTheme.typography.labelLarge,
+            color = if (active) Color.White else Brand.OnSurface,
         )
-        LazyRow(
-            modifier =
-                Modifier
-                    .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(16.dp),
-        ) {
-            items(games.size, key = { games[it].id }) { index ->
-                val game = games[index]
-                LemuroidGameCard(
-                    modifier =
-                        Modifier
-                            .widthIn(0.dp, 144.dp)
-                            .animateItem(),
-                    game = game,
-                    onClick = { onGameClicked(game) },
-                    onLongClick = { onGameLongClick(game) },
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun CatalogRow(
-    title: String,
-    games: List<Game>,
-    onGameClicked: (Game) -> Unit,
-    onGameLongClick: (Game) -> Unit,
-    onHideClicked: () -> Unit,
-) {
-    if (games.isEmpty()) return
-
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 4.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.LocalActivity,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(18.dp),
-            )
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp),
-            )
-            TextButton(onClick = onHideClicked) {
-                Text(
-                    text = stringResource(R.string.catalog_hide),
-                    style = MaterialTheme.typography.labelMedium,
-                )
-            }
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        LazyRow(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp),
-        ) {
-            items(games.size, key = { games[it].id }) { index ->
-                CatalogGameCard(
-                    modifier = Modifier.widthIn(0.dp, 160.dp),
-                    game = games[index],
-                    onClick = { onGameClicked(games[index]) },
-                    onLongClick = { onGameLongClick(games[index]) },
-                )
-            }
-        }
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun CatalogGameCard(
+private fun CatalogGameCard(
     modifier: Modifier = Modifier,
     game: Game,
     onClick: () -> Unit,
@@ -319,11 +373,8 @@ fun CatalogGameCard(
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp),
     ) {
         Column {
-            androidx.compose.foundation.layout.Box {
-                LemuroidGameImage(
-                    modifier = Modifier.fillMaxWidth(),
-                    game = game,
-                )
+            Box {
+                LemuroidGameImage(modifier = Modifier.fillMaxWidth(), game = game)
                 Surface(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
@@ -360,27 +411,15 @@ private fun HomeNotification(
     extraText: String? = null,
     onAction: () -> Unit = { },
 ) {
-    ElevatedCard(
-        modifier =
-            Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp),
-    ) {
+    ElevatedCard(modifier = Modifier.fillMaxWidth()) {
         Column(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            Text(
-                text = stringResource(titleId),
-                style = MaterialTheme.typography.titleMedium,
-            )
-            Text(
-                text = stringResource(messageId),
-                style = MaterialTheme.typography.bodyMedium,
-            )
+            Text(text = stringResource(titleId), style = MaterialTheme.typography.titleMedium)
+            Text(text = stringResource(messageId), style = MaterialTheme.typography.bodyMedium)
             if (extraText != null) {
                 Text(
                     text = extraText,

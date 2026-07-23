@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">Indien uit, wordt alleen gescand bij de eerste start of na het wijzigen van de gamesmap. Gebruik de knop opnieuw scannen om handmatig te verversen.</string>
     <string name="settings_gamepad_title_reserve_first_port">Fysieke controllers vanaf speler 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Houd speler 1 op de schermcontroller en verbind fysieke controllers vanaf speler 2</string>
+    <string name="web_games_title">Spellen</string>
+    <string name="web_games_see_all">Alle</string>
+    <string name="web_games_search_hint">Spellen zoeken</string>
+    <string name="web_games_empty">Geen spellen beschikbaar</string>
+    <string name="web_games_free_badge">GRATIS</string>
+    <string name="web_games_locked_badge">Vergrendeld</string>
+    <string name="web_game_loading">Laden…</string>
+    <string name="web_game_loading_percent">Laden… %1$d%%</string>
+    <string name="web_game_loading_mb">Laden… %1$d MB</string>
+    <string name="web_game_load_failed">Kan het spel niet laden. Controleer je verbinding.</string>
+    <string name="home_filter_all">Alle</string>
+    <string name="home_filter_games">Spellen</string>
+    <string name="home_filter_catalog">Catalogus</string>
+    <string name="home_filter_recent">Recent</string>
+    <string name="home_filter_new">Nieuw</string>
 </resources>

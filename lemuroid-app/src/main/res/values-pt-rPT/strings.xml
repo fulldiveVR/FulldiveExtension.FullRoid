@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">Quando desativado, analisa apenas no primeiro arranque ou depois de alterar a pasta de jogos. Utilize o botão de reanálise para atualizar manualmente.</string>
     <string name="settings_gamepad_title_reserve_first_port">Comandos físicos a partir do Jogador 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Mantém o Jogador 1 no comando no ecrã e liga os comandos físicos a partir do Jogador 2</string>
+    <string name="web_games_title">Jogos</string>
+    <string name="web_games_see_all">Todos</string>
+    <string name="web_games_search_hint">Procurar jogos</string>
+    <string name="web_games_empty">Nenhum jogo disponível</string>
+    <string name="web_games_free_badge">GRÁTIS</string>
+    <string name="web_games_locked_badge">Bloqueado</string>
+    <string name="web_game_loading">A carregar…</string>
+    <string name="web_game_loading_percent">A carregar… %1$d%%</string>
+    <string name="web_game_loading_mb">A carregar… %1$d MB</string>
+    <string name="web_game_load_failed">Não foi possível carregar o jogo. Verifique a sua ligação.</string>
+    <string name="home_filter_all">Todos</string>
+    <string name="home_filter_games">Jogos</string>
+    <string name="home_filter_catalog">Catálogo</string>
+    <string name="home_filter_recent">Recentes</string>
+    <string name="home_filter_new">Novos</string>
 </resources>

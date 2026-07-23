@@ -11,12 +11,15 @@ import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher
+import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.common.coroutines.combine
 import com.swordfish.lemuroid.lib.core.CoresSelection
 import com.swordfish.lemuroid.lib.library.CoreID
+import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.SystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import com.swordfish.lemuroid.lib.library.metaSystemID
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -40,6 +43,8 @@ class HomeViewModel(
 ) : ViewModel() {
     companion object {
         const val CAROUSEL_MAX_ITEMS = 10
+        const val RECENT_MAX_ITEMS = 50
+        const val NEW_MAX_ITEMS = 20
         const val DEBOUNCE_TIME = 100L
     }
 
@@ -71,6 +76,33 @@ class HomeViewModel(
     private val microphonePermissionEnabledState = MutableStateFlow(true)
     private val notificationsPermissionEnabledState = MutableStateFlow(true)
     private val uiStates = MutableStateFlow(UIState())
+
+    // Flat Home grid sources (filtered by the Home chips). No horizontal category rows.
+    val installedGames: Flow<List<Game>> = retrogradeDb.gameDao().selectVisibleGames()
+    val catalogGames: Flow<List<Game>> = retrogradeDb.gameDao().selectCatalogGames()
+
+    // "Recent" chip: any game the user launched (ROM or web), newest play first.
+    val playedGames: Flow<List<Game>> = retrogradeDb.gameDao().selectRecentGames(RECENT_MAX_ITEMS)
+
+    // "New" chip: the most recently added user ROMs.
+    val newlyAddedGames: Flow<List<Game>> = retrogradeDb.gameDao().selectNewGames(NEW_MAX_ITEMS)
+
+    // Platform chips on Home (replaces the removed Systems tab).
+    val availableMetaSystems: Flow<List<MetaSystemInfo>> =
+        retrogradeDb.gameDao().selectSystemsWithCount()
+            .map { systemCounts ->
+                systemCounts.asSequence()
+                    .filter { (_, count) -> count > 0 }
+                    .mapNotNull { (systemId, count) ->
+                        GameSystem.findByIdOrNull(systemId, isProVersion = true)
+                            ?.metaSystemID()
+                            ?.let { it to count }
+                    }
+                    .groupBy { (metaSystemId, _) -> metaSystemId }
+                    .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumOf { it.second }) }
+                    .sortedBy { it.getName(appContext) }
+                    .toList()
+            }
 
     fun getViewStates(): Flow<UIState> {
         return uiStates
