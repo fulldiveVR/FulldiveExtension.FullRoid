@@ -195,6 +195,7 @@
     <string name="web_games_see_all">Tots</string>
     <string name="web_games_search_hint">Cerca jocs</string>
     <string name="web_games_empty">No hi ha jocs disponibles</string>
+    <string name="web_games_syncing">Carregant el catàleg…</string>
     <string name="web_games_free_badge">GRATIS</string>
     <string name="web_games_locked_badge">Bloquejat</string>
     <string name="web_game_loading">S\'està carregant…</string>

@@ -267,6 +267,7 @@
     <string name="web_games_see_all">Tất cả</string>
     <string name="web_games_search_hint">Tìm trò chơi</string>
     <string name="web_games_empty">Không có trò chơi nào</string>
+    <string name="web_games_syncing">Đang tải danh mục…</string>
     <string name="web_games_free_badge">MIỄN PHÍ</string>
     <string name="web_games_locked_badge">Đã khóa</string>
     <string name="web_game_loading">Đang tải…</string>

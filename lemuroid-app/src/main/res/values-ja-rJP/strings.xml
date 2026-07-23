@@ -290,6 +290,7 @@
     <string name="web_games_see_all">すべて</string>
     <string name="web_games_search_hint">ゲームを検索</string>
     <string name="web_games_empty">利用できるゲームがありません</string>
+    <string name="web_games_syncing">カタログを読み込み中…</string>
     <string name="web_games_free_badge">無料</string>
     <string name="web_games_locked_badge">ロック中</string>
     <string name="web_game_loading">読み込み中…</string>

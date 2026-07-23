@@ -289,6 +289,7 @@
     <string name="web_games_see_all">Wszystkie</string>
     <string name="web_games_search_hint">Szukaj gier</string>
     <string name="web_games_empty">Brak dostępnych gier</string>
+    <string name="web_games_syncing">Ładowanie katalogu…</string>
     <string name="web_games_free_badge">ZA DARMO</string>
     <string name="web_games_locked_badge">Zablokowane</string>
     <string name="web_game_loading">Ładowanie…</string>

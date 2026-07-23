@@ -108,6 +108,7 @@
     <string name="web_games_see_all">Alle</string>
     <string name="web_games_search_hint">Soek speletjies</string>
     <string name="web_games_empty">Geen speletjies beskikbaar nie</string>
+    <string name="web_games_syncing">Katalogus laai…</string>
     <string name="web_games_free_badge">GRATIS</string>
     <string name="web_games_locked_badge">Gesluit</string>
     <string name="web_game_loading">Laai tans…</string>

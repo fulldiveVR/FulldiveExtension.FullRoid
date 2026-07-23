@@ -271,6 +271,7 @@
     <string name="web_games_see_all">Све</string>
     <string name="web_games_search_hint">Претражи игре</string>
     <string name="web_games_empty">Нема доступних игара</string>
+    <string name="web_games_syncing">Учитавање каталога…</string>
     <string name="web_games_free_badge">БЕСПЛАТНО</string>
     <string name="web_games_locked_badge">Закључано</string>
     <string name="web_game_loading">Учитавање…</string>

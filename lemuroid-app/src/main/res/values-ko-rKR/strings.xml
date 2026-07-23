@@ -289,6 +289,7 @@
     <string name="web_games_see_all">전체</string>
     <string name="web_games_search_hint">게임 검색</string>
     <string name="web_games_empty">사용 가능한 게임이 없습니다</string>
+    <string name="web_games_syncing">카탈로그 불러오는 중…</string>
     <string name="web_games_free_badge">무료</string>
     <string name="web_games_locked_badge">잠김</string>
     <string name="web_game_loading">불러오는 중…</string>
