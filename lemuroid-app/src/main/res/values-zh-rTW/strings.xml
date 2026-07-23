@@ -78,6 +78,7 @@
   <string name="game_context_menu_add_to_favorites">加入最愛</string>
   <string name="game_context_menu_remove_from_favorites">移出最愛</string>
   <string name="game_context_menu_resume">繼續遊戲</string>
+  <string name="game_context_menu_play">開始遊戲</string>
   <string name="game_context_menu_restart">重新啟動</string>
   <string name="game_context_menu_create_shortcut">新增桌布捷徑</string>
   <string name="home_notification_title">啟用通知</string>

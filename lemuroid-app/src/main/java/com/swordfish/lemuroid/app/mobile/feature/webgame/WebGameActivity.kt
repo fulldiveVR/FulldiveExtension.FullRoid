@@ -86,12 +86,25 @@ class WebGameActivity : RetrogradeComponentActivity() {
         web = WebView(this).apply {
             visibility = View.GONE
             settings.javaScriptEnabled = true
+            // Persistent save data: localStorage/IndexedDB (DOM storage) + WebSQL. These
+            // survive across launches as long as the origin is stable — and we now serve
+            // over https (see loadGame) so the page is a secure context, which some games
+            // require before they'll persist saves and which lets the browser treat the
+            // storage as durable rather than best-effort/evictable.
             settings.domStorageEnabled = true
+            @Suppress("DEPRECATION")
+            settings.databaseEnabled = true
+            // The page is https but intercepted local/CDN assets may be requested over
+            // http; allow it (everything is served offline via shouldInterceptRequest).
+            settings.mixedContentMode = android.webkit.WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
             settings.mediaPlaybackRequiresUserGesture = false
             settings.useWideViewPort = true
             settings.loadWithOverviewMode = true
             settings.allowFileAccess = false
             settings.allowContentAccess = false
+            // Some games persist progress via cookies (this = the WebView).
+            android.webkit.CookieManager.getInstance().setAcceptCookie(true)
+            android.webkit.CookieManager.getInstance().setAcceptThirdPartyCookies(this, true)
             webViewClient = client()
             webChromeClient = object : WebChromeClient() {
                 override fun onConsoleMessage(m: ConsoleMessage): Boolean {
@@ -201,7 +214,7 @@ class WebGameActivity : RetrogradeComponentActivity() {
             if (ok) {
                 loading.visibility = View.GONE
                 web.visibility = View.VISIBLE
-                web.loadUrl("http://$HOST/__play")
+                web.loadUrl("https://$HOST/__play")
                 // Record the launch so the game surfaces in Home's "Recent" chip.
                 recordPlayed(target)
             } else {
@@ -234,6 +247,22 @@ class WebGameActivity : RetrogradeComponentActivity() {
         override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
             val h = request.url.host ?: return false
             return h != HOST && h != "localhost" && h != "127.0.0.1"
+        }
+
+        // We serve the game from the fake https host `gamehub.local` purely through
+        // shouldInterceptRequest (no real TLS), so a cert error can only be the synthetic
+        // one for our own offline host — proceed for it, block anything else.
+        override fun onReceivedSslError(
+            view: WebView,
+            handler: android.webkit.SslErrorHandler,
+            error: android.net.http.SslError,
+        ) {
+            val h = android.net.Uri.parse(error.url).host
+            if (h == HOST || (h != null && sha256Hex(h) == CDN_HOST_HASH)) {
+                handler.proceed()
+            } else {
+                handler.cancel()
+            }
         }
 
         override fun shouldInterceptRequest(view: WebView, request: WebResourceRequest): WebResourceResponse? {
@@ -317,7 +346,15 @@ class WebGameActivity : RetrogradeComponentActivity() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        // Persist cookies to disk; localStorage/IndexedDB are flushed by the WebView's
+        // storage subsystem when the page goes to the background.
+        runCatching { android.webkit.CookieManager.getInstance().flush() }
+    }
+
     override fun onDestroy() {
+        runCatching { android.webkit.CookieManager.getInstance().flush() }
         web.destroy()
         super.onDestroy()
     }

@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">添加到收藏</string>
   <string name="game_context_menu_remove_from_favorites">从收藏中移除</string>
   <string name="game_context_menu_resume">继续</string>
+  <string name="game_context_menu_play">开始游戏</string>
   <string name="game_context_menu_restart">重新开始</string>
   <string name="game_context_menu_create_shortcut">添加到桌面</string>
   <string name="home_notification_title">开启推送</string>

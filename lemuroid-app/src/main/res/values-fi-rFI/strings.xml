@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">Lisää suosikkeihin</string>
   <string name="game_context_menu_remove_from_favorites">Poista suosikeista</string>
   <string name="game_context_menu_resume">Jatka</string>
+  <string name="game_context_menu_play">Pelaa</string>
   <string name="game_context_menu_restart">Käynnistä Uudelleen</string>
   <string name="game_context_menu_create_shortcut">Kiinnitä käynnistettäväksi</string>
   <string name="home_notification_title">Ota ilmoitukset käyttöön</string>

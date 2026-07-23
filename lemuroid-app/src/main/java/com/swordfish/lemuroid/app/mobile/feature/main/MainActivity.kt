@@ -72,6 +72,8 @@ import com.swordfish.lemuroid.app.mobile.feature.games.GamesScreen
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.catalog.CatalogDetailScreen
 import com.swordfish.lemuroid.app.mobile.feature.webgames.WebGamesScreen
+import com.swordfish.lemuroid.app.mobile.feature.webgames.canPlayWebGame
+import com.swordfish.lemuroid.app.mobile.feature.webgames.launchWebGame
 import com.swordfish.lemuroid.app.mobile.feature.webview.WebViewActivity
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeScreen
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeViewModel
@@ -279,8 +281,19 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 selectedGameState.value = game
             }
 
+            // Web (GameHub) games launch via the offline WebView player, not the libretro
+            // core. Route them here so favorited/searched web games also open correctly from
+            // any screen (Favorites, Search) — a locked pro game opens the store, like a tap.
             val onGameClick = { game: Game ->
-                gameInteractor.onGamePlay(game)
+                if (game.webGameSlug != null) {
+                    if (canPlayWebGame(this, game)) {
+                        launchWebGame(this, game)
+                    } else {
+                        openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
+                    }
+                } else {
+                    gameInteractor.onGamePlay(game)
+                }
             }
 
             val onGameFavoriteToggle = { game: Game, isFavorite: Boolean ->
@@ -578,6 +591,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         WebGamesScreen(
                             modifier = Modifier.padding(padding),
                             webGamesFlow = retrogradeDb.gameDao().selectWebCatalogGames(),
+                            onGameLongClick = onGameLongClick,
                         )
                     }
                 }
@@ -585,7 +599,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 MainGameContextActions(
                     selectedGameState = selectedGameState,
                     shortcutSupported = gameInteractor.supportShortcuts(),
-                    onGamePlay = { gameInteractor.onGamePlay(it) },
+                    onGamePlay = { onGameClick(it) },
                     onGameRestart = { gameInteractor.onGameRestart(it) },
                     onFavoriteToggle = { game: Game, isFavorite: Boolean ->
                         gameInteractor.onFavoriteToggle(game, isFavorite)

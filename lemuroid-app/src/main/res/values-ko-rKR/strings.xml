@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">즐겨찾기에 추가</string>
   <string name="game_context_menu_remove_from_favorites">즐겨찾기에서 제거</string>
   <string name="game_context_menu_resume">계속하기</string>
+  <string name="game_context_menu_play">플레이</string>
   <string name="game_context_menu_restart">다시 시작</string>
   <string name="game_context_menu_create_shortcut">런처에 고정</string>
   <string name="home_notification_title">알림 사용</string>

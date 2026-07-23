@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">Toevoegen aan favorieten</string>
   <string name="game_context_menu_remove_from_favorites">Verwijderen uit favorieten</string>
   <string name="game_context_menu_resume">Hervatten</string>
+  <string name="game_context_menu_play">Spelen</string>
   <string name="game_context_menu_restart">Herstarten</string>
   <string name="game_context_menu_create_shortcut">Vastzetten aan launcher</string>
   <string name="home_notification_title">Meldingen inschakelen</string>

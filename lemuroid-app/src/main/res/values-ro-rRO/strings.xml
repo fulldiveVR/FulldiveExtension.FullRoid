@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">Adaugă la favorite</string>
   <string name="game_context_menu_remove_from_favorites">Șterge din Favoriți</string>
   <string name="game_context_menu_resume">Reluaţi</string>
+  <string name="game_context_menu_play">Joacă</string>
   <string name="game_context_menu_restart">Reporniţi</string>
   <string name="game_context_menu_create_shortcut">Fixează în lansator</string>
   <string name="home_notification_title">Activați notificările</string>
