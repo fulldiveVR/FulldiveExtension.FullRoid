@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">꺼져 있으면 첫 실행 시 또는 게임 폴더를 변경한 후에만 검색합니다. 수동으로 새로 고치려면 다시 검색 버튼을 사용하세요.</string>
     <string name="settings_gamepad_title_reserve_first_port">실물 컨트롤러를 플레이어 2부터</string>
     <string name="settings_gamepad_description_reserve_first_port">플레이어 1을 화면 컨트롤러로 유지하고 실물 컨트롤러를 플레이어 2부터 연결합니다</string>
+    <string name="web_games_title">게임</string>
+    <string name="web_games_see_all">전체</string>
+    <string name="web_games_search_hint">게임 검색</string>
+    <string name="web_games_empty">사용 가능한 게임이 없습니다</string>
+    <string name="web_games_free_badge">무료</string>
+    <string name="web_games_locked_badge">잠김</string>
+    <string name="web_game_loading">불러오는 중…</string>
+    <string name="web_game_loading_percent">불러오는 중… %1$d%%</string>
+    <string name="web_game_loading_mb">불러오는 중… %1$d MB</string>
+    <string name="web_game_load_failed">게임을 불러올 수 없습니다. 연결을 확인하세요.</string>
+    <string name="home_filter_all">전체</string>
+    <string name="home_filter_games">게임</string>
+    <string name="home_filter_catalog">카탈로그</string>
+    <string name="home_filter_recent">최근</string>
+    <string name="home_filter_new">신규</string>
 </resources>

@@ -38,4 +38,19 @@
     <string name="settings_description_scan_on_app_startup">When off, scans only on first launch or after changing the games folder. Use the rescan button to refresh manually.</string>
     <string name="settings_gamepad_title_reserve_first_port">Physical controllers from Player 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Keep Player 1 on the on-screen controller and connect physical controllers starting from Player 2</string>
+    <string name="web_games_title">Games</string>
+    <string name="web_games_see_all">All</string>
+    <string name="web_games_search_hint">Search games</string>
+    <string name="web_games_empty">No games available</string>
+    <string name="web_games_free_badge">FREE</string>
+    <string name="web_games_locked_badge">Locked</string>
+    <string name="web_game_loading">Loading…</string>
+    <string name="web_game_loading_percent">Loading… %1$d%%</string>
+    <string name="web_game_loading_mb">Loading… %1$d MB</string>
+    <string name="web_game_load_failed">Couldn\'t load the game. Check your connection.</string>
+    <string name="home_filter_all">All</string>
+    <string name="home_filter_games">Games</string>
+    <string name="home_filter_catalog">Catalog</string>
+    <string name="home_filter_recent">Recent</string>
+    <string name="home_filter_new">New</string>
 </resources>

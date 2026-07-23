@@ -142,4 +142,19 @@
     <string name="settings_description_scan_on_app_startup">Kikapcsolva csak az első indításkor vagy a játékmappa módosítása után keres. A kézi frissítéshez használd az újrakeresés gombot.</string>
     <string name="settings_gamepad_title_reserve_first_port">Fizikai vezérlők a 2. játékostól</string>
     <string name="settings_gamepad_description_reserve_first_port">Az 1. játékos a képernyőn megjelenő vezérlőn marad, a fizikai vezérlők a 2. játékostól kezdődnek</string>
+    <string name="web_games_title">Játékok</string>
+    <string name="web_games_see_all">Összes</string>
+    <string name="web_games_search_hint">Játékok keresése</string>
+    <string name="web_games_empty">Nincs elérhető játék</string>
+    <string name="web_games_free_badge">INGYENES</string>
+    <string name="web_games_locked_badge">Zárolva</string>
+    <string name="web_game_loading">Betöltés…</string>
+    <string name="web_game_loading_percent">Betöltés… %1$d%%</string>
+    <string name="web_game_loading_mb">Betöltés… %1$d MB</string>
+    <string name="web_game_load_failed">A játék betöltése nem sikerült. Ellenőrizze a kapcsolatot.</string>
+    <string name="home_filter_all">Összes</string>
+    <string name="home_filter_games">Játékok</string>
+    <string name="home_filter_catalog">Katalógus</string>
+    <string name="home_filter_recent">Legutóbbi</string>
+    <string name="home_filter_new">Új</string>
 </resources>

@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">Quando disattivato, esegue la scansione solo al primo avvio o dopo aver cambiato la cartella dei giochi. Usa il pulsante di nuova scansione per aggiornare manualmente.</string>
     <string name="settings_gamepad_title_reserve_first_port">Controller fisici dal Giocatore 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Mantieni il Giocatore 1 sul controller a schermo e collega i controller fisici a partire dal Giocatore 2</string>
+    <string name="web_games_title">Giochi</string>
+    <string name="web_games_see_all">Tutti</string>
+    <string name="web_games_search_hint">Cerca giochi</string>
+    <string name="web_games_empty">Nessun gioco disponibile</string>
+    <string name="web_games_free_badge">GRATIS</string>
+    <string name="web_games_locked_badge">Bloccato</string>
+    <string name="web_game_loading">Caricamento…</string>
+    <string name="web_game_loading_percent">Caricamento… %1$d%%</string>
+    <string name="web_game_loading_mb">Caricamento… %1$d MB</string>
+    <string name="web_game_load_failed">Impossibile caricare il gioco. Controlla la connessione.</string>
+    <string name="home_filter_all">Tutti</string>
+    <string name="home_filter_games">Giochi</string>
+    <string name="home_filter_catalog">Catalogo</string>
+    <string name="home_filter_recent">Recenti</string>
+    <string name="home_filter_new">Nuovi</string>
 </resources>

@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">Lorsque désactivé, la recherche a lieu uniquement au premier démarrage ou après un changement de dossier de jeux. Utilisez le bouton de réanalyse pour actualiser manuellement.</string>
     <string name="settings_gamepad_title_reserve_first_port">Manettes physiques à partir du Joueur 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Garde le Joueur 1 sur la manette à l\'écran et connecte les manettes physiques à partir du Joueur 2</string>
+    <string name="web_games_title">Jeux</string>
+    <string name="web_games_see_all">Tout</string>
+    <string name="web_games_search_hint">Rechercher des jeux</string>
+    <string name="web_games_empty">Aucun jeu disponible</string>
+    <string name="web_games_free_badge">GRATUIT</string>
+    <string name="web_games_locked_badge">Verrouillé</string>
+    <string name="web_game_loading">Chargement…</string>
+    <string name="web_game_loading_percent">Chargement… %1$d%%</string>
+    <string name="web_game_loading_mb">Chargement… %1$d Mo</string>
+    <string name="web_game_load_failed">Impossible de charger le jeu. Vérifiez votre connexion.</string>
+    <string name="home_filter_all">Tout</string>
+    <string name="home_filter_games">Jeux</string>
+    <string name="home_filter_catalog">Catalogue</string>
+    <string name="home_filter_recent">Récents</string>
+    <string name="home_filter_new">Nouveaux</string>
 </resources>

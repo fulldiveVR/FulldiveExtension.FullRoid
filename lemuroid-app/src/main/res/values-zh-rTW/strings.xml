@@ -266,4 +266,19 @@
     <string name="settings_description_scan_on_app_startup">關閉時，僅在首次啟動或變更遊戲資料夾後掃描。使用重新掃描按鈕手動重新整理。</string>
     <string name="settings_gamepad_title_reserve_first_port">實體控制器從玩家 2 開始</string>
     <string name="settings_gamepad_description_reserve_first_port">讓玩家 1 保持使用螢幕控制器，實體控制器從玩家 2 開始連接</string>
+    <string name="web_games_title">遊戲</string>
+    <string name="web_games_see_all">全部</string>
+    <string name="web_games_search_hint">搜尋遊戲</string>
+    <string name="web_games_empty">沒有可用的遊戲</string>
+    <string name="web_games_free_badge">免費</string>
+    <string name="web_games_locked_badge">已鎖定</string>
+    <string name="web_game_loading">載入中…</string>
+    <string name="web_game_loading_percent">載入中… %1$d%%</string>
+    <string name="web_game_loading_mb">載入中… %1$d MB</string>
+    <string name="web_game_load_failed">無法載入遊戲。請檢查你的連線。</string>
+    <string name="home_filter_all">全部</string>
+    <string name="home_filter_games">遊戲</string>
+    <string name="home_filter_catalog">目錄</string>
+    <string name="home_filter_recent">最近</string>
+    <string name="home_filter_new">最新</string>
 </resources>

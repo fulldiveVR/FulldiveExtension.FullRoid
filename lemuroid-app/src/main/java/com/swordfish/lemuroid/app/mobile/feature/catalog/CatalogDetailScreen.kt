@@ -58,10 +58,10 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 @Composable
 fun CatalogDetailScreen(
+    modifier: Modifier = Modifier,
     gameId: Int,
     retrogradeDb: RetrogradeDatabase,
     onPlayClicked: (Game) -> Unit,
-    onNavigateBack: () -> Unit,
 ) {
     val vm: CatalogDetailViewModel = viewModel(
         factory = CatalogDetailViewModel.Factory(gameId, retrogradeDb),
@@ -70,9 +70,9 @@ fun CatalogDetailScreen(
 
     game?.let { g ->
         CatalogDetailContent(
+            modifier = modifier,
             game = g,
             onPlayClicked = onPlayClicked,
-            onNavigateBack = onNavigateBack,
         )
     }
 }
@@ -80,35 +80,19 @@ fun CatalogDetailScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun CatalogDetailContent(
+    modifier: Modifier = Modifier,
     game: Game,
     onPlayClicked: (Game) -> Unit,
-    onNavigateBack: () -> Unit,
 ) {
     var descriptionExpanded by remember { mutableStateOf(false) }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = null)
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface,
-                ),
-            )
-        },
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(innerPadding)
-                .padding(horizontal = 16.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
             // Cover image
             ElevatedCard(
                 modifier = Modifier.fillMaxWidth(),
@@ -214,5 +198,4 @@ private fun CatalogDetailContent(
                 )
             }
         }
-    }
 }

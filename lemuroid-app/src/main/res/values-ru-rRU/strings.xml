@@ -285,4 +285,19 @@
     <string name="settings_description_scan_on_app_startup">Если выключено, сканирование выполняется только при первом запуске или после смены папки с играми. Для ручного обновления используйте кнопку пересканирования.</string>
     <string name="settings_gamepad_title_reserve_first_port">Физические контроллеры со второго игрока</string>
     <string name="settings_gamepad_description_reserve_first_port">Оставить первого игрока на экранном контроллере, а физические подключать начиная со второго игрока</string>
+    <string name="web_games_title">Игры</string>
+    <string name="web_games_see_all">Все</string>
+    <string name="web_games_search_hint">Поиск игр</string>
+    <string name="web_games_empty">Нет доступных игр</string>
+    <string name="web_games_free_badge">БЕСПЛАТНО</string>
+    <string name="web_games_locked_badge">Заблокировано</string>
+    <string name="web_game_loading">Загрузка…</string>
+    <string name="web_game_loading_percent">Загрузка… %1$d%%</string>
+    <string name="web_game_loading_mb">Загрузка… %1$d МБ</string>
+    <string name="web_game_load_failed">Не удалось загрузить игру. Проверьте подключение.</string>
+    <string name="home_filter_all">Все</string>
+    <string name="home_filter_games">Игры</string>
+    <string name="home_filter_catalog">Каталог</string>
+    <string name="home_filter_recent">Недавнее</string>
+    <string name="home_filter_new">Новое</string>
 </resources>

@@ -104,4 +104,19 @@
     <string name="settings_description_scan_on_app_startup">Saat nonaktif, hanya memindai pada peluncuran pertama atau setelah mengubah folder gim. Gunakan tombol pindai ulang untuk menyegarkan secara manual.</string>
     <string name="settings_gamepad_title_reserve_first_port">Kontroler fisik mulai dari Pemain 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Biarkan Pemain 1 di kontroler layar dan sambungkan kontroler fisik mulai dari Pemain 2</string>
+    <string name="web_games_title">Game</string>
+    <string name="web_games_see_all">Semua</string>
+    <string name="web_games_search_hint">Cari game</string>
+    <string name="web_games_empty">Tidak ada game tersedia</string>
+    <string name="web_games_free_badge">GRATIS</string>
+    <string name="web_games_locked_badge">Terkunci</string>
+    <string name="web_game_loading">Memuat…</string>
+    <string name="web_game_loading_percent">Memuat… %1$d%%</string>
+    <string name="web_game_loading_mb">Memuat… %1$d MB</string>
+    <string name="web_game_load_failed">Tidak dapat memuat game. Periksa koneksi Anda.</string>
+    <string name="home_filter_all">Semua</string>
+    <string name="home_filter_games">Game</string>
+    <string name="home_filter_catalog">Katalog</string>
+    <string name="home_filter_recent">Terbaru</string>
+    <string name="home_filter_new">Baru</string>
 </resources>

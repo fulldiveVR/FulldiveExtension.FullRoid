@@ -273,4 +273,19 @@
     <string name="settings_description_scan_on_app_startup">Când este dezactivat, scanează doar la prima pornire sau după schimbarea folderului de jocuri. Folosește butonul de rescanare pentru a actualiza manual.</string>
     <string name="settings_gamepad_title_reserve_first_port">Controlere fizice de la Jucătorul 2</string>
     <string name="settings_gamepad_description_reserve_first_port">Menține Jucătorul 1 pe controlerul de pe ecran și conectează controlerele fizice începând cu Jucătorul 2</string>
+    <string name="web_games_title">Jocuri</string>
+    <string name="web_games_see_all">Toate</string>
+    <string name="web_games_search_hint">Caută jocuri</string>
+    <string name="web_games_empty">Niciun joc disponibil</string>
+    <string name="web_games_free_badge">GRATIS</string>
+    <string name="web_games_locked_badge">Blocat</string>
+    <string name="web_game_loading">Se încarcă…</string>
+    <string name="web_game_loading_percent">Se încarcă… %1$d%%</string>
+    <string name="web_game_loading_mb">Se încarcă… %1$d MB</string>
+    <string name="web_game_load_failed">Jocul nu a putut fi încărcat. Verifică-ți conexiunea.</string>
+    <string name="home_filter_all">Toate</string>
+    <string name="home_filter_games">Jocuri</string>
+    <string name="home_filter_catalog">Catalog</string>
+    <string name="home_filter_recent">Recente</string>
+    <string name="home_filter_new">Noi</string>
 </resources>

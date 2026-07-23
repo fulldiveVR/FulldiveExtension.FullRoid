@@ -88,6 +88,17 @@ object Migrations {
             }
         }
 
+    val VERSION_11_12: Migration =
+        object : Migration(11, 12) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE games ADD COLUMN webGameSlug TEXT")
+                database.execSQL("ALTER TABLE games ADD COLUMN webZipUrl TEXT")
+                database.execSQL("ALTER TABLE games ADD COLUMN webZipSha256 TEXT")
+                database.execSQL("ALTER TABLE games ADD COLUMN webOrientation TEXT NOT NULL DEFAULT 'any'")
+                database.execSQL("ALTER TABLE games ADD COLUMN isFreeTier INTEGER NOT NULL DEFAULT 0")
+            }
+        }
+
     val VERSION_8_9: Migration =
         object : Migration(8, 9) {
             override fun migrate(database: SupportSQLiteDatabase) {

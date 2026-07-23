@@ -52,6 +52,14 @@ data class Game(
     val isCatalogGame: Boolean = false,
     val description: String? = null,
     val catalogLink: String? = null,
+    // GameHub web-game fields. A row is a web game exactly when webGameSlug != null.
+    // Web games are always catalog games (isCatalogGame = 1), so they stay out of the
+    // scanned ROM library, recents and search.
+    val webGameSlug: String? = null,
+    val webZipUrl: String? = null,
+    val webZipSha256: String? = null,
+    val webOrientation: String = "any",
+    val isFreeTier: Boolean = false,
 ) : Serializable {
     companion object {
         val DIFF_CALLBACK =

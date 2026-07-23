@@ -1,10 +1,10 @@
 /* ktlint-disable no-multi-spaces max-line-length */
 object deps {
     object android {
-        const val targetSdkVersion  = 35
-        const val compileSdkVersion = 35
+        const val targetSdkVersion  = 36
+        const val compileSdkVersion = 36
         const val minSdkVersion     = 23
-        const val buildToolsVersion = "35.0.0"
+        const val buildToolsVersion = "36.0.0"
     }
 
     object versions {
