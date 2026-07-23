@@ -57,6 +57,7 @@ import kotlinx.coroutines.flow.Flow
 fun WebGamesScreen(
     modifier: Modifier = Modifier,
     webGamesFlow: Flow<List<Game>>,
+    onGameLongClick: (Game) -> Unit = {},
 ) {
     val context = LocalContext.current
     val allGames by webGamesFlow.collectAsState(initial = emptyList())
@@ -134,6 +135,7 @@ fun WebGamesScreen(
                             launchWebGame(context, game)
                         }
                     },
+                    onLongClick = { onGameLongClick(game) },
                 )
             }
         }

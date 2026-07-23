@@ -71,6 +71,7 @@
   <string name="game_context_menu_add_to_favorites">הוסף למועדפים</string>
   <string name="game_context_menu_remove_from_favorites">הסר מהמועדפים</string>
   <string name="game_context_menu_resume">המשך</string>
+  <string name="game_context_menu_play">שחק</string>
   <string name="game_context_menu_restart">הפעל מחדש</string>
   <string name="game_context_menu_create_shortcut">הצמד למסך הבית</string>
   <string name="home_empty_title">בחר את תיקיית היעד בה נמצאים קבצי ה-ROM</string>

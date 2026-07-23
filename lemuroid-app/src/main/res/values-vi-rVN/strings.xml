@@ -78,6 +78,7 @@
   <string name="game_context_menu_add_to_favorites">Thêm vào mục yêu thích</string>
   <string name="game_context_menu_remove_from_favorites">Xóa khỏi mục yêu thích</string>
   <string name="game_context_menu_resume">Tiếp tục</string>
+  <string name="game_context_menu_play">Chơi</string>
   <string name="game_context_menu_restart">Bắt đầu lại</string>
   <string name="game_context_menu_create_shortcut">Ghim vào launcher</string>
   <string name="home_notification_title">Bật thông báo</string>

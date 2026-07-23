@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">お気に入りに追加</string>
   <string name="game_context_menu_remove_from_favorites">お気に入りから削除</string>
   <string name="game_context_menu_resume">再開</string>
+  <string name="game_context_menu_play">プレイ</string>
   <string name="game_context_menu_restart">再起動</string>
   <string name="game_context_menu_create_shortcut">ランチャーに追加</string>
   <string name="home_notification_title">通知を有効化</string>

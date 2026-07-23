@@ -281,6 +281,7 @@ private fun GameGridCard(
                         launchWebGame(context, game)
                     }
                 },
+                onLongClick = { onGameLongClick(game) },
             )
         }
         game.isCatalogGame -> {

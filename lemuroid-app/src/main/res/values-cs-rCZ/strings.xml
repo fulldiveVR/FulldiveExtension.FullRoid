@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">Přidat do oblíbených</string>
   <string name="game_context_menu_remove_from_favorites">Odebrat z oblíbených</string>
   <string name="game_context_menu_resume">Pokračovat</string>
+  <string name="game_context_menu_play">Hrát</string>
   <string name="game_context_menu_restart">Restartovat</string>
   <string name="game_context_menu_create_shortcut">Připnout do launcheru</string>
   <string name="home_notification_title">Povolit oznámení</string>

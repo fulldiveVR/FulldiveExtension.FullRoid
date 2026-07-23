@@ -109,6 +109,10 @@ private fun ContextActionContent(
     onCreateShortcut: (Game) -> Unit,
     onShareRoomcord: (Game) -> Unit,
 ) {
+    // Web (GameHub) games are launched, not resumed/restarted, and don't support save
+    // states, home-screen shortcuts or Roomcord share — only Play + Favorite apply.
+    val isWebGame = selectedGame.webGameSlug != null
+
     Column(
         modifier =
             Modifier
@@ -118,21 +122,25 @@ private fun ContextActionContent(
         ContextActionHeader(game = selectedGame)
         Divider()
         ContextActionEntry(
-            label = stringResource(id = R.string.game_context_menu_resume),
+            label = stringResource(
+                id = if (isWebGame) R.string.game_context_menu_play else R.string.game_context_menu_resume,
+            ),
             icon = Icons.Default.PlayArrow,
             onClick = {
                 onGamePlay(selectedGame)
                 selectedGameState.value = null
             },
         )
-        ContextActionEntry(
-            label = stringResource(id = R.string.game_context_menu_restart),
-            icon = Icons.Default.RestartAlt,
-            onClick = {
-                onGameRestart(selectedGame)
-                selectedGameState.value = null
-            },
-        )
+        if (!isWebGame) {
+            ContextActionEntry(
+                label = stringResource(id = R.string.game_context_menu_restart),
+                icon = Icons.Default.RestartAlt,
+                onClick = {
+                    onGameRestart(selectedGame)
+                    selectedGameState.value = null
+                },
+            )
+        }
 
         if (selectedGame.isFavorite) {
             ContextActionEntry(
@@ -154,7 +162,7 @@ private fun ContextActionContent(
             )
         }
 
-        if (shortcutSupported) {
+        if (!isWebGame && shortcutSupported) {
             ContextActionEntry(
                 label = stringResource(id = R.string.game_context_menu_create_shortcut),
                 icon = Icons.Default.AppShortcut,
@@ -165,14 +173,16 @@ private fun ContextActionContent(
             )
         }
 
-        ContextActionEntry(
-            label = stringResource(id = R.string.game_context_menu_share),
-            icon = Icons.Default.Share,
-            onClick = {
-                onShareRoomcord.invoke(selectedGame)
-                selectedGameState.value = null
-            },
-        )
+        if (!isWebGame) {
+            ContextActionEntry(
+                label = stringResource(id = R.string.game_context_menu_share),
+                icon = Icons.Default.Share,
+                onClick = {
+                    onShareRoomcord.invoke(selectedGame)
+                    selectedGameState.value = null
+                },
+            )
+        }
     }
 }
 

@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">Προσθήκη στα αγαπημένα</string>
   <string name="game_context_menu_remove_from_favorites">Αφαίρεση από τα αγαπημένα</string>
   <string name="game_context_menu_resume">Συνέχεια</string>
+  <string name="game_context_menu_play">Παίξε</string>
   <string name="game_context_menu_restart">Επανεκκίνηση</string>
   <string name="game_context_menu_create_shortcut">Καρφίτσωμα στον launcher</string>
   <string name="home_notification_title">Ενεργοποίηση ειδοποιήσεων</string>

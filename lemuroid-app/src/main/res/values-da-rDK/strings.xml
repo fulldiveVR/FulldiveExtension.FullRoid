@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">Tilføj til favoritter</string>
   <string name="game_context_menu_remove_from_favorites">Fjern fra Favoritter</string>
   <string name="game_context_menu_resume">Fortsæt</string>
+  <string name="game_context_menu_play">Spil</string>
   <string name="game_context_menu_restart">Genstart</string>
   <string name="game_context_menu_create_shortcut">Føj til Startskærm</string>
   <string name="home_notification_title">Aktiver notifikationer</string>

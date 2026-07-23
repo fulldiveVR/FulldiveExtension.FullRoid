@@ -78,6 +78,7 @@
   <string name="game_context_menu_add_to_favorites">Додај у омиљено</string>
   <string name="game_context_menu_remove_from_favorites">Уклони из омиљених</string>
   <string name="game_context_menu_resume">Настави</string>
+  <string name="game_context_menu_play">Играј</string>
   <string name="game_context_menu_restart">Рестартуј</string>
   <string name="game_context_menu_create_shortcut">Закачи на покретач</string>
   <string name="home_notification_title">Омогући обавештења</string>

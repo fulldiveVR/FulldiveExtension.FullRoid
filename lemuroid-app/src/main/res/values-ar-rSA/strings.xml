@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">إضافة إلى المفضلة</string>
   <string name="game_context_menu_remove_from_favorites">إزالة من المفضلة</string>
   <string name="game_context_menu_resume">استئناف</string>
+  <string name="game_context_menu_play">تشغيل</string>
   <string name="game_context_menu_restart">إعادة التشغيل</string>
   <string name="game_context_menu_create_shortcut">تثبيت على الشاشة الرئيسية</string>
   <string name="home_notification_title">تمكين الإشعارات</string>

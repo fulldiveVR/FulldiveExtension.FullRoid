@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">Lägg till i Favoriter</string>
   <string name="game_context_menu_remove_from_favorites">Ta bort från Favoriter</string>
   <string name="game_context_menu_resume">Återuppta</string>
+  <string name="game_context_menu_play">Spela</string>
   <string name="game_context_menu_restart">Starta om</string>
   <string name="game_context_menu_create_shortcut">Fäst på startskärmen</string>
   <string name="home_notification_title">Aktivera aviseringar</string>

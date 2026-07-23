@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">Zu Favoriten hinzufügen</string>
   <string name="game_context_menu_remove_from_favorites">Aus Favoriten entfernen</string>
   <string name="game_context_menu_resume">Fortsetzen</string>
+  <string name="game_context_menu_play">Spielen</string>
   <string name="game_context_menu_restart">Neustart</string>
   <string name="game_context_menu_create_shortcut">Zum Startbildschirm hinzufügen</string>
   <string name="home_notification_title">Alle Benachrichtigungen aktivieren</string>

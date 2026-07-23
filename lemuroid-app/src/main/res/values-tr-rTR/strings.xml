@@ -78,6 +78,7 @@
   <string name="game_context_menu_add_to_favorites">Favorilere Ekle</string>
   <string name="game_context_menu_remove_from_favorites">Favorilerden Kaldır</string>
   <string name="game_context_menu_resume">Devam Et</string>
+  <string name="game_context_menu_play">Oyna</string>
   <string name="game_context_menu_restart">Yeniden Başlat</string>
   <string name="game_context_menu_create_shortcut">Ana Ekrana Sabitle</string>
   <string name="home_notification_title">Bildirimleri Aç</string>

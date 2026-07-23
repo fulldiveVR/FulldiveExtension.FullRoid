@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">Aggiungi ai preferiti</string>
   <string name="game_context_menu_remove_from_favorites">Rimuovi dai preferiti</string>
   <string name="game_context_menu_resume">Riprendi</string>
+  <string name="game_context_menu_play">Gioca</string>
   <string name="game_context_menu_restart">Riavvia</string>
   <string name="game_context_menu_create_shortcut">Aggiungi al launcher</string>
   <string name="home_notification_title">Attiva notifiche</string>

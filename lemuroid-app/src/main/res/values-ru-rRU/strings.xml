@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">Добавить в избранное</string>
   <string name="game_context_menu_remove_from_favorites">Удалить из избранного</string>
   <string name="game_context_menu_resume">Продолжить</string>
+  <string name="game_context_menu_play">Играть</string>
   <string name="game_context_menu_restart">Перезапустить</string>
   <string name="game_context_menu_create_shortcut">Закрепить в лаунчере</string>
   <string name="home_notification_title">Включить уведомления</string>

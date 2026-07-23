@@ -52,6 +52,7 @@
   <string name="game_context_menu_add_to_favorites">Afegeix als preferits</string>
   <string name="game_context_menu_remove_from_favorites">Elimina dels preferits</string>
   <string name="game_context_menu_resume">Reprèn</string>
+  <string name="game_context_menu_play">Jugar</string>
   <string name="game_context_menu_restart">Reinicia</string>
   <string name="home_empty_title">Seleccionar directori de ROMs</string>
   <string name="home_empty_action">Seleccioneu la carpeta</string>

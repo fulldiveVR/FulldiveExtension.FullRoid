@@ -81,6 +81,7 @@
   <string name="game_context_menu_add_to_favorites">Legg til favoritter</string>
   <string name="game_context_menu_remove_from_favorites">Fjern fra favoritter</string>
   <string name="game_context_menu_resume">Fortsett</string>
+  <string name="game_context_menu_play">Spill</string>
   <string name="game_context_menu_restart">Start på nytt</string>
   <string name="game_context_menu_create_shortcut">Fest til hjemskjermen</string>
   <string name="home_notification_title">Aktiver varsler</string>
