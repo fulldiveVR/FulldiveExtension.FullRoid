@@ -312,6 +312,22 @@ class BaseGameScreenViewModel(
         owner.lifecycle.addObserver(touchControls)
     }
 
+    // Persist the memory card (SRAM) whenever the game leaves the foreground, not only on a clean
+    // exit via requestFinish(). Without this, in-game saves are lost if the process is killed while
+    // backgrounded (e.g. swiped away from Recents). The write is small (~128KB for PS1) and runs on
+    // an IO dispatcher, so onStop returns immediately and the UI never blocks. saveSRAM() serializes
+    // itself against the requestFinish() write via a mutex, and no-ops for cores without SRAM.
+    override fun onStop(owner: LifecycleOwner) {
+        super.onStop(owner)
+        viewModelScope.launch {
+            try {
+                saves.saveSRAM(game)
+            } catch (e: Throwable) {
+                Timber.e(e, "Error while saving SRAM on stop")
+            }
+        }
+    }
+
     fun sendKeyEvent(
         keyCode: Int,
         event: KeyEvent,
