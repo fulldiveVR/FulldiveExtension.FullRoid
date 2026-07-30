@@ -1,3 +1,5 @@
 What's New:
 
-• Physical Controllers as Player 2: Optionally connect physical controllers starting from Player 2 while Player 1 stays on the on-screen controller — the virtual pad no longer disappears when a gamepad is plugged in
+• New Games section: a built-in catalog of casual games you can play right in the app
+• Redesigned home screen with modern navigation, a quick games button, categories, and instant search
+• New "Recent" and "New" tabs, mark games as favorites, and your progress is now saved between sessions

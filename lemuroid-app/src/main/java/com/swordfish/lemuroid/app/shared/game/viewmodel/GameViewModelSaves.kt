@@ -18,6 +18,8 @@ import com.swordfish.lemuroid.lib.saves.StatesPreviewManager
 import com.swordfish.libretrodroid.GLRetroView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import kotlin.math.roundToInt
@@ -35,6 +37,11 @@ class GameViewModelSaves(
     private val sideEffects: GameViewModelSideEffects,
 ) {
     private var currentQuickSave: SaveState? = null
+
+    // Serializes SRAM (memory card) writes. saveSRAM can be triggered both by a clean exit
+    // (requestFinish) and by the app going to the background (onStop) at almost the same time.
+    // AtomicFile is not safe under concurrent writers to the same path, so we serialize them.
+    private val sramMutex = Mutex()
 
     suspend fun saveSlot(index: Int) {
         getCurrentSaveState()?.let {
@@ -68,10 +75,12 @@ class GameViewModelSaves(
     }
 
     suspend fun saveSRAM(game: Game) {
-        val retroGameView = retroGameView.retroGameView ?: return
-        val sramState = retroGameView.serializeSRAM()
-        savesManager.setSaveRAM(game, sramState)
-        Timber.i("Stored sram file with size: ${sramState.size}")
+        sramMutex.withLock {
+            val retroGameView = retroGameView.retroGameView ?: return
+            val sramState = retroGameView.serializeSRAM()
+            savesManager.setSaveRAM(game, sramState)
+            Timber.i("Stored sram file with size: ${sramState.size}")
+        }
     }
 
     suspend fun saveAutoSave(game: Game) {

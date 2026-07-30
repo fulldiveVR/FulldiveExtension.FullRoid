@@ -1,191 +1,255 @@
 <en-US>
 What's New:
 
-• Physical Controllers as Player 2: Optionally connect physical controllers starting from Player 2 while Player 1 stays on the on-screen controller — the virtual pad no longer disappears when a gamepad is plugged in
+• New Games section: a built-in catalog of casual games you can play right in the app
+• Redesigned home screen with modern navigation, a quick games button, categories, and instant search
+• New "Recent" and "New" tabs, mark games as favorites, and your progress is now saved between sessions
 </en-US>
 
 <zh-CN>
 更新内容：
 
-• 实体手柄作为玩家 2：可选让实体手柄从玩家 2 开始连接，玩家 1 继续使用屏幕手柄——接入手柄时屏幕手柄不再消失
+• 新增游戏板块：内置休闲游戏目录，您可以在应用中直接玩
+• 重新设计的主屏幕，现代导航，快速游戏按钮，类别和即时搜索
+• 新增“最近”和“新游戏”标签，标记游戏为收藏，现在您的进度将在会话之间保存
 </zh-CN>
 
 <zh-TW>
 更新內容：
 
-• 實體控制器作為玩家 2：可選讓實體控制器從玩家 2 開始連接，玩家 1 繼續使用螢幕控制器——接上控制器時螢幕控制器不再消失
+• 新增遊戲板塊：內建休閒遊戲目錄，您可以在應用中直接玩
+• 重新設計的主畫面，現代導航，快速遊戲按鈕，類別和即時搜索
+• 新增“最近”和“新遊戲”標籤，標記遊戲為收藏，現在您的進度將在會話之間保存
 </zh-TW>
 
 <hi-IN>
 नया क्या है:
 
-• फ़िज़िकल कंट्रोलर प्लेयर 2 के रूप में: वैकल्पिक रूप से फ़िज़िकल कंट्रोलर प्लेयर 2 से जोड़ें और प्लेयर 1 ऑन-स्क्रीन कंट्रोलर पर बना रहे — गेमपैड जोड़ने पर वर्चुअल पैड अब गायब नहीं होता
+• नए गेम्स सेक्शन: ऐप में ही खेलने के लिए कैज़ुअल गेम्स की एक बिल्ट-इन कैटलॉग
+• आधुनिक नेविगेशन, त्वरित गेम्स बटन, श्रेणियाँ, और त्वरित खोज के साथ पुनः डिज़ाइन किया गया होम स्क्रीन
+• नए "हाल ही में" और "नया" टैब, गेम्स को पसंदीदा के रूप में चिह्नित करें, और अब आपका प्रगति सत्रों के बीच में सहेजा जाता है
 </hi-IN>
 
 <es-ES>
 Novedades:
 
-• Mandos físicos como Jugador 2: Conecta los mandos físicos a partir del Jugador 2 y mantén al Jugador 1 en el mando en pantalla (opcional); el mando virtual ya no desaparece al conectar un mando
+• Nueva sección de juegos: un catálogo integrado de juegos casuales que puedes jugar directamente en la aplicación
+• Pantalla de inicio rediseñada con navegación moderna, botón de juegos rápidos, categorías y búsqueda instantánea
+• Nuevas pestañas "Recientes" y "Nuevos", marca juegos como favoritos y ahora tu progreso se guarda entre sesiones
 </es-ES>
 
 <ar>
 ما الجديد:
 
-• أجهزة التحكم الفعلية كلاعب ثانٍ: خيار لتوصيل أجهزة التحكم الفعلية بدءًا من اللاعب 2 مع إبقاء اللاعب 1 على وحدة التحكم التي تظهر على الشاشة — لم تعد وحدة التحكم الافتراضية تختفي عند توصيل ذراع تحكم
+• قسم الألعاب الجديد: كتالوج مدمج للألعاب العادية يمكنك لعبها مباشرة في التطبيق
+• شاشة رئيسية معاد تصميمها مع تنقل حديث، زر ألعاب سريع، فئات، وبحث فوري
+• علامات تبويب "الأحدث" و"الجديد"، وضع الألعاب كمفضلة، والآن يتم حفظ تقدمك بين الجلسات
 </ar>
 
 <pt-BR>
 Novidades:
 
-• Controles físicos como Jogador 2: Conecte os controles físicos a partir do Jogador 2 e mantenha o Jogador 1 no controle na tela (opcional); o controle virtual não some mais ao conectar um gamepad
+• Nova seção de jogos: um catálogo integrado de jogos casuais que você pode jogar diretamente no aplicativo
+• Tela inicial redesenhada com navegação moderna, botão de jogos rápidos, categorias e busca instantânea
+• Novas abas "Recentes" e "Novos", marque jogos como favoritos e agora seu progresso é salvo entre sessões
 </pt-BR>
 
 <id>
 Apa yang Baru:
 
-• Kontroler fisik sebagai Pemain 2: Opsi menyambungkan kontroler fisik mulai dari Pemain 2 dan tetap menjaga Pemain 1 di kontroler layar — kontroler virtual tidak lagi hilang saat gamepad disambungkan
+• Bagian Game Baru: katalog bawaan dari game kasual yang dapat Anda mainkan langsung di aplikasi
+• Layar beranda yang didesain ulang dengan navigasi modern, tombol permainan cepat, kategori, dan pencarian instan
+• Tab "Terbaru" dan "Baru", tandai game sebagai favorit, dan kemajuan Anda sekarang disimpan di antara sesi
 </id>
 
 <ru-RU>
 Что нового:
 
-• Физические контроллеры как Игрок 2: возможность подключать физические контроллеры начиная со второго игрока, оставляя первого на экранном контроллере — виртуальный пад больше не пропадает при подключении геймпада
+• Новый раздел игр: встроенный каталог казуальных игр, которые можно играть прямо в приложении
+• Обновлённый главный экран с современной навигацией, кнопкой быстрого доступа к играм, категориями и мгновенным поиском
+• Новые вкладки "Недавние" и "Новые", отметьте игры как избранные, и теперь ваш прогресс сохраняется между сессиями
 </ru-RU>
 
 <ja-JP>
-新機能:
+新着情報:
 
-• 物理コントローラーをプレイヤー2に: 物理コントローラーをプレイヤー2から接続し、プレイヤー1を画面上のコントローラーのままにできます（任意）。ゲームパッド接続時に画面上のパッドが消えなくなりました
+• 新しいゲームセクション: アプリ内で直接プレイできるカジュアルゲームの組み込みカタログ
+• モダンなナビゲーション、クイックゲームボタン、カテゴリー、インスタント検索を備えたホーム画面の再設計
+• 新しい「最近」と「新規」タブ、ゲームをお気に入りにマークし、セッション間で進行状況が保存されるようになりました
 </ja-JP>
 
 <de-DE>
-Neues:
+Neuigkeiten:
 
-• Physische Controller ab Spieler 2: Verbinde physische Controller optional ab Spieler 2 und behalte Spieler 1 auf dem Bildschirm-Controller — der virtuelle Controller verschwindet nicht mehr, wenn ein Gamepad angeschlossen wird
+• Neuer Spielebereich: ein integrierter Katalog von Casual-Spielen, die Sie direkt in der App spielen können
+• Neugestalteter Startbildschirm mit moderner Navigation, Schnellspiel-Schaltfläche, Kategorien und Sofortsuche
+• Neue Registerkarten "Zuletzt" und "Neu", markieren Sie Spiele als Favoriten und Ihr Fortschritt wird jetzt zwischen den Sitzungen gespeichert
 </de-DE>
 
 <fr-FR>
-Nouveautés :
+Quoi de neuf :
 
-• Manettes physiques en Joueur 2 : Connectez les manettes physiques à partir du Joueur 2 et gardez le Joueur 1 sur la manette à l'écran (optionnel) ; la manette virtuelle ne disparaît plus lorsqu'une manette est branchée
+• Nouvelle section Jeux : un catalogue intégré de jeux occasionnels que vous pouvez jouer directement dans l'application
+• Écran d'accueil repensé avec une navigation moderne, un bouton de jeux rapides, des catégories et une recherche instantanée
+• Nouveaux onglets "Récents" et "Nouveaux", marquez les jeux comme favoris et votre progression est désormais sauvegardée entre les sessions
 </fr-FR>
 
 <ko-KR>
 새로운 기능:
 
-• 실물 컨트롤러를 플레이어 2로: 실물 컨트롤러를 플레이어 2부터 연결하고 플레이어 1은 화면 컨트롤러로 유지하는 옵션 — 게임패드를 연결해도 화면 컨트롤러가 더 이상 사라지지 않습니다
+• 새로운 게임 섹션: 앱 내에서 바로 플레이할 수 있는 캐주얼 게임의 내장 카탈로그
+• 현대적인 탐색, 빠른 게임 버튼, 카테고리 및 즉시 검색 기능을 갖춘 홈 화면 재설계
+• 새로운 "최근" 및 "새로운" 탭, 게임을 즐겨찾기로 표시하고 이제 세션 간에 진행 상황이 저장됩니다
 </ko-KR>
 
 <tr-TR>
 Yenilikler:
 
-• Fiziksel kumandalar 2. Oyuncu olarak: Fiziksel kumandaları 2. Oyuncudan itibaren bağlayın ve 1. Oyuncuyu ekran kumandasında tutun (isteğe bağlı); kumanda takıldığında sanal kumanda artık kaybolmuyor
+• Yeni Oyunlar bölümü: uygulama içinde doğrudan oynayabileceğiniz gündelik oyunların yerleşik kataloğu
+• Modern gezinme, hızlı oyun düğmesi, kategoriler ve anında arama ile yeniden tasarlanmış ana ekran
+• Yeni "Son" ve "Yeni" sekmeleri, oyunları favori olarak işaretleyin ve artık ilerlemeniz oturumlar arasında kaydediliyor
 </tr-TR>
 
 <vi>
 Có gì mới:
 
-• Tay cầm vật lý làm Người chơi 2: Tùy chọn kết nối tay cầm vật lý bắt đầu từ Người chơi 2 và giữ Người chơi 1 trên tay cầm trên màn hình — tay cầm ảo không còn biến mất khi cắm gamepad
+• Phần trò chơi mới: danh mục trò chơi thông thường tích hợp sẵn mà bạn có thể chơi ngay trong ứng dụng
+• Màn hình chính được thiết kế lại với điều hướng hiện đại, nút trò chơi nhanh, danh mục và tìm kiếm tức thì
+• Tab "Gần đây" và "Mới", đánh dấu trò chơi yêu thích và tiến trình của bạn hiện được lưu giữa các phiên
 </vi>
 
 <it-IT>
 Novità:
 
-• Controller fisici come Giocatore 2: Collega i controller fisici a partire dal Giocatore 2 e mantieni il Giocatore 1 sul controller a schermo (opzionale); il controller virtuale non scompare più quando colleghi un gamepad
+• Nuova sezione Giochi: un catalogo integrato di giochi casual che puoi giocare direttamente nell'app
+• Schermata principale ridisegnata con navigazione moderna, pulsante giochi rapidi, categorie e ricerca istantanea
+• Nuove schede "Recenti" e "Nuovi", segna i giochi come preferiti e ora i tuoi progressi vengono salvati tra le sessioni
 </it-IT>
 
 <pl-PL>
 Co nowego:
 
-• Fizyczne kontrolery jako Gracz 2: Opcjonalnie podłączaj fizyczne kontrolery od gracza 2 i zostaw gracza 1 na kontrolerze ekranowym — wirtualny pad nie znika już po podłączeniu gamepada
+• Nowa sekcja gier: wbudowany katalog gier casualowych, które możesz grać bezpośrednio w aplikacji
+• Przeprojektowany ekran główny z nowoczesną nawigacją, przyciskiem szybkich gier, kategoriami i natychmiastowym wyszukiwaniem
+• Nowe zakładki "Ostatnie" i "Nowe", oznacz gry jako ulubione, a teraz twój postęp jest zapisywany między sesjami
 </pl-PL>
 
 <uk>
 Що нового:
 
-• Фізичні контролери як Гравець 2: можливість підключати фізичні контролери починаючи з гравця 2, залишаючи гравця 1 на екранному контролері — віртуальний пад більше не зникає під час підключення геймпада
+• Новий розділ ігор: вбудований каталог казуальних ігор, які можна грати прямо в додатку
+• Перероблений головний екран з сучасною навігацією, кнопкою швидкого доступу до ігор, категоріями та миттєвим пошуком
+• Нові вкладки "Останні" та "Нові", позначайте ігри як улюблені, і тепер ваш прогрес зберігається між сеансами
 </uk>
 
 <cs-CZ>
 Co je nového:
 
-• Fyzické ovladače jako hráč 2: Volitelně připojte fyzické ovladače počínaje hráčem 2 a hráče 1 ponechte na ovladači na obrazovce — virtuální ovladač už po připojení gamepadu nezmizí
+• Nová sekce her: vestavěný katalog příležitostných her, které můžete hrát přímo v aplikaci
+• Přepracovaná domovská obrazovka s moderní navigací, tlačítkem rychlých her, kategoriemi a okamžitým vyhledáváním
+• Nové záložky "Nedávné" a "Nové", označte hry jako oblíbené a nyní se váš postup ukládá mezi sezeními
 </cs-CZ>
 
 <da-DK>
-Hvad er nyt:
+Nyheder:
 
-• Fysiske controllere som spiller 2: Tilslut valgfrit fysiske controllere fra spiller 2, og behold spiller 1 på skærmcontrolleren — den virtuelle controller forsvinder ikke længere, når en controller tilsluttes
+• Ny spilsektion: en indbygget katalog af afslappede spil, du kan spille direkte i appen
+• Redesignet startskærm med moderne navigation, hurtigspil-knap, kategorier og øjeblikkelig søgning
+• Nye faner "Seneste" og "Nye", markér spil som favoritter, og dine fremskridt gemmes nu mellem sessioner
 </da-DK>
 
 <el-GR>
 Τι νέο υπάρχει:
 
-• Φυσικά χειριστήρια ως Παίκτης 2: Προαιρετικά συνδέστε φυσικά χειριστήρια ξεκινώντας από τον Παίκτη 2 και κρατήστε τον Παίκτη 1 στο χειριστήριο οθόνης — το εικονικό χειριστήριο δεν εξαφανίζεται πλέον όταν συνδέετε ένα gamepad
+• Νέα ενότητα παιχνιδιών: ένας ενσωματωμένος κατάλογος περιστασιακών παιχνιδιών που μπορείτε να παίξετε απευθείας στην εφαρμογή
+• Επανασχεδιασμένη αρχική οθόνη με σύγχρονη πλοήγηση, κουμπί γρήγορων παιχνιδιών, κατηγορίες και άμεση αναζήτηση
+• Νέες καρτέλες "Πρόσφατα" και "Νέα", σημειώστε τα παιχνίδια ως αγαπημένα και η πρόοδός σας αποθηκεύεται πλέον μεταξύ των συνεδριών
 </el-GR>
 
 <fi-FI>
-Mitä uutta:
+Uutta:
 
-• Fyysiset ohjaimet pelaajana 2: Yhdistä fyysiset ohjaimet valinnaisesti pelaajasta 2 alkaen ja pidä pelaaja 1 näytön ohjaimessa — virtuaaliohjain ei enää katoa, kun ohjain liitetään
+• Uusi peliosio: sisäänrakennettu luettelo rentoja pelejä, joita voit pelata suoraan sovelluksessa
+• Uudistettu aloitusnäyttö modernilla navigoinnilla, pikapelipainikkeella, kategorioilla ja välittömällä haulla
+• Uudet "Viimeisimmät" ja "Uudet" välilehdet, merkitse pelit suosikeiksi, ja edistymisesi tallennetaan nyt istuntojen välillä
 </fi-FI>
 
 <hu-HU>
 Újdonságok:
 
-• Fizikai vezérlők 2. játékosként: Csatlakoztasd a fizikai vezérlőket a 2. játékostól, az 1. játékos pedig a képernyőn megjelenő vezérlőn marad (opcionális); a virtuális vezérlő már nem tűnik el gamepad csatlakoztatásakor
+• Új Játékok szekció: beépített katalógus alkalmi játékokkal, amelyeket közvetlenül az alkalmazásban játszhatsz
+• Újratervezett kezdőképernyő modern navigációval, gyors játék gombbal, kategóriákkal és azonnali kereséssel
+• Új "Legutóbbi" és "Új" lapok, jelöld meg a játékokat kedvencként, és most már a haladásod mentésre kerül a munkamenetek között
 </hu-HU>
 
 <iw-IL>
 מה חדש:
 
-• בקרים פיזיים כשחקן 2: אפשרות לחבר בקרים פיזיים החל משחקן 2 ולהשאיר את שחקן 1 בבקר שעל המסך — הבקר הווירטואלי כבר לא נעלם כשמחברים בקר
+• מדור משחקים חדש: קטלוג מובנה של משחקים מזדמנים שתוכל לשחק ישירות באפליקציה
+• מסך בית מעוצב מחדש עם ניווט מודרני, כפתור משחקים מהירים, קטגוריות וחיפוש מיידי
+• לשוניות "אחרונים" ו"חדשים" חדשות, סמן משחקים כמועדפים, ועכשיו ההתקדמות שלך נשמרת בין מפגשים
 </iw-IL>
 
 <nl-NL>
-Wat is nieuw:
+Wat is er nieuw:
 
-• Fysieke controllers als speler 2: Verbind fysieke controllers optioneel vanaf speler 2 en houd speler 1 op de schermcontroller — de virtuele controller verdwijnt niet meer wanneer je een gamepad aansluit
+• Nieuwe games-sectie: een ingebouwde catalogus van casual games die je direct in de app kunt spelen
+• Herontworpen startscherm met moderne navigatie, snelle games-knop, categorieën en directe zoekfunctie
+• Nieuwe tabbladen "Recent" en "Nieuw", markeer games als favorieten en je voortgang wordt nu tussen sessies opgeslagen
 </nl-NL>
 
 <no-NO>
 Hva er nytt:
 
-• Fysiske kontrollere som spiller 2: Koble til fysiske kontrollere fra spiller 2, og behold spiller 1 på skjermkontrolleren (valgfritt); den virtuelle kontrolleren forsvinner ikke lenger når en kontroller kobles til
+• Ny spillseksjon: en innebygd katalog over uformelle spill du kan spille direkte i appen
+• Redesignet startskjerm med moderne navigasjon, hurtigspill-knapp, kategorier og umiddelbar søkefunksjon
+• Nye "Nylige" og "Nye" faner, merk spill som favoritter, og fremgangen din lagres nå mellom økter
 </no-NO>
 
 <pt-PT>
 Novidades:
 
-• Comandos físicos como Jogador 2: Ligue os comandos físicos a partir do Jogador 2 e mantenha o Jogador 1 no comando no ecrã (opcional); o comando virtual já não desaparece ao ligar um comando
+• Nova secção de jogos: um catálogo integrado de jogos casuais que pode jogar diretamente na aplicação
+• Ecrã inicial redesenhado com navegação moderna, botão de jogos rápidos, categorias e pesquisa instantânea
+• Novas abas "Recentes" e "Novos", marque jogos como favoritos e agora o seu progresso é guardado entre sessões
 </pt-PT>
 
 <ro>
 Ce este nou:
 
-• Controlere fizice ca Jucătorul 2: Conectează controlerele fizice începând cu Jucătorul 2 și menține Jucătorul 1 pe controlerul de pe ecran (opțional); controlerul virtual nu mai dispare când conectezi un gamepad
+• Secțiune nouă de jocuri: un catalog integrat de jocuri casual pe care le poți juca direct în aplicație
+• Ecran de start redesenat cu navigație modernă, buton de jocuri rapide, categorii și căutare instantanee
+• File noi "Recente" și "Noi", marchează jocurile ca favorite și acum progresul tău este salvat între sesiuni
 </ro>
 
 <sr>
 Шта је ново:
 
-• Физички контролери као играч 2: Опционо повежите физичке контролере почев од играча 2 и задржите играча 1 на екранском контролеру — виртуелни контролер више не нестаје када прикључите гејмпад
+• Нови одељак игара: уграђени каталог лежерних игара које можете играти директно у апликацији
+• Прерађен почетни екран са модерном навигацијом, дугметом за брзе игре, категоријама и тренутном претрагом
+• Нове картице "Недавне" и "Нове", означите игре као омиљене и сада се ваш напредак чува између сесија
 </sr>
 
 <sv-SE>
 Nyheter:
 
-• Fysiska handkontroller som spelare 2: Anslut valfritt fysiska handkontroller från spelare 2 och behåll spelare 1 på skärmkontrollen — den virtuella kontrollen försvinner inte längre när en handkontroll ansluts
+• Ny spelsektion: en inbyggd katalog med avslappnade spel som du kan spela direkt i appen
+• Omdesignad startskärm med modern navigering, snabbspelsknapp, kategorier och omedelbar sökning
+• Nya flikar "Senaste" och "Nya", markera spel som favoriter och din framgång sparas nu mellan sessioner
 </sv-SE>
 
 <af>
 Wat is nuut:
 
-• Fisiese beheerders as Speler 2: Koppel opsioneel fisiese beheerders vanaf Speler 2 en hou Speler 1 op die skermbeheerder — die virtuele beheerder verdwyn nie meer wanneer 'n speelbeheerder ingeprop word nie
+• Nuwe speletjies-afdeling: 'n ingeboude katalogus van toevallige speletjies wat jy reg in die toepassing kan speel
+• Herontwerpte tuisskerm met moderne navigasie, vinnige speletjieknoppie, kategorieë en onmiddellike soektog
+• Nuwe "Onlangse" en "Nuwe" oortjies, merk speletjies as gunstelinge, en jou vordering word nou tussen sessies gestoor
 </af>
 
 <ca>
 Novetats:
 
-• Controls físics com a Jugador 2: Connecta els controls físics a partir del Jugador 2 i mantén el Jugador 1 al comandament en pantalla (opcional); el comandament virtual ja no desapareix en connectar un comandament
+• Nova secció de jocs: un catàleg integrat de jocs casuals que pots jugar directament a l'aplicació
+• Pantalla d'inici redissenyada amb navegació moderna, botó de jocs ràpids, categories i cerca instantània
+• Noves pestanyes "Recents" i "Nous", marca els jocs com a favorits i ara el teu progrés es guarda entre sessions
 </ca>

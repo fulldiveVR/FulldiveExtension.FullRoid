@@ -93,6 +93,11 @@ interface GameDao {
     @Query("SELECT count(*) count, systemId systemId FROM games GROUP BY systemId")
     fun selectSystemsWithCount(): Flow<List<SystemCount>>
 
+    // Same, but only the user's own scanned games. Used for the Home platform chips when the
+    // "Show catalog" setting is off, so a platform present only in the catalog gets no chip.
+    @Query("SELECT count(*) count, systemId systemId FROM games WHERE isCatalogGame = 0 GROUP BY systemId")
+    fun selectScannedSystemsWithCount(): Flow<List<SystemCount>>
+
     // Bundled console catalog games first (3ds/nds sort before the synthetic 'webgame'),
     // then GameHub web games (free tier first).
     @Query("SELECT * FROM games WHERE isCatalogGame = 1 ORDER BY (webGameSlug IS NOT NULL) ASC, isFreeTier DESC, systemId ASC, title ASC")

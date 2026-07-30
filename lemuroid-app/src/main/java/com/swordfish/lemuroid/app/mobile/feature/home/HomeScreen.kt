@@ -101,6 +101,7 @@ fun HomeScreen(
     val playedGames = viewModel.playedGames.collectAsState(emptyList()).value
     val newlyAddedGames = viewModel.newlyAddedGames.collectAsState(emptyList()).value
     val systems = viewModel.availableMetaSystems.collectAsState(emptyList()).value
+    val showCatalog = viewModel.showCatalog.collectAsState(true).value
 
     HomeContent(
         modifier = modifier,
@@ -108,6 +109,7 @@ fun HomeScreen(
         localRomsDirectory = viewModel.localRomsDirectory,
         installedGames = installedGames,
         catalogGames = catalogGames,
+        showCatalog = showCatalog,
         playedGames = playedGames,
         newlyAddedGames = newlyAddedGames,
         systems = systems,
@@ -136,6 +138,7 @@ private fun HomeContent(
     localRomsDirectory: String,
     installedGames: List<Game>,
     catalogGames: List<Game>,
+    showCatalog: Boolean,
     playedGames: List<Game>,
     newlyAddedGames: List<Game>,
     systems: List<MetaSystemInfo>,
@@ -154,13 +157,13 @@ private fun HomeContent(
     val hasRecent = playedGames.isNotEmpty()
     val hasNew = newlyAddedGames.isNotEmpty()
 
-    // Keep selection valid if the available chips change (e.g. Recent/New emptied).
-    val validKeys = remember(systems, hasRecent, hasNew) {
+    // Keep selection valid if the available chips change (e.g. Recent/New emptied, catalog hidden).
+    val validKeys = remember(systems, hasRecent, hasNew, showCatalog) {
         buildSet {
             add(KEY_ALL)
             if (hasRecent) add(KEY_RECENT)
             if (hasNew) add(KEY_NEW)
-            add(KEY_CATALOG)
+            if (showCatalog) add(KEY_CATALOG)
             addAll(systems.map { it.metaSystem.name })
         }
     }
@@ -210,6 +213,7 @@ private fun HomeContent(
                 systems = systems,
                 hasRecent = hasRecent,
                 hasNew = hasNew,
+                hasCatalog = showCatalog,
                 selectedKey = selectedKey.value,
                 onSelected = { selectedKey.value = it },
             )
@@ -306,6 +310,7 @@ private fun HomeFilterChips(
     systems: List<MetaSystemInfo>,
     hasRecent: Boolean,
     hasNew: Boolean,
+    hasCatalog: Boolean,
     selectedKey: String,
     onSelected: (String) -> Unit,
 ) {
@@ -323,7 +328,10 @@ private fun HomeFilterChips(
         if (hasNew) {
             FilterChip(stringResource(R.string.home_filter_new), selectedKey == KEY_NEW) { onSelected(KEY_NEW) }
         }
-        FilterChip(stringResource(R.string.home_filter_catalog), selectedKey == KEY_CATALOG) { onSelected(KEY_CATALOG) }
+        if (hasCatalog) {
+            val label = stringResource(R.string.home_filter_catalog)
+            FilterChip(label, selectedKey == KEY_CATALOG) { onSelected(KEY_CATALOG) }
+        }
         systems.forEach { system ->
             val key = system.metaSystem.name
             FilterChip(system.getName(context), selectedKey == key) { onSelected(key) }
