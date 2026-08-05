@@ -91,6 +91,7 @@ import com.swordfish.lemuroid.app.mobile.feature.settings.coreselection.CoresSel
 import com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevicesSettingsScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.licenses.LicensesScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevicesSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsViewModel
@@ -122,7 +123,7 @@ import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
-import com.swordfish.lemuroid.lib.citra.Citra3DSKeysManager
+import com.swordfish.lemuroid.lib.citra.Citra3DSSystemFilesManager
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import dagger.Provides
 import de.charlex.compose.material3.HtmlText
@@ -161,7 +162,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
     lateinit var settingsInteractor: SettingsInteractor
 
     @Inject
-    lateinit var citra3DSKeysManager: Citra3DSKeysManager
+    lateinit var citra3DSSystemFilesManager: Citra3DSSystemFilesManager
 
     @Inject
     lateinit var inputDeviceManager: InputDeviceManager
@@ -502,7 +503,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                         AdvancedSettingsViewModel.Factory(
                                             applicationContext,
                                             settingsInteractor,
-                                            citra3DSKeysManager,
+                                            citra3DSSystemFilesManager,
                                         ),
                                 ),
                             navController = navController,
@@ -524,7 +525,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                         AdvancedSettingsViewModel.Factory(
                                             applicationContext,
                                             settingsInteractor,
-                                            citra3DSKeysManager,
+                                            citra3DSSystemFilesManager,
                                         ),
                                 ),
                             navController = navController,
@@ -538,6 +539,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                     factory = BiosSettingsViewModel.Factory(biosManager),
                                 ),
                         )
+                    }
+                    composable(MainRoute.SETTINGS_LICENSES) {
+                        LicensesScreen(modifier = Modifier.padding(padding))
                     }
                     composable(MainRoute.SETTINGS_CORES_SELECTION) {
                         CoresSelectionScreen(

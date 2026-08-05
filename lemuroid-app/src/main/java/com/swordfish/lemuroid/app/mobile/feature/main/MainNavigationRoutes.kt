@@ -105,6 +105,12 @@ enum class MainRoute(
         parent = SETTINGS,
         showBottomNavigation = false,
     ),
+    SETTINGS_LICENSES(
+        route = "settings/licenses",
+        titleId = R.string.settings_title_licenses,
+        parent = SETTINGS,
+        showBottomNavigation = false,
+    ),
     CATALOG_DETAIL(
         route = "catalog/{gameId}",
         titleId = R.string.catalog_title,

@@ -2,15 +2,15 @@ package com.swordfish.lemuroid.app.mobile.feature.settings.advanced
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -164,40 +164,41 @@ private fun ExperimentalSettings(viewModel: AdvancedSettingsViewModel) {
             },
         )
     }
-    Citra3DSKeysSettings(viewModel)
+    Citra3DSSystemFilesSettings(viewModel)
 }
 
 @Composable
-private fun Citra3DSKeysSettings(viewModel: AdvancedSettingsViewModel) {
-    val keysState by viewModel.keysState.collectAsState()
+private fun Citra3DSSystemFilesSettings(viewModel: AdvancedSettingsViewModel) {
+    val systemFilesState by viewModel.systemFilesState.collectAsState()
     val context = LocalContext.current
+    // The only way the file can reach the device: an import the user starts themselves,
+    // from a location they pick in the system document picker.
     val filePicker =
         rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
-            uri?.let { viewModel.installKeysFromUri(context, it) }
+            uri?.let { viewModel.importSystemFileFromUri(context, it) }
         }
-    var showUrlDialog by remember { mutableStateOf(false) }
     var showDeleteConfirmDialog by remember { mutableStateOf(false) }
 
     LemuroidCardSettingsGroup(
-        title = { Text(text = stringResource(id = R.string.settings_category_citra_keys)) },
+        title = { Text(text = stringResource(id = R.string.settings_category_citra_system_files)) },
     ) {
         LemuroidSettingsMenuLink(
             enabled = false,
-            title = { Text(text = stringResource(id = R.string.settings_title_citra_keys_status)) },
+            title = { Text(text = stringResource(id = R.string.settings_title_citra_system_files_status)) },
             subtitle = {
-                if (keysState.isLoading) {
+                if (systemFilesState.isLoading) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         CircularProgressIndicator(modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = stringResource(id = R.string.settings_citra_keys_downloading))
+                        Text(text = stringResource(id = R.string.settings_citra_system_files_importing))
                     }
                 } else {
                     Text(
                         text =
-                            if (keysState.keysPresent) {
-                                stringResource(id = R.string.settings_value_citra_keys_present)
+                            if (systemFilesState.filePresent) {
+                                stringResource(id = R.string.settings_value_citra_system_files_present)
                             } else {
-                                stringResource(id = R.string.settings_value_citra_keys_absent)
+                                stringResource(id = R.string.settings_value_citra_system_files_absent)
                             },
                     )
                 }
@@ -205,71 +206,44 @@ private fun Citra3DSKeysSettings(viewModel: AdvancedSettingsViewModel) {
             onClick = {},
         )
         LemuroidSettingsMenuLink(
-            enabled = !keysState.isLoading,
-            title = { Text(text = stringResource(id = R.string.settings_title_citra_keys_load_file)) },
-            subtitle = { Text(text = stringResource(id = R.string.settings_description_citra_keys_load_file)) },
+            enabled = !systemFilesState.isLoading,
+            title = { Text(text = stringResource(id = R.string.settings_title_citra_system_files_import)) },
+            subtitle = {
+                Text(text = stringResource(id = R.string.settings_description_citra_system_files_import))
+            },
             onClick = { filePicker.launch(arrayOf("*/*")) },
         )
-        LemuroidSettingsMenuLink(
-            enabled = !keysState.isLoading,
-            title = { Text(text = stringResource(id = R.string.settings_title_citra_keys_load_url)) },
-            subtitle = { Text(text = stringResource(id = R.string.settings_description_citra_keys_load_url)) },
-            onClick = { showUrlDialog = true },
-        )
-        if (keysState.keysPresent && !keysState.isLoading) {
+        if (systemFilesState.filePresent && !systemFilesState.isLoading) {
             LemuroidSettingsMenuLink(
-                title = { Text(text = stringResource(id = R.string.settings_title_citra_keys_delete)) },
-                subtitle = { Text(text = stringResource(id = R.string.settings_description_citra_keys_delete)) },
+                title = { Text(text = stringResource(id = R.string.settings_title_citra_system_files_delete)) },
+                subtitle = {
+                    Text(text = stringResource(id = R.string.settings_description_citra_system_files_delete))
+                },
                 onClick = { showDeleteConfirmDialog = true },
             )
         }
-    }
-
-    if (showUrlDialog) {
-        var urlText by remember { mutableStateOf("") }
-        AlertDialog(
-            onDismissRequest = { showUrlDialog = false },
-            title = { Text(text = stringResource(id = R.string.settings_title_citra_keys_load_url)) },
-            text = {
-                Column {
-                    Text(text = stringResource(id = R.string.settings_citra_keys_disclaimer))
-                    Spacer(modifier = Modifier.size(8.dp))
-                    OutlinedTextField(
-                        value = urlText,
-                        onValueChange = { urlText = it },
-                        label = { Text(text = stringResource(id = R.string.settings_citra_keys_url_hint)) },
-                        singleLine = true,
-                    )
-                }
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = {
-                        showUrlDialog = false
-                        viewModel.installKeysFromUrl(urlText)
-                    },
-                ) {
-                    Text(text = stringResource(id = android.R.string.ok))
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { showUrlDialog = false }) {
-                    Text(text = stringResource(id = android.R.string.cancel))
-                }
-            },
+        // Shown unconditionally: it used to live inside the removed download dialog, so a user
+        // who only ever imports a file would never have seen it.
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
+            text = stringResource(id = R.string.settings_citra_system_files_disclaimer),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
 
     if (showDeleteConfirmDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteConfirmDialog = false },
-            title = { Text(text = stringResource(id = R.string.settings_citra_keys_delete_confirm_title)) },
-            text = { Text(text = stringResource(id = R.string.settings_citra_keys_delete_confirm_body)) },
+            title = {
+                Text(text = stringResource(id = R.string.settings_citra_system_files_delete_confirm_title))
+            },
+            text = { Text(text = stringResource(id = R.string.settings_citra_system_files_delete_confirm_body)) },
             confirmButton = {
                 TextButton(
                     onClick = {
                         showDeleteConfirmDialog = false
-                        viewModel.deleteKeys()
+                        viewModel.deleteSystemFile()
                     },
                 ) {
                     Text(text = stringResource(id = android.R.string.ok))
@@ -283,10 +257,10 @@ private fun Citra3DSKeysSettings(viewModel: AdvancedSettingsViewModel) {
         )
     }
 
-    keysState.error?.let { errorMessage ->
+    systemFilesState.error?.let { errorMessage ->
         AlertDialog(
             onDismissRequest = { viewModel.clearError() },
-            title = { Text(text = stringResource(id = R.string.settings_citra_keys_error_title)) },
+            title = { Text(text = stringResource(id = R.string.settings_citra_system_files_error_title)) },
             text = { Text(text = errorMessage) },
             confirmButton = {
                 TextButton(onClick = { viewModel.clearError() }) {
