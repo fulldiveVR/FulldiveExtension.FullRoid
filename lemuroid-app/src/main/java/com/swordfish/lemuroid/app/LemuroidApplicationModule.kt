@@ -75,7 +75,7 @@ import com.swordfish.lemuroid.lib.saves.SavesManager
 import com.swordfish.lemuroid.lib.saves.StatesManager
 import com.swordfish.lemuroid.lib.saves.StatesPreviewManager
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
-import com.swordfish.lemuroid.lib.citra.Citra3DSKeysManager
+import com.swordfish.lemuroid.lib.citra.Citra3DSSystemFilesManager
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import com.swordfish.lemuroid.lib.storage.StorageProvider
 import com.swordfish.lemuroid.lib.storage.StorageProviderRegistry
@@ -119,6 +119,10 @@ abstract class LemuroidApplicationModule {
     abstract fun gameActivity(): GameActivity
 
     @PerActivity
+    @ContributesAndroidInjector
+    abstract fun webGameActivity(): com.swordfish.lemuroid.app.mobile.feature.webgame.WebGameActivity
+
+    @PerActivity
     @ContributesAndroidInjector(modules = [GameMenuActivity.Module::class])
     abstract fun gameMenuActivity(): GameMenuActivity
 
@@ -151,7 +155,13 @@ abstract class LemuroidApplicationModule {
         fun retrogradeDb(app: LemuroidApplication) =
             Room.databaseBuilder(app, RetrogradeDatabase::class.java, RetrogradeDatabase.DB_NAME)
                 .addCallback(GameSearchDao.CALLBACK)
-                .addMigrations(GameSearchDao.MIGRATION, Migrations.VERSION_8_9, Migrations.VERSION_9_10, Migrations.VERSION_10_11)
+                .addMigrations(
+                    GameSearchDao.MIGRATION,
+                    Migrations.VERSION_8_9,
+                    Migrations.VERSION_9_10,
+                    Migrations.VERSION_10_11,
+                    Migrations.VERSION_11_12,
+                )
                 .fallbackToDestructiveMigration()
                 .build()
 
@@ -245,8 +255,8 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun citra3DSKeysManager(directoriesManager: DirectoriesManager): Citra3DSKeysManager =
-            Citra3DSKeysManager(directoriesManager)
+        fun citra3DSSystemFilesManager(directoriesManager: DirectoriesManager): Citra3DSSystemFilesManager =
+            Citra3DSSystemFilesManager(directoriesManager)
 
         @Provides
         @PerApp

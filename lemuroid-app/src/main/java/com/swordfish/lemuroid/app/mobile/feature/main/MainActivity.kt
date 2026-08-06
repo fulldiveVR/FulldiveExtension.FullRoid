@@ -71,6 +71,9 @@ import com.swordfish.lemuroid.app.mobile.feature.favorites.FavoritesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesScreen
 import com.swordfish.lemuroid.app.mobile.feature.games.GamesViewModel
 import com.swordfish.lemuroid.app.mobile.feature.catalog.CatalogDetailScreen
+import com.swordfish.lemuroid.app.mobile.feature.webgames.WebGamesScreen
+import com.swordfish.lemuroid.app.mobile.feature.webgames.canPlayWebGame
+import com.swordfish.lemuroid.app.mobile.feature.webgames.launchWebGame
 import com.swordfish.lemuroid.app.mobile.feature.webview.WebViewActivity
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeScreen
 import com.swordfish.lemuroid.app.mobile.feature.home.HomeViewModel
@@ -88,11 +91,13 @@ import com.swordfish.lemuroid.app.mobile.feature.settings.coreselection.CoresSel
 import com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.general.SettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevicesSettingsScreen
+import com.swordfish.lemuroid.app.mobile.feature.settings.licenses.LicensesScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.inputdevices.InputDevicesSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsScreen
 import com.swordfish.lemuroid.app.mobile.feature.settings.savesync.SaveSyncSettingsViewModel
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.catalog.CatalogSyncWork
+import com.swordfish.lemuroid.app.shared.catalog.RemoteCatalogSyncWork
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsScreen
@@ -118,7 +123,7 @@ import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.lib.preferences.SharedPreferencesHelper
 import com.swordfish.lemuroid.lib.savesync.SaveSyncManager
-import com.swordfish.lemuroid.lib.citra.Citra3DSKeysManager
+import com.swordfish.lemuroid.lib.citra.Citra3DSSystemFilesManager
 import com.swordfish.lemuroid.lib.storage.DirectoriesManager
 import dagger.Provides
 import de.charlex.compose.material3.HtmlText
@@ -157,7 +162,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
     lateinit var settingsInteractor: SettingsInteractor
 
     @Inject
-    lateinit var citra3DSKeysManager: Citra3DSKeysManager
+    lateinit var citra3DSSystemFilesManager: Citra3DSSystemFilesManager
 
     @Inject
     lateinit var inputDeviceManager: InputDeviceManager
@@ -194,6 +199,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
         InstallAttributionReporter.reportIfNeeded(applicationContext, GlobalScope)
 
         CatalogSyncWork.schedule(applicationContext)
+        RemoteCatalogSyncWork.schedule(applicationContext)
 
         // Scan the library and update cores when the app UI is opened (not on every process start),
         // so launching a game via shortcut doesn't trigger a scan. The scan is gated by the
@@ -276,8 +282,19 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 selectedGameState.value = game
             }
 
+            // Web (GameHub) games launch via the offline WebView player, not the libretro
+            // core. Route them here so favorited/searched web games also open correctly from
+            // any screen (Favorites, Search) — a locked pro game opens the store, like a tap.
             val onGameClick = { game: Game ->
-                gameInteractor.onGamePlay(game)
+                if (game.webGameSlug != null) {
+                    if (canPlayWebGame(this, game)) {
+                        launchWebGame(this, game)
+                    } else {
+                        openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
+                    }
+                } else {
+                    gameInteractor.onGamePlay(game)
+                }
             }
 
             val onGameFavoriteToggle = { game: Game, isFavorite: Boolean ->
@@ -308,35 +325,24 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                             } else {
                                 navController.navigate(MainRoute.PRO_TUTORIAL.route)
                             }
-                        }
+                        },
                     )
                 },
-                bottomBar = { MainNavigationBar(currentRoute, navController) },
-                floatingActionButton = {
-                    // Compact, always-available entry to Roomcord on Home, shown only when the
-                    // bottom promo banners are not occupying the screen.
-                    if (currentRoute == MainRoute.HOME &&
-                        !isProPopupVisible.value &&
-                        !isRoomcordPopupVisible.value
-                    ) {
-                        FloatingActionButton(
-                            onClick = {
-                                actionTracker.logAction(TrackerConstants.EVENT_ROOMCORD_FAB_CLICKED)
-                                startActivity(
-                                    WebViewActivity.newIntent(
-                                        context = this@MainActivity,
-                                        url = FulldiveConfigs.ROOMCORD_ROOM_URL_GAMES,
-                                        title = getString(R.string.roomcord_webview_title),
-                                    ),
-                                )
-                            },
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.SportsEsports,
-                                contentDescription = stringResource(R.string.popup_more_games_title),
+                bottomBar = {
+                    MainNavigationBar(
+                        currentRoute = currentRoute,
+                        navController = navController,
+                        onChatClick = {
+                            actionTracker.logAction(TrackerConstants.EVENT_ROOMCORD_FAB_CLICKED)
+                            startActivity(
+                                WebViewActivity.newIntent(
+                                    context = this@MainActivity,
+                                    url = FulldiveConfigs.ROOMCORD_ROOM_URL_GAMES,
+                                    title = getString(R.string.roomcord_webview_title),
+                                ),
                             )
-                        }
-                    }
+                        },
+                    )
                 },
             ) { padding ->
                 NavHost(
@@ -425,10 +431,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                     factory = SearchViewModel.Factory(retrogradeDb),
                                 ),
                             searchQuery = mainUIState.searchQuery,
+                            onUpdateQuery = { mainViewModel.changeQueryString(it) },
                             onGameClick = onGameClick,
                             onGameLongClick = onGameLongClick,
                             onGameFavoriteToggle = onGameFavoriteToggle,
-                            onResetSearchQuery = { mainViewModel.changeQueryString("") },
                         )
                     }
                     composable(MainRoute.SYSTEMS) {
@@ -443,6 +449,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                             applicationContext,
                                         ),
                                 ),
+                            retrogradeDb = retrogradeDb,
+                            onGameClick = onGameClick,
+                            onGameLongClick = onGameLongClick,
+                            onGameFavoriteToggle = onGameFavoriteToggle,
                         )
                     }
                     composable(MainRoute.SYSTEM_GAMES) { entry ->
@@ -493,7 +503,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                         AdvancedSettingsViewModel.Factory(
                                             applicationContext,
                                             settingsInteractor,
-                                            citra3DSKeysManager,
+                                            citra3DSSystemFilesManager,
                                         ),
                                 ),
                             navController = navController,
@@ -515,7 +525,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                         AdvancedSettingsViewModel.Factory(
                                             applicationContext,
                                             settingsInteractor,
-                                            citra3DSKeysManager,
+                                            citra3DSSystemFilesManager,
                                         ),
                                 ),
                             navController = navController,
@@ -529,6 +539,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                     factory = BiosSettingsViewModel.Factory(biosManager),
                                 ),
                         )
+                    }
+                    composable(MainRoute.SETTINGS_LICENSES) {
+                        LicensesScreen(modifier = Modifier.padding(padding))
                     }
                     composable(MainRoute.SETTINGS_CORES_SELECTION) {
                         CoresSelectionScreen(
@@ -572,10 +585,17 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     composable(MainRoute.CATALOG_DETAIL) { entry ->
                         val gameId = entry.arguments?.getInt("gameId") ?: return@composable
                         CatalogDetailScreen(
+                            modifier = Modifier.padding(padding),
                             gameId = gameId,
                             retrogradeDb = retrogradeDb,
                             onPlayClicked = { game -> gameInteractor.onGamePlay(game) },
-                            onNavigateBack = { navController.popBackStack() },
+                        )
+                    }
+                    composable(MainRoute.WEB_GAMES) {
+                        WebGamesScreen(
+                            modifier = Modifier.padding(padding),
+                            webGamesFlow = retrogradeDb.gameDao().selectWebCatalogGames(),
+                            onGameLongClick = onGameLongClick,
                         )
                     }
                 }
@@ -583,7 +603,7 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 MainGameContextActions(
                     selectedGameState = selectedGameState,
                     shortcutSupported = gameInteractor.supportShortcuts(),
-                    onGamePlay = { gameInteractor.onGamePlay(it) },
+                    onGamePlay = { onGameClick(it) },
                     onGameRestart = { gameInteractor.onGameRestart(it) },
                     onFavoriteToggle = { game: Game, isFavorite: Boolean ->
                         gameInteractor.onFavoriteToggle(game, isFavorite)

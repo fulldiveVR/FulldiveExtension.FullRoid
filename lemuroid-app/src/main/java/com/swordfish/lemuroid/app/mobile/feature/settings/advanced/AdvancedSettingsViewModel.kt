@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
-import com.swordfish.lemuroid.lib.citra.Citra3DSKeysManager
+import com.swordfish.lemuroid.lib.citra.Citra3DSSystemFilesManager
 import com.swordfish.lemuroid.lib.storage.cache.CacheCleaner
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -23,15 +23,15 @@ import java.io.IOException
 class AdvancedSettingsViewModel(
     appContext: Context,
     private val settingsInteractor: SettingsInteractor,
-    private val citra3DSKeysManager: Citra3DSKeysManager,
+    private val citra3DSSystemFilesManager: Citra3DSSystemFilesManager,
 ) : ViewModel() {
     class Factory(
         private val appContext: Context,
         private val settingsInteractor: SettingsInteractor,
-        private val citra3DSKeysManager: Citra3DSKeysManager,
+        private val citra3DSSystemFilesManager: Citra3DSSystemFilesManager,
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return AdvancedSettingsViewModel(appContext, settingsInteractor, citra3DSKeysManager) as T
+            return AdvancedSettingsViewModel(appContext, settingsInteractor, citra3DSSystemFilesManager) as T
         }
     }
 
@@ -43,8 +43,8 @@ class AdvancedSettingsViewModel(
 
     data class State(val cache: CacheState)
 
-    data class KeysState(
-        val keysPresent: Boolean,
+    data class SystemFilesState(
+        val filePresent: Boolean,
         val isLoading: Boolean = false,
         val error: String? = null,
     )
@@ -53,12 +53,12 @@ class AdvancedSettingsViewModel(
         initializeState(appContext)
             .stateIn(viewModelScope, started = SharingStarted.Lazily, null)
 
-    private val _keysState = MutableStateFlow(KeysState(keysPresent = false))
-    val keysState: StateFlow<KeysState> = _keysState.asStateFlow()
+    private val _systemFilesState = MutableStateFlow(SystemFilesState(filePresent = false))
+    val systemFilesState: StateFlow<SystemFilesState> = _systemFilesState.asStateFlow()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            _keysState.value = KeysState(keysPresent = citra3DSKeysManager.keysPresent())
+            _systemFilesState.value = SystemFilesState(filePresent = citra3DSSystemFilesManager.isPresent())
         }
     }
 
@@ -90,48 +90,41 @@ class AdvancedSettingsViewModel(
         settingsInteractor.resetAllSettings()
     }
 
-    fun installKeysFromUri(
+    /**
+     * Imports the user-provided 3DS system file from a location the user picked in the system
+     * document picker. This is the only import path: the app never fetches the file itself.
+     */
+    fun importSystemFileFromUri(
         context: Context,
         uri: Uri,
     ) {
         viewModelScope.launch {
-            _keysState.value = _keysState.value.copy(isLoading = true, error = null)
+            _systemFilesState.value = _systemFilesState.value.copy(isLoading = true, error = null)
             try {
-                citra3DSKeysManager.installFromUri(context, uri)
-                _keysState.value = KeysState(keysPresent = true)
+                citra3DSSystemFilesManager.importFromUri(context, uri)
+                _systemFilesState.value = SystemFilesState(filePresent = true)
             } catch (e: IOException) {
-                citra3DSKeysManager.deleteKeys()
-                _keysState.value = KeysState(keysPresent = false, error = e.message ?: "Failed to load file")
+                citra3DSSystemFilesManager.delete()
+                _systemFilesState.value =
+                    SystemFilesState(filePresent = false, error = e.message ?: "Failed to import file")
             }
         }
     }
 
-    fun installKeysFromUrl(url: String) {
+    fun deleteSystemFile() {
         viewModelScope.launch {
-            _keysState.value = _keysState.value.copy(isLoading = true, error = null)
+            _systemFilesState.value = _systemFilesState.value.copy(isLoading = true, error = null)
             try {
-                citra3DSKeysManager.installFromUrl(url)
-                _keysState.value = KeysState(keysPresent = true)
+                citra3DSSystemFilesManager.delete()
+                _systemFilesState.value = SystemFilesState(filePresent = false)
             } catch (e: IOException) {
-                citra3DSKeysManager.deleteKeys()
-                _keysState.value = KeysState(keysPresent = false, error = e.message ?: "Download failed")
-            }
-        }
-    }
-
-    fun deleteKeys() {
-        viewModelScope.launch {
-            _keysState.value = _keysState.value.copy(isLoading = true, error = null)
-            try {
-                citra3DSKeysManager.deleteKeys()
-                _keysState.value = KeysState(keysPresent = false)
-            } catch (e: IOException) {
-                _keysState.value = KeysState(keysPresent = true, error = e.message ?: "Failed to delete keys")
+                _systemFilesState.value =
+                    SystemFilesState(filePresent = true, error = e.message ?: "Failed to delete file")
             }
         }
     }
 
     fun clearError() {
-        _keysState.value = _keysState.value.copy(error = null)
+        _systemFilesState.value = _systemFilesState.value.copy(error = null)
     }
 }

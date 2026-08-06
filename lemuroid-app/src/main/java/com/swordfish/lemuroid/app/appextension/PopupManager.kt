@@ -65,11 +65,9 @@ class PopupManager(private val context: Context) {
                 }
 
                 StartAppDialog.InstallBrowser -> {
-                    if (!isProVersion() && !installBrowserDone && !isRoomcordInstalled()) {
-                        showInstallBrowserDialog(activity) {
-                            onInstallAppPositiveClicked()
-                        }
-                    }
+                    // Roomcord install-browser dialog disabled.
+                    // Original show condition was:
+                    //   !isProVersion() && !installBrowserDone && !isRoomcordInstalled()
                 }
 
                 else -> {
@@ -200,9 +198,12 @@ class PopupManager(private val context: Context) {
     }
 
     fun isRoomcordPopupVisible(): Boolean {
-        if (isProVersion() && isRoomcordInstalled()) return false
-        val startCount = getCurrentStartCounter()
-        return startCount % 2 == 1
+        // Roomcord promo banner disabled.
+        // Original show conditions were:
+        //   if (isProVersion() && isRoomcordInstalled()) return false
+        //   val startCount = getCurrentStartCounter()
+        //   return startCount % 2 == 1
+        return false
     }
 
     companion object {

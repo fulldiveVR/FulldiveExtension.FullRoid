@@ -812,6 +812,13 @@ data class GameSystem(
                             defaultSettings =
                             listOf(
                                 CoreVariable("ppsspp_frame_duplication", "enabled"),
+                                // Default to the IR JIT instead of the native dynarec ("JIT").
+                                // The full dynarec faults inside the CPU dispatch loop on some
+                                // devices/games (crash in MIPSState::RunLoopUntil / Core_RunLoopUntil
+                                // with anonymous JIT-generated frames). IR JIT is far more stable
+                                // while keeping most of the speed; users can still pick "JIT" or
+                                // "Interpreter" via the advanced ppsspp_cpu_core setting.
+                                CoreVariable("ppsspp_cpu_core", "IR JIT"),
                             ),
                             exposedSettings =
                             listOf(
@@ -1404,6 +1411,14 @@ data class GameSystem(
                                 ),
                                 statesSupported = false,
                                 supportsLibretroVFS = true,
+                                // Citra closes the VFS file descriptor with a bare close() in
+                                // retro_vfs_file_close_impl (FileUtil::IOFile::~IOFile ->
+                                // filestream_close), which trips fdsan (double-close / ownership
+                                // mismatch on the ParcelFileDescriptor) and aborts the process while
+                                // loading 3DS games in Loader::GetLoader / retro_load_game. Marked
+                                // unstable so "Optimal" VFS mode routes 3DS through the safe
+                                // cached-file path.
+                                libretroVFSStable = false,
                                 supportedOnlyArchitectures = setOf("arm64-v8a"),
                             ),
                         ),

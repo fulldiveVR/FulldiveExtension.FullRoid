@@ -1,0 +1,122 @@
+THIRD-PARTY LICENSES
+====================
+
+FullRoid bundles third-party software. This file identifies each component, the
+licence it is distributed under, and where the licence text can be found.
+
+The same notices are shown inside the app: Settings -> Open-source licenses.
+The full licence texts are shipped with the application under
+`retrograde-app-shared/src/main/assets/licenses/` and are verbatim copies of the
+upstream licence files.
+
+FullRoid itself is free software distributed under the GNU General Public
+License, version 3. See `COPYING`.
+
+FullRoid is a fork of Lemuroid (https://github.com/Swordfish90/Lemuroid), which
+is itself distributed under the GNU General Public License, version 3.
+
+
+1. EMULATION CORES
+------------------
+
+Each core is a separate work with its own licence and its own copyright
+holders. The binaries shipped with the application are built from the
+repositories listed below; the 3DS core is built from our own Azahar fork.
+
+Licence identifications were taken from the Libretro project's core licence
+table (https://docs.libretro.com/development/licenses/) and confirmed against
+each upstream licence file.
+
+  Core                Licence                              Licence text
+  ----                -------                              ------------
+  Stella              GNU GPL, version 2                   licenses/gpl-2.0.txt
+  FCEUmm              GNU GPL, version 2                   licenses/gpl-2.0.txt
+  Snes9x              Snes9x licence (non-commercial)      licenses/snes9x.txt
+  Genesis Plus GX     Genesis Plus GX licence              licenses/genesis-plus-gx.txt
+                      (non-commercial)
+  Gambatte            GNU GPL, version 2                   licenses/gpl-2.0.txt
+  mGBA                Mozilla Public License, version 2.0  licenses/mpl-2.0.txt
+  Mupen64Plus         GNU GPL, version 3                   licenses/gpl-3.0.txt
+  PCSX ReARMed        GNU GPL, version 2                   licenses/gpl-2.0.txt
+  PPSSPP              GNU GPL, version 2                   licenses/gpl-2.0.txt
+  FB Neo              FB Neo licence (non-commercial)      licenses/fbneo.txt
+  MAME 2003-Plus      MAME 0.78 licence (non-commercial)   licenses/mame2003-plus.txt
+  DeSmuME             GNU GPL, version 2                   licenses/gpl-2.0.txt
+  melonDS             GNU GPL, version 3                   licenses/gpl-3.0.txt
+  Handy               zlib licence                         licenses/zlib-handy.txt
+  Beetle PCE FAST     GNU GPL, version 2                   licenses/gpl-2.0.txt
+  ProSystem           GNU GPL, version 2                   licenses/gpl-2.0.txt
+  Beetle NeoPop       GNU GPL, version 2                   licenses/gpl-2.0.txt
+  Beetle Cygne        GNU GPL, version 2                   licenses/gpl-2.0.txt
+  Azahar (3DS)        GNU GPL, version 2                   licenses/gpl-2.0.txt
+  DOSBox Pure         GNU GPL, version 2                   licenses/gpl-2.0.txt
+
+Upstream repositories:
+
+  Stella              https://github.com/libretro/stella2023
+  FCEUmm              https://github.com/libretro/libretro-fceumm
+  Snes9x              https://github.com/libretro/snes9x
+  Genesis Plus GX     https://github.com/libretro/Genesis-Plus-GX
+  Gambatte            https://github.com/libretro/gambatte-libretro
+  mGBA                https://github.com/libretro/mgba
+  Mupen64Plus         https://github.com/libretro/mupen64plus-libretro-nx
+  PCSX ReARMed        https://github.com/libretro/pcsx_rearmed
+  PPSSPP              https://github.com/libretro/ppsspp
+  FB Neo              https://github.com/libretro/FBNeo
+  MAME 2003-Plus      https://github.com/libretro/mame2003-plus-libretro
+  DeSmuME             https://github.com/libretro/desmume
+  melonDS             https://github.com/libretro/melonDS
+  Handy               https://github.com/libretro/libretro-handy
+  Beetle PCE FAST     https://github.com/libretro/beetle-pce-fast-libretro
+  ProSystem           https://github.com/libretro/prosystem-libretro
+  Beetle NeoPop       https://github.com/libretro/beetle-ngp-libretro
+  Beetle Cygne        https://github.com/libretro/beetle-wswan-libretro
+  Azahar (3DS)        https://github.com/fulldiveVR/azahar
+  DOSBox Pure         https://github.com/libretro/dosbox-pure
+
+Copyright notices stated in the upstream licence files:
+
+  Snes9x            Copyright 1996-2011 Gary Henderson, Jerremy Koot and the
+                    Snes9x team
+  Genesis Plus GX   Copyright (c) 1998-2003 Charles MacDonald
+                    Copyright (c) 2007-2026 Eke-Eke
+                    Some portions copyright Nicola Salmoria and the MAME team
+  MAME 2003-Plus    Copyright (C) 1997-2003 Nicola Salmoria and the MAME Team
+                    Copyright (C) 2003-2018 the Libretro MAME 2003 Team
+                    Copyright (C) 2017-2018 the Libretro MAME 2003-Plus Team
+  Handy             Copyright (c) 1996, 1997, 2004 K. Wilkins
+
+For the remaining cores the copyright holders are named in the source files of
+the repositories listed above.
+
+
+2. LIBRETRO API
+---------------
+
+The libretro API headers are distributed by the RetroArch team under the MIT
+licence. LibretroDroid (https://github.com/Swordfish90/LibretroDroid), the
+Android layer that loads the cores, is distributed under the GNU General Public
+License, version 3.
+
+
+3. JAVA AND KOTLIN LIBRARIES
+----------------------------
+
+The application links against the Android Jetpack libraries, the Kotlin
+standard library and coroutines, Dagger, Retrofit, OkHttp, Coil and Timber.
+All of these are distributed under the Apache License, Version 2.0; its text is
+shipped as `licenses/apache-2.0.txt`.
+
+The authoritative, complete dependency list is `buildSrc/src/main/java/deps.kt`
+together with the `build.gradle.kts` files of each module.
+
+
+4. CORRESPONDING SOURCE
+-----------------------
+
+The cores are unmodified builds of the upstream projects listed in section 1,
+with the exception of the 3DS core, which is built from the Azahar fork at
+https://github.com/fulldiveVR/azahar.
+
+The source code of FullRoid itself is distributed under the GNU General Public
+License, version 3.
