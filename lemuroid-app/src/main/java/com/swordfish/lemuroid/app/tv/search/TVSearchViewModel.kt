@@ -26,6 +26,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.filter
+import com.swordfish.lemuroid.app.tv.shared.TVSupportedSystems
 import com.swordfish.lemuroid.common.paging.buildFlowPaging
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -33,6 +35,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 
 class TVSearchViewModel(private val retrogradeDb: RetrogradeDatabase) : ViewModel() {
     class Factory(val retrogradeDb: RetrogradeDatabase) : ViewModelProvider.Factory {
@@ -48,5 +51,6 @@ class TVSearchViewModel(private val retrogradeDb: RetrogradeDatabase) : ViewMode
         queryString
             .flatMapLatest {
                 buildFlowPaging(20, viewModelScope) { retrogradeDb.gameSearchDao().search(it) }
+                    .map { pagingData -> pagingData.filter { TVSupportedSystems.isSupported(it) } }
             }
 }

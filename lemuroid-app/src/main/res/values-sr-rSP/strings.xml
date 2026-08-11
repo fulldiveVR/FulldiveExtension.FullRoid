@@ -219,10 +219,8 @@
   <string name="share_discord_text_title_part_2">Преузмите ову игру овде %s</string>
   <string name="string_pro_buy_now">Купи сада</string>
   <string name="string_pro_limited_deal">Ограничена понуда</string>
-  <string name="string_pro_popup_disclamer">Nabavite FullRoid X za manje od šoljice kafe. Igrajte WS i 3DS igre!</string>
   <string name="string_pro_popup_title">Не пропустите нашу ПРОДАЈУ!</string>
   <string name="string_pro_price" formatted="false">%d/ доживотно %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 нових емулатора, укључујући Nintendo 3DS\n✓ HD режим за ефикасно побољшање игара\n✓ Подршка за 7z архиве\n✓ Ексклузиван приступ будућим функцијама</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_citra_system_files">Системске датотеке 3DS (обезбеђује корисник)</string>
   <string name="settings_title_citra_system_files_status">Статус</string>
@@ -291,4 +289,28 @@
     <string name="home_filter_catalog">Каталог</string>
     <string name="home_filter_recent">Недавне</string>
     <string name="home_filter_new">Нове</string>
+  <string name="roomcord_share_limit_too_soon">Можете да делите једном на сваких 5 минута. Покушајте поново %1$s.</string>
+  <string name="roomcord_share_limit_daily">Достигли сте ограничење од 5 дељења дневно. Покушајте поново %1$s.</string>
+  <string name="roomcord_share_limit_duplicate">Ваша повратна информација је већ послата.</string>
+  <string name="nav_chat">Ћаскање</string>
+  <string name="string_pro_popup_disclamer">Подржите тим програмера и откључајте додатне могућности.</string>
+  <string name="string_pro_tutorial_disclamer">✓ Комплетан каталог игара\n✓ Подршка за 7z архиве\n✓ Експериментална стања чувања за 3DS\n✓ Ексклузиван приступ будућим могућностима</string>
+  <string name="settings_title_immersive_mode">Режим уживљавања</string>
+  <string name="settings_description_immersive_mode">Динамички боји позадину на основу изгледа игре</string>
+  <string name="settings_core_selection_ds_info">DeSmuME је застарео и биће уклоњен у једном од наредних ажурирања. Сачувајте напредак унутар игре, па пређите на melonDS. Сачуване игре ће се аутоматски учитати у melonDS-у, али стања чувања могу да се користе само са језгром које их је направило.</string>
+  <string name="home_notification_desmume_deprecated_title">DeSmuME се повлачи</string>
+  <string name="home_notification_desmume_deprecated_message">Сачувајте унутар игре, па пређите на melonDS да задржите напредак. Стања чувања се не преносе и остају употребљива само у DeSmuME-у.</string>
+  <string name="home_notification_desmume_deprecated_action">Пређи на melonDS</string>
+  <string name="game_menu_tilt_sensor">Сензор нагиба</string>
+  <string name="game_toast_quick_save_loaded">Брзо учитано</string>
+  <string name="game_toast_quick_save_saved">Брзо сачувано</string>
+  <string name="shortcut_binding_update_title">Додели \"Пречицу %1$s\"</string>
+  <string name="shortcut_binding_update_description">Притисните прво једно, па друго дугме да повежете комбинацију на \"%1$s\"</string>
+  <string name="tilt_configuration_disabled">Онемогућено</string>
+  <string name="tilt_configuration_analog_left">Леви аналог</string>
+  <string name="tilt_configuration_analog_right">Десни аналог</string>
+  <string name="tilt_configuration_cross">DPAD</string>
+  <string name="tilt_configuration_buttons_l_r">L - R</string>
+  <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
+  <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
 </resources>

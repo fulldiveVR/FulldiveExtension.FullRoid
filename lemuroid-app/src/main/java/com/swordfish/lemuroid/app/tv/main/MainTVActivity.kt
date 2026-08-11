@@ -17,6 +17,7 @@ import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.isFullRoidProInstalled
 import com.swordfish.lemuroid.app.appextension.launchApp
 import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
+import com.swordfish.lemuroid.app.appextension.proInstallReferrer
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
@@ -67,7 +68,10 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
         if (packageManager.isFullRoidProInstalled()) {
             launchApp(this, FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
         } else {
-            openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
+            openAppInGooglePlay(
+                FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME,
+                proInstallReferrer("archive_7z_tv"),
+            )
         }
     }
 

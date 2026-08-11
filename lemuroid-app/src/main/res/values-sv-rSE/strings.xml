@@ -237,10 +237,8 @@
   <string name="share_discord_text_title_part_2">Ladda ner detta spel här %s</string>
   <string name="string_pro_buy_now">Köp nu</string>
   <string name="string_pro_limited_deal">Begränsat erbjudande</string>
-  <string name="string_pro_popup_disclamer">Få FullRoid X för mindre än en kopp kaffe. Spela WS- och 3DS-spel!</string>
   <string name="string_pro_popup_title">Missa inte vår REA!</string>
   <string name="string_pro_price" formatted="false">%d/ livstid %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 nya emulatorer, inklusive Nintendo 3DS\n✓ HD-läge för effektiv uppskalning av spel\n✓ Stöd för 7z-arkiv\n✓ Exklusiv tillgång till kommande funktioner</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_citra_system_files">3DS-systemfiler (tillhandahålls av användaren)</string>
   <string name="settings_title_citra_system_files_status">Status</string>
@@ -309,4 +307,10 @@
     <string name="home_filter_catalog">Katalog</string>
     <string name="home_filter_recent">Senaste</string>
     <string name="home_filter_new">Nya</string>
+  <string name="roomcord_share_limit_too_soon">Du kan dela en gång var 5:e minut. Försök igen %1$s.</string>
+  <string name="roomcord_share_limit_daily">Du har nått gränsen på 5 delningar per dag. Försök igen %1$s.</string>
+  <string name="roomcord_share_limit_duplicate">Din feedback har redan skickats.</string>
+  <string name="nav_chat">Chatt</string>
+  <string name="string_pro_popup_disclamer">Stötta utvecklingsteamet och lås upp fler funktioner.</string>
+  <string name="string_pro_tutorial_disclamer">✓ Hela spelkatalogen\n✓ Stöd för 7z-arkiv\n✓ Experimentella 3DS-sparlägen\n✓ Exklusiv tillgång till kommande funktioner</string>
 </resources>

@@ -64,6 +64,9 @@ fun AdvancedSettingsScreen(
         if (isProVersion()) {
             ExperimentalSettings(viewModel)
         }
+        // 3DS is playable in every build, so the import must be reachable in every build —
+        // without it a 3DS title that needs the system file can never be made to load.
+        Citra3DSSystemFilesSettings(viewModel)
     }
 }
 
@@ -164,7 +167,6 @@ private fun ExperimentalSettings(viewModel: AdvancedSettingsViewModel) {
             },
         )
     }
-    Citra3DSSystemFilesSettings(viewModel)
 }
 
 @Composable

@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
+import com.swordfish.lemuroid.app.appextension.proInstallReferrer
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.BrandSearchField
 import com.swordfish.lemuroid.app.shared.catalog.rememberSmoothCatalogProgress
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -130,7 +131,10 @@ fun WebGamesScreen(
                     locked = locked,
                     onClick = {
                         if (locked) {
-                            context.openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
+                            context.openAppInGooglePlay(
+                                FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME,
+                                proInstallReferrer("web_game_locked_catalog"),
+                            )
                         } else {
                             launchWebGame(context, game)
                         }

@@ -52,10 +52,8 @@
   <string name="share_discord_text_title_part_2">Unduh game ini di sini %s</string>
   <string name="string_pro_buy_now">Beli sekarang</string>
   <string name="string_pro_limited_deal">Penawaran terbatas</string>
-  <string name="string_pro_popup_disclamer">Dapatkan FullRoid X dengan harga lebih murah dari secangkir kopi. Mainkan game WS dan 3DS!</string>
   <string name="string_pro_popup_title">Jangan lewatkan PENJUALAN kami!</string>
   <string name="string_pro_price" formatted="false">%d/ seumur hidup %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 emulator baru, termasuk Nintendo 3DS\n✓ Mode HD untuk meningkatkan kualitas game\n✓ Dukungan arsip 7z\n✓ Akses eksklusif ke fitur mendatang</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_experimental">Eksperimental</string>
   <string name="settings_title_citra_experimental_save_states">Status Simpan 3DS (Eksperimental)</string>
@@ -127,4 +125,10 @@
     <string name="home_filter_catalog">Katalog</string>
     <string name="home_filter_recent">Terbaru</string>
     <string name="home_filter_new">Baru</string>
+  <string name="roomcord_share_limit_too_soon">Anda dapat membagikan sekali setiap 5 menit. Coba lagi %1$s.</string>
+  <string name="roomcord_share_limit_daily">Anda telah mencapai batas 5 kali berbagi per hari. Coba lagi %1$s.</string>
+  <string name="roomcord_share_limit_duplicate">Masukan Anda sudah terkirim.</string>
+  <string name="nav_chat">Obrolan</string>
+  <string name="string_pro_popup_disclamer">Dukung tim pengembang dan buka fitur tambahan.</string>
+  <string name="string_pro_tutorial_disclamer">✓ Katalog game lengkap\n✓ Dukungan arsip 7z\n✓ Save state 3DS eksperimental\n✓ Akses eksklusif ke fitur mendatang</string>
 </resources>

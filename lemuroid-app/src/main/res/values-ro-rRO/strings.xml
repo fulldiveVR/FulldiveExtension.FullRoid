@@ -225,10 +225,8 @@
   <string name="share_discord_text_title_part_2">Descarcă acest joc aici %s</string>
   <string name="string_pro_buy_now">Cumpără acum</string>
   <string name="string_pro_limited_deal">Ofertă limitată</string>
-  <string name="string_pro_popup_disclamer">Obțineți FullRoid X pentru mai puțin decât o ceașcă de cafea. Joacă jocuri WS și 3DS!</string>
   <string name="string_pro_popup_title">Nu ratați REDUCEREA noastră!</string>
   <string name="string_pro_price" formatted="false">%d/ pe viață %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 emulatoare noi, inclusiv Nintendo 3DS\n✓ Mod HD pentru a îmbunătăți eficient jocurile\n✓ Suport pentru arhive 7z\n✓ Acces exclusiv la funcții viitoare</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_citra_system_files">Fișiere de sistem 3DS (furnizate de utilizator)</string>
   <string name="settings_title_citra_system_files_status">Stare</string>
@@ -297,4 +295,12 @@
     <string name="home_filter_catalog">Catalog</string>
     <string name="home_filter_recent">Recente</string>
     <string name="home_filter_new">Noi</string>
+  <string name="roomcord_share_limit_too_soon">Puteți distribui o dată la 5 minute. Încercați din nou %1$s.</string>
+  <string name="roomcord_share_limit_daily">Ați atins limita de 5 distribuiri pe zi. Încercați din nou %1$s.</string>
+  <string name="roomcord_share_limit_duplicate">Feedbackul dvs. a fost deja trimis.</string>
+  <string name="nav_chat">Chat</string>
+  <string name="string_pro_popup_disclamer">Susțineți echipa de dezvoltare și deblocați funcții suplimentare.</string>
+  <string name="string_pro_tutorial_disclamer">✓ Catalogul complet de jocuri\n✓ Suport pentru arhive 7z\n✓ Stări de salvare 3DS experimentale\n✓ Acces exclusiv la funcțiile viitoare</string>
+  <string name="game_loader_error_generic">Ceva nu a mers bine. Încercați următoarele:\n \n\u2022 Dezactivați salvarea automată și rulați din nou jocul \n\u2022 Accesați setările Android și goliți memoria cache a aplicației \n\u2022 Accesați setările Roid și efectuați o resetare la valorile din fabrică \n\nDacă nimic din toate acestea nu funcționează, este posibil ca acest joc sau nucleu să nu fie acceptat de acest dispozitiv.</string>
+  <string name="lemuroid_crash_disclamer">Se pare că nucleul Fullroid a întâmpinat o problemă neașteptată. Dacă persistă, încercați următoarele:\n \n\u2022 Dezactivați salvarea automată și rulați din nou jocul \n\u2022 Accesați setările Android și goliți memoria cache a aplicației \n\u2022 Accesați setările aplicației și efectuați o resetare la valorile din fabrică \n\n Dacă nimic din toate acestea nu funcționează, este posibil ca acest joc sau nucleu să nu fie acceptat de acest dispozitiv.</string>
 </resources>

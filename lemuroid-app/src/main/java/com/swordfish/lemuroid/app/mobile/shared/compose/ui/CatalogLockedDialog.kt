@@ -25,6 +25,8 @@ import androidx.compose.ui.res.stringResource
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
+import com.swordfish.lemuroid.app.appextension.proInstallReferrer
+import com.swordfish.lemuroid.app.appextension.roomcordInstallReferrer
 
 @Composable
 fun CatalogLockedDialog(onDismiss: () -> Unit) {
@@ -35,7 +37,10 @@ fun CatalogLockedDialog(onDismiss: () -> Unit) {
         text = { Text(stringResource(R.string.catalog_feature_locked_message)) },
         confirmButton = {
             TextButton(onClick = {
-                context.openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
+                context.openAppInGooglePlay(
+                    FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME,
+                    proInstallReferrer("catalog_locked_dialog"),
+                )
                 onDismiss()
             }) {
                 Text(stringResource(R.string.catalog_feature_locked_buy_pro))
@@ -43,7 +48,10 @@ fun CatalogLockedDialog(onDismiss: () -> Unit) {
         },
         dismissButton = {
             TextButton(onClick = {
-                context.openAppInGooglePlay(FulldiveConfigs.ROOMCORD_PACKAGE_NAME)
+                context.openAppInGooglePlay(
+                    FulldiveConfigs.ROOMCORD_PACKAGE_NAME,
+                    roomcordInstallReferrer("catalog_locked_dialog"),
+                )
                 onDismiss()
             }) {
                 Text(stringResource(R.string.catalog_feature_locked_join_roomcord))

@@ -215,10 +215,8 @@
   <string name="share_discord_text_title_part_2">Tải trò chơi này tại đây %s</string>
   <string name="string_pro_buy_now">Mua ngay</string>
   <string name="string_pro_limited_deal">Ưu đãi có hạn</string>
-  <string name="string_pro_popup_disclamer">Sở hữu FullRoid X với giá rẻ hơn một ly cà phê. Chơi các trò chơi WS và 3DS!</string>
   <string name="string_pro_popup_title">Đừng bỏ lỡ KHUYẾN MÃI của chúng tôi!</string>
   <string name="string_pro_price" formatted="false">%d/ trọn đời %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 trình giả lập mới, bao gồm Nintendo 3DS\n✓ Chế độ HD để nâng cao chất lượng trò chơi hiệu quả\n✓ Hỗ trợ tệp nén 7z\n✓ Truy cập độc quyền vào các tính năng sắp tới</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_citra_system_files">Tệp hệ thống 3DS (do người dùng cung cấp)</string>
   <string name="settings_title_citra_system_files_status">Trạng thái</string>
@@ -287,4 +285,29 @@
     <string name="home_filter_catalog">Danh mục</string>
     <string name="home_filter_recent">Gần đây</string>
     <string name="home_filter_new">Mới</string>
+  <string name="roomcord_share_limit_too_soon">Bạn có thể chia sẻ 5 phút một lần. Hãy thử lại %1$s.</string>
+  <string name="roomcord_share_limit_daily">Bạn đã đạt giới hạn 5 lượt chia sẻ mỗi ngày. Hãy thử lại %1$s.</string>
+  <string name="roomcord_share_limit_duplicate">Phản hồi của bạn đã được gửi.</string>
+  <string name="nav_chat">Trò chuyện</string>
+  <string name="string_pro_popup_disclamer">Hãy ủng hộ đội ngũ phát triển và mở khóa các tính năng bổ sung.</string>
+  <string name="string_pro_tutorial_disclamer">✓ Toàn bộ danh mục trò chơi\n✓ Hỗ trợ tệp nén 7z\n✓ Lưu trạng thái 3DS thử nghiệm\n✓ Quyền truy cập độc quyền vào các tính năng sắp ra mắt</string>
+  <string name="settings_title_immersive_mode">Chế độ toàn màn hình</string>
+  <string name="settings_description_immersive_mode">Tự động đổi màu nền theo hình ảnh trong trò chơi</string>
+  <string name="settings_core_selection_ds_info">DeSmuME đã ngừng hỗ trợ và sẽ bị loại bỏ trong một bản cập nhật sắp tới. Hãy lưu tiến trình trong trò chơi, sau đó chuyển sang melonDS. Bản lưu trong trò chơi sẽ tự động tải trong melonDS, nhưng trạng thái lưu chỉ dùng được với nhân đã tạo ra chúng.</string>
+  <string name="home_notification_desmume_deprecated_title">DeSmuME sắp ngừng hỗ trợ</string>
+  <string name="home_notification_desmume_deprecated_message">Hãy lưu trong trò chơi rồi chuyển sang melonDS để giữ tiến trình. Trạng thái lưu sẽ không chuyển được và chỉ dùng được trong DeSmuME.</string>
+  <string name="home_notification_desmume_deprecated_action">Chuyển sang melonDS</string>
+  <string name="game_menu_tilt_sensor">Cảm biến nghiêng</string>
+  <string name="game_toast_quick_save_loaded">Đã tải nhanh</string>
+  <string name="game_toast_quick_save_saved">Đã lưu nhanh</string>
+  <string name="shortcut_binding_update_title">Gán \"Phím tắt %1$s\"</string>
+  <string name="shortcut_binding_update_description">Nhấn nút thứ nhất rồi nút thứ hai để gán tổ hợp trên \"%1$s\"</string>
+  <string name="gamepad_binding_update_title">Gán \"RetroPad %1$s\"</string>
+  <string name="tilt_configuration_disabled">Đã tắt</string>
+  <string name="tilt_configuration_analog_left">Analog trái</string>
+  <string name="tilt_configuration_analog_right">Analog phải</string>
+  <string name="tilt_configuration_cross">DPAD</string>
+  <string name="tilt_configuration_buttons_l_r">L - R</string>
+  <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
+  <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
 </resources>

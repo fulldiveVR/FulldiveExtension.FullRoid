@@ -29,6 +29,7 @@ import androidx.lifecycle.viewModelScope
 import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
+import com.swordfish.lemuroid.app.tv.shared.TVSupportedSystems
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
@@ -122,7 +123,7 @@ class TVHomeViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : V
         .selectSystemsWithCount()
         .map { systemCounts ->
             systemCounts.asSequence()
-                .filter { (_, count) -> count > 0 }
+                .filter { (systemId, count) -> count > 0 && TVSupportedSystems.isSupported(systemId) }
                 .map { (systemId, count) -> GameSystem.findById(systemId, isProVersion()).metaSystemID() to count }
                 .groupBy { (metaSystemId, _) -> metaSystemId }
                 .map { (metaSystemId, counts) -> MetaSystemInfo(metaSystemId, counts.sumBy { it.second }) }
@@ -133,8 +134,10 @@ class TVHomeViewModel(retrogradeDb: RetrogradeDatabase, appContext: Context) : V
     private fun favoriteGames(retrogradeDb: RetrogradeDatabase) =
         retrogradeDb.gameDao()
             .selectFirstFavoritesRecents(CAROUSEL_MAX_ITEMS + 1)
+            .map { games -> games.filter { TVSupportedSystems.isSupported(it) } }
 
     private fun recentGames(retrogradeDb: RetrogradeDatabase) =
         retrogradeDb.gameDao()
             .selectFirstUnfavoriteRecents(CAROUSEL_MAX_ITEMS)
+            .map { games -> games.filter { TVSupportedSystems.isSupported(it) } }
 }

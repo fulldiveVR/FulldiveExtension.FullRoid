@@ -237,10 +237,8 @@
   <string name="share_discord_text_title_part_2">Download dit spel hier %s</string>
   <string name="string_pro_buy_now">Nu kopen</string>
   <string name="string_pro_limited_deal">Beperkte aanbieding</string>
-  <string name="string_pro_popup_disclamer">Pak FullRoid X voor minder dan een kop koffie. Speel WS- en 3DS-spellen!</string>
   <string name="string_pro_popup_title">Mis onze UITVERKOOP niet!</string>
   <string name="string_pro_price" formatted="false">%d/ levenslang %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 nieuwe emulators, inclusief Nintendo 3DS\n✓ HD-modus voor efficiënte opschaling van games\n✓ Ondersteuning voor 7z-archieven\n✓ Exclusieve toegang tot toekomstige functies</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_citra_system_files">3DS-systeembestanden (door de gebruiker aangeleverd)</string>
   <string name="settings_title_citra_system_files_status">Status</string>
@@ -309,4 +307,10 @@
     <string name="home_filter_catalog">Catalogus</string>
     <string name="home_filter_recent">Recent</string>
     <string name="home_filter_new">Nieuw</string>
+  <string name="roomcord_share_limit_too_soon">Je kunt één keer per 5 minuten delen. Probeer het %1$s opnieuw.</string>
+  <string name="roomcord_share_limit_daily">Je hebt de limiet van 5 keer delen per dag bereikt. Probeer het %1$s opnieuw.</string>
+  <string name="roomcord_share_limit_duplicate">Je feedback is al verzonden.</string>
+  <string name="nav_chat">Chat</string>
+  <string name="string_pro_popup_disclamer">Steun het ontwikkelteam en ontgrendel extra functies.</string>
+  <string name="string_pro_tutorial_disclamer">✓ De volledige spellencatalogus\n✓ Ondersteuning voor 7z-archieven\n✓ Experimentele 3DS-savestates\n✓ Exclusieve toegang tot komende functies</string>
 </resources>

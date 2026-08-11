@@ -27,7 +27,7 @@ buildscript {
 android {
     val versionMajor = 1
     val versionMinor = 11
-    val versionPatch = 2
+    val versionPatch = 3
 
     namespace = "com.swordfish.lemuroid"
     buildFeatures.buildConfig = true
@@ -73,6 +73,14 @@ android {
             // Stripping created some issues with some libretro cores such as ppsspp
             keepDebugSymbols += setOf("*/*/*_libretro_android.so")
             useLegacyPackaging = true
+            // GameSystem restricts PSP to arm64-v8a/armeabi-v7a, so the x86 builds are dead weight:
+            // x86 is ~22 MB that can never load, and upstream ships x86_64 as a zero-byte stub,
+            // which is also an upload hazard. Keep this in sync with supportedOnlyArchitectures.
+            excludes +=
+                setOf(
+                    "**/x86/libppsspp_libretro_android.so",
+                    "**/x86_64/libppsspp_libretro_android.so",
+                )
         }
         resources {
             excludes += setOf("META-INF/DEPENDENCIES", "META-INF/library_release.kotlin_module")
@@ -180,12 +188,6 @@ android {
     namespace = "com.swordfish.lemuroid"
 }
 
-androidComponents {
-    onVariants(selector().withFlavor("opensource" to "free")) { variant ->
-        variant.packaging.jniLibs.excludes.add("**/libppsspp_libretro_android.so")
-    }
-}
-
 dependencies {
     implementation(project(":retrograde-util"))
     implementation(project(":retrograde-app-shared"))
@@ -196,7 +198,11 @@ dependencies {
     implementation(deps.libs.androidx.profileInstaller)
 
     implementation(project(":bundled-cores"))
-    "proImplementation"(project(":bundled-cores-pro"))
+    // Upstream :bundled-cores ships the PPSSPP .so but not assets/ppsspp.zip, and that asset lives
+    // in the LemuroidCores submodule we cannot commit to. :bundled-cores-pro is a module of THIS
+    // repo and is the only tracked source of it. Keep it unscoped: PSP is available in free too,
+    // so scoping this to proImplementation silently ships free without PSP assets.
+    implementation(project(":bundled-cores-pro"))
 
     "freeImplementation"(project(":lemuroid-app-ext-free"))
     "proImplementation"(project(":lemuroid-app-ext-free"))

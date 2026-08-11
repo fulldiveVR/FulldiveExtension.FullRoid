@@ -59,6 +59,7 @@ import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.isRoomcordInstalled
 import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
+import com.swordfish.lemuroid.app.appextension.roomcordInstallReferrer
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
 
 class WebViewActivity : ComponentActivity() {
@@ -165,7 +166,10 @@ private fun WebViewScreen(
                                     .getLaunchIntentForPackage(FulldiveConfigs.ROOMCORD_PACKAGE_NAME)
                                     ?.let { context.startActivity(it) }
                             } else {
-                                context.openAppInGooglePlay(FulldiveConfigs.ROOMCORD_PACKAGE_NAME)
+                                context.openAppInGooglePlay(
+                                    FulldiveConfigs.ROOMCORD_PACKAGE_NAME,
+                                    roomcordInstallReferrer("webview_toolbar"),
+                                )
                             }
                         },
                     ) {

@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import com.swordfish.lemuroid.app.tv.shared.TVSupportedSystems
 import com.swordfish.lemuroid.common.paging.buildFlowPaging
 import com.swordfish.lemuroid.lib.library.MetaSystemID
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
@@ -50,7 +51,7 @@ class TVGamesViewModel(retrogradeDb: RetrogradeDatabase) : ViewModel() {
     val games: Flow<PagingData<Game>> =
         metaSystemId
             .map { metaSystem -> metaSystem?.systemIDs ?: emptyList() }
-            .map { systems -> systems.map { it.dbname } }
+            .map { systems -> systems.map { it.dbname }.filter { TVSupportedSystems.isSupported(it) } }
             .flatMapLatest {
                 when (it.size) {
                     0 -> emptyFlow()

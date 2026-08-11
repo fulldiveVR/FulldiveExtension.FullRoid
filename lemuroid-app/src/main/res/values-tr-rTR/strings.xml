@@ -216,10 +216,8 @@
   <string name="share_discord_text_title_part_2">Bu oyunu buradan indir %s</string>
   <string name="string_pro_buy_now">Şimdi satın al</string>
   <string name="string_pro_limited_deal">Sınırlı teklif</string>
-  <string name="string_pro_popup_disclamer">Bir fincan kahveden daha ucuza FullRoid X\'i kap. WS ve 3DS oyunları oyna!</string>
   <string name="string_pro_popup_title">FIRSATIMIZI kaçırmayın!</string>
   <string name="string_pro_price" formatted="false">%d/ ömür boyu %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 yeni emülatör, Nintendo 3DS dahil\n✓ Oyunları verimli bir şekilde yükseltmek için HD modu\n✓ 7z arşiv desteği\n✓ Yaklaşan özelliklere özel erişim</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_citra_system_files">3DS sistem dosyaları (kullanıcı tarafından sağlanır)</string>
   <string name="settings_title_citra_system_files_status">Durum</string>
@@ -288,4 +286,28 @@
     <string name="home_filter_catalog">Katalog</string>
     <string name="home_filter_recent">Son</string>
     <string name="home_filter_new">Yeni</string>
+  <string name="roomcord_share_limit_too_soon">5 dakikada bir paylaşım yapabilirsiniz. %1$s tekrar deneyin.</string>
+  <string name="roomcord_share_limit_daily">Günlük 5 paylaşım sınırına ulaştınız. %1$s tekrar deneyin.</string>
+  <string name="roomcord_share_limit_duplicate">Geri bildiriminiz zaten gönderildi.</string>
+  <string name="nav_chat">Sohbet</string>
+  <string name="string_pro_popup_disclamer">Geliştirme ekibine destek olun ve ek özelliklerin kilidini açın.</string>
+  <string name="string_pro_tutorial_disclamer">✓ Tüm oyun kataloğu\n✓ 7z arşiv desteği\n✓ Deneysel 3DS kayıt durumları\n✓ Yaklaşan özelliklere özel erişim</string>
+  <string name="settings_title_immersive_mode">Sürükleyici mod</string>
+  <string name="settings_description_immersive_mode">Arka planı oyunun görüntüsüne göre dinamik olarak renklendirir</string>
+  <string name="settings_core_selection_ds_info">DeSmuME kullanımdan kaldırılıyor ve sonraki güncellemelerden birinde tamamen kaldırılacak. İlerlemenizi oyun içinde kaydedin, sonra melonDS çekirdeğine geçin. Oyun içi kayıtlar melonDS tarafından otomatik olarak yüklenir, ancak kayıt durumları yalnızca onları oluşturan çekirdekle kullanılabilir.</string>
+  <string name="home_notification_desmume_deprecated_title">DeSmuME kullanımdan kaldırılıyor</string>
+  <string name="home_notification_desmume_deprecated_message">İlerlemenizi korumak için oyun içinde kaydedin ve melonDS çekirdeğine geçin. Kayıt durumları aktarılmaz ve yalnızca DeSmuME içinde kullanılabilir kalır.</string>
+  <string name="home_notification_desmume_deprecated_action">melonDS çekirdeğine geç</string>
+  <string name="game_menu_tilt_sensor">Eğim sensörü</string>
+  <string name="game_toast_quick_save_loaded">Hızlı yüklendi</string>
+  <string name="game_toast_quick_save_saved">Hızlı kaydedildi</string>
+  <string name="shortcut_binding_update_title">\"Kısayol %1$s\" ata</string>
+  <string name="shortcut_binding_update_description">\"%1$s\" üzerinde bir kombinasyon atamak için önce birinci, sonra ikinci düğmeye basın</string>
+  <string name="tilt_configuration_disabled">Devre dışı</string>
+  <string name="tilt_configuration_analog_left">Sol analog</string>
+  <string name="tilt_configuration_analog_right">Sağ analog</string>
+  <string name="tilt_configuration_cross">DPAD</string>
+  <string name="tilt_configuration_buttons_l_r">L - R</string>
+  <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
+  <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
 </resources>

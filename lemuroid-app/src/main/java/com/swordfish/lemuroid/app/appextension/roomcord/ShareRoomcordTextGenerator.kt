@@ -25,7 +25,8 @@ import javax.inject.Inject
 
 class ShareRoomcordTextGenerator @Inject constructor(
     private val roomcordManager: RoomcordManager,
-    private val roomcordImageUploader: RoomcordImageUploader
+    private val roomcordImageUploader: RoomcordImageUploader,
+    private val rateLimiter: ShareRateLimiter
 ) {
 
     fun shareGame(
@@ -35,6 +36,15 @@ class ShareRoomcordTextGenerator @Inject constructor(
         onSuccess: () -> Unit,
         onError: (String) -> Unit,
     ) {
+        // Authoritative gate. The share screens disable their button ahead of time, but that state
+        // can be stale, so the limit is enforced here too — before uploading anything, otherwise a
+        // rejected share still costs a screenshot upload.
+        val decision = rateLimiter.check(content)
+        if (decision !is ShareRateLimiter.Decision.Allowed) {
+            onError(rateLimiter.describe(decision))
+            return
+        }
+
         GlobalScope.launch {
             try {
                 val urls = buildAttachmentUrls(game, screenshotPath)
@@ -49,6 +59,9 @@ class ShareRoomcordTextGenerator @Inject constructor(
                     RoomcordMessageRequest(content = content, type = "text")
                 }
                 roomcordManager.sendMessage(request)
+                // Only a message that actually reached the room consumes quota, so a failed send
+                // does not lock the user out for five minutes.
+                rateLimiter.recordSent(content)
                 withContext(Dispatchers.Main) { onSuccess.invoke() }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) { onError.invoke(e.message ?: "Unknown error") }
