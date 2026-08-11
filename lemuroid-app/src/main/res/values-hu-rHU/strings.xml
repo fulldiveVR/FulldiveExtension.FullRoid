@@ -166,4 +166,7 @@
   <string name="roomcord_share_limit_too_soon">5 percenként egyszer oszthatsz meg. Próbáld újra %1$s.</string>
   <string name="roomcord_share_limit_daily">Elérted a napi 5 megosztás korlátját. Próbáld újra %1$s.</string>
   <string name="roomcord_share_limit_duplicate">A visszajelzésedet már elküldtük.</string>
+  <string name="nav_chat">Csevegés</string>
+  <string name="string_pro_popup_disclamer">Támogasd a fejlesztőcsapatot, és oldj fel további funkciókat.</string>
+  <string name="string_pro_tutorial_disclamer">✓ A teljes játékkatalógus\n✓ 7z archívumok támogatása\n✓ Kísérleti 3DS mentési állapotok\n✓ Exkluzív hozzáférés a közelgő funkciókhoz</string>
 </resources>

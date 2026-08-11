@@ -206,7 +206,7 @@
     <string name="string_pro_limited_deal">Limited deal</string>
     <string name="string_pro_price" formatted="false">%d/ lifetime %d</string>
     <string name="string_pro_buy_now">Buy Now</string>
-    <string name="string_pro_popup_disclamer">Grab FullRoid X for less than a cup of coffee. Unlock the full games catalog!</string>
+    <string name="string_pro_popup_disclamer">Support the development team and unlock extra features.</string>
     <string name="string_pro_popup_title">Don\'t miss out on our SALE!</string>
     <string name="settings_category_misc"> Miscellaneous</string>
     <string name="settings_title_maximum_cache_usage">Cache size limit</string>
@@ -329,7 +329,8 @@
     <string name="web_games_empty">No games available</string>
     <string name="web_games_syncing">Loading catalog…</string>
     <string name="web_games_free_badge">FREE</string>
-    <string name="web_games_pro_badge">PRO</string>
+    <!-- Brand token: the badge reads "PRO" in every language, so it must not be translated. -->
+    <string name="web_games_pro_badge" translatable="false">PRO</string>
     <string name="home_filter_all">All</string>
     <string name="home_filter_games">Games</string>
     <string name="home_filter_catalog">Catalog</string>

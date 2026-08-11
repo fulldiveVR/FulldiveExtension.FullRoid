@@ -310,4 +310,7 @@
   <string name="roomcord_share_limit_too_soon">Du kan dele én gang hvert 5. minutt. Prøv igjen %1$s.</string>
   <string name="roomcord_share_limit_daily">Du har nådd grensen på 5 delinger per dag. Prøv igjen %1$s.</string>
   <string name="roomcord_share_limit_duplicate">Tilbakemeldingen din er allerede sendt.</string>
+  <string name="nav_chat">Chat</string>
+  <string name="string_pro_popup_disclamer">Støtt utviklingsteamet og lås opp flere funksjoner.</string>
+  <string name="string_pro_tutorial_disclamer">✓ Hele spillkatalogen\n✓ Støtte for 7z-arkiver\n✓ Eksperimentelle 3DS-lagringstilstander\n✓ Eksklusiv tilgang til kommende funksjoner</string>
 </resources>

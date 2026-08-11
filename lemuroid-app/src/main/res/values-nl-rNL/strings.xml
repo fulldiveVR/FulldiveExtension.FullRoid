@@ -310,4 +310,7 @@
   <string name="roomcord_share_limit_too_soon">Je kunt één keer per 5 minuten delen. Probeer het %1$s opnieuw.</string>
   <string name="roomcord_share_limit_daily">Je hebt de limiet van 5 keer delen per dag bereikt. Probeer het %1$s opnieuw.</string>
   <string name="roomcord_share_limit_duplicate">Je feedback is al verzonden.</string>
+  <string name="nav_chat">Chat</string>
+  <string name="string_pro_popup_disclamer">Steun het ontwikkelteam en ontgrendel extra functies.</string>
+  <string name="string_pro_tutorial_disclamer">✓ De volledige spellencatalogus\n✓ Ondersteuning voor 7z-archieven\n✓ Experimentele 3DS-savestates\n✓ Exclusieve toegang tot komende functies</string>
 </resources>

@@ -309,4 +309,7 @@
   <string name="roomcord_share_limit_too_soon">Sdílet můžete jednou za 5 minut. Zkuste to znovu %1$s.</string>
   <string name="roomcord_share_limit_daily">Dosáhli jste limitu 5 sdílení za den. Zkuste to znovu %1$s.</string>
   <string name="roomcord_share_limit_duplicate">Vaše zpětná vazba již byla odeslána.</string>
+  <string name="nav_chat">Chat</string>
+  <string name="string_pro_popup_disclamer">Podpořte vývojářský tým a získejte další funkce.</string>
+  <string name="string_pro_tutorial_disclamer">✓ Kompletní katalog her\n✓ Podpora archivů 7z\n✓ Experimentální uložené stavy 3DS\n✓ Exkluzivní přístup k připravovaným funkcím</string>
 </resources>

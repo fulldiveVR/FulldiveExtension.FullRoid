@@ -128,4 +128,7 @@
   <string name="roomcord_share_limit_too_soon">Anda dapat membagikan sekali setiap 5 menit. Coba lagi %1$s.</string>
   <string name="roomcord_share_limit_daily">Anda telah mencapai batas 5 kali berbagi per hari. Coba lagi %1$s.</string>
   <string name="roomcord_share_limit_duplicate">Masukan Anda sudah terkirim.</string>
+  <string name="nav_chat">Obrolan</string>
+  <string name="string_pro_popup_disclamer">Dukung tim pengembang dan buka fitur tambahan.</string>
+  <string name="string_pro_tutorial_disclamer">✓ Katalog game lengkap\n✓ Dukungan arsip 7z\n✓ Save state 3DS eksperimental\n✓ Akses eksklusif ke fitur mendatang</string>
 </resources>

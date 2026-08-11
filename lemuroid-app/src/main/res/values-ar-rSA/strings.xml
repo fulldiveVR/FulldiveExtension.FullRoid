@@ -310,4 +310,7 @@
   <string name="roomcord_share_limit_too_soon">يمكنك المشاركة مرة واحدة كل 5 دقائق. حاول مرة أخرى %1$s.</string>
   <string name="roomcord_share_limit_daily">لقد وصلت إلى الحد الأقصى وهو 5 مشاركات يوميًا. حاول مرة أخرى %1$s.</string>
   <string name="roomcord_share_limit_duplicate">تم إرسال ملاحظاتك بالفعل.</string>
+  <string name="nav_chat">الدردشة</string>
+  <string name="string_pro_popup_disclamer">ادعم فريق التطوير واحصل على ميزات إضافية.</string>
+  <string name="string_pro_tutorial_disclamer">✓ كتالوج الألعاب الكامل\n✓ دعم أرشيف 7z\n✓ حالات حفظ تجريبية لـ 3DS\n✓ وصول حصري إلى الميزات القادمة</string>
 </resources>

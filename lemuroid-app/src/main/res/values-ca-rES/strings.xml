@@ -216,4 +216,7 @@
   <string name="roomcord_share_limit_too_soon">Només podeu compartir un cop cada 5 minuts. Torneu-ho a provar %1$s.</string>
   <string name="roomcord_share_limit_daily">Heu arribat al límit de 5 comparticions al dia. Torneu-ho a provar %1$s.</string>
   <string name="roomcord_share_limit_duplicate">El vostre comentari ja s\'ha enviat.</string>
+  <string name="nav_chat">Xat</string>
+  <string name="string_pro_popup_disclamer">Dona suport a l\'equip de desenvolupament i desbloqueja funcions addicionals.</string>
+  <string name="string_pro_tutorial_disclamer">✓ El catàleg complet de jocs\n✓ Compatibilitat amb arxius 7z\n✓ Estats de partida experimentals de 3DS\n✓ Accés exclusiu a les funcions futures</string>
 </resources>

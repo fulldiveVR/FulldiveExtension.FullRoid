@@ -291,4 +291,25 @@
   <string name="roomcord_share_limit_too_soon">每 5 分鐘只能分享一次。請%1$s重試。</string>
   <string name="roomcord_share_limit_daily">您已達到每天 5 次分享的上限。請%1$s重試。</string>
   <string name="roomcord_share_limit_duplicate">您的意見回饋已送出。</string>
+  <string name="nav_chat">聊天</string>
+  <string name="string_pro_popup_disclamer">支持開發團隊，解鎖更多功能。</string>
+  <string name="string_pro_tutorial_disclamer">✓ 完整遊戲目錄\n✓ 支援 7z 壓縮檔\n✓ 實驗性 3DS 即時存檔\n✓ 搶先體驗後續新功能</string>
+  <string name="settings_title_immersive_mode">沉浸模式</string>
+  <string name="settings_description_immersive_mode">根據遊戲畫面動態調整背景顏色</string>
+  <string name="settings_core_selection_ds_info">DeSmuME 已淘汰，將在後續更新中移除。請先在遊戲中存檔，再切換至 melonDS。遊戲內存檔會在 melonDS 中自動載入，但即時存檔只能在建立它的核心中使用。</string>
+  <string name="home_notification_desmume_deprecated_title">DeSmuME 即將淘汰</string>
+  <string name="home_notification_desmume_deprecated_message">請先在遊戲中存檔，再切換至 melonDS 以保留進度。即時存檔無法轉移，只能繼續在 DeSmuME 中使用。</string>
+  <string name="home_notification_desmume_deprecated_action">切換至 melonDS</string>
+  <string name="game_menu_tilt_sensor">傾斜感測器</string>
+  <string name="game_toast_quick_save_loaded">已快速載入</string>
+  <string name="game_toast_quick_save_saved">已快速存檔</string>
+  <string name="shortcut_binding_update_title">指定「捷徑 %1$s」</string>
+  <string name="shortcut_binding_update_description">先按第一個按鈕，再按第二個按鈕，即可在「%1$s」上綁定組合鍵</string>
+  <string name="tilt_configuration_disabled">已停用</string>
+  <string name="tilt_configuration_analog_left">左類比</string>
+  <string name="tilt_configuration_analog_right">右類比</string>
+  <string name="tilt_configuration_cross">DPAD</string>
+  <string name="tilt_configuration_buttons_l_r">L - R</string>
+  <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
+  <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
 </resources>

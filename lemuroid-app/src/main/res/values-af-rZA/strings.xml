@@ -128,4 +128,7 @@
   <string name="roomcord_share_limit_too_soon">Jy kan een keer elke 5 minute deel. Probeer weer %1$s.</string>
   <string name="roomcord_share_limit_daily">Jy het die limiet van 5 delings per dag bereik. Probeer weer %1$s.</string>
   <string name="roomcord_share_limit_duplicate">Jou terugvoer is reeds gestuur.</string>
+  <string name="nav_chat">Klets</string>
+  <string name="string_pro_popup_disclamer">Ondersteun die ontwikkelingspan en ontsluit ekstra funksies.</string>
+  <string name="string_pro_tutorial_disclamer">✓ Die volledige speletjiekatalogus\n✓ 7z-argiefondersteuning\n✓ Eksperimentele 3DS-stoortoestande\n✓ Eksklusiewe toegang tot komende funksies</string>
 </resources>

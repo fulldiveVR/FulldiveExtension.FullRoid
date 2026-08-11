@@ -309,4 +309,7 @@
   <string name="roomcord_share_limit_too_soon">每 5 分钟只能分享一次。请%1$s重试。</string>
   <string name="roomcord_share_limit_daily">您已达到每天 5 次分享的上限。请%1$s重试。</string>
   <string name="roomcord_share_limit_duplicate">您的反馈已发送。</string>
+  <string name="nav_chat">聊天</string>
+  <string name="string_pro_popup_disclamer">支持开发团队，解锁更多功能。</string>
+  <string name="string_pro_tutorial_disclamer">✓ 完整游戏目录\n✓ 支持 7z 压缩包\n✓ 实验性 3DS 即时存档\n✓ 抢先体验后续新功能</string>
 </resources>
