@@ -34,6 +34,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
+import com.swordfish.lemuroid.app.appextension.proInstallReferrer
 import com.swordfish.lemuroid.app.mobile.feature.webgames.canPlayWebGame
 import com.swordfish.lemuroid.app.mobile.feature.webgames.launchWebGame
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidEmptyView
@@ -70,7 +71,10 @@ fun SearchScreen(
             if (canPlayWebGame(context, game)) {
                 launchWebGame(context, game)
             } else {
-                context.openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
+                context.openAppInGooglePlay(
+                    FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME,
+                    proInstallReferrer("web_game_locked_search"),
+                )
             }
         } else {
             onGameClick(game)

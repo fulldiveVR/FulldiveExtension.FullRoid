@@ -26,6 +26,7 @@ import com.swordfish.lemuroid.app.appextension.PopupManager
 import com.swordfish.lemuroid.app.appextension.roomcord.RoomcordApiImpl
 import com.swordfish.lemuroid.app.appextension.roomcord.RoomcordImageUploader
 import com.swordfish.lemuroid.app.appextension.roomcord.RoomcordManager
+import com.swordfish.lemuroid.app.appextension.roomcord.ShareRateLimiter
 import com.swordfish.lemuroid.app.appextension.roomcord.ShareRoomcordTextGenerator
 import com.swordfish.lemuroid.app.appextension.remoteconfig.FirebaseConfigurationFetcher
 import com.swordfish.lemuroid.app.appextension.remoteconfig.IRemoteConfigFetcher
@@ -161,6 +162,7 @@ abstract class LemuroidApplicationModule {
                     Migrations.VERSION_9_10,
                     Migrations.VERSION_10_11,
                     Migrations.VERSION_11_12,
+                    Migrations.VERSION_12_13,
                 )
                 .fallbackToDestructiveMigration()
                 .build()
@@ -468,7 +470,16 @@ abstract class LemuroidApplicationModule {
         @Provides
         @PerApp
         @JvmStatic
-        fun shareRoomcordTextGenerator(roomcordManager: RoomcordManager, roomcordImageUploader: RoomcordImageUploader): ShareRoomcordTextGenerator =
-            ShareRoomcordTextGenerator(roomcordManager, roomcordImageUploader)
+        fun shareRateLimiter(app: LemuroidApplication): ShareRateLimiter = ShareRateLimiter(app)
+
+        @Provides
+        @PerApp
+        @JvmStatic
+        fun shareRoomcordTextGenerator(
+            roomcordManager: RoomcordManager,
+            roomcordImageUploader: RoomcordImageUploader,
+            shareRateLimiter: ShareRateLimiter,
+        ): ShareRoomcordTextGenerator =
+            ShareRoomcordTextGenerator(roomcordManager, roomcordImageUploader, shareRateLimiter)
     }
 }

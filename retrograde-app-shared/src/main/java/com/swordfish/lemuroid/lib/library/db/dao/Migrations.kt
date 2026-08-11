@@ -99,6 +99,22 @@ object Migrations {
             }
         }
 
+    // Covers were stored with cleartext URLs, and an existing row is never re-fetched by a
+    // rescan — only new files get fresh metadata. Rewrite them, otherwise every already-scanned
+    // game loses its cover the moment cleartext is refused.
+    val VERSION_12_13: Migration =
+        object : Migration(12, 13) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    """
+                    UPDATE games
+                    SET coverFrontUrl = 'https://' || substr(coverFrontUrl, 8)
+                    WHERE coverFrontUrl LIKE 'http://thumbnails.libretro.com/%'
+                    """.trimIndent(),
+                )
+            }
+        }
+
     val VERSION_8_9: Migration =
         object : Migration(8, 9) {
             override fun migrate(database: SupportSQLiteDatabase) {

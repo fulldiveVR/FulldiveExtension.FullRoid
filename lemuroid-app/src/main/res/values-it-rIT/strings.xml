@@ -237,10 +237,8 @@
   <string name="share_discord_text_title_part_2">Scarica questo gioco qui %s</string>
   <string name="string_pro_buy_now">Acquista ora</string>
   <string name="string_pro_limited_deal">Offerta limitata</string>
-  <string name="string_pro_popup_disclamer">Acquista FullRoid X per meno di una tazza di caffè. Gioca ai giochi WS e 3DS!</string>
   <string name="string_pro_popup_title">Non perdere la nostra OFFERTA!</string>
   <string name="string_pro_price" formatted="false">%d/ a vita %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 nuovi emulatori, incluso Nintendo 3DS\n✓ Modalità HD per migliorare efficacemente i giochi\n✓ Supporto per archivi 7z\n✓ Accesso esclusivo alle funzionalità future</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_citra_system_files">File di sistema 3DS (forniti dall\'utente)</string>
   <string name="settings_title_citra_system_files_status">Stato</string>
@@ -309,4 +307,7 @@
     <string name="home_filter_catalog">Catalogo</string>
     <string name="home_filter_recent">Recenti</string>
     <string name="home_filter_new">Nuovi</string>
+  <string name="roomcord_share_limit_too_soon">Puoi condividere una volta ogni 5 minuti. Riprova %1$s.</string>
+  <string name="roomcord_share_limit_daily">Hai raggiunto il limite di 5 condivisioni al giorno. Riprova %1$s.</string>
+  <string name="roomcord_share_limit_duplicate">Il tuo feedback è già stato inviato.</string>
 </resources>

@@ -862,6 +862,11 @@ data class GameSystem(
                                 0 to arrayListOf(ControllerConfigs.PSP),
                             ),
                             supportsLibretroVFS = true,
+                            // The x86_64 PPSSPP core was dropped upstream for not being page-size
+                            // compliant and ships as a zero-byte stub, so an x86_64 device would
+                            // load a broken library. Listing "x86" here would not help: x86_64
+                            // devices report x86 in SUPPORTED_ABIS but get the x86_64 lib installed.
+                            supportedOnlyArchitectures = setOf("arm64-v8a", "armeabi-v7a"),
                         ),
                     ),
                     uniqueExtensions = listOf(),
@@ -872,7 +877,6 @@ data class GameSystem(
                         scanByUniqueExtension = false,
                         scanByPathAndSupportedExtensions = true,
                     ),
-                    proOnly = true,
                 ),
                 GameSystem(
                     SystemID.FBNEO,
@@ -1224,7 +1228,6 @@ data class GameSystem(
                     ),
                 ),
             ).apply {
-                // Pro-only systems - visible in all versions, but playable only in Pro
                 add(
                     GameSystem(
                         SystemID.WSC,
@@ -1262,7 +1265,6 @@ data class GameSystem(
                             ),
                         ),
                         uniqueExtensions = listOf("wsc"),
-                        proOnly = true,
                     )
                 )
                 add(
@@ -1424,7 +1426,6 @@ data class GameSystem(
                         ),
                         uniqueExtensions = listOf("3ds", "cci", "zcci", "3dsx", "z3dsx", "cxi", "zcxi"),
                         hasTouchScreen = true,
-                        proOnly = true,
                     ),
                 )
             }

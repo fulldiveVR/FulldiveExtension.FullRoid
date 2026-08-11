@@ -1,0 +1,395 @@
+{
+  "project_info": {
+    "project_number": "254410647594",
+    "firebase_url": "https://full-dive-co.firebaseio.com",
+    "project_id": "full-dive-co",
+    "storage_bucket": "full-dive-co.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254410647594:android:09aaf899b25c481033bb53",
+        "android_client_info": {
+          "package_name": "ai.invest.stock.market.top.finance.trade.crypto.news.chat.bot.make.money.new.etf.save"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254410647594-0ilno6kj0368kb6slp92vicu29unbetm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ai.invest.stock.market.top.finance.trade.crypto.news.chat.bot.make.money.new.etf.save",
+            "certificate_hash": "d25c7e061022809452c6eb853e89b1d8f1d155d0"
+          }
+        },
+        {
+          "client_id": "254410647594-t86325ttalib8jb0bd9qhu361on6i1cp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ai.invest.stock.market.top.finance.trade.crypto.news.chat.bot.make.money.new.etf.save",
+            "certificate_hash": "1e3c6de3a8d458f656cae63fb34453ae7326f71c"
+          }
+        },
+        {
+          "client_id": "254410647594-ko3n698vrre8qnideo169lllqlvad6lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3aXTBMn8ZUW3dpkYdfszSaOZN0-AJDas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254410647594-be428ste4nn82l8337sd15p26sb84ro3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254410647594-4vko924pnr97poion9blk5go3c3ri88g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fulldive.tvbs"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254410647594:android:03e0caf874df959233bb53",
+        "android_client_info": {
+          "package_name": "com.fulldive.experimential"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254410647594-ko3n698vrre8qnideo169lllqlvad6lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3aXTBMn8ZUW3dpkYdfszSaOZN0-AJDas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254410647594-be428ste4nn82l8337sd15p26sb84ro3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254410647594-4vko924pnr97poion9blk5go3c3ri88g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fulldive.tvbs"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254410647594:android:433769e89a84779f33bb53",
+        "android_client_info": {
+          "package_name": "com.fulldive.extension.adshield.dnschanger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254410647594-v5doiue5fg6frriiccaefe6jui86cahv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fulldive.extension.adshield.dnschanger",
+            "certificate_hash": "d25c7e061022809452c6eb853e89b1d8f1d155d0"
+          }
+        },
+        {
+          "client_id": "254410647594-ko3n698vrre8qnideo169lllqlvad6lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3aXTBMn8ZUW3dpkYdfszSaOZN0-AJDas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254410647594-be428ste4nn82l8337sd15p26sb84ro3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254410647594-4vko924pnr97poion9blk5go3c3ri88g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fulldive.tvbs"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254410647594:android:75f989b6de66e1f833bb53",
+        "android_client_info": {
+          "package_name": "com.fulldive.extension.fullroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254410647594-bag6kahe1qu5agqu5hc88jug4uomu9tj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fulldive.extension.fullroid",
+            "certificate_hash": "d25c7e061022809452c6eb853e89b1d8f1d155d0"
+          }
+        },
+        {
+          "client_id": "254410647594-je8tki0pdk7vhck58960svv8s6oh3hai.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fulldive.extension.fullroid",
+            "certificate_hash": "b1af3a0bf998aeede1a8716a539e5a59da1d86d6"
+          }
+        },
+        {
+          "client_id": "254410647594-tgvt6v0gi5h1nkn10eq1at5tu7mok6k2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fulldive.extension.fullroid",
+            "certificate_hash": "b06fde12a6d98c88291e318b3037b5260284b2bf"
+          }
+        },
+        {
+          "client_id": "254410647594-ko3n698vrre8qnideo169lllqlvad6lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3aXTBMn8ZUW3dpkYdfszSaOZN0-AJDas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254410647594-be428ste4nn82l8337sd15p26sb84ro3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254410647594-4vko924pnr97poion9blk5go3c3ri88g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fulldive.tvbs"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254410647594:android:4b3eca5d2c96ef7c33bb53",
+        "android_client_info": {
+          "package_name": "com.fulldive.extension.fullroid.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254410647594-12t2ljhau919egg2pfbtu7nuibia4ul2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fulldive.extension.fullroid.pro",
+            "certificate_hash": "b1af3a0bf998aeede1a8716a539e5a59da1d86d6"
+          }
+        },
+        {
+          "client_id": "254410647594-reuu2p401krtuvvd367530ufbnin8g35.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fulldive.extension.fullroid.pro",
+            "certificate_hash": "d25c7e061022809452c6eb853e89b1d8f1d155d0"
+          }
+        },
+        {
+          "client_id": "254410647594-ko3n698vrre8qnideo169lllqlvad6lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3aXTBMn8ZUW3dpkYdfszSaOZN0-AJDas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254410647594-be428ste4nn82l8337sd15p26sb84ro3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254410647594-4vko924pnr97poion9blk5go3c3ri88g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fulldive.tvbs"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254410647594:android:8c75381b2a4fa4ce33bb53",
+        "android_client_info": {
+          "package_name": "com.fulldive.extension.lockscreen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254410647594-mc34u6cs0jb0bg46akm4qoj7egoig1cv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fulldive.extension.lockscreen",
+            "certificate_hash": "d25c7e061022809452c6eb853e89b1d8f1d155d0"
+          }
+        },
+        {
+          "client_id": "254410647594-ko3n698vrre8qnideo169lllqlvad6lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3aXTBMn8ZUW3dpkYdfszSaOZN0-AJDas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254410647594-be428ste4nn82l8337sd15p26sb84ro3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254410647594-4vko924pnr97poion9blk5go3c3ri88g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fulldive.tvbs"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254410647594:android:b931bf950b0826e7",
+        "android_client_info": {
+          "package_name": "com.fulldive.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254410647594-ftugjhuqgkj3k9guoa8ol7g9k8tpjkk2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fulldive.mobile",
+            "certificate_hash": "d25c7e061022809452c6eb853e89b1d8f1d155d0"
+          }
+        },
+        {
+          "client_id": "254410647594-qf4jphthvn8aald1asdlvpgd9k2fccva.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fulldive.mobile",
+            "certificate_hash": "b1af3a0bf998aeede1a8716a539e5a59da1d86d6"
+          }
+        },
+        {
+          "client_id": "254410647594-ko3n698vrre8qnideo169lllqlvad6lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3aXTBMn8ZUW3dpkYdfszSaOZN0-AJDas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254410647594-be428ste4nn82l8337sd15p26sb84ro3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254410647594-4vko924pnr97poion9blk5go3c3ri88g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fulldive.tvbs"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254410647594:android:d49e3cd3adeb4612",
+        "android_client_info": {
+          "package_name": "in.fulldive.shell"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254410647594-7p7gvgj3kl4k0bb12g4np9gger8sj109.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.fulldive.shell",
+            "certificate_hash": "d25c7e061022809452c6eb853e89b1d8f1d155d0"
+          }
+        },
+        {
+          "client_id": "254410647594-ko3n698vrre8qnideo169lllqlvad6lq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3aXTBMn8ZUW3dpkYdfszSaOZN0-AJDas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "254410647594-be428ste4nn82l8337sd15p26sb84ro3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "254410647594-4vko924pnr97poion9blk5go3c3ri88g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fulldive.tvbs"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

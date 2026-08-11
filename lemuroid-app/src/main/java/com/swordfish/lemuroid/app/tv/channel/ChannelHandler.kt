@@ -16,6 +16,7 @@ import androidx.tvprovider.media.tv.TvContractCompat
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.covers.CoverUtils
 import com.swordfish.lemuroid.app.shared.deeplink.DeepLink
+import com.swordfish.lemuroid.app.tv.shared.TVSupportedSystems
 import com.swordfish.lemuroid.lib.library.db.RetrogradeDatabase
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 import kotlinx.coroutines.flow.asFlow
@@ -94,7 +95,10 @@ class ChannelHandler(
     }
 
     suspend fun update() {
-        val recentGames = retrogradeDatabase.gameDao().asyncSelectFirstRecents(10)
+        val recentGames =
+            retrogradeDatabase.gameDao()
+                .asyncSelectFirstRecents(10)
+                .filter { TVSupportedSystems.isSupported(it) }
 
         val channelEntries =
             recentGames.asFlow()

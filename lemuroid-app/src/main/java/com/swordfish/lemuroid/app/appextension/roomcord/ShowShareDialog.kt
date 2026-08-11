@@ -17,6 +17,7 @@ import com.swordfish.lemuroid.lib.library.db.entity.Game
 import com.swordfish.lemuroid.R
 import androidx.compose.material3.TextField
 import androidx.compose.ui.graphics.Color
+import kotlinx.coroutines.delay
 
 private const val PREFS_NAME = "roomcord_share_prefs"
 private const val KEY_USER_NAME = "user_name"
@@ -33,6 +34,21 @@ fun ShowShareDialog(
     val name = remember { mutableStateOf(prefs.getString(KEY_USER_NAME, "") ?: "") }
     val feedback = remember { mutableStateOf("") }
     val isLoading = remember { mutableStateOf(false) }
+
+    val rateLimiter = remember { ShareRateLimiter(context) }
+    // Re-evaluated every second so the "try again in N minutes" countdown stays honest and the
+    // button re-enables on its own once the interval passes.
+    val nowMillis = remember { mutableStateOf(System.currentTimeMillis()) }
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(1_000L)
+            nowMillis.value = System.currentTimeMillis()
+        }
+    }
+
+    val shareText = buildRoomcordShareContent(context, name.value, game.title, feedback.value)
+    val decision = rateLimiter.check(shareText, nowMillis.value)
+    val isLimited = decision !is ShareRateLimiter.Decision.Allowed
 
     Dialog(onDismissRequest = onDismissRequest) {
         Surface(
@@ -83,6 +99,15 @@ fun ShowShareDialog(
                     placeholder = { Text(text = stringResource(id = R.string.share_discord_dialog_enter_feedback)) },
                 )
 
+                if (isLimited) {
+                    Text(
+                        text = rateLimiter.describe(decision),
+                        color = colorResource(id = R.color.textColorAccent),
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                }
+
                 Box(
                     modifier = Modifier.fillMaxWidth(),
                     contentAlignment = Alignment.Center
@@ -94,13 +119,6 @@ fun ShowShareDialog(
                             } else {
                                 prefs.edit().putString(KEY_USER_NAME, name.value.trim()).apply()
 
-                                val shareTextPart1 = context.getString(
-                                    R.string.share_discord_text_title_part_1,
-                                    name.value.trim(),
-                                    game.title
-                                )
-
-                                val shareText = if (feedback.value.isNotBlank()) "$shareTextPart1 ${feedback.value.trim()}" else shareTextPart1
                                 isLoading.value = true
                                 onShare(
                                     game,
@@ -113,7 +131,7 @@ fun ShowShareDialog(
                                 )
                             }
                         },
-                        enabled = !isLoading.value,
+                        enabled = !isLoading.value && !isLimited,
                         modifier = Modifier
                             .padding(top = 16.dp, bottom = 0.dp)
                             .width(150.dp)

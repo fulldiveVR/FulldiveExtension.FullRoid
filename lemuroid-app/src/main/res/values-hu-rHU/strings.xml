@@ -90,10 +90,8 @@
   <string name="share_discord_text_title_part_2">Töltsd le ezt a játékot itt %s</string>
   <string name="string_pro_buy_now">Vásároljon most</string>
   <string name="string_pro_limited_deal">Korlátozott ajánlat</string>
-  <string name="string_pro_popup_disclamer">Szerezd meg a FullRoid X-et kevesebbért, mint egy csésze kávé. Játssz WS és 3DS játékokkal!</string>
   <string name="string_pro_popup_title">Ne hagyja ki az AKCIÓNKAT!</string>
   <string name="string_pro_price" formatted="false">%d/ élethosszig %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 új emulátor, köztük a Nintendo 3DS\n✓ HD mód a játékok hatékony feljavításához\n✓ 7z archívum támogatás\n✓ Exkluzív hozzáférés a közelgő funkciókhoz</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_experimental">Kísérleti</string>
   <string name="settings_title_citra_experimental_save_states">3DS mentési állapotok (Kísérleti)</string>
@@ -165,4 +163,7 @@
     <string name="home_filter_catalog">Katalógus</string>
     <string name="home_filter_recent">Legutóbbi</string>
     <string name="home_filter_new">Új</string>
+  <string name="roomcord_share_limit_too_soon">5 percenként egyszer oszthatsz meg. Próbáld újra %1$s.</string>
+  <string name="roomcord_share_limit_daily">Elérted a napi 5 megosztás korlátját. Próbáld újra %1$s.</string>
+  <string name="roomcord_share_limit_duplicate">A visszajelzésedet már elküldtük.</string>
 </resources>

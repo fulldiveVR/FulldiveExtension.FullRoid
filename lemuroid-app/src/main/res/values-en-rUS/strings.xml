@@ -61,4 +61,7 @@
     <string name="home_filter_catalog">Catalog</string>
     <string name="home_filter_recent">Recent</string>
     <string name="home_filter_new">New</string>
+  <string name="roomcord_share_limit_too_soon">You can share once every 5 minutes. Try again %1$s.</string>
+  <string name="roomcord_share_limit_daily">You have reached the limit of 5 shares per day. Try again %1$s.</string>
+  <string name="roomcord_share_limit_duplicate">Your feedback has already been sent.</string>
 </resources>

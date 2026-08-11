@@ -216,10 +216,8 @@
   <string name="share_discord_text_title_part_2">Bu oyunu buradan indir %s</string>
   <string name="string_pro_buy_now">Şimdi satın al</string>
   <string name="string_pro_limited_deal">Sınırlı teklif</string>
-  <string name="string_pro_popup_disclamer">Bir fincan kahveden daha ucuza FullRoid X\'i kap. WS ve 3DS oyunları oyna!</string>
   <string name="string_pro_popup_title">FIRSATIMIZI kaçırmayın!</string>
   <string name="string_pro_price" formatted="false">%d/ ömür boyu %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 yeni emülatör, Nintendo 3DS dahil\n✓ Oyunları verimli bir şekilde yükseltmek için HD modu\n✓ 7z arşiv desteği\n✓ Yaklaşan özelliklere özel erişim</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_citra_system_files">3DS sistem dosyaları (kullanıcı tarafından sağlanır)</string>
   <string name="settings_title_citra_system_files_status">Durum</string>
@@ -288,4 +286,7 @@
     <string name="home_filter_catalog">Katalog</string>
     <string name="home_filter_recent">Son</string>
     <string name="home_filter_new">Yeni</string>
+  <string name="roomcord_share_limit_too_soon">5 dakikada bir paylaşım yapabilirsiniz. %1$s tekrar deneyin.</string>
+  <string name="roomcord_share_limit_daily">Günlük 5 paylaşım sınırına ulaştınız. %1$s tekrar deneyin.</string>
+  <string name="roomcord_share_limit_duplicate">Geri bildiriminiz zaten gönderildi.</string>
 </resources>

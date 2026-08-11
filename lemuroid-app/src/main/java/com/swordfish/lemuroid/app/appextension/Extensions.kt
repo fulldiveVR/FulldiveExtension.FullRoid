@@ -75,24 +75,42 @@ fun SharedPreferences.getProperty(tag: String, default_value: Boolean): Boolean 
     return result
 }
 
-fun Context.openAppInGooglePlay(appPackageName: String? = null) {
+fun Context.openAppInGooglePlay(
+    appPackageName: String? = null,
+    referrer: String? = null,
+) {
     val packName = appPackageName ?: packageName
+    val referrerParam = referrer?.let { "&referrer=${Uri.encode(it)}" }.orEmpty()
     try {
         startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/details?id=$packName")
+                Uri.parse("https://play.google.com/store/apps/details?id=$packName$referrerParam")
             ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         )
     } catch (anfe: ActivityNotFoundException) {
         startActivity(
             Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("market://details?id=$packName")
+                Uri.parse("market://details?id=$packName$referrerParam")
             ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         )
     }
 }
+
+/**
+ * Play parses `utm_*` out of the referrer string and reports it as the install's traffic source.
+ * Without it every in-app hand-off collapses into one "source not set" bucket, so the placement
+ * goes into `utm_campaign` — the field the Play Console traffic-source report shows directly.
+ */
+private fun installReferrer(campaign: String): String {
+    val source = if (isProVersion()) "fullroid_pro" else "fullroid_free"
+    return "utm_source=$source&utm_medium=in_app&utm_campaign=$campaign"
+}
+
+fun proInstallReferrer(placement: String) = installReferrer("pro_$placement")
+
+fun roomcordInstallReferrer(placement: String) = installReferrer("roomcord_$placement")
 
 fun launchApp(activity: Activity, appPackageName: String): Boolean {
     return try {

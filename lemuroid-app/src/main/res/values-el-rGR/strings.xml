@@ -237,10 +237,8 @@
   <string name="share_discord_text_title_part_2">Κατεβάστε αυτό το παιχνίδι εδώ %s</string>
   <string name="string_pro_buy_now">Αγοράστε τώρα</string>
   <string name="string_pro_limited_deal">Περιορισμένη προσφορά</string>
-  <string name="string_pro_popup_disclamer">Αποκτήστε το FullRoid X για λιγότερο από ένα φλιτζάνι καφέ. Παίξτε παιχνίδια WS και 3DS!</string>
   <string name="string_pro_popup_title">Μην χάσετε την ΠΡΟΣΦΟΡΑ μας!</string>
   <string name="string_pro_price" formatted="false">%d/ εφ\' όρου ζωής %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 νέοι εξομοιωτές, συμπεριλαμβανομένου του Nintendo 3DS\n✓ Λειτουργία HD για αποτελεσματική αναβάθμιση παιχνιδιών\n✓ Υποστήριξη αρχείων 7z\n✓ Αποκλειστική πρόσβαση σε μελλοντικές δυνατότητες</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_citra_system_files">Αρχεία συστήματος 3DS (παρέχονται από τον χρήστη)</string>
   <string name="settings_title_citra_system_files_status">Κατάσταση</string>
@@ -309,4 +307,7 @@
     <string name="home_filter_catalog">Κατάλογος</string>
     <string name="home_filter_recent">Πρόσφατα</string>
     <string name="home_filter_new">Νέα</string>
+  <string name="roomcord_share_limit_too_soon">Μπορείτε να κάνετε κοινοποίηση μία φορά κάθε 5 λεπτά. Δοκιμάστε ξανά %1$s.</string>
+  <string name="roomcord_share_limit_daily">Φτάσατε το όριο των 5 κοινοποιήσεων ανά ημέρα. Δοκιμάστε ξανά %1$s.</string>
+  <string name="roomcord_share_limit_duplicate">Τα σχόλιά σας έχουν ήδη σταλεί.</string>
 </resources>

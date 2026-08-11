@@ -63,6 +63,7 @@ import com.swordfish.lemuroid.app.appextension.isFullRoidProInstalled
 import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.appextension.launchApp
 import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
+import com.swordfish.lemuroid.app.appextension.proInstallReferrer
 import com.swordfish.lemuroid.app.appextension.attribution.InstallAttributionReporter
 import com.swordfish.lemuroid.app.fulldive.analytics.IActionTracker
 import com.swordfish.lemuroid.app.fulldive.analytics.TrackerConstants
@@ -290,7 +291,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     if (canPlayWebGame(this, game)) {
                         launchWebGame(this, game)
                     } else {
-                        openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
+                        openAppInGooglePlay(
+                            FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME,
+                            proInstallReferrer("web_game_locked_library"),
+                        )
                     }
                 } else {
                     gameInteractor.onGamePlay(game)
@@ -511,7 +515,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                                 if (packageManager.isFullRoidProInstalled()) {
                                     launchApp(this@MainActivity, FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
                                 } else {
-                                    openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
+                                    openAppInGooglePlay(
+                                        FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME,
+                                        proInstallReferrer("pro_tutorial"),
+                                    )
                                 }
                             }
                         )

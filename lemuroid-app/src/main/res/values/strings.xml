@@ -202,11 +202,11 @@
         <item>CRT</item>
         <item>LCD</item>
     </string-array>
-    <string name="string_pro_tutorial_disclamer">✓ + 6 new emulators, including Nintendo 3DS\n✓ HD mode to efficiently upscale games\n✓ 7z archive support\n✓ Exclusive access to upcoming features</string>
+    <string name="string_pro_tutorial_disclamer">✓ The full games catalog\n✓ 7z archive support\n✓ Experimental 3DS save states\n✓ Exclusive access to upcoming features</string>
     <string name="string_pro_limited_deal">Limited deal</string>
     <string name="string_pro_price" formatted="false">%d/ lifetime %d</string>
     <string name="string_pro_buy_now">Buy Now</string>
-    <string name="string_pro_popup_disclamer">Grab FullRoid X for less than a cup of coffee. Play WS and 3DS games!</string>
+    <string name="string_pro_popup_disclamer">Grab FullRoid X for less than a cup of coffee. Unlock the full games catalog!</string>
     <string name="string_pro_popup_title">Don\'t miss out on our SALE!</string>
     <string name="settings_category_misc"> Miscellaneous</string>
     <string name="settings_title_maximum_cache_usage">Cache size limit</string>
@@ -266,6 +266,9 @@
     <string name="webview_launch_roomcord">Launch Roomcord</string>
     <string name="share_discord_popup_description">Do you like playing the games? Rate us and share your opinion!</string>
     <string name="share_discord_text_title_part_2">Download this game here %s</string>
+    <string name="roomcord_share_limit_too_soon">You can share once every 5 minutes. Try again %1$s.</string>
+    <string name="roomcord_share_limit_daily">You have reached the limit of 5 shares per day. Try again %1$s.</string>
+    <string name="roomcord_share_limit_duplicate">Your feedback has already been sent.</string>
     <string name="home_notification_title">Enable notifications</string>
     <string name="home_notification_message">Fullroid uses notifications to let you know when a game or operation is running in background.</string>
     <string name="home_notification_action">Enable</string>

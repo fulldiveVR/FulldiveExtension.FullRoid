@@ -53,6 +53,7 @@ import androidx.lifecycle.Lifecycle
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.appextension.FulldiveConfigs
 import com.swordfish.lemuroid.app.appextension.openAppInGooglePlay
+import com.swordfish.lemuroid.app.appextension.proInstallReferrer
 import com.swordfish.lemuroid.app.mobile.feature.webgames.WebGameCard
 import com.swordfish.lemuroid.app.mobile.feature.webgames.canPlayWebGame
 import com.swordfish.lemuroid.app.mobile.feature.webgames.launchWebGame
@@ -280,7 +281,10 @@ private fun GameGridCard(
                 locked = locked,
                 onClick = {
                     if (locked) {
-                        context.openAppInGooglePlay(FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
+                        context.openAppInGooglePlay(
+                            FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME,
+                            proInstallReferrer("web_game_locked_home"),
+                        )
                     } else {
                         launchWebGame(context, game)
                     }

@@ -14,6 +14,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -21,9 +22,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.swordfish.lemuroid.R
+import com.swordfish.lemuroid.app.appextension.roomcord.ShareRateLimiter
 import com.swordfish.lemuroid.app.appextension.roomcord.ShareRoomcordTextGenerator
 import com.swordfish.lemuroid.app.appextension.roomcord.ShareSuccessDialog
+import com.swordfish.lemuroid.app.appextension.roomcord.buildRoomcordShareContent
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import kotlinx.coroutines.delay
 
 private const val PREFS_NAME = "roomcord_share_prefs"
 private const val KEY_USER_NAME = "user_name"
@@ -44,6 +48,20 @@ fun GameMenuShareScreen(
     val feedback = remember { mutableStateOf("") }
     val showSuccessDialog = remember { mutableStateOf(false) }
     val isLoading = remember { mutableStateOf(false) }
+
+    val rateLimiter = remember { ShareRateLimiter(context) }
+    // Ticks so the countdown stays honest and the button re-enables once the interval passes.
+    val nowMillis = remember { mutableStateOf(System.currentTimeMillis()) }
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(1_000L)
+            nowMillis.value = System.currentTimeMillis()
+        }
+    }
+
+    val content = buildRoomcordShareContent(context, name.value, game.title, feedback.value)
+    val decision = rateLimiter.check(content, nowMillis.value)
+    val isLimited = decision !is ShareRateLimiter.Decision.Allowed
 
     Column(
         modifier = Modifier
@@ -72,23 +90,21 @@ fun GameMenuShareScreen(
             placeholder = { Text(text = stringResource(id = R.string.share_discord_dialog_enter_feedback)) },
         )
 
+        if (isLimited) {
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(text = rateLimiter.describe(decision))
+        }
+
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
             modifier = Modifier.fillMaxWidth(),
-            enabled = !isLoading.value,
+            enabled = !isLoading.value && !isLimited,
             onClick = {
                 when {
                     name.value.isBlank() -> Toast.makeText(context, "Enter your name!", Toast.LENGTH_SHORT).show()
                     else -> {
                         prefs.edit().putString(KEY_USER_NAME, name.value.trim()).apply()
-
-                        val shareTextPart1 = context.getString(
-                            R.string.share_discord_text_title_part_1,
-                            name.value.trim(),
-                            game.title
-                        )
-                        val content = if (feedback.value.isNotBlank()) "$shareTextPart1 ${feedback.value.trim()}" else shareTextPart1
 
                         isLoading.value = true
                         shareGenerator.shareGame(

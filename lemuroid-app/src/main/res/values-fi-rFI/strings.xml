@@ -235,10 +235,8 @@
   <string name="share_discord_text_title_part_2">Lataa tämä peli täältä %s</string>
   <string name="string_pro_buy_now">Osta nyt</string>
   <string name="string_pro_limited_deal">Rajoitettu tarjous</string>
-  <string name="string_pro_popup_disclamer">Hanki FullRoid X halvemmalla kuin kupillinen kahvia. Pelaa WS- ja 3DS-pelejä!</string>
   <string name="string_pro_popup_title">Älä missaa ALEA!</string>
   <string name="string_pro_price" formatted="false">%d/ elinikäinen %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 uutta emulaattoria, mukaan lukien Nintendo 3DS\n✓ HD-tila pelien tehokkaaseen skaalaamiseen\n✓ 7z-arkistotuki\n✓ Yksinoikeudellinen pääsy tuleviin ominaisuuksiin</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_citra_system_files">3DS-järjestelmätiedostot (käyttäjän toimittamat)</string>
   <string name="settings_title_citra_system_files_status">Tila</string>
@@ -307,4 +305,7 @@
     <string name="home_filter_catalog">Luettelo</string>
     <string name="home_filter_recent">Viimeisimmät</string>
     <string name="home_filter_new">Uudet</string>
+  <string name="roomcord_share_limit_too_soon">Voit jakaa kerran 5 minuutissa. Yritä uudelleen %1$s.</string>
+  <string name="roomcord_share_limit_daily">Olet saavuttanut rajan 5 jakoa päivässä. Yritä uudelleen %1$s.</string>
+  <string name="roomcord_share_limit_duplicate">Palautteesi on jo lähetetty.</string>
 </resources>

@@ -218,10 +218,8 @@
   <string name="share_discord_text_title_part_2">在這裡下載這個遊戲 %s</string>
   <string name="string_pro_buy_now">立即購買</string>
   <string name="string_pro_limited_deal">限時優惠</string>
-  <string name="string_pro_popup_disclamer">以低於一杯咖啡的價格獲取 FullRoid X。暢玩 WS 和 3DS 遊戲！</string>
   <string name="string_pro_popup_title">不要錯過我們的促銷！</string>
   <string name="string_pro_price" formatted="false">%d/ 終身 %d</string>
-  <string name="string_pro_tutorial_disclamer">✓ + 6 個新模擬器，包括 Nintendo 3DS\n✓ 高清模式有效提升遊戲畫質\n✓ 支援 7z 壓縮檔案\n✓ 獨家訪問即將推出的功能</string>
   <string name="string_pro_tutorial_title" formatted="false">FullRoid X &lt;font color=\"%tutorialTextColor%\" face=\"sans-serif-medium\"&gt;PRO&lt;/font&gt;</string>
   <string name="settings_category_citra_system_files">3DS 系統檔案（由使用者提供）</string>
   <string name="settings_title_citra_system_files_status">狀態</string>
@@ -290,4 +288,7 @@
     <string name="home_filter_catalog">目錄</string>
     <string name="home_filter_recent">最近</string>
     <string name="home_filter_new">最新</string>
+  <string name="roomcord_share_limit_too_soon">每 5 分鐘只能分享一次。請%1$s重試。</string>
+  <string name="roomcord_share_limit_daily">您已達到每天 5 次分享的上限。請%1$s重試。</string>
+  <string name="roomcord_share_limit_duplicate">您的意見回饋已送出。</string>
 </resources>
