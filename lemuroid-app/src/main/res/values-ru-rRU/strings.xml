@@ -313,4 +313,7 @@
   <string name="nav_chat">Чат</string>
   <string name="string_pro_popup_disclamer">Поддержи команду разработчиков и получи дополнительные возможности.</string>
   <string name="string_pro_tutorial_disclamer">✓ Полный каталог игр\n✓ Поддержка архивов 7z\n✓ Экспериментальные сохранения состояния 3DS\n✓ Эксклюзивный доступ к будущим возможностям</string>
+  <string name="archive_7z_locked_title">Архивы 7z доступны в Pro</string>
+  <string name="archive_7z_locked_message">Все эмуляторы бесплатны. Платная возможность FullRoid X — только запуск игры прямо из архива .7z. Распакуйте файл, например в .iso, .cso или .zip, и он запустится в этой версии.</string>
+  <string name="archive_7z_locked_action">О версии Pro</string>
 </resources>

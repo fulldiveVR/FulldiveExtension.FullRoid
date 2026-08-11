@@ -315,4 +315,7 @@
   <string name="string_pro_popup_disclamer">開発チームを支援して、追加機能を利用しましょう。</string>
   <string name="string_pro_tutorial_disclamer">✓ すべてのゲームカタログ\n✓ 7z アーカイブ対応\n✓ 実験的な 3DS のセーブステート\n✓ 今後の機能への先行アクセス</string>
   <string name="game_loading_preparing_game">ゲームを準備しています…</string>
+  <string name="archive_7z_locked_title">7z アーカイブには Pro が必要です</string>
+  <string name="archive_7z_locked_message">エミュレーターはすべて無料です。.7z アーカイブから直接ゲームを読み込むことだけが FullRoid X の機能です。ファイルを .iso や .cso、.zip などに展開すれば、このバージョンでも遊べます。</string>
+  <string name="archive_7z_locked_action">Pro について</string>
 </resources>

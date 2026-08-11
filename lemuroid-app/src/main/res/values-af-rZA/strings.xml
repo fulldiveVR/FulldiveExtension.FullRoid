@@ -131,4 +131,7 @@
   <string name="nav_chat">Klets</string>
   <string name="string_pro_popup_disclamer">Ondersteun die ontwikkelingspan en ontsluit ekstra funksies.</string>
   <string name="string_pro_tutorial_disclamer">✓ Die volledige speletjiekatalogus\n✓ 7z-argiefondersteuning\n✓ Eksperimentele 3DS-stoortoestande\n✓ Eksklusiewe toegang tot komende funksies</string>
+  <string name="archive_7z_locked_title">7z-argiewe vereis Pro</string>
+  <string name="archive_7z_locked_message">Alle emuleerders is gratis. Net om ’n speletjie regstreeks uit ’n .7z-argief te lees, is ’n FullRoid X-funksie. Pak die lêer uit — byvoorbeeld na .iso, .cso of .zip — om dit in hierdie weergawe te speel.</string>
+  <string name="archive_7z_locked_action">Meer oor Pro</string>
 </resources>

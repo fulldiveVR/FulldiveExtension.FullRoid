@@ -131,4 +131,7 @@
   <string name="nav_chat">चैट</string>
   <string name="string_pro_popup_disclamer">डेवलपमेंट टीम का समर्थन करें और अतिरिक्त सुविधाएँ पाएँ।</string>
   <string name="string_pro_tutorial_disclamer">✓ पूरा गेम कैटलॉग\n✓ 7z आर्काइव समर्थन\n✓ प्रायोगिक 3DS सेव स्टेट\n✓ आने वाली सुविधाओं तक विशेष पहुँच</string>
+  <string name="archive_7z_locked_title">7z आर्काइव के लिए Pro चाहिए</string>
+  <string name="archive_7z_locked_message">सभी एमुलेटर मुफ़्त हैं। केवल .7z आर्काइव से सीधे गेम पढ़ना FullRoid X की सुविधा है। फ़ाइल को अनपैक करें — जैसे .iso, .cso या .zip में — और इसी संस्करण में खेलें।</string>
+  <string name="archive_7z_locked_action">Pro के बारे में</string>
 </resources>

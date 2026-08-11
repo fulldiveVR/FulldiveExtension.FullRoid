@@ -310,4 +310,7 @@
   <string name="tilt_configuration_buttons_l_r">L - R</string>
   <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
   <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+  <string name="archive_7z_locked_title">Tệp nén 7z cần bản Pro</string>
+  <string name="archive_7z_locked_message">Mọi trình giả lập đều miễn phí. Chỉ việc đọc trò chơi trực tiếp từ tệp nén .7z mới là tính năng của FullRoid X. Hãy giải nén tệp — ví dụ sang .iso, .cso hoặc .zip — để chơi trong phiên bản này.</string>
+  <string name="archive_7z_locked_action">Giới thiệu về Pro</string>
 </resources>

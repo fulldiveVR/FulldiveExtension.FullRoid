@@ -219,4 +219,7 @@
   <string name="nav_chat">Xat</string>
   <string name="string_pro_popup_disclamer">Dona suport a l\'equip de desenvolupament i desbloqueja funcions addicionals.</string>
   <string name="string_pro_tutorial_disclamer">✓ El catàleg complet de jocs\n✓ Compatibilitat amb arxius 7z\n✓ Estats de partida experimentals de 3DS\n✓ Accés exclusiu a les funcions futures</string>
+  <string name="archive_7z_locked_title">Els arxius 7z requereixen Pro</string>
+  <string name="archive_7z_locked_message">Tots els emuladors són gratuïts. Només llegir un joc directament des d\'un arxiu .7z és una funció de FullRoid X. Descomprimiu el fitxer — per exemple a .iso, .cso o .zip — per jugar-hi en aquesta versió.</string>
+  <string name="archive_7z_locked_action">Sobre Pro</string>
 </resources>

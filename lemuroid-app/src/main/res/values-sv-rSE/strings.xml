@@ -313,4 +313,7 @@
   <string name="nav_chat">Chatt</string>
   <string name="string_pro_popup_disclamer">Stötta utvecklingsteamet och lås upp fler funktioner.</string>
   <string name="string_pro_tutorial_disclamer">✓ Hela spelkatalogen\n✓ Stöd för 7z-arkiv\n✓ Experimentella 3DS-sparlägen\n✓ Exklusiv tillgång till kommande funktioner</string>
+  <string name="archive_7z_locked_title">7z-arkiv kräver Pro</string>
+  <string name="archive_7z_locked_message">Alla emulatorer är gratis. Endast att läsa ett spel direkt från ett .7z-arkiv är en FullRoid X-funktion. Packa upp filen — till exempel till .iso, .cso eller .zip — för att spela den i den här versionen.</string>
+  <string name="archive_7z_locked_action">Om Pro</string>
 </resources>

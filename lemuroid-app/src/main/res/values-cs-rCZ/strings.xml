@@ -312,4 +312,7 @@
   <string name="nav_chat">Chat</string>
   <string name="string_pro_popup_disclamer">Podpořte vývojářský tým a získejte další funkce.</string>
   <string name="string_pro_tutorial_disclamer">✓ Kompletní katalog her\n✓ Podpora archivů 7z\n✓ Experimentální uložené stavy 3DS\n✓ Exkluzivní přístup k připravovaným funkcím</string>
+  <string name="archive_7z_locked_title">Archivy 7z vyžadují Pro</string>
+  <string name="archive_7z_locked_message">Všechny emulátory jsou zdarma. Placenou funkcí FullRoid X je pouze načtení hry přímo z archivu .7z. Rozbalte soubor — například do .iso, .cso nebo .zip — a spustíte ho i v této verzi.</string>
+  <string name="archive_7z_locked_action">O verzi Pro</string>
 </resources>

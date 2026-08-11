@@ -313,4 +313,7 @@
   <string name="nav_chat">Συνομιλία</string>
   <string name="string_pro_popup_disclamer">Στηρίξτε την ομάδα ανάπτυξης και ξεκλειδώστε επιπλέον δυνατότητες.</string>
   <string name="string_pro_tutorial_disclamer">✓ Ο πλήρης κατάλογος παιχνιδιών\n✓ Υποστήριξη αρχείων 7z\n✓ Πειραματικά σημεία αποθήκευσης 3DS\n✓ Αποκλειστική πρόσβαση σε επερχόμενες δυνατότητες</string>
+  <string name="archive_7z_locked_title">Τα αρχεία 7z απαιτούν Pro</string>
+  <string name="archive_7z_locked_message">Όλοι οι εξομοιωτές είναι δωρεάν. Μόνο η ανάγνωση παιχνιδιού απευθείας από αρχείο .7z είναι δυνατότητα του FullRoid X. Αποσυμπιέστε το αρχείο — για παράδειγμα σε .iso, .cso ή .zip — για να παίξετε σε αυτήν την έκδοση.</string>
+  <string name="archive_7z_locked_action">Σχετικά με το Pro</string>
 </resources>

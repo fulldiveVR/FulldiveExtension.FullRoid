@@ -266,6 +266,9 @@
     <string name="webview_launch_roomcord">Launch Roomcord</string>
     <string name="share_discord_popup_description">Do you like playing the games? Rate us and share your opinion!</string>
     <string name="share_discord_text_title_part_2">Download this game here %s</string>
+    <string name="archive_7z_locked_title">7z archives require Pro</string>
+    <string name="archive_7z_locked_message">All emulators are free. Only reading a game straight out of a .7z archive is a FullRoid X feature. Unpack the file — for example to .iso, .cso or .zip — to play it in this version.</string>
+    <string name="archive_7z_locked_action">About Pro</string>
     <string name="roomcord_share_limit_too_soon">You can share once every 5 minutes. Try again %1$s.</string>
     <string name="roomcord_share_limit_daily">You have reached the limit of 5 shares per day. Try again %1$s.</string>
     <string name="roomcord_share_limit_duplicate">Your feedback has already been sent.</string>

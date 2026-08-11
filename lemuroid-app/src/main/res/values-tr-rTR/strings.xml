@@ -310,4 +310,7 @@
   <string name="tilt_configuration_buttons_l_r">L - R</string>
   <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
   <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+  <string name="archive_7z_locked_title">7z arşivleri için Pro gerekir</string>
+  <string name="archive_7z_locked_message">Tüm emülatörler ücretsizdir. Yalnızca oyunu doğrudan .7z arşivinden okumak FullRoid X özelliğidir. Dosyayı açın — örneğin .iso, .cso veya .zip olarak — ve bu sürümde oynayın.</string>
+  <string name="archive_7z_locked_action">Pro hakkında</string>
 </resources>

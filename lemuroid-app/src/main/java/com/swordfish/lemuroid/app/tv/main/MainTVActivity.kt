@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -68,6 +69,9 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
         if (packageManager.isFullRoidProInstalled()) {
             launchApp(this, FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
         } else {
+            // Say what is actually locked before leaving for the store: the emulators are free,
+            // only reading a ROM out of a .7z archive is not.
+            Toast.makeText(this, R.string.archive_7z_locked_message, Toast.LENGTH_LONG).show()
             openAppInGooglePlay(
                 FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME,
                 proInstallReferrer("archive_7z_tv"),

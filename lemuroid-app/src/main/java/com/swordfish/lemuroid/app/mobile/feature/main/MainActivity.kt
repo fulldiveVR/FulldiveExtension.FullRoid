@@ -104,6 +104,7 @@ import com.swordfish.lemuroid.app.mobile.feature.settings.SettingsManager
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsScreen
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsViewModel
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.Archive7zLockedDialog
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
@@ -181,6 +182,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
     private val _navigateToProTutorial = MutableStateFlow(false)
     private val navigateToProTutorial = _navigateToProTutorial.asStateFlow()
+
+    private val _show7zLockedDialog = MutableStateFlow(false)
+    private val show7zLockedDialog = _show7zLockedDialog.asStateFlow()
 
     private val mainViewModel: MainViewModel by viewModels {
         MainViewModel.Factory(applicationContext, saveSyncManager)
@@ -272,6 +276,13 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                     navController.navigate(MainRoute.PRO_TUTORIAL.route)
                     _navigateToProTutorial.value = false
                 }
+            }
+
+            if (show7zLockedDialog.collectAsState().value) {
+                Archive7zLockedDialog(
+                    onLearnMore = { _navigateToProTutorial.value = true },
+                    onDismiss = { _show7zLockedDialog.value = false },
+                )
             }
 
             val selectedGameState =
@@ -674,7 +685,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
         if (packageManager.isFullRoidProInstalled()) {
             launchApp(this, FulldiveConfigs.FULLROID_PRO_PACKAGE_NAME)
         } else {
-            _navigateToProTutorial.value = true
+            // Explain first: jumping straight to the Pro screen reads as "this console is paid",
+            // while the paid part is only reading ROMs out of a .7z archive.
+            _show7zLockedDialog.value = true
         }
     }
 

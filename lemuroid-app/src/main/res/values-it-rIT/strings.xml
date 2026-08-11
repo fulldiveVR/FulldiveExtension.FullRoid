@@ -313,4 +313,7 @@
   <string name="nav_chat">Chat</string>
   <string name="string_pro_popup_disclamer">Sostieni il team di sviluppo e sblocca funzionalità aggiuntive.</string>
   <string name="string_pro_tutorial_disclamer">✓ Il catalogo completo dei giochi\n✓ Supporto agli archivi 7z\n✓ Stati di salvataggio 3DS sperimentali\n✓ Accesso esclusivo alle funzionalità in arrivo</string>
+  <string name="archive_7z_locked_title">Gli archivi 7z richiedono Pro</string>
+  <string name="archive_7z_locked_message">Tutti gli emulatori sono gratuiti. Solo la lettura di un gioco direttamente da un archivio .7z è una funzione di FullRoid X. Estrai il file — ad esempio in .iso, .cso o .zip — per giocarci in questa versione.</string>
+  <string name="archive_7z_locked_action">Informazioni su Pro</string>
 </resources>

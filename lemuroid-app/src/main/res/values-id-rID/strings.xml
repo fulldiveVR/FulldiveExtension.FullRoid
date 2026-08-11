@@ -131,4 +131,7 @@
   <string name="nav_chat">Obrolan</string>
   <string name="string_pro_popup_disclamer">Dukung tim pengembang dan buka fitur tambahan.</string>
   <string name="string_pro_tutorial_disclamer">✓ Katalog game lengkap\n✓ Dukungan arsip 7z\n✓ Save state 3DS eksperimental\n✓ Akses eksklusif ke fitur mendatang</string>
+  <string name="archive_7z_locked_title">Arsip 7z memerlukan Pro</string>
+  <string name="archive_7z_locked_message">Semua emulator gratis. Hanya membaca game langsung dari arsip .7z yang merupakan fitur FullRoid X. Ekstrak berkasnya — misalnya ke .iso, .cso, atau .zip — untuk memainkannya di versi ini.</string>
+  <string name="archive_7z_locked_action">Tentang Pro</string>
 </resources>
