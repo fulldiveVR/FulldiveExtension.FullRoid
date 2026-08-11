@@ -303,4 +303,7 @@
   <string name="string_pro_tutorial_disclamer">✓ Catalogul complet de jocuri\n✓ Suport pentru arhive 7z\n✓ Stări de salvare 3DS experimentale\n✓ Acces exclusiv la funcțiile viitoare</string>
   <string name="game_loader_error_generic">Ceva nu a mers bine. Încercați următoarele:\n \n\u2022 Dezactivați salvarea automată și rulați din nou jocul \n\u2022 Accesați setările Android și goliți memoria cache a aplicației \n\u2022 Accesați setările Roid și efectuați o resetare la valorile din fabrică \n\nDacă nimic din toate acestea nu funcționează, este posibil ca acest joc sau nucleu să nu fie acceptat de acest dispozitiv.</string>
   <string name="lemuroid_crash_disclamer">Se pare că nucleul Fullroid a întâmpinat o problemă neașteptată. Dacă persistă, încercați următoarele:\n \n\u2022 Dezactivați salvarea automată și rulați din nou jocul \n\u2022 Accesați setările Android și goliți memoria cache a aplicației \n\u2022 Accesați setările aplicației și efectuați o resetare la valorile din fabrică \n\n Dacă nimic din toate acestea nu funcționează, este posibil ca acest joc sau nucleu să nu fie acceptat de acest dispozitiv.</string>
+  <string name="archive_7z_locked_title">Arhivele 7z necesită Pro</string>
+  <string name="archive_7z_locked_message">Toate emulatoarele sunt gratuite. Doar citirea unui joc direct dintr-o arhivă .7z este o funcție FullRoid X. Dezarhivați fișierul — de exemplu în .iso, .cso sau .zip — pentru a-l juca în această versiune.</string>
+  <string name="archive_7z_locked_action">Despre Pro</string>
 </resources>

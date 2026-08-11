@@ -313,4 +313,7 @@
   <string name="nav_chat">채팅</string>
   <string name="string_pro_popup_disclamer">개발팀을 후원하고 추가 기능을 이용해 보세요.</string>
   <string name="string_pro_tutorial_disclamer">✓ 전체 게임 카탈로그\n✓ 7z 압축 파일 지원\n✓ 실험적인 3DS 세이브 스테이트\n✓ 출시 예정 기능 우선 이용</string>
+  <string name="archive_7z_locked_title">7z 압축 파일은 Pro가 필요합니다</string>
+  <string name="archive_7z_locked_message">모든 에뮬레이터는 무료입니다. .7z 압축 파일에서 게임을 바로 읽는 기능만 FullRoid X 전용입니다. 파일을 .iso, .cso, .zip 등으로 풀면 이 버전에서도 플레이할 수 있습니다.</string>
+  <string name="archive_7z_locked_action">Pro 정보</string>
 </resources>

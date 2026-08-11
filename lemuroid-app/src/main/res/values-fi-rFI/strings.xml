@@ -313,4 +313,7 @@
   <string name="string_pro_tutorial_disclamer">✓ Koko peliluettelo\n✓ 7z-arkistojen tuki\n✓ Kokeelliset 3DS-tallennustilat\n✓ Yksinoikeus tuleviin ominaisuuksiin</string>
   <string name="game_loading_preparing_game">Valmistellaan peliä…</string>
   <string name="lemuroid_help_content"><b>&#8226;Miten käytän sovellusta %s?</b><br/> Kopioi kaikki ROM-tiedostosi laitteesi kansioon ja valitse kansio Roidissa. Kansiossa voi olla alikansioita. Kun haku on valmis, pelisi näkyvät luettelossa.<br/><br/> <b>&#8226;Miksi pelejäni ei tunnisteta?</b><br/> Jos pelit on pakattu, kokeile purkaa ne. Jos se ei auta, sijoita ROMit omiin kansioihinsa, yksi kutakin järjestelmää kohden, seuraavilla nimillä: $SYSTEMS.</string>
+  <string name="archive_7z_locked_title">7z-arkistot vaativat Pron</string>
+  <string name="archive_7z_locked_message">Kaikki emulaattorit ovat ilmaisia. Vain pelin lukeminen suoraan .7z-arkistosta on FullRoid X:n ominaisuus. Pura tiedosto — esimerkiksi muotoon .iso, .cso tai .zip — niin voit pelata sitä tässä versiossa.</string>
+  <string name="archive_7z_locked_action">Tietoja Prosta</string>
 </resources>

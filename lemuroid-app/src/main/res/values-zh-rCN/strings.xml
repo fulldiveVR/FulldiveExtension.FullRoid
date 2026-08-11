@@ -312,4 +312,7 @@
   <string name="nav_chat">聊天</string>
   <string name="string_pro_popup_disclamer">支持开发团队，解锁更多功能。</string>
   <string name="string_pro_tutorial_disclamer">✓ 完整游戏目录\n✓ 支持 7z 压缩包\n✓ 实验性 3DS 即时存档\n✓ 抢先体验后续新功能</string>
+  <string name="archive_7z_locked_title">7z 压缩包需要 Pro</string>
+  <string name="archive_7z_locked_message">所有模拟器均免费。只有直接从 .7z 压缩包读取游戏才是 FullRoid X 的功能。请将文件解压（例如解压为 .iso、.cso 或 .zip），即可在本版本中游玩。</string>
+  <string name="archive_7z_locked_action">关于 Pro</string>
 </resources>

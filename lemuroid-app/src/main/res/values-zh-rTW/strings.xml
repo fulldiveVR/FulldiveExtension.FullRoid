@@ -312,4 +312,7 @@
   <string name="tilt_configuration_buttons_l_r">L - R</string>
   <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
   <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+  <string name="archive_7z_locked_title">7z 壓縮檔需要 Pro</string>
+  <string name="archive_7z_locked_message">所有模擬器皆為免費。只有直接從 .7z 壓縮檔讀取遊戲才是 FullRoid X 的功能。請將檔案解壓縮（例如解壓縮為 .iso、.cso 或 .zip），即可在本版本中遊玩。</string>
+  <string name="archive_7z_locked_action">關於 Pro</string>
 </resources>

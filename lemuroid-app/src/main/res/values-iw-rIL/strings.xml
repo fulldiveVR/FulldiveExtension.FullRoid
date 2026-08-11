@@ -305,4 +305,7 @@
   <string name="tilt_configuration_buttons_l_r">L - R</string>
   <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
   <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+  <string name="archive_7z_locked_title">ארכיוני 7z דורשים Pro</string>
+  <string name="archive_7z_locked_message">כל האמולטורים חינמיים. רק קריאת משחק ישירות מארכיון .7z היא תכונה של FullRoid X. חלצו את הקובץ — למשל ל-.iso, ל-.cso או ל-.zip — כדי לשחק בו בגרסה הזו.</string>
+  <string name="archive_7z_locked_action">על Pro</string>
 </resources>

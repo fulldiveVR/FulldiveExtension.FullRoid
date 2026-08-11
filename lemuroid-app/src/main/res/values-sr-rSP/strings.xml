@@ -313,4 +313,7 @@
   <string name="tilt_configuration_buttons_l_r">L - R</string>
   <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
   <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+  <string name="archive_7z_locked_title">7z архиве захтевају Pro</string>
+  <string name="archive_7z_locked_message">Сви емулатори су бесплатни. Само читање игре директно из .7z архиве јесте могућност FullRoid X-а. Распакујте датотеку — на пример у .iso, .cso или .zip — да бисте је играли у овој верзији.</string>
+  <string name="archive_7z_locked_action">О Pro верзији</string>
 </resources>
