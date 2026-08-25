@@ -344,7 +344,9 @@ tasks.register("checkRoomcordBundle") {
         if (problems.isNotEmpty()) {
             throw GradleException(
                 "Embedded Roomcord bundle is broken (${problems.size} problem(s)); " +
-                    "re-run ./update_roomcord_web.sh\n  " + problems.take(10).joinToString("\n  "),
+                    "re-run ./update_roomcord_web.sh\n  " + problems.take(10).joinToString("\n  ") +
+                    "\n\nIf the sizes are only slightly off, this is git normalising CRLF to LF: " +
+                    "check that .gitattributes still marks assets/roomcord/** as -text.",
             )
         }
         logger.lifecycle(
