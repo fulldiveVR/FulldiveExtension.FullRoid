@@ -1,0 +1,7 @@
+# The embedded Roomcord web bundle is verified byte-for-byte against
+# assets/roomcord/bundle-manifest.json at build time (checkRoomcordBundle).
+# Git's CRLF normalisation (core.autocrlf=input) silently rewrites the few
+# text files in it — NOTICES and the record_web helpers — which shrinks them
+# by one byte per line and fails that check on a fresh checkout.
+# Keep every packed byte exactly as the packing script produced it.
+lemuroid-app/src/main/assets/roomcord/** -text
