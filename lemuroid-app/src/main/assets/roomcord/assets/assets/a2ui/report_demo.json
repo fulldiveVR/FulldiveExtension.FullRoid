@@ -1,0 +1,22 @@
+[
+  {"version": "v0.9", "createSurface": {"surfaceId": "report-demo", "catalogId": "wize.rooms.a2ui.v2"}},
+  {"version": "v0.9", "updateComponents": {"surfaceId": "report-demo", "components": [
+    {"id": "root", "component": "Card", "child": "col"},
+    {"id": "col", "component": "Column", "children": ["title", "facts", "tldr", "discussion", "next-title", "a1", "a2", "badges"]},
+    {"id": "title", "component": "Text", "text": "Weekly sync — product & engineering", "variant": "h3"},
+    {"id": "facts", "component": "KeyValue", "items": [
+      {"label": "Duration", "value": "~35 min"},
+      {"label": "Speakers", "value": "5"}
+    ]},
+    {"id": "tldr", "component": "Callout", "title": "TL;DR", "tone": "highlight",
+     "text": "A2UI pipeline ships this sprint; streaming moves to the next one. One blocker on web fonts."},
+    {"id": "discussion", "component": "Section", "title": "Key discussion",
+     "text": "Reviewed the catalog approach. Agreed the Basic catalog stays first-class so third-party agents render with zero custom work."},
+    {"id": "next-title", "component": "Text", "text": "Top follow-ups", "variant": "h5"},
+    {"id": "a1", "component": "TaskItem", "title": "Wire action round-trip behind MessageType.a2ui", "owner": "Marina", "status": "open"},
+    {"id": "a2", "component": "TaskItem", "title": "Validate fixtures against the JSON schema in CI", "owner": "API", "status": "open"},
+    {"id": "badges", "component": "Row", "children": ["bd1", "bd2"]},
+    {"id": "bd1", "component": "Badge", "text": "Decision: ship pipeline", "tone": "decision"},
+    {"id": "bd2", "component": "Badge", "text": "Blocker: web fonts", "tone": "blocker"}
+  ]}}
+]

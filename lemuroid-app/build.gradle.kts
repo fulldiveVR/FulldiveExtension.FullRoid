@@ -1,3 +1,5 @@
+import java.security.MessageDigest
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -27,7 +29,7 @@ buildscript {
 android {
     val versionMajor = 1
     val versionMinor = 12
-    val versionPatch = 0
+    val versionPatch = 1
 
     namespace = "com.swordfish.lemuroid"
     buildFeatures.buildConfig = true
@@ -305,3 +307,77 @@ dependencies {
     implementation("com.android.installreferrer:installreferrer:2.2")
 }
 
+
+// ---------------------------------------------------------------------------
+// Embedded Roomcord web bundle (assets/roomcord), produced by
+// ../update_roomcord_web.sh. See docs/plans/roomcord-embedded-webview.md.
+//
+// A half-copied bundle is invisible until a device shows a blank WebView, so
+// the presence/size check runs on every build and the full hash check is one
+// command away (./gradlew verifyRoomcordBundle).
+// ---------------------------------------------------------------------------
+
+tasks.register("checkRoomcordBundle") {
+    description = "Fails the build if the embedded Roomcord bundle is missing or truncated."
+    group = "verification"
+    val bundleDir = file("src/main/assets/roomcord")
+    doLast {
+        val manifestFile = File(bundleDir, "bundle-manifest.json")
+        if (!manifestFile.exists()) {
+            throw GradleException(
+                "assets/roomcord/bundle-manifest.json is missing - run ./update_roomcord_web.sh",
+            )
+        }
+        @Suppress("UNCHECKED_CAST")
+        val manifest = groovy.json.JsonSlurper().parse(manifestFile) as Map<String, Any>
+        @Suppress("UNCHECKED_CAST")
+        val files = manifest["files"] as Map<String, Map<String, Any>>
+        val problems = mutableListOf<String>()
+        files.forEach { (path, meta) ->
+            val target = File(bundleDir, path)
+            when {
+                !target.exists() -> problems += "missing: $path"
+                target.length() != (meta["size"] as Number).toLong() ->
+                    problems += "wrong size: $path (${target.length()} != ${meta["size"]})"
+            }
+        }
+        if (problems.isNotEmpty()) {
+            throw GradleException(
+                "Embedded Roomcord bundle is broken (${problems.size} problem(s)); " +
+                    "re-run ./update_roomcord_web.sh\n  " + problems.take(10).joinToString("\n  "),
+            )
+        }
+        logger.lifecycle(
+            "Roomcord bundle OK: ${files.size} files, version ${manifest["version"]} (${manifest["buildNumber"]})",
+        )
+    }
+}
+
+tasks.register("verifyRoomcordBundle") {
+    description = "Verifies every file of the embedded Roomcord bundle against its sha256."
+    group = "verification"
+    dependsOn("checkRoomcordBundle")
+    val bundleDir = file("src/main/assets/roomcord")
+    doLast {
+        val manifestFile = File(bundleDir, "bundle-manifest.json")
+        @Suppress("UNCHECKED_CAST")
+        val manifest = groovy.json.JsonSlurper().parse(manifestFile) as Map<String, Any>
+        @Suppress("UNCHECKED_CAST")
+        val files = manifest["files"] as Map<String, Map<String, Any>>
+        val digest = MessageDigest.getInstance("SHA-256")
+        val corrupt = files.filter { entry ->
+            digest.reset()
+            val hash = digest.digest(File(bundleDir, entry.key).readBytes())
+                .joinToString("") { byte -> "%02x".format(byte) }
+            hash != entry.value["sha256"]
+        }.keys
+        if (corrupt.isNotEmpty()) {
+            throw GradleException("Corrupt Roomcord bundle files:\n  " + corrupt.joinToString("\n  "))
+        }
+        logger.lifecycle("Roomcord bundle verified: ${files.size} files match their sha256")
+    }
+}
+
+tasks.named("preBuild") {
+    dependsOn("checkRoomcordBundle")
+}

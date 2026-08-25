@@ -1,0 +1,33 @@
+[
+  {"version": "v0.9", "createSurface": {"surfaceId": "wize-showcase", "catalogId": "wize.rooms.a2ui.v2"}},
+  {"version": "v0.9", "updateComponents": {"surfaceId": "wize-showcase", "components": [
+    {"id": "root", "component": "Column", "children": ["badges", "callout", "section", "facts", "tasks-title", "t1", "t2", "table", "files-title", "file1", "file2"]},
+    {"id": "badges", "component": "Row", "children": ["b1", "b2", "b3", "b4"]},
+    {"id": "b1", "component": "Badge", "text": "Decision", "tone": "decision"},
+    {"id": "b2", "component": "Badge", "text": "Risk", "tone": "risk"},
+    {"id": "b3", "component": "Badge", "text": "Blocker", "tone": "blocker"},
+    {"id": "b4", "component": "Badge", "text": "Info", "tone": "info"},
+    {"id": "callout", "component": "Callout", "title": "TL;DR", "tone": "highlight",
+     "text": "These are the Wize extension components — same look as today's report cards, now standard A2UI."},
+    {"id": "section", "component": "Section", "title": "Key discussion",
+     "text": "The team agreed to migrate to the real protocol and keep the branded look via this catalog."},
+    {"id": "facts", "component": "KeyValue", "items": [
+      {"label": "Duration", "value": "42 min"},
+      {"label": "Speakers", "value": "4"},
+      {"label": "Started", "value": "2026-07-07 10:00"}
+    ]},
+    {"id": "tasks-title", "component": "Text", "text": "Follow-ups", "variant": "h5"},
+    {"id": "t1", "component": "TaskItem", "title": "Send the updated proposal", "owner": "Marina", "status": "open", "due": "Fri"},
+    {"id": "t2", "component": "TaskItem", "title": "Book the demo room", "owner": "Alex", "status": "done"},
+    {"id": "table", "component": "Table",
+     "columns": ["Room", "Members", "Mode"],
+     "rows": [["Design", "12", "open"], ["Backend", "8", "private"], ["Chapel", "31", "broadcast"]]},
+    {"id": "files-title", "component": "Text", "text": "Attachments", "variant": "h5"},
+    {"id": "file1", "component": "FileCard",
+     "url": "https://raw.githubusercontent.com/dart-lang/sdk/main/README.md",
+     "name": "release-notes.md", "mimeType": "text/markdown", "size": 8241},
+    {"id": "file2", "component": "FileCard",
+     "url": "https://example.com/quarterly-report.pdf",
+     "name": "quarterly-report.pdf", "mimeType": "application/pdf", "size": 542311}
+  ]}}
+]

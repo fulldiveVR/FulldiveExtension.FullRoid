@@ -1,255 +1,319 @@
 <en-US>
 What's New:
 
-• New Games section: a built-in catalog of casual games you can play right in the app
-• Redesigned home screen with modern navigation, a quick games button, categories, and instant search
-• New "Recent" and "New" tabs, mark games as favorites, and your progress is now saved between sessions
+• All consoles are now free — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES and every other system, with nothing to buy
+• Chat now opens instantly — Roomcord is built into the app, so it loads even on slow connections
+• Smaller download: we removed unused libraries
+• Clearer explanations when a feature belongs to FullRoid X
+• Better translations in every supported language
 </en-US>
 
 <zh-CN>
 更新内容：
 
-• 新增游戏板块：内置休闲游戏目录，您可以在应用中直接玩
-• 重新设计的主屏幕，现代导航，快速游戏按钮，类别和即时搜索
-• 新增“最近”和“新游戏”标签，标记游戏为收藏，现在您的进度将在会话之间保存
+• 所有主机现已免费开放 —— PSP、Nintendo 3DS、DS、PlayStation、N64、SNES 以及其他所有系统，无需购买
+• 聊天现在即刻打开 —— Roomcord 已内置到应用中，网络较慢时也能加载
+• 安装包更小：移除了未使用的库文件
+• 当某项功能属于 FullRoid X 时，会给出更清晰的说明
+• 改进了所有支持语言的翻译
 </zh-CN>
 
 <zh-TW>
 更新內容：
 
-• 新增遊戲板塊：內建休閒遊戲目錄，您可以在應用中直接玩
-• 重新設計的主畫面，現代導航，快速遊戲按鈕，類別和即時搜索
-• 新增“最近”和“新遊戲”標籤，標記遊戲為收藏，現在您的進度將在會話之間保存
+• 所有主機現已免費開放 —— PSP、Nintendo 3DS、DS、PlayStation、N64、SNES 以及其他所有系統，無需購買
+• 聊天現在立即開啟 —— Roomcord 已內建於應用程式中，網路較慢時也能載入
+• 安裝檔更小：移除了未使用的函式庫
+• 當某項功能屬於 FullRoid X 時，會提供更清楚的說明
+• 改進了所有支援語言的翻譯
 </zh-TW>
 
 <hi-IN>
 नया क्या है:
 
-• नए गेम्स सेक्शन: ऐप में ही खेलने के लिए कैज़ुअल गेम्स की एक बिल्ट-इन कैटलॉग
-• आधुनिक नेविगेशन, त्वरित गेम्स बटन, श्रेणियाँ, और त्वरित खोज के साथ पुनः डिज़ाइन किया गया होम स्क्रीन
-• नए "हाल ही में" और "नया" टैब, गेम्स को पसंदीदा के रूप में चिह्नित करें, और अब आपका प्रगति सत्रों के बीच में सहेजा जाता है
+• अब सभी कंसोल मुफ़्त हैं — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES और बाकी सभी सिस्टम, कुछ भी खरीदने की ज़रूरत नहीं
+• चैट अब तुरंत खुलती है — Roomcord ऐप में ही शामिल है, इसलिए धीमे कनेक्शन पर भी लोड होती है
+• छोटा डाउनलोड: अप्रयुक्त लाइब्रेरी हटा दी गईं
+• जब कोई सुविधा FullRoid X की हो, तो अब स्पष्ट जानकारी मिलती है
+• सभी समर्थित भाषाओं में बेहतर अनुवाद
 </hi-IN>
 
 <es-ES>
 Novedades:
 
-• Nueva sección de juegos: un catálogo integrado de juegos casuales que puedes jugar directamente en la aplicación
-• Pantalla de inicio rediseñada con navegación moderna, botón de juegos rápidos, categorías y búsqueda instantánea
-• Nuevas pestañas "Recientes" y "Nuevos", marca juegos como favoritos y ahora tu progreso se guarda entre sesiones
+• Todas las consolas ya son gratis: PSP, Nintendo 3DS, DS, PlayStation, N64, SNES y el resto de sistemas, sin comprar nada
+• El chat se abre al instante: Roomcord viene integrado en la app, así que carga incluso con conexiones lentas
+• Descarga más ligera: hemos eliminado bibliotecas sin usar
+• Explicaciones más claras cuando una función pertenece a FullRoid X
+• Mejores traducciones en todos los idiomas
 </es-ES>
 
 <ar>
 ما الجديد:
 
-• قسم الألعاب الجديد: كتالوج مدمج للألعاب العادية يمكنك لعبها مباشرة في التطبيق
-• شاشة رئيسية معاد تصميمها مع تنقل حديث، زر ألعاب سريع، فئات، وبحث فوري
-• علامات تبويب "الأحدث" و"الجديد"، وضع الألعاب كمفضلة، والآن يتم حفظ تقدمك بين الجلسات
+• جميع الأجهزة أصبحت مجانية الآن — PSP وNintendo 3DS وDS وPlayStation وN64 وSNES وبقية الأنظمة، دون أي شراء
+• تفتح الدردشة الآن على الفور — أصبح Roomcord مدمجًا داخل التطبيق، لذا يتم تحميله حتى مع الاتصالات البطيئة
+• حجم تنزيل أصغر: أزلنا المكتبات غير المستخدمة
+• شرح أوضح عندما تكون الميزة جزءًا من FullRoid X
+• ترجمات أفضل بجميع اللغات المدعومة
 </ar>
 
 <pt-BR>
 Novidades:
 
-• Nova seção de jogos: um catálogo integrado de jogos casuais que você pode jogar diretamente no aplicativo
-• Tela inicial redesenhada com navegação moderna, botão de jogos rápidos, categorias e busca instantânea
-• Novas abas "Recentes" e "Novos", marque jogos como favoritos e agora seu progresso é salvo entre sessões
+• Todos os consoles agora são gratuitos — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES e todos os outros sistemas, sem precisar comprar nada
+• O chat agora abre instantaneamente — o Roomcord vem integrado ao app, então carrega mesmo com conexões lentas
+• Download menor: removemos bibliotecas não utilizadas
+• Explicações mais claras quando um recurso pertence ao FullRoid X
+• Traduções melhores em todos os idiomas
 </pt-BR>
 
 <id>
-Apa yang Baru:
+Yang Baru:
 
-• Bagian Game Baru: katalog bawaan dari game kasual yang dapat Anda mainkan langsung di aplikasi
-• Layar beranda yang didesain ulang dengan navigasi modern, tombol permainan cepat, kategori, dan pencarian instan
-• Tab "Terbaru" dan "Baru", tandai game sebagai favorit, dan kemajuan Anda sekarang disimpan di antara sesi
+• Semua konsol kini gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES, dan semua sistem lainnya, tanpa perlu membeli apa pun
+• Chat kini terbuka seketika — Roomcord sudah menyatu di dalam aplikasi, jadi tetap termuat pada koneksi lambat
+• Unduhan lebih kecil: kami menghapus pustaka yang tidak terpakai
+• Penjelasan lebih jelas saat sebuah fitur milik FullRoid X
+• Terjemahan lebih baik di semua bahasa
 </id>
 
 <ru-RU>
 Что нового:
 
-• Новый раздел игр: встроенный каталог казуальных игр, которые можно играть прямо в приложении
-• Обновлённый главный экран с современной навигацией, кнопкой быстрого доступа к играм, категориями и мгновенным поиском
-• Новые вкладки "Недавние" и "Новые", отметьте игры как избранные, и теперь ваш прогресс сохраняется между сессиями
+• Все консоли теперь бесплатны — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES и остальные системы, покупать ничего не нужно
+• Чат открывается мгновенно — Roomcord встроен в приложение и загружается даже при медленном соединении
+• Приложение стало легче: убрали неиспользуемые библиотеки
+• Понятные пояснения, когда функция относится к FullRoid X
+• Улучшенные переводы на всех языках
 </ru-RU>
 
 <ja-JP>
-新着情報:
+新機能:
 
-• 新しいゲームセクション: アプリ内で直接プレイできるカジュアルゲームの組み込みカタログ
-• モダンなナビゲーション、クイックゲームボタン、カテゴリー、インスタント検索を備えたホーム画面の再設計
-• 新しい「最近」と「新規」タブ、ゲームをお気に入りにマークし、セッション間で進行状況が保存されるようになりました
+• すべての機種が無料になりました — PSP、Nintendo 3DS、DS、PlayStation、N64、SNES ほか全システムを購入なしで
+• チャットが瞬時に開きます — Roomcord をアプリに内蔵したので、回線が遅くても読み込めます
+• ダウンロードサイズを削減：未使用のライブラリを除去
+• FullRoid X の機能である場合の説明をわかりやすく
+• 対応するすべての言語で翻訳を改善
 </ja-JP>
 
 <de-DE>
-Neuigkeiten:
+Neu:
 
-• Neuer Spielebereich: ein integrierter Katalog von Casual-Spielen, die Sie direkt in der App spielen können
-• Neugestalteter Startbildschirm mit moderner Navigation, Schnellspiel-Schaltfläche, Kategorien und Sofortsuche
-• Neue Registerkarten "Zuletzt" und "Neu", markieren Sie Spiele als Favoriten und Ihr Fortschritt wird jetzt zwischen den Sitzungen gespeichert
+• Alle Konsolen sind jetzt kostenlos — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES und alle weiteren Systeme, ohne Kauf
+• Der Chat öffnet jetzt sofort — Roomcord ist in die App integriert und lädt auch bei langsamer Verbindung
+• Kleinerer Download: ungenutzte Bibliotheken entfernt
+• Klarere Hinweise, wenn eine Funktion zu FullRoid X gehört
+• Bessere Übersetzungen in allen unterstützten Sprachen
 </de-DE>
 
 <fr-FR>
-Quoi de neuf :
+Nouveautés :
 
-• Nouvelle section Jeux : un catalogue intégré de jeux occasionnels que vous pouvez jouer directement dans l'application
-• Écran d'accueil repensé avec une navigation moderne, un bouton de jeux rapides, des catégories et une recherche instantanée
-• Nouveaux onglets "Récents" et "Nouveaux", marquez les jeux comme favoris et votre progression est désormais sauvegardée entre les sessions
+• Toutes les consoles sont désormais gratuites : PSP, Nintendo 3DS, DS, PlayStation, N64, SNES et tous les autres systèmes, sans achat
+• Le chat s'ouvre désormais instantanément : Roomcord est intégré à l'application et se charge même avec une connexion lente
+• Téléchargement plus léger : bibliothèques inutilisées supprimées
+• Explications plus claires quand une fonction relève de FullRoid X
+• Meilleures traductions dans toutes les langues
 </fr-FR>
 
 <ko-KR>
 새로운 기능:
 
-• 새로운 게임 섹션: 앱 내에서 바로 플레이할 수 있는 캐주얼 게임의 내장 카탈로그
-• 현대적인 탐색, 빠른 게임 버튼, 카테고리 및 즉시 검색 기능을 갖춘 홈 화면 재설계
-• 새로운 "최근" 및 "새로운" 탭, 게임을 즐겨찾기로 표시하고 이제 세션 간에 진행 상황이 저장됩니다
+• 이제 모든 기기를 무료로 — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES 등 모든 시스템을 구매 없이 이용
+• 채팅이 이제 즉시 열립니다 — Roomcord가 앱에 내장되어 느린 연결에서도 불러옵니다
+• 다운로드 용량 축소: 사용하지 않는 라이브러리 제거
+• FullRoid X 기능일 때 더 명확한 안내
+• 지원되는 모든 언어의 번역 개선
 </ko-KR>
 
 <tr-TR>
 Yenilikler:
 
-• Yeni Oyunlar bölümü: uygulama içinde doğrudan oynayabileceğiniz gündelik oyunların yerleşik kataloğu
-• Modern gezinme, hızlı oyun düğmesi, kategoriler ve anında arama ile yeniden tasarlanmış ana ekran
-• Yeni "Son" ve "Yeni" sekmeleri, oyunları favori olarak işaretleyin ve artık ilerlemeniz oturumlar arasında kaydediliyor
+• Tüm konsollar artık ücretsiz — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES ve diğer tüm sistemler, satın almaya gerek yok
+• Sohbet artık anında açılıyor — Roomcord uygulamaya yerleşik, bu yüzden yavaş bağlantılarda da yükleniyor
+• Daha küçük indirme: kullanılmayan kütüphaneler kaldırıldı
+• Bir özellik FullRoid X kapsamındaysa daha net açıklama
+• Tüm dillerde daha iyi çeviriler
 </tr-TR>
 
 <vi>
 Có gì mới:
 
-• Phần trò chơi mới: danh mục trò chơi thông thường tích hợp sẵn mà bạn có thể chơi ngay trong ứng dụng
-• Màn hình chính được thiết kế lại với điều hướng hiện đại, nút trò chơi nhanh, danh mục và tìm kiếm tức thì
-• Tab "Gần đây" và "Mới", đánh dấu trò chơi yêu thích và tiến trình của bạn hiện được lưu giữa các phiên
+• Tất cả máy chơi game giờ đã miễn phí — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES và mọi hệ máy khác, không cần mua gì
+• Trò chuyện giờ mở ngay lập tức — Roomcord đã được tích hợp sẵn trong ứng dụng nên vẫn tải được khi mạng chậm
+• Tải nhẹ hơn: đã loại bỏ các thư viện không dùng đến
+• Giải thích rõ ràng hơn khi một tính năng thuộc FullRoid X
+• Bản dịch tốt hơn ở mọi ngôn ngữ
 </vi>
 
 <it-IT>
 Novità:
 
-• Nuova sezione Giochi: un catalogo integrato di giochi casual che puoi giocare direttamente nell'app
-• Schermata principale ridisegnata con navigazione moderna, pulsante giochi rapidi, categorie e ricerca istantanea
-• Nuove schede "Recenti" e "Nuovi", segna i giochi come preferiti e ora i tuoi progressi vengono salvati tra le sessioni
+• Tutte le console ora sono gratuite — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES e tutti gli altri sistemi, senza acquisti
+• La chat ora si apre all'istante: Roomcord è integrato nell'app e si carica anche con connessioni lente
+• Download più leggero: rimosse librerie inutilizzate
+• Spiegazioni più chiare quando una funzione appartiene a FullRoid X
+• Traduzioni migliori in tutte le lingue
 </it-IT>
 
 <pl-PL>
 Co nowego:
 
-• Nowa sekcja gier: wbudowany katalog gier casualowych, które możesz grać bezpośrednio w aplikacji
-• Przeprojektowany ekran główny z nowoczesną nawigacją, przyciskiem szybkich gier, kategoriami i natychmiastowym wyszukiwaniem
-• Nowe zakładki "Ostatnie" i "Nowe", oznacz gry jako ulubione, a teraz twój postęp jest zapisywany między sesjami
+• Wszystkie konsole są teraz darmowe — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES i pozostałe systemy, bez żadnych zakupów
+• Czat otwiera się teraz błyskawicznie — Roomcord jest wbudowany w aplikację, więc ładuje się nawet przy wolnym połączeniu
+• Mniejszy rozmiar pobierania: usunęliśmy nieużywane biblioteki
+• Jaśniejsze wyjaśnienia, gdy funkcja należy do FullRoid X
+• Lepsze tłumaczenia we wszystkich językach
 </pl-PL>
 
 <uk>
 Що нового:
 
-• Новий розділ ігор: вбудований каталог казуальних ігор, які можна грати прямо в додатку
-• Перероблений головний екран з сучасною навігацією, кнопкою швидкого доступу до ігор, категоріями та миттєвим пошуком
-• Нові вкладки "Останні" та "Нові", позначайте ігри як улюблені, і тепер ваш прогрес зберігається між сеансами
+• Усі консолі тепер безкоштовні — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES та інші системи, купувати нічого не треба
+• Чат тепер відкривається миттєво — Roomcord вбудовано в застосунок, тож він завантажується навіть за повільного з'єднання
+• Менший розмір завантаження: прибрали невикористані бібліотеки
+• Зрозуміліші пояснення, коли функція належить FullRoid X
+• Кращі переклади всіма мовами
 </uk>
 
 <cs-CZ>
-Co je nového:
+Novinky:
 
-• Nová sekce her: vestavěný katalog příležitostných her, které můžete hrát přímo v aplikaci
-• Přepracovaná domovská obrazovka s moderní navigací, tlačítkem rychlých her, kategoriemi a okamžitým vyhledáváním
-• Nové záložky "Nedávné" a "Nové", označte hry jako oblíbené a nyní se váš postup ukládá mezi sezeními
+• Všechny konzole jsou nyní zdarma — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES a všechny další systémy, bez nákupu
+• Chat se nyní otevře okamžitě — Roomcord je zabudovaný v aplikaci, takže se načte i při pomalém připojení
+• Menší stahování: odstranili jsme nepoužívané knihovny
+• Srozumitelnější vysvětlení, když funkce patří do FullRoid X
+• Lepší překlady ve všech jazycích
 </cs-CZ>
 
 <da-DK>
 Nyheder:
 
-• Ny spilsektion: en indbygget katalog af afslappede spil, du kan spille direkte i appen
-• Redesignet startskærm med moderne navigation, hurtigspil-knap, kategorier og øjeblikkelig søgning
-• Nye faner "Seneste" og "Nye", markér spil som favoritter, og dine fremskridt gemmes nu mellem sessioner
+• Alle konsoller er nu gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES og alle øvrige systemer, uden køb
+• Chatten åbner nu med det samme — Roomcord er indbygget i appen og indlæses selv ved langsom forbindelse
+• Mindre download: vi har fjernet ubrugte biblioteker
+• Tydeligere forklaringer, når en funktion hører til FullRoid X
+• Bedre oversættelser på alle sprog
 </da-DK>
 
 <el-GR>
 Τι νέο υπάρχει:
 
-• Νέα ενότητα παιχνιδιών: ένας ενσωματωμένος κατάλογος περιστασιακών παιχνιδιών που μπορείτε να παίξετε απευθείας στην εφαρμογή
-• Επανασχεδιασμένη αρχική οθόνη με σύγχρονη πλοήγηση, κουμπί γρήγορων παιχνιδιών, κατηγορίες και άμεση αναζήτηση
-• Νέες καρτέλες "Πρόσφατα" και "Νέα", σημειώστε τα παιχνίδια ως αγαπημένα και η πρόοδός σας αποθηκεύεται πλέον μεταξύ των συνεδριών
+• Όλες οι κονσόλες είναι πλέον δωρεάν — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES και όλα τα υπόλοιπα συστήματα, χωρίς αγορά
+• Η συνομιλία ανοίγει πλέον ακαριαία — το Roomcord είναι ενσωματωμένο στην εφαρμογή και φορτώνει ακόμη και σε αργή σύνδεση
+• Μικρότερη λήψη: αφαιρέσαμε αχρησιμοποίητες βιβλιοθήκες
+• Πιο σαφείς εξηγήσεις όταν μια δυνατότητα ανήκει στο FullRoid X
+• Καλύτερες μεταφράσεις σε όλες τις γλώσσες
 </el-GR>
 
 <fi-FI>
-Uutta:
+Mitä uutta:
 
-• Uusi peliosio: sisäänrakennettu luettelo rentoja pelejä, joita voit pelata suoraan sovelluksessa
-• Uudistettu aloitusnäyttö modernilla navigoinnilla, pikapelipainikkeella, kategorioilla ja välittömällä haulla
-• Uudet "Viimeisimmät" ja "Uudet" välilehdet, merkitse pelit suosikeiksi, ja edistymisesi tallennetaan nyt istuntojen välillä
+• Kaikki konsolit ovat nyt ilmaisia — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES ja kaikki muut järjestelmät, ilman ostoja
+• Chat avautuu nyt heti — Roomcord on sisäänrakennettu sovellukseen, joten se latautuu hitaallakin yhteydellä
+• Pienempi lataus: poistimme käyttämättömät kirjastot
+• Selkeämmät selitykset, kun ominaisuus kuuluu FullRoid X:ään
+• Paremmat käännökset kaikilla kielillä
 </fi-FI>
 
 <hu-HU>
 Újdonságok:
 
-• Új Játékok szekció: beépített katalógus alkalmi játékokkal, amelyeket közvetlenül az alkalmazásban játszhatsz
-• Újratervezett kezdőképernyő modern navigációval, gyors játék gombbal, kategóriákkal és azonnali kereséssel
-• Új "Legutóbbi" és "Új" lapok, jelöld meg a játékokat kedvencként, és most már a haladásod mentésre kerül a munkamenetek között
+• Minden konzol ingyenes lett — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES és az összes többi rendszer, vásárlás nélkül
+• A csevegés mostantól azonnal megnyílik — a Roomcord be van építve az alkalmazásba, így lassú kapcsolat mellett is betölt
+• Kisebb letöltés: eltávolítottuk a nem használt könyvtárakat
+• Érthetőbb magyarázat, ha egy funkció a FullRoid X része
+• Jobb fordítások minden nyelven
 </hu-HU>
 
 <iw-IL>
 מה חדש:
 
-• מדור משחקים חדש: קטלוג מובנה של משחקים מזדמנים שתוכל לשחק ישירות באפליקציה
-• מסך בית מעוצב מחדש עם ניווט מודרני, כפתור משחקים מהירים, קטגוריות וחיפוש מיידי
-• לשוניות "אחרונים" ו"חדשים" חדשות, סמן משחקים כמועדפים, ועכשיו ההתקדמות שלך נשמרת בין מפגשים
+• כל הקונסולות זמינות עכשיו בחינם — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES וכל שאר המערכות, בלי לרכוש דבר
+• הצ'אט נפתח עכשיו מיד — Roomcord מובנה באפליקציה ולכן נטען גם בחיבור איטי
+• הורדה קטנה יותר: הסרנו ספריות שאינן בשימוש
+• הסברים ברורים יותר כשתכונה שייכת ל-FullRoid X
+• תרגומים משופרים בכל השפות
 </iw-IL>
 
 <nl-NL>
 Wat is er nieuw:
 
-• Nieuwe games-sectie: een ingebouwde catalogus van casual games die je direct in de app kunt spelen
-• Herontworpen startscherm met moderne navigatie, snelle games-knop, categorieën en directe zoekfunctie
-• Nieuwe tabbladen "Recent" en "Nieuw", markeer games als favorieten en je voortgang wordt nu tussen sessies opgeslagen
+• Alle consoles zijn nu gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES en alle andere systemen, zonder aankoop
+• De chat opent nu direct — Roomcord zit ingebouwd in de app en laadt ook bij een trage verbinding
+• Kleinere download: ongebruikte bibliotheken verwijderd
+• Duidelijkere uitleg wanneer een functie bij FullRoid X hoort
+• Betere vertalingen in alle talen
 </nl-NL>
 
 <no-NO>
 Hva er nytt:
 
-• Ny spillseksjon: en innebygd katalog over uformelle spill du kan spille direkte i appen
-• Redesignet startskjerm med moderne navigasjon, hurtigspill-knapp, kategorier og umiddelbar søkefunksjon
-• Nye "Nylige" og "Nye" faner, merk spill som favoritter, og fremgangen din lagres nå mellom økter
+• Alle konsoller er nå gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES og alle andre systemer, uten kjøp
+• Chatten åpnes nå umiddelbart — Roomcord er innebygd i appen og lastes selv ved treg tilkobling
+• Mindre nedlasting: vi fjernet ubrukte biblioteker
+• Tydeligere forklaringer når en funksjon hører til FullRoid X
+• Bedre oversettelser på alle språk
 </no-NO>
 
 <pt-PT>
 Novidades:
 
-• Nova secção de jogos: um catálogo integrado de jogos casuais que pode jogar diretamente na aplicação
-• Ecrã inicial redesenhado com navegação moderna, botão de jogos rápidos, categorias e pesquisa instantânea
-• Novas abas "Recentes" e "Novos", marque jogos como favoritos e agora o seu progresso é guardado entre sessões
+• Todas as consolas são agora gratuitas — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES e todos os outros sistemas, sem comprar nada
+• O chat abre agora instantaneamente — o Roomcord está integrado na aplicação, por isso carrega mesmo com ligações lentas
+• Transferência mais pequena: removemos bibliotecas não utilizadas
+• Explicações mais claras quando uma funcionalidade pertence ao FullRoid X
+• Melhores traduções em todos os idiomas
 </pt-PT>
 
 <ro>
 Ce este nou:
 
-• Secțiune nouă de jocuri: un catalog integrat de jocuri casual pe care le poți juca direct în aplicație
-• Ecran de start redesenat cu navigație modernă, buton de jocuri rapide, categorii și căutare instantanee
-• File noi "Recente" și "Noi", marchează jocurile ca favorite și acum progresul tău este salvat între sesiuni
+• Toate consolele sunt acum gratuite — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES și toate celelalte sisteme, fără achiziții
+• Chatul se deschide acum instantaneu — Roomcord este integrat în aplicație, așa că se încarcă și la conexiuni lente
+• Descărcare mai mică: am eliminat bibliotecile nefolosite
+• Explicații mai clare când o funcție aparține de FullRoid X
+• Traduceri mai bune în toate limbile
 </ro>
 
 <sr>
 Шта је ново:
 
-• Нови одељак игара: уграђени каталог лежерних игара које можете играти директно у апликацији
-• Прерађен почетни екран са модерном навигацијом, дугметом за брзе игре, категоријама и тренутном претрагом
-• Нове картице "Недавне" и "Нове", означите игре као омиљене и сада се ваш напредак чува између сесија
+• Све конзоле су сада бесплатне — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES и сви остали системи, без куповине
+• Ћаскање се сада отвара тренутно — Roomcord је уграђен у апликацију, па се учитава и при спорој вези
+• Мање преузимање: уклонили смо некоришћене библиотеке
+• Јасније објашњење када функција припада FullRoid X-у
+• Бољи преводи на свим језицима
 </sr>
 
 <sv-SE>
 Nyheter:
 
-• Ny spelsektion: en inbyggd katalog med avslappnade spel som du kan spela direkt i appen
-• Omdesignad startskärm med modern navigering, snabbspelsknapp, kategorier och omedelbar sökning
-• Nya flikar "Senaste" och "Nya", markera spel som favoriter och din framgång sparas nu mellan sessioner
+• Alla konsoler är nu gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES och alla andra system, utan köp
+• Chatten öppnas nu direkt — Roomcord är inbyggt i appen och laddas även vid långsam anslutning
+• Mindre nedladdning: vi tog bort oanvända bibliotek
+• Tydligare förklaringar när en funktion hör till FullRoid X
+• Bättre översättningar på alla språk
 </sv-SE>
 
 <af>
 Wat is nuut:
 
-• Nuwe speletjies-afdeling: 'n ingeboude katalogus van toevallige speletjies wat jy reg in die toepassing kan speel
-• Herontwerpte tuisskerm met moderne navigasie, vinnige speletjieknoppie, kategorieë en onmiddellike soektog
-• Nuwe "Onlangse" en "Nuwe" oortjies, merk speletjies as gunstelinge, en jou vordering word nou tussen sessies gestoor
+• Alle konsoles is nou gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES en al die ander stelsels, sonder om iets te koop
+• Klets open nou dadelik — Roomcord is in die app ingebou, so dit laai selfs met stadige verbindings
+• Kleiner aflaai: ons het ongebruikte biblioteke verwyder
+• Duideliker verduidelikings wanneer 'n funksie deel van FullRoid X is
+• Beter vertalings in alle tale
 </af>
 
 <ca>
 Novetats:
 
-• Nova secció de jocs: un catàleg integrat de jocs casuals que pots jugar directament a l'aplicació
-• Pantalla d'inici redissenyada amb navegació moderna, botó de jocs ràpids, categories i cerca instantània
-• Noves pestanyes "Recents" i "Nous", marca els jocs com a favorits i ara el teu progrés es guarda entre sessions
+• Totes les consoles ara són gratuïtes — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES i la resta de sistemes, sense cap compra
+• El xat s'obre a l'instant: Roomcord ve integrat a l'app, així que es carrega fins i tot amb connexions lentes
+• Descàrrega més lleugera: hem eliminat biblioteques sense ús
+• Explicacions més clares quan una funció pertany a FullRoid X
+• Millors traduccions en tots els idiomes
 </ca>

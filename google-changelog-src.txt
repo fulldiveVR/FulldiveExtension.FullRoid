@@ -1,5 +1,7 @@
 What's New:
 
-• New Games section: a built-in catalog of casual games you can play right in the app
-• Redesigned home screen with modern navigation, a quick games button, categories, and instant search
-• New "Recent" and "New" tabs, mark games as favorites, and your progress is now saved between sessions
+• All consoles are now free — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES and every other system, with nothing to buy
+• Chat now opens instantly — Roomcord is built into the app, so it loads even on slow connections
+• Smaller download: we removed unused libraries
+• Clearer explanations when a feature belongs to FullRoid X
+• Better translations in every supported language

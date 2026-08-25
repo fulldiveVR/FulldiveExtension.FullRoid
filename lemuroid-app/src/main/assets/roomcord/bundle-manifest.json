@@ -1,0 +1,293 @@
+{
+  "brand": "roomcord",
+  "buildNumber": "228",
+  "builtAt": "2026-08-25T11:11:37Z",
+  "engineRevision": "425cfb54d01a9472b3e81d9e76fd63a4a44cfbcb",
+  "env": "prod",
+  "fileCount": 70,
+  "files": {
+    "assets/AssetManifest.bin": {
+      "sha256": "0c5bb898e6e8de7e39ad46a48138bb3a19066acb272c618899cf2adc46b2a854",
+      "size": 2549
+    },
+    "assets/AssetManifest.bin.json": {
+      "sha256": "7a59af19da2313e4852967a6a9a8c485307aa73be8471b8ac44015100eb7339e",
+      "size": 3402
+    },
+    "assets/FontManifest.json": {
+      "sha256": "28b1eb2b3d2e1ad60b8c8b0f9100b1ccbf492f7fa97f5bebb51ea97e73926e7d",
+      "size": 82
+    },
+    "assets/NOTICES": {
+      "sha256": "fe980464eebb13304594113f69a67baa04a4652b18881bf5478842426c15caee",
+      "size": 1577227
+    },
+    "assets/assets/a2ui/basic_showcase.json": {
+      "sha256": "c0d2147457df6f63e02577fc0e278f35abe259304adcfcef738f8533dc21c37e",
+      "size": 1730
+    },
+    "assets/assets/a2ui/form_demo.json": {
+      "sha256": "c07e97d62f654d4943ae891bd9fe3ffc88f19d2ed1c418715f73f1d337079d73",
+      "size": 1841
+    },
+    "assets/assets/a2ui/poll_demo.json": {
+      "sha256": "d9f605e8b37851be26cccfde4f3842fabbf320bf4cc25c6d996172cadd9041b4",
+      "size": 1088
+    },
+    "assets/assets/a2ui/report_demo.json": {
+      "sha256": "555ffb332ddc250fcbf15a1a1c5050cc61a3e5ccb521ef199f4cd9b3bb2c04df",
+      "size": 1685
+    },
+    "assets/assets/a2ui/wize_showcase.json": {
+      "sha256": "7d66e294c29405f6307279e48b2e1bc2dc2cc11ab4b2403c55ec9b63b281d355",
+      "size": 2338
+    },
+    "assets/assets/branding/jesuscord/logo.png": {
+      "sha256": "3ba58cb472b2055371b6f0fcf10ea6e20d2cf8e4ada053577a9ad78dea699424",
+      "size": 918143
+    },
+    "assets/assets/branding/jesuscord/logo_transparent.png": {
+      "sha256": "53643b2d5075a02737c0486beb04e222af5e4880ace1fda3c63c63c0f5a67a23",
+      "size": 335709
+    },
+    "assets/assets/branding/roomcord/README.md": {
+      "sha256": "aecac786640f7fcad2d9b507e882e85646b29396025250a85686872a78688eda",
+      "size": 831
+    },
+    "assets/assets/branding/roomcord/logo.png": {
+      "sha256": "09ca7ddb0f666bcbcdec3ffbfeb0e312e5fa6902e695d76e1de42d25eff01a4a",
+      "size": 20424
+    },
+    "assets/assets/branding/roomcord/logo_transparent.png": {
+      "sha256": "e1fc95ccefae302036879e620a4f446287ce940bde3a13dbb4e39597d2e8ef57",
+      "size": 19860
+    },
+    "assets/assets/branding/workcord/logo.png": {
+      "sha256": "dfd6553dad3df1cc487935e52e8caa4a0bcd9de0311dbed63c5ca03d39af316e",
+      "size": 23758
+    },
+    "assets/assets/branding/workcord/logo_transparent.png": {
+      "sha256": "a40b7a327888df1423ec5ac75ed03e094e1f248da497322d3e264e09181b39d5",
+      "size": 14553
+    },
+    "assets/assets/brands/claude.svg": {
+      "sha256": "728cd046c80d287be6bb3f52f753e26147f20e0b39e648baad7d4c618cf935f5",
+      "size": 1936
+    },
+    "assets/assets/brands/gemini.svg": {
+      "sha256": "0d02bc04470324a47263639980b18a79515f9aeafc93c7ce7507663493e77fe5",
+      "size": 363
+    },
+    "assets/assets/brands/openai.svg": {
+      "sha256": "00af558b21e7bca2cce785e7d7305e7e674b5612e180bb8eccac9ba189442761",
+      "size": 1275
+    },
+    "assets/assets/call_backgrounds/aurora.jpg": {
+      "sha256": "dd1ec532dc3292ed797901b87671c345cb2138f3ae29b254c1e93ea0008b751d",
+      "size": 12792
+    },
+    "assets/assets/call_backgrounds/dusk.jpg": {
+      "sha256": "0609e87b3a468c10a8cc9a884b503c00145e8a876c8c86205dfdec84d594913b",
+      "size": 11176
+    },
+    "assets/assets/call_backgrounds/studio.jpg": {
+      "sha256": "8efa257b7af1d8e413c317759297f40a8da85158861f76fb02b67a963e6aeaf5",
+      "size": 11841
+    },
+    "assets/assets/call_backgrounds/sunset.jpg": {
+      "sha256": "d84f8bf8c4527109c6dab6c5018c6a7e89674740efe1ee4b73ba65bb2d8774a7",
+      "size": 14486
+    },
+    "assets/assets/icons/agent_feedback.png": {
+      "sha256": "f9c2a80443bc07b6a0cdcf0e2cbdf38633c3f20b7a2e34943807f8fe6ba3e35c",
+      "size": 6730
+    },
+    "assets/fonts/MaterialIcons-Regular.otf": {
+      "sha256": "2fc31d36496c1d4112383d026cd152f480e4a0f18632c83eb4d78bb2b5e56ff5",
+      "size": 53132
+    },
+    "assets/packages/flutter_soloud/web/init_module.dart.js": {
+      "sha256": "3e98b7c311ea4986aad5f1dd31127a6ec93d9beef9f133470088d9cec4b85fe6",
+      "size": 63458
+    },
+    "assets/packages/flutter_soloud/web/libflutter_soloud_plugin.js": {
+      "sha256": "1c7309510cbab870b9e841692bfacbb72d85f1392a03f1d576a3d022cc84710f",
+      "size": 90854
+    },
+    "assets/packages/flutter_soloud/web/libflutter_soloud_plugin.wasm": {
+      "sha256": "f2835b0cbe6a32216d839758084e0f70ed6a438eff1611ed0151e8fc6ece9944",
+      "size": 1266653
+    },
+    "assets/packages/flutter_soloud/web/worker.dart.js": {
+      "sha256": "80659794e105425dfc73183002c6a058808ab10d86cd4b8bf93b57c2a90395ff",
+      "size": 78408
+    },
+    "assets/packages/mixpanel_flutter/assets/mixpanel.js": {
+      "sha256": "3c2cfe5da9d3f6008e3e78bfbe0cc6823fb568c12b9ab9f7e9cb248a1215d26d",
+      "size": 1811
+    },
+    "assets/packages/record_web/assets/js/record.fixwebmduration.js": {
+      "sha256": "c345ad5d2fffb357ada647b9b690693452a2001bc5912f1e9066876ce016399b",
+      "size": 23286
+    },
+    "assets/packages/record_web/assets/js/record.worklet.js": {
+      "sha256": "ba7e0f4c841480ee78c0b54e7eadd44455b916fefdb07410ee46159d82dcc08e",
+      "size": 11803
+    },
+    "assets/packages/wakelock_plus/assets/no_sleep.js": {
+      "sha256": "726c644cda17bf271d996fb629806a59409607e9b00e0dfbf75adfd3986bbb7e",
+      "size": 13669
+    },
+    "assets/shaders/ink_sparkle.frag": {
+      "sha256": "5aee0e4ff369c0559eaa7af6d64dce812bab67afd9888d1d7d27046293b39ab5",
+      "size": 8890
+    },
+    "assets/shaders/spoiler.frag": {
+      "sha256": "522060b01bcdaedb8aa7a98eddaa4af2e8337c9ddd2ad9583db695ad9af6201b",
+      "size": 2343
+    },
+    "assets/shaders/stretch_effect.frag": {
+      "sha256": "c723fbb5b9a3456b101073825ab5d34de312a39f32bf5de42aae0cda605d0a1a",
+      "size": 6737
+    },
+    "branding/jesuscord/Icon-192.png": {
+      "sha256": "857efbc792a2bfc58d8180b44d3398c7a1f50e8f8762e7923de123c170778462",
+      "size": 31894
+    },
+    "branding/jesuscord/Icon-512.png": {
+      "sha256": "62a6d912142f9c5aaca882f728a08e6a451465acb1cefcb4eb97f457acd14c5b",
+      "size": 226175
+    },
+    "branding/jesuscord/Icon-maskable-192.png": {
+      "sha256": "857efbc792a2bfc58d8180b44d3398c7a1f50e8f8762e7923de123c170778462",
+      "size": 31894
+    },
+    "branding/jesuscord/Icon-maskable-512.png": {
+      "sha256": "62a6d912142f9c5aaca882f728a08e6a451465acb1cefcb4eb97f457acd14c5b",
+      "size": 226175
+    },
+    "branding/jesuscord/favicon.png": {
+      "sha256": "e0f1f6ff19cc6f2836217bc45760f5688b027f82de27680317235f1b5d5367e6",
+      "size": 1743
+    },
+    "branding/jesuscord/logo.png": {
+      "sha256": "53643b2d5075a02737c0486beb04e222af5e4880ace1fda3c63c63c0f5a67a23",
+      "size": 335709
+    },
+    "branding/jesuscord/og-card.png": {
+      "sha256": "9284b1d43264050fd4f3d3771b4501ae101ecf3dd01b3f182c7aad3aad3b6aef",
+      "size": 183524
+    },
+    "branding/jesuscord/og-default.png": {
+      "sha256": "aa432f647087ce9cb555804635c0eaefcabe6e5626ce5bb75b1d08522da21cbd",
+      "size": 271394
+    },
+    "branding/roomcord/Icon-192.png": {
+      "sha256": "4b14992ec7fc9873b143e112809ed151a1e32b95224832353048081241ff4fe7",
+      "size": 2020
+    },
+    "branding/roomcord/Icon-512.png": {
+      "sha256": "cd8b06e3540d3a7376d253f4bae155d4970a79338fc500bbaccba80db59af3ed",
+      "size": 7833
+    },
+    "branding/roomcord/Icon-maskable-192.png": {
+      "sha256": "4b14992ec7fc9873b143e112809ed151a1e32b95224832353048081241ff4fe7",
+      "size": 2020
+    },
+    "branding/roomcord/Icon-maskable-512.png": {
+      "sha256": "cd8b06e3540d3a7376d253f4bae155d4970a79338fc500bbaccba80db59af3ed",
+      "size": 7833
+    },
+    "branding/roomcord/README.md": {
+      "sha256": "e16b9a2cb6513fba9a94f73c34317a258aae2a2ff89312e55958b4f95b520c50",
+      "size": 550
+    },
+    "branding/roomcord/favicon.png": {
+      "sha256": "e18dbbd6de391752d819b6823a8989a118eef028a459510f8620b22f68e8b12f",
+      "size": 619
+    },
+    "branding/roomcord/logo.png": {
+      "sha256": "e1fc95ccefae302036879e620a4f446287ce940bde3a13dbb4e39597d2e8ef57",
+      "size": 19860
+    },
+    "branding/roomcord/og-default.png": {
+      "sha256": "f9e01f82bd0907cc8d1f958ad5fe9ca7347d72676b201ad6abb42d6f2d6772c3",
+      "size": 7833
+    },
+    "branding/workcord/Icon-192.png": {
+      "sha256": "10ea44d1c1cfd102ef6c00547e4e6364d595bf309d754e5142a2aafc6ecc456c",
+      "size": 6445
+    },
+    "branding/workcord/Icon-512.png": {
+      "sha256": "ca777fb4461b2fe44360c49bea0c2aa1b415a20e564165a5e6992f603d431e81",
+      "size": 16830
+    },
+    "branding/workcord/Icon-maskable-192.png": {
+      "sha256": "10ea44d1c1cfd102ef6c00547e4e6364d595bf309d754e5142a2aafc6ecc456c",
+      "size": 6445
+    },
+    "branding/workcord/Icon-maskable-512.png": {
+      "sha256": "ca777fb4461b2fe44360c49bea0c2aa1b415a20e564165a5e6992f603d431e81",
+      "size": 16830
+    },
+    "branding/workcord/favicon.png": {
+      "sha256": "b34ecc216947776f6360b374d31c5c5ea6945751e88b4af16e528808971a4856",
+      "size": 2693
+    },
+    "canvaskit/chromium/canvaskit.js": {
+      "sha256": "ff8dcd85cee325699499ee23ffd7567bc8086e9592c24d4d8d411f951c16bda4",
+      "size": 86496
+    },
+    "canvaskit/chromium/canvaskit.wasm": {
+      "sha256": "2bf5ea09d70b8eadb22bb0471c9edfd7b2bee909dbf84456c32480d944660418",
+      "size": 5686880
+    },
+    "favicon.png": {
+      "sha256": "e18dbbd6de391752d819b6823a8989a118eef028a459510f8620b22f68e8b12f",
+      "size": 619
+    },
+    "flutter.js": {
+      "sha256": "a483fd28f51ed2fadd0da3fade5b672eba56310d549d736ce62eabf624a6a578",
+      "size": 9553
+    },
+    "flutter_bootstrap.js": {
+      "sha256": "71c95bb7f2bb64f52c8a71e4df5ceabcc483f32412e9a37457b1c54c75d1c52b",
+      "size": 10182
+    },
+    "icons/Icon-192.png": {
+      "sha256": "4b14992ec7fc9873b143e112809ed151a1e32b95224832353048081241ff4fe7",
+      "size": 2020
+    },
+    "icons/Icon-512.png": {
+      "sha256": "cd8b06e3540d3a7376d253f4bae155d4970a79338fc500bbaccba80db59af3ed",
+      "size": 7833
+    },
+    "icons/Icon-maskable-192.png": {
+      "sha256": "4b14992ec7fc9873b143e112809ed151a1e32b95224832353048081241ff4fe7",
+      "size": 2020
+    },
+    "icons/Icon-maskable-512.png": {
+      "sha256": "cd8b06e3540d3a7376d253f4bae155d4970a79338fc500bbaccba80db59af3ed",
+      "size": 7833
+    },
+    "index.html": {
+      "sha256": "14ac81b639260ed6ca024fe15ea2f2ec5d7b677197dc0cb702a4c9a343867f26",
+      "size": 6498
+    },
+    "main.dart.js": {
+      "sha256": "8800dee3ec13d67668e0d850494c12ad9ebb59335d667387046cb7bf311e5a18",
+      "size": 15655992
+    },
+    "manifest.json": {
+      "sha256": "9784765733a3e4832a3a7fbeaedb407b5c19017148a681c8caceff624f51868a",
+      "size": 897
+    },
+    "version.json": {
+      "sha256": "4f1af0debfba9951f6ef480453b158be8d6554e66cbc141430366e4105c48db2",
+      "size": 94
+    }
+  },
+  "sourceCommit": "e1e9626e37c6e1a607d749a6077f15181b5f9913",
+  "totalBytes": 27490099,
+  "version": "1.2.523"
+}
