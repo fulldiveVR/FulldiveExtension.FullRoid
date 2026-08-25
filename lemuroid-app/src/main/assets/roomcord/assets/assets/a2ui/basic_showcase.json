@@ -1,0 +1,23 @@
+[
+  {"version": "v0.9", "createSurface": {"surfaceId": "basic-showcase", "catalogId": "https://a2ui.org/specification/v0_9/basic_catalog.json"}},
+  {"version": "v0.9", "updateComponents": {"surfaceId": "basic-showcase", "components": [
+    {"id": "root", "component": "Column", "children": ["h1", "h2", "body", "caption", "div1", "icon-row", "card", "list-title", "topics"]},
+    {"id": "h1", "component": "Text", "text": "Heading one", "variant": "h1"},
+    {"id": "h2", "component": "Text", "text": "Heading two", "variant": "h2"},
+    {"id": "body", "component": "Text", "text": "Body text with **markdown**, `code`, and a data-bound greeting below."},
+    {"id": "caption", "component": "Text", "text": {"path": "/greeting"}, "variant": "caption"},
+    {"id": "div1", "component": "Divider"},
+    {"id": "icon-row", "component": "Row", "children": ["ic1", "ic-label"]},
+    {"id": "ic1", "component": "Icon", "name": "star"},
+    {"id": "ic-label", "component": "Text", "text": "Icon next to text in a Row"},
+    {"id": "card", "component": "Card", "child": "card-body"},
+    {"id": "card-body", "component": "Text", "text": "Text inside a Card container."},
+    {"id": "list-title", "component": "Text", "text": "Template list bound to /topics:", "variant": "h5"},
+    {"id": "topics", "component": "List", "children": {"componentId": "topic-row", "path": "/topics"}},
+    {"id": "topic-row", "component": "Text", "text": {"path": "name"}}
+  ]}},
+  {"version": "v0.9", "updateDataModel": {"surfaceId": "basic-showcase", "path": "/", "value": {
+    "greeting": "This caption came from the data model, not the component tree.",
+    "topics": [{"name": "• Agenda"}, {"name": "• Budget"}, {"name": "• Next steps"}]
+  }}}
+]

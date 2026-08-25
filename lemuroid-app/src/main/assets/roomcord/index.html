@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Permissions-Policy" content="microphone=*, camera=*, autoplay=*">
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Roomcord">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Roomcord">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <!-- Warm the gstatic.com connection + start Firebase ESM downloads
+       during HTML parsing. Without this, Dart fires three parallel
+       dynamic imports at boot, racing on a cold TLS socket — Chrome
+       returns ERR_SOCKET_NOT_CONNECTED on hard reload. -->
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js" crossorigin>
+  <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js" crossorigin>
+  <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/12.9.0/firebase-messaging.js" crossorigin>
+
+  <style>
+    /* Prevent horizontal overscroll from triggering browser back/forward navigation */
+    html, body { overscroll-behavior-x: none; }
+    /* Hide Google Identity Services privacy badge that overlaps bottom nav */
+    #credential_picker_container { display: none !important; }
+    /* Hide Cloudflare Turnstile / challenge badge that overlaps bottom nav */
+    .cf-turnstile, [id^="cf-"], iframe[src*="challenges.cloudflare.com"], iframe[src*="turnstile"] {
+      display: none !important;
+    }
+    /* Hide Firebase reCAPTCHA badge that overlaps bottom nav */
+    .grecaptcha-badge { visibility: hidden !important; }
+  </style>
+
+  <title>Roomcord</title>
+  <link rel="manifest" href="manifest.json">
+
+  <script>
+    (function() {
+      var path = window.location.pathname || '';
+      var query = window.location.search || '';
+      var key = 'wize.pendingKitRoute';
+      if (path.startsWith('/k/')) {
+        window.sessionStorage.setItem(key, path);
+        window.location.replace(window.location.origin + '/' + query + '#' + path);
+        return;
+      }
+      if ((window.location.hash || '').startsWith('#/k/')) {
+        window.sessionStorage.setItem(key, window.location.hash.slice(1).split('?')[0]);
+      }
+      var pending = window.sessionStorage.getItem(key);
+      if (!pending || !pending.startsWith('/k/')) return;
+      var expiresAt = Date.now() + 6000;
+      var enforceKitRoute = function() {
+        var hash = window.location.hash || '';
+        if (hash === '#/rooms' || hash === '#/' || hash === '') {
+          window.location.replace(window.location.origin + window.location.search + '#' + pending);
+        }
+        if (Date.now() >= expiresAt) {
+          window.sessionStorage.removeItem(key);
+          window.clearInterval(timer);
+        }
+      };
+      var timer = window.setInterval(enforceKitRoute, 100);
+      window.addEventListener('hashchange', enforceKitRoute);
+      enforceKitRoute();
+    })();
+  </script>
+
+  <!-- Mixpanel stub — actual init is called from Dart via mixpanel_flutter -->
+  <script type="text/javascript">
+  (function(f,b){if(!b.__SV){var e,g,i,h;window.mixpanel=b;b._i=[];b.init=function(e,f,c){function g(a,d){var b=d.split(".");2==b.length&&(a=a[b[0]],d=b[1]);a[d]=function(){a.push([d].concat(Array.prototype.slice.call(arguments,0)))}}var a=b;"undefined"!==typeof c?a=b[c]=[]:c="mixpanel";a.people=a.people||[];a.toString=function(a){var d="mixpanel";"mixpanel"!==c&&(d+="."+c);a||(d+=" (stub)");return d};a.people.toString=function(){return a.toString(1)+".people (stub)"};i="disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" ");for(h=0;h<i.length;h++)g(a,i[h]);var j="set set_once union unset remove delete".split(" ");a.get_group=function(){function b(c){d[c]=function(){call2_args=arguments;call2=[c].concat(Array.prototype.slice.call(call2_args,0));a.push([e,call2])}}for(var d={},e=["get_group"].concat(Array.prototype.slice.call(arguments,0)),c=0;c<j.length;c++)b(j[c]);return d};b._i.push([e,f,c])};b.__SV=1.2;e=f.createElement("script");e.type="text/javascript";e.async=!0;e.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===f.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";g=f.getElementsByTagName("script")[0];g.parentNode.insertBefore(e,g)}})(document,window.mixpanel||[]);
+  </script>
+</head>
+<body>
+  <!--
+    You can customize the "flutter_bootstrap.js" script.
+    This is useful to provide a custom configuration to the Flutter loader
+    or to give the user feedback during the initialization process.
+
+    For more details:
+    * https://docs.flutter.dev/platform-integration/web/initialization
+  -->
+  <!-- flutter_soloud web audio: these define the Module_soloud global the
+       plugin's SoLoud.init() expects. Without them voice fails with
+       audio_init_failed (null check). Requires cross-origin isolation
+       (see web/_headers) for SharedArrayBuffer. -->
+  <script src="assets/packages/flutter_soloud/web/libflutter_soloud_plugin.js" defer></script>
+  <script src="assets/packages/flutter_soloud/web/init_module.dart.js" defer></script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

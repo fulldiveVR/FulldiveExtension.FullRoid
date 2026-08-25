@@ -4,12 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.content.MutableContextWrapper
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
 import android.webkit.CookieManager
+import android.webkit.ServiceWorkerClient
+import android.webkit.ServiceWorkerController
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -220,6 +224,7 @@ private fun WebViewScreen(
                                 // screen's state, which differs across Activity instances.
                                 webViewClient =
                                     LemuroidWebViewClient(
+                                        appContext = ctx.applicationContext,
                                         onStarted = {
                                             isError = false
                                             isLoading = true
@@ -323,6 +328,8 @@ private fun obtainCachedWebView(activityContext: Context): WebView {
         return existing
     }
 
+    registerServiceWorkerAssetClient(activityContext.applicationContext)
+
     val wrapper = MutableContextWrapper(activityContext)
     val webView =
         WebView(wrapper).apply {
@@ -346,11 +353,44 @@ private fun obtainCachedWebView(activityContext: Context): WebView {
     return webView
 }
 
+/**
+ * Service worker requests bypass [WebViewClient.shouldInterceptRequest] entirely,
+ * so they need their own client or a stale registration from an earlier online
+ * visit could pull the shell off the network. The current build ships no service
+ * worker at all (the Flutter one is replaced by a self-unregistering stub), so
+ * this is defence in depth.
+ */
+private fun registerServiceWorkerAssetClient(appContext: Context) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) return
+    ServiceWorkerController.getInstance().setServiceWorkerClient(
+        object : ServiceWorkerClient() {
+            override fun shouldInterceptRequest(request: WebResourceRequest): WebResourceResponse? =
+                RoomcordAssetServer.intercept(appContext, request)
+        },
+    )
+}
+
 private class LemuroidWebViewClient(
+    private val appContext: Context,
     private val onStarted: () -> Unit,
     private val onFinished: () -> Unit,
     private val onError: () -> Unit,
 ) : WebViewClient() {
+    // Serve the Roomcord shell from assets; everything else hits the network.
+    override fun shouldInterceptRequest(
+        view: WebView?,
+        request: WebResourceRequest?,
+    ): WebResourceResponse? {
+        val current = request ?: return null
+        return RoomcordAssetServer.intercept(appContext, current)
+    }
+
+    // NOTE: no onReceivedSslError override on purpose. The offline GameHub
+    // player proceeds through cert errors for its fake host, but here the
+    // embedded host is the *real* web.roomcord.com: every request to it is
+    // answered from assets (no TLS at all), so an SSL error can only come from
+    // a genuine network host — where the default behaviour (cancel) is right.
+
     override fun onPageStarted(
         view: WebView?,
         url: String?,

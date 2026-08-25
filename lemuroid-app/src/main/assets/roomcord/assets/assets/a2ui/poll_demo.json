@@ -1,0 +1,15 @@
+[
+  {"version": "v0.9", "createSurface": {"surfaceId": "poll-demo", "catalogId": "https://a2ui.org/specification/v0_9/basic_catalog.json"}},
+  {"version": "v0.9", "updateComponents": {"surfaceId": "poll-demo", "components": [
+    {"id": "root", "component": "Card", "child": "col"},
+    {"id": "col", "component": "Column", "children": ["q", "choices", "vote"]},
+    {"id": "q", "component": "Text", "text": "Where should the offsite be?", "variant": "h4"},
+    {"id": "choices", "component": "ChoicePicker", "label": "Destination", "variant": "mutuallyExclusive",
+     "options": [{"label": "Lisbon", "value": "lis"}, {"label": "Tbilisi", "value": "tbs"}, {"label": "Online", "value": "web"}],
+     "value": {"path": "/vote/choice"}},
+    {"id": "vote", "component": "Button", "child": "vote-label",
+     "action": {"event": {"name": "cast_vote", "context": {"choice": {"path": "/vote/choice"}}}}},
+    {"id": "vote-label", "component": "Text", "text": "Vote"}
+  ]}},
+  {"version": "v0.9", "updateDataModel": {"surfaceId": "poll-demo", "path": "/", "value": {"vote": {"choice": []}}}}
+]

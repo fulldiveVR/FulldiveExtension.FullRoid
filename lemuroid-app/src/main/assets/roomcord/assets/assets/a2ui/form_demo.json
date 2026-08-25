@@ -1,0 +1,27 @@
+[
+  {"version": "v0.9", "createSurface": {"surfaceId": "form-demo", "catalogId": "https://a2ui.org/specification/v0_9/basic_catalog.json"}},
+  {"version": "v0.9", "updateComponents": {"surfaceId": "form-demo", "components": [
+    {"id": "root", "component": "Column", "children": ["title", "name", "guests", "when", "pick", "agree", "echo", "submit"]},
+    {"id": "title", "component": "Text", "text": "Book a room", "variant": "h3"},
+    {"id": "name", "component": "TextField", "label": "Your name", "value": {"path": "/form/name"}},
+    {"id": "guests", "component": "Slider", "label": "Guests", "value": {"path": "/form/guests"}, "min": 1, "max": 12},
+    {"id": "when", "component": "DateTimeInput", "value": {"path": "/form/when"}, "variant": "datetime"},
+    {"id": "pick", "component": "ChoicePicker", "label": "Room type", "variant": "mutuallyExclusive",
+     "options": [{"label": "Quiet", "value": "quiet"}, {"label": "Open", "value": "open"}, {"label": "Studio", "value": "studio"}],
+     "value": {"path": "/form/roomType"}},
+    {"id": "agree", "component": "CheckBox", "label": "Send me a reminder", "value": {"path": "/form/remind"}},
+    {"id": "echo", "component": "Text", "text": {"path": "/form/name"}, "variant": "caption"},
+    {"id": "submit", "component": "Button", "child": "submit-label",
+     "action": {"event": {"name": "book_room", "context": {
+       "name": {"path": "/form/name"},
+       "guests": {"path": "/form/guests"},
+       "when": {"path": "/form/when"},
+       "roomType": {"path": "/form/roomType"},
+       "remind": {"path": "/form/remind"}
+     }}}},
+    {"id": "submit-label", "component": "Text", "text": "Book it"}
+  ]}},
+  {"version": "v0.9", "updateDataModel": {"surfaceId": "form-demo", "path": "/", "value": {
+    "form": {"name": "", "guests": 2, "remind": false, "roomType": []}
+  }}}
+]
