@@ -60,7 +60,6 @@ object RoomcordAssetServer {
 
     private const val TAG_MISS = "RoomcordAssetMiss"
     private const val TAG_FALLBACK = "RoomcordAssetFallback"
-    private const val TAG_SERVE = "RoomcordAsset"
 
     /**
      * @return a response served from the APK, or null to let the WebView fetch
@@ -107,11 +106,7 @@ object RoomcordAssetServer {
 
         // Pinned local: the update banner must never be able to see prod.
         if (path == VERSION_JSON) {
-            open(context, "$ROOT/$path")?.let {
-                // Logged so QA can prove the update check never reached the CDN.
-                Log.d(TAG_SERVE, "served version.json from the bundle")
-                return ok(path, it)
-            }
+            open(context, "$ROOT/$path")?.let { return ok(path, it) }
             Log.e(TAG_MISS, "version.json missing from the bundle")
             return notFound()
         }

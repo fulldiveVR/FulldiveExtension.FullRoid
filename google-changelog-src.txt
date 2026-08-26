@@ -1,7 +1,3 @@
 What's New:
 
-• All consoles are now free — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES and every other system, with nothing to buy
 • Chat now opens instantly — Roomcord is built into the app, so it loads even on slow connections
-• Smaller download: we removed unused libraries
-• Clearer explanations when a feature belongs to FullRoid X
-• Better translations in every supported language
