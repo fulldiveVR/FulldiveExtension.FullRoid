@@ -1,319 +1,191 @@
 <en-US>
 What's New:
 
-• All consoles are now free — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES and every other system, with nothing to buy
 • Chat now opens instantly — Roomcord is built into the app, so it loads even on slow connections
-• Smaller download: we removed unused libraries
-• Clearer explanations when a feature belongs to FullRoid X
-• Better translations in every supported language
 </en-US>
 
 <zh-CN>
 更新内容：
 
-• 所有主机现已免费开放 —— PSP、Nintendo 3DS、DS、PlayStation、N64、SNES 以及其他所有系统，无需购买
 • 聊天现在即刻打开 —— Roomcord 已内置到应用中，网络较慢时也能加载
-• 安装包更小：移除了未使用的库文件
-• 当某项功能属于 FullRoid X 时，会给出更清晰的说明
-• 改进了所有支持语言的翻译
 </zh-CN>
 
 <zh-TW>
 更新內容：
 
-• 所有主機現已免費開放 —— PSP、Nintendo 3DS、DS、PlayStation、N64、SNES 以及其他所有系統，無需購買
 • 聊天現在立即開啟 —— Roomcord 已內建於應用程式中，網路較慢時也能載入
-• 安裝檔更小：移除了未使用的函式庫
-• 當某項功能屬於 FullRoid X 時，會提供更清楚的說明
-• 改進了所有支援語言的翻譯
 </zh-TW>
 
 <hi-IN>
 नया क्या है:
 
-• अब सभी कंसोल मुफ़्त हैं — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES और बाकी सभी सिस्टम, कुछ भी खरीदने की ज़रूरत नहीं
 • चैट अब तुरंत खुलती है — Roomcord ऐप में ही शामिल है, इसलिए धीमे कनेक्शन पर भी लोड होती है
-• छोटा डाउनलोड: अप्रयुक्त लाइब्रेरी हटा दी गईं
-• जब कोई सुविधा FullRoid X की हो, तो अब स्पष्ट जानकारी मिलती है
-• सभी समर्थित भाषाओं में बेहतर अनुवाद
 </hi-IN>
 
 <es-ES>
 Novedades:
 
-• Todas las consolas ya son gratis: PSP, Nintendo 3DS, DS, PlayStation, N64, SNES y el resto de sistemas, sin comprar nada
 • El chat se abre al instante: Roomcord viene integrado en la app, así que carga incluso con conexiones lentas
-• Descarga más ligera: hemos eliminado bibliotecas sin usar
-• Explicaciones más claras cuando una función pertenece a FullRoid X
-• Mejores traducciones en todos los idiomas
 </es-ES>
 
 <ar>
 ما الجديد:
 
-• جميع الأجهزة أصبحت مجانية الآن — PSP وNintendo 3DS وDS وPlayStation وN64 وSNES وبقية الأنظمة، دون أي شراء
 • تفتح الدردشة الآن على الفور — أصبح Roomcord مدمجًا داخل التطبيق، لذا يتم تحميله حتى مع الاتصالات البطيئة
-• حجم تنزيل أصغر: أزلنا المكتبات غير المستخدمة
-• شرح أوضح عندما تكون الميزة جزءًا من FullRoid X
-• ترجمات أفضل بجميع اللغات المدعومة
 </ar>
 
 <pt-BR>
 Novidades:
 
-• Todos os consoles agora são gratuitos — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES e todos os outros sistemas, sem precisar comprar nada
 • O chat agora abre instantaneamente — o Roomcord vem integrado ao app, então carrega mesmo com conexões lentas
-• Download menor: removemos bibliotecas não utilizadas
-• Explicações mais claras quando um recurso pertence ao FullRoid X
-• Traduções melhores em todos os idiomas
 </pt-BR>
 
 <id>
 Yang Baru:
 
-• Semua konsol kini gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES, dan semua sistem lainnya, tanpa perlu membeli apa pun
 • Chat kini terbuka seketika — Roomcord sudah menyatu di dalam aplikasi, jadi tetap termuat pada koneksi lambat
-• Unduhan lebih kecil: kami menghapus pustaka yang tidak terpakai
-• Penjelasan lebih jelas saat sebuah fitur milik FullRoid X
-• Terjemahan lebih baik di semua bahasa
 </id>
 
 <ru-RU>
 Что нового:
 
-• Все консоли теперь бесплатны — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES и остальные системы, покупать ничего не нужно
 • Чат открывается мгновенно — Roomcord встроен в приложение и загружается даже при медленном соединении
-• Приложение стало легче: убрали неиспользуемые библиотеки
-• Понятные пояснения, когда функция относится к FullRoid X
-• Улучшенные переводы на всех языках
 </ru-RU>
 
 <ja-JP>
 新機能:
 
-• すべての機種が無料になりました — PSP、Nintendo 3DS、DS、PlayStation、N64、SNES ほか全システムを購入なしで
 • チャットが瞬時に開きます — Roomcord をアプリに内蔵したので、回線が遅くても読み込めます
-• ダウンロードサイズを削減：未使用のライブラリを除去
-• FullRoid X の機能である場合の説明をわかりやすく
-• 対応するすべての言語で翻訳を改善
 </ja-JP>
 
 <de-DE>
 Neu:
 
-• Alle Konsolen sind jetzt kostenlos — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES und alle weiteren Systeme, ohne Kauf
 • Der Chat öffnet jetzt sofort — Roomcord ist in die App integriert und lädt auch bei langsamer Verbindung
-• Kleinerer Download: ungenutzte Bibliotheken entfernt
-• Klarere Hinweise, wenn eine Funktion zu FullRoid X gehört
-• Bessere Übersetzungen in allen unterstützten Sprachen
 </de-DE>
 
 <fr-FR>
 Nouveautés :
 
-• Toutes les consoles sont désormais gratuites : PSP, Nintendo 3DS, DS, PlayStation, N64, SNES et tous les autres systèmes, sans achat
 • Le chat s'ouvre désormais instantanément : Roomcord est intégré à l'application et se charge même avec une connexion lente
-• Téléchargement plus léger : bibliothèques inutilisées supprimées
-• Explications plus claires quand une fonction relève de FullRoid X
-• Meilleures traductions dans toutes les langues
 </fr-FR>
 
 <ko-KR>
 새로운 기능:
 
-• 이제 모든 기기를 무료로 — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES 등 모든 시스템을 구매 없이 이용
 • 채팅이 이제 즉시 열립니다 — Roomcord가 앱에 내장되어 느린 연결에서도 불러옵니다
-• 다운로드 용량 축소: 사용하지 않는 라이브러리 제거
-• FullRoid X 기능일 때 더 명확한 안내
-• 지원되는 모든 언어의 번역 개선
 </ko-KR>
 
 <tr-TR>
 Yenilikler:
 
-• Tüm konsollar artık ücretsiz — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES ve diğer tüm sistemler, satın almaya gerek yok
 • Sohbet artık anında açılıyor — Roomcord uygulamaya yerleşik, bu yüzden yavaş bağlantılarda da yükleniyor
-• Daha küçük indirme: kullanılmayan kütüphaneler kaldırıldı
-• Bir özellik FullRoid X kapsamındaysa daha net açıklama
-• Tüm dillerde daha iyi çeviriler
 </tr-TR>
 
 <vi>
 Có gì mới:
 
-• Tất cả máy chơi game giờ đã miễn phí — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES và mọi hệ máy khác, không cần mua gì
 • Trò chuyện giờ mở ngay lập tức — Roomcord đã được tích hợp sẵn trong ứng dụng nên vẫn tải được khi mạng chậm
-• Tải nhẹ hơn: đã loại bỏ các thư viện không dùng đến
-• Giải thích rõ ràng hơn khi một tính năng thuộc FullRoid X
-• Bản dịch tốt hơn ở mọi ngôn ngữ
 </vi>
 
 <it-IT>
 Novità:
 
-• Tutte le console ora sono gratuite — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES e tutti gli altri sistemi, senza acquisti
 • La chat ora si apre all'istante: Roomcord è integrato nell'app e si carica anche con connessioni lente
-• Download più leggero: rimosse librerie inutilizzate
-• Spiegazioni più chiare quando una funzione appartiene a FullRoid X
-• Traduzioni migliori in tutte le lingue
 </it-IT>
 
 <pl-PL>
 Co nowego:
 
-• Wszystkie konsole są teraz darmowe — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES i pozostałe systemy, bez żadnych zakupów
 • Czat otwiera się teraz błyskawicznie — Roomcord jest wbudowany w aplikację, więc ładuje się nawet przy wolnym połączeniu
-• Mniejszy rozmiar pobierania: usunęliśmy nieużywane biblioteki
-• Jaśniejsze wyjaśnienia, gdy funkcja należy do FullRoid X
-• Lepsze tłumaczenia we wszystkich językach
 </pl-PL>
 
 <uk>
 Що нового:
 
-• Усі консолі тепер безкоштовні — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES та інші системи, купувати нічого не треба
 • Чат тепер відкривається миттєво — Roomcord вбудовано в застосунок, тож він завантажується навіть за повільного з'єднання
-• Менший розмір завантаження: прибрали невикористані бібліотеки
-• Зрозуміліші пояснення, коли функція належить FullRoid X
-• Кращі переклади всіма мовами
 </uk>
 
 <cs-CZ>
 Novinky:
 
-• Všechny konzole jsou nyní zdarma — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES a všechny další systémy, bez nákupu
 • Chat se nyní otevře okamžitě — Roomcord je zabudovaný v aplikaci, takže se načte i při pomalém připojení
-• Menší stahování: odstranili jsme nepoužívané knihovny
-• Srozumitelnější vysvětlení, když funkce patří do FullRoid X
-• Lepší překlady ve všech jazycích
 </cs-CZ>
 
 <da-DK>
 Nyheder:
 
-• Alle konsoller er nu gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES og alle øvrige systemer, uden køb
 • Chatten åbner nu med det samme — Roomcord er indbygget i appen og indlæses selv ved langsom forbindelse
-• Mindre download: vi har fjernet ubrugte biblioteker
-• Tydeligere forklaringer, når en funktion hører til FullRoid X
-• Bedre oversættelser på alle sprog
 </da-DK>
 
 <el-GR>
 Τι νέο υπάρχει:
 
-• Όλες οι κονσόλες είναι πλέον δωρεάν — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES και όλα τα υπόλοιπα συστήματα, χωρίς αγορά
 • Η συνομιλία ανοίγει πλέον ακαριαία — το Roomcord είναι ενσωματωμένο στην εφαρμογή και φορτώνει ακόμη και σε αργή σύνδεση
-• Μικρότερη λήψη: αφαιρέσαμε αχρησιμοποίητες βιβλιοθήκες
-• Πιο σαφείς εξηγήσεις όταν μια δυνατότητα ανήκει στο FullRoid X
-• Καλύτερες μεταφράσεις σε όλες τις γλώσσες
 </el-GR>
 
 <fi-FI>
 Mitä uutta:
 
-• Kaikki konsolit ovat nyt ilmaisia — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES ja kaikki muut järjestelmät, ilman ostoja
 • Chat avautuu nyt heti — Roomcord on sisäänrakennettu sovellukseen, joten se latautuu hitaallakin yhteydellä
-• Pienempi lataus: poistimme käyttämättömät kirjastot
-• Selkeämmät selitykset, kun ominaisuus kuuluu FullRoid X:ään
-• Paremmat käännökset kaikilla kielillä
 </fi-FI>
 
 <hu-HU>
 Újdonságok:
 
-• Minden konzol ingyenes lett — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES és az összes többi rendszer, vásárlás nélkül
 • A csevegés mostantól azonnal megnyílik — a Roomcord be van építve az alkalmazásba, így lassú kapcsolat mellett is betölt
-• Kisebb letöltés: eltávolítottuk a nem használt könyvtárakat
-• Érthetőbb magyarázat, ha egy funkció a FullRoid X része
-• Jobb fordítások minden nyelven
 </hu-HU>
 
 <iw-IL>
 מה חדש:
 
-• כל הקונסולות זמינות עכשיו בחינם — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES וכל שאר המערכות, בלי לרכוש דבר
 • הצ'אט נפתח עכשיו מיד — Roomcord מובנה באפליקציה ולכן נטען גם בחיבור איטי
-• הורדה קטנה יותר: הסרנו ספריות שאינן בשימוש
-• הסברים ברורים יותר כשתכונה שייכת ל-FullRoid X
-• תרגומים משופרים בכל השפות
 </iw-IL>
 
 <nl-NL>
 Wat is er nieuw:
 
-• Alle consoles zijn nu gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES en alle andere systemen, zonder aankoop
 • De chat opent nu direct — Roomcord zit ingebouwd in de app en laadt ook bij een trage verbinding
-• Kleinere download: ongebruikte bibliotheken verwijderd
-• Duidelijkere uitleg wanneer een functie bij FullRoid X hoort
-• Betere vertalingen in alle talen
 </nl-NL>
 
 <no-NO>
 Hva er nytt:
 
-• Alle konsoller er nå gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES og alle andre systemer, uten kjøp
 • Chatten åpnes nå umiddelbart — Roomcord er innebygd i appen og lastes selv ved treg tilkobling
-• Mindre nedlasting: vi fjernet ubrukte biblioteker
-• Tydeligere forklaringer når en funksjon hører til FullRoid X
-• Bedre oversettelser på alle språk
 </no-NO>
 
 <pt-PT>
 Novidades:
 
-• Todas as consolas são agora gratuitas — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES e todos os outros sistemas, sem comprar nada
 • O chat abre agora instantaneamente — o Roomcord está integrado na aplicação, por isso carrega mesmo com ligações lentas
-• Transferência mais pequena: removemos bibliotecas não utilizadas
-• Explicações mais claras quando uma funcionalidade pertence ao FullRoid X
-• Melhores traduções em todos os idiomas
 </pt-PT>
 
 <ro>
 Ce este nou:
 
-• Toate consolele sunt acum gratuite — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES și toate celelalte sisteme, fără achiziții
 • Chatul se deschide acum instantaneu — Roomcord este integrat în aplicație, așa că se încarcă și la conexiuni lente
-• Descărcare mai mică: am eliminat bibliotecile nefolosite
-• Explicații mai clare când o funcție aparține de FullRoid X
-• Traduceri mai bune în toate limbile
 </ro>
 
 <sr>
 Шта је ново:
 
-• Све конзоле су сада бесплатне — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES и сви остали системи, без куповине
 • Ћаскање се сада отвара тренутно — Roomcord је уграђен у апликацију, па се учитава и при спорој вези
-• Мање преузимање: уклонили смо некоришћене библиотеке
-• Јасније објашњење када функција припада FullRoid X-у
-• Бољи преводи на свим језицима
 </sr>
 
 <sv-SE>
 Nyheter:
 
-• Alla konsoler är nu gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES och alla andra system, utan köp
 • Chatten öppnas nu direkt — Roomcord är inbyggt i appen och laddas även vid långsam anslutning
-• Mindre nedladdning: vi tog bort oanvända bibliotek
-• Tydligare förklaringar när en funktion hör till FullRoid X
-• Bättre översättningar på alla språk
 </sv-SE>
 
 <af>
 Wat is nuut:
 
-• Alle konsoles is nou gratis — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES en al die ander stelsels, sonder om iets te koop
 • Klets open nou dadelik — Roomcord is in die app ingebou, so dit laai selfs met stadige verbindings
-• Kleiner aflaai: ons het ongebruikte biblioteke verwyder
-• Duideliker verduidelikings wanneer 'n funksie deel van FullRoid X is
-• Beter vertalings in alle tale
 </af>
 
 <ca>
 Novetats:
 
-• Totes les consoles ara són gratuïtes — PSP, Nintendo 3DS, DS, PlayStation, N64, SNES i la resta de sistemes, sense cap compra
 • El xat s'obre a l'instant: Roomcord ve integrat a l'app, així que es carrega fins i tot amb connexions lentes
-• Descàrrega més lleugera: hem eliminat biblioteques sense ús
-• Explicacions més clares quan una funció pertany a FullRoid X
-• Millors traduccions en tots els idiomes
 </ca>

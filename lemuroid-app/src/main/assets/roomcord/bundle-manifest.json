@@ -1,7 +1,7 @@
 {
   "brand": "roomcord",
-  "buildNumber": "228",
-  "builtAt": "2026-08-25T11:11:37Z",
+  "buildNumber": "231",
+  "builtAt": "2026-08-26T12:22:14Z",
   "engineRevision": "425cfb54d01a9472b3e81d9e76fd63a4a44cfbcb",
   "env": "prod",
   "fileCount": 70,
@@ -103,8 +103,8 @@
       "size": 6730
     },
     "assets/fonts/MaterialIcons-Regular.otf": {
-      "sha256": "2fc31d36496c1d4112383d026cd152f480e4a0f18632c83eb4d78bb2b5e56ff5",
-      "size": 53132
+      "sha256": "aef974c8a6b00738c1108df89c13e0e9fdf1f6d237f72d48fb3769ce97c3aa90",
+      "size": 53248
     },
     "assets/packages/flutter_soloud/web/init_module.dart.js": {
       "sha256": "3e98b7c311ea4986aad5f1dd31127a6ec93d9beef9f133470088d9cec4b85fe6",
@@ -275,19 +275,19 @@
       "size": 6498
     },
     "main.dart.js": {
-      "sha256": "8800dee3ec13d67668e0d850494c12ad9ebb59335d667387046cb7bf311e5a18",
-      "size": 15655992
+      "sha256": "df6893bff1716b63504bb51fd7e87dcc5b42de7b4180111ee74aa59bd042032a",
+      "size": 15736147
     },
     "manifest.json": {
       "sha256": "9784765733a3e4832a3a7fbeaedb407b5c19017148a681c8caceff624f51868a",
       "size": 897
     },
     "version.json": {
-      "sha256": "4f1af0debfba9951f6ef480453b158be8d6554e66cbc141430366e4105c48db2",
+      "sha256": "84e998fad99abaa92ca6c3d207aca0d1a498869139c5b6442cc36edd3ae39db1",
       "size": 94
     }
   },
-  "sourceCommit": "e1e9626e37c6e1a607d749a6077f15181b5f9913",
-  "totalBytes": 27490099,
-  "version": "1.2.523"
+  "sourceCommit": "7d529caa8baf9e8e8f08f7b7430192abc7ed415b",
+  "totalBytes": 27570370,
+  "version": "1.2.530"
 }
