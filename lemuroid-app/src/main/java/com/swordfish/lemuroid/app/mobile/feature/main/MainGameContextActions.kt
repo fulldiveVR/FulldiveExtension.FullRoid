@@ -22,6 +22,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AppShortcut
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.HideImage
+import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.RestartAlt
 import androidx.compose.material.icons.filled.Share
@@ -48,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameTexts
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidSmallGameImage
+import com.swordfish.lemuroid.app.shared.covers.rememberCustomCover
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -60,6 +63,8 @@ fun MainGameContextActions(
     onFavoriteToggle: (Game, Boolean) -> Unit,
     onCreateShortcut: (Game) -> Unit,
     onShareRoomcord: (Game) -> Unit,
+    onSetCover: (Game) -> Unit,
+    onRemoveCover: (Game) -> Unit,
 ) {
     val modalSheetState = rememberModalBottomSheetState(true)
     val haptic = LocalHapticFeedback.current
@@ -92,7 +97,9 @@ fun MainGameContextActions(
                 onFavoriteToggle = onFavoriteToggle,
                 shortcutSupported = shortcutSupported,
                 onCreateShortcut = onCreateShortcut,
-                onShareRoomcord = onShareRoomcord
+                onShareRoomcord = onShareRoomcord,
+                onSetCover = onSetCover,
+                onRemoveCover = onRemoveCover,
             )
         }
     }
@@ -108,6 +115,8 @@ private fun ContextActionContent(
     shortcutSupported: Boolean,
     onCreateShortcut: (Game) -> Unit,
     onShareRoomcord: (Game) -> Unit,
+    onSetCover: (Game) -> Unit,
+    onRemoveCover: (Game) -> Unit,
 ) {
     // Web (GameHub) games are launched, not resumed/restarted, and don't support save
     // states, home-screen shortcuts or Roomcord share — only Play + Favorite apply.
@@ -174,6 +183,26 @@ private fun ContextActionContent(
         }
 
         if (!isWebGame) {
+            ContextActionEntry(
+                label = stringResource(id = R.string.game_context_menu_set_cover),
+                icon = Icons.Default.Image,
+                onClick = {
+                    onSetCover(selectedGame)
+                    selectedGameState.value = null
+                },
+            )
+
+            if (rememberCustomCover(selectedGame) != null) {
+                ContextActionEntry(
+                    label = stringResource(id = R.string.game_context_menu_remove_cover),
+                    icon = Icons.Default.HideImage,
+                    onClick = {
+                        onRemoveCover(selectedGame)
+                        selectedGameState.value = null
+                    },
+                )
+            }
+
             ContextActionEntry(
                 label = stringResource(id = R.string.game_context_menu_share),
                 icon = Icons.Default.Share,

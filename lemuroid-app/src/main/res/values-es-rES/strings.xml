@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Jugar</string>
   <string name="game_context_menu_restart">Reiniciar</string>
   <string name="game_context_menu_create_shortcut">Fijar al lanzador</string>
+  <string name="game_context_menu_set_cover">Elegir portada</string>
+  <string name="game_context_menu_remove_cover">Quitar portada</string>
+  <string name="custom_cover_saved_next_to_rom">Portada guardada junto al archivo del juego</string>
+  <string name="custom_cover_saved_app_storage">Portada guardada en la aplicación. La carpeta de juegos es de solo lectura; vuelve a seleccionarla en los ajustes para guardar las portadas junto a tus juegos.</string>
+  <string name="custom_cover_save_failed">No se pudo guardar la portada</string>
+  <string name="custom_cover_remove_failed">No se pudo eliminar el archivo de la portada. La carpeta de juegos es de solo lectura.</string>
   <string name="home_notification_title">Habilitar notificaciones</string>
   <string name="home_notification_message">Fulldroid utiliza notificaciones para informarte cuando un juego u operación se está ejecutando en segundo plano.</string>
   <string name="home_notification_action">Habilitar</string>

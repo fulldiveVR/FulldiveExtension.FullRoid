@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Pelaa</string>
   <string name="game_context_menu_restart">Käynnistä Uudelleen</string>
   <string name="game_context_menu_create_shortcut">Kiinnitä käynnistettäväksi</string>
+  <string name="game_context_menu_set_cover">Valitse kansikuva</string>
+  <string name="game_context_menu_remove_cover">Poista kansikuva</string>
+  <string name="custom_cover_saved_next_to_rom">Kansikuva tallennettiin pelitiedoston viereen</string>
+  <string name="custom_cover_saved_app_storage">Kansikuva tallennettiin sovellukseen. Pelikansio on vain luku -tilassa; valitse se uudelleen asetuksista, jotta kansikuvat tallentuvat pelien viereen.</string>
+  <string name="custom_cover_save_failed">Kansikuvan tallentaminen ei onnistunut</string>
+  <string name="custom_cover_remove_failed">Kansikuvatiedoston poistaminen ei onnistunut. Pelikansio on vain luku -tilassa.</string>
   <string name="home_notification_title">Ota ilmoitukset käyttöön</string>
   <string name="home_notification_message">Fulldroid käyttää ilmoituksia ilmoittaakseen sinulle, milloin peli tai operaatio on käynnissä taustalla.</string>
   <string name="home_notification_action">Aktivoi</string>

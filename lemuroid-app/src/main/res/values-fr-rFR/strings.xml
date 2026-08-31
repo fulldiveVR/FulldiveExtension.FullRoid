@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Jouer</string>
   <string name="game_context_menu_restart">Redémarrer</string>
   <string name="game_context_menu_create_shortcut">Épingler à l\'accueil</string>
+  <string name="game_context_menu_set_cover">Choisir une couverture</string>
+  <string name="game_context_menu_remove_cover">Supprimer la couverture</string>
+  <string name="custom_cover_saved_next_to_rom">Couverture enregistrée à côté du fichier du jeu</string>
+  <string name="custom_cover_saved_app_storage">Couverture enregistrée dans l\'application. Le dossier des jeux est en lecture seule : sélectionnez-le à nouveau dans les paramètres pour enregistrer les couvertures à côté de vos jeux.</string>
+  <string name="custom_cover_save_failed">Impossible d\'enregistrer la couverture</string>
+  <string name="custom_cover_remove_failed">Impossible de supprimer le fichier de la couverture. Le dossier des jeux est en lecture seule.</string>
   <string name="home_notification_title">Activer les notifications</string>
   <string name="home_notification_message">Fulldroid utilise des notifications pour vous informer lorsqu\'un jeu ou une opération est en cours d\'exécution en arrière-plan.</string>
   <string name="home_notification_action">Activer</string>

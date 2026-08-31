@@ -81,6 +81,12 @@
   <string name="game_context_menu_play">Chơi</string>
   <string name="game_context_menu_restart">Bắt đầu lại</string>
   <string name="game_context_menu_create_shortcut">Ghim vào launcher</string>
+  <string name="game_context_menu_set_cover">Chọn ảnh bìa</string>
+  <string name="game_context_menu_remove_cover">Xoá ảnh bìa</string>
+  <string name="custom_cover_saved_next_to_rom">Đã lưu ảnh bìa cạnh tệp trò chơi</string>
+  <string name="custom_cover_saved_app_storage">Đã lưu ảnh bìa trong ứng dụng. Thư mục trò chơi chỉ đọc, hãy chọn lại thư mục trong phần cài đặt để lưu ảnh bìa cạnh trò chơi.</string>
+  <string name="custom_cover_save_failed">Không thể lưu ảnh bìa</string>
+  <string name="custom_cover_remove_failed">Không thể xoá tệp ảnh bìa. Thư mục trò chơi chỉ đọc.</string>
   <string name="home_notification_title">Bật thông báo</string>
   <string name="home_notification_message">Fulldroid sử dụng thông báo để cho bạn biết khi có trò chơi hoặc hoạt động chạy trong nền.</string>
   <string name="home_notification_action">Bật</string>

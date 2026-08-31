@@ -11,20 +11,51 @@ import coil.request.CachePolicy
 import com.swordfish.lemuroid.common.drawable.TextDrawable
 import com.swordfish.lemuroid.common.graphics.ColorUtils
 import com.swordfish.lemuroid.lib.library.db.entity.Game
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
+import java.util.Collections
+import java.util.WeakHashMap
 
 object CoverUtils {
+    // Games whose custom cover is still being looked up, so a recycled view does not end up
+    // displaying the cover of the game it used to hold. Only touched from the main thread.
+    private val pendingCovers = Collections.synchronizedMap(WeakHashMap<ImageView, String>())
+
+    @OptIn(DelicateCoroutinesApi::class)
     fun loadCover(
         game: Game,
         imageView: ImageView?,
     ) {
         if (imageView == null) return
 
-        imageView.load(game.coverFrontUrl, imageView.context.imageLoader) {
+        val customCover = CustomCovers.cached(game)
+
+        imageView.load(customCover ?: game.coverFrontUrl, imageView.context.imageLoader) {
             val fallbackDrawable = getFallbackDrawable(game)
             fallback(fallbackDrawable)
             error(fallbackDrawable)
+            if (customCover != null) {
+                // Covers are replaced in place, so their uri alone is not a stable cache key.
+                memoryCacheKey("$customCover#${CustomCovers.revision.value}")
+                diskCachePolicy(CachePolicy.DISABLED)
+            }
+        }
+
+        // The first time we see a game we do not know yet whether the user set a cover for it.
+        if (customCover == null && !CustomCovers.isResolved(game)) {
+            pendingCovers[imageView] = game.fileUri
+            val context = imageView.context.applicationContext
+            GlobalScope.launch(Dispatchers.Main) {
+                val resolved = CustomCovers.resolve(context, game)
+                if (resolved != null && pendingCovers[imageView] == game.fileUri) {
+                    loadCover(game, imageView)
+                }
+            }
+        } else {
+            pendingCovers.remove(imageView)
         }
     }
 

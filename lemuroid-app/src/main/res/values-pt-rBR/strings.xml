@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Jogar</string>
   <string name="game_context_menu_restart">Reiniciar</string>
   <string name="game_context_menu_create_shortcut">Fixar na tela inicial</string>
+  <string name="game_context_menu_set_cover">Escolher capa</string>
+  <string name="game_context_menu_remove_cover">Remover capa</string>
+  <string name="custom_cover_saved_next_to_rom">Capa salva ao lado do arquivo do jogo</string>
+  <string name="custom_cover_saved_app_storage">Capa salva no aplicativo. A pasta de jogos é somente leitura; selecione-a novamente nas configurações para salvar as capas ao lado dos jogos.</string>
+  <string name="custom_cover_save_failed">Não foi possível salvar a capa</string>
+  <string name="custom_cover_remove_failed">Não foi possível excluir o arquivo da capa. A pasta de jogos é somente leitura.</string>
   <string name="home_notification_title">Ativar notificações</string>
   <string name="home_notification_message">O Fulldroid usa notificações para informar quando um jogo ou uma operação está rodando em segundo plano.</string>
   <string name="home_notification_action">Ativar</string>

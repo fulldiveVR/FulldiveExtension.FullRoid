@@ -207,6 +207,12 @@
   <string name="game_context_menu_play">Speel</string>
   <string name="game_context_menu_restart">Begin oor</string>
   <string name="game_context_menu_create_shortcut">Speld aan tuisskerm</string>
+  <string name="game_context_menu_set_cover">Kies omslag</string>
+  <string name="game_context_menu_remove_cover">Verwyder omslag</string>
+  <string name="custom_cover_saved_next_to_rom">Omslag langs die speletjielêer gestoor</string>
+  <string name="custom_cover_saved_app_storage">Omslag in die program gestoor. Die speletjiegids is leesalleen; kies dit weer in die instellings om omslae langs jou speletjies te stoor.</string>
+  <string name="custom_cover_save_failed">Kon nie die omslag stoor nie</string>
+  <string name="custom_cover_remove_failed">Kon nie die omslaglêer skrap nie. Die speletjiegids is leesalleen.</string>
   <string name="home_empty_title">Kies ROM-gids</string>
   <string name="home_empty_message">Roid moet ’n gids met ROM-lêers skandeer.\nDit kan tot ’n paar minute duur.</string>
   <string name="home_empty_action">Kies gids</string>

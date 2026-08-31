@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Joacă</string>
   <string name="game_context_menu_restart">Reporniţi</string>
   <string name="game_context_menu_create_shortcut">Fixează în lansator</string>
+  <string name="game_context_menu_set_cover">Alege coperta</string>
+  <string name="game_context_menu_remove_cover">Șterge coperta</string>
+  <string name="custom_cover_saved_next_to_rom">Coperta a fost salvată lângă fișierul jocului</string>
+  <string name="custom_cover_saved_app_storage">Coperta a fost salvată în aplicație. Folderul cu jocuri este doar pentru citire; selectează-l din nou în setări pentru a salva copertele lângă jocuri.</string>
+  <string name="custom_cover_save_failed">Coperta nu a putut fi salvată</string>
+  <string name="custom_cover_remove_failed">Fișierul copertei nu a putut fi șters. Folderul cu jocuri este doar pentru citire.</string>
   <string name="home_notification_title">Activați notificările</string>
   <string name="home_notification_message">Fulldroid folosește notificări pentru a te anunța când un joc sau o activitate rulează în fundal.</string>
   <string name="home_notification_action">Activați</string>

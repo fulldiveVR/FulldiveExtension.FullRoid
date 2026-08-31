@@ -247,6 +247,12 @@
   <string name="settings_save_sync_include_saves">Sincronitza les partides desades dins del joc</string>
   <string name="settings_save_sync_include_states_description">Més còmode, però més pesat i menys fiable. Trieu quins nuclis o sistemes voleu sincronitzar</string>
   <string name="game_context_menu_create_shortcut">Fixa al llançador</string>
+  <string name="game_context_menu_set_cover">Tria una coberta</string>
+  <string name="game_context_menu_remove_cover">Elimina la coberta</string>
+  <string name="custom_cover_saved_next_to_rom">Coberta desada al costat del fitxer del joc</string>
+  <string name="custom_cover_saved_app_storage">Coberta desada dins l\'aplicació. La carpeta de jocs és només de lectura; torna a seleccionar-la a la configuració per desar les cobertes al costat dels jocs.</string>
+  <string name="custom_cover_save_failed">No s\'ha pogut desar la coberta</string>
+  <string name="custom_cover_remove_failed">No s\'ha pogut eliminar el fitxer de la coberta. La carpeta de jocs és només de lectura.</string>
   <string name="home_empty_message">El Roid ha d\'escanejar una carpeta amb fitxers ROM.\nAixò pot trigar uns quants minuts.</string>
   <string name="home_notification_desmume_deprecated_title">El DeSmuME es retira</string>
   <string name="home_notification_desmume_deprecated_message">Deseu dins del joc i després canvieu a melonDS per conservar el progrés. Els estats desats no es transfereixen i només seguiran sent utilitzables al DeSmuME.</string>

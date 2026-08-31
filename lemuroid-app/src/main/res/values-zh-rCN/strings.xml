@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">开始游戏</string>
   <string name="game_context_menu_restart">重新开始</string>
   <string name="game_context_menu_create_shortcut">添加到桌面</string>
+  <string name="game_context_menu_set_cover">选择封面</string>
+  <string name="game_context_menu_remove_cover">移除封面</string>
+  <string name="custom_cover_saved_next_to_rom">封面已保存在游戏文件旁</string>
+  <string name="custom_cover_saved_app_storage">封面已保存在应用内。游戏文件夹为只读，请在设置中重新选择该文件夹，以便将封面保存在游戏旁边。</string>
+  <string name="custom_cover_save_failed">无法保存封面</string>
+  <string name="custom_cover_remove_failed">无法删除封面文件。游戏文件夹为只读。</string>
   <string name="home_notification_title">开启推送</string>
   <string name="home_notification_message">Fulldroid 使用通知让您知道游戏或操作正在后台运行。</string>
   <string name="home_notification_action">启用</string>

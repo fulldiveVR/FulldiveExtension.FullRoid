@@ -9,12 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.request.ImageRequest
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import com.swordfish.lemuroid.app.shared.covers.CoverUtils
+import com.swordfish.lemuroid.app.shared.covers.rememberGameCoverRequest
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 @Composable
@@ -30,10 +29,7 @@ fun LemuroidSmallGameImage(
     val fallbackPainter = rememberDrawablePainter(fallbackDrawable)
 
     AsyncImage(
-        model =
-            ImageRequest.Builder(LocalContext.current)
-                .data(game.coverFrontUrl)
-                .build(),
+        model = rememberGameCoverRequest(game),
         contentDescription = game.title,
         modifier =
             modifier

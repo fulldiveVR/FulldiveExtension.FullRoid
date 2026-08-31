@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">تشغيل</string>
   <string name="game_context_menu_restart">إعادة التشغيل</string>
   <string name="game_context_menu_create_shortcut">تثبيت على الشاشة الرئيسية</string>
+  <string name="game_context_menu_set_cover">اختيار الغلاف</string>
+  <string name="game_context_menu_remove_cover">إزالة الغلاف</string>
+  <string name="custom_cover_saved_next_to_rom">تم حفظ الغلاف بجانب ملف اللعبة</string>
+  <string name="custom_cover_saved_app_storage">تم حفظ الغلاف داخل التطبيق. مجلد الألعاب للقراءة فقط، أعد اختياره من الإعدادات لحفظ الأغلفة بجانب ألعابك.</string>
+  <string name="custom_cover_save_failed">تعذر حفظ الغلاف</string>
+  <string name="custom_cover_remove_failed">تعذر حذف ملف الغلاف. مجلد الألعاب للقراءة فقط.</string>
   <string name="home_notification_title">تمكين الإشعارات</string>
   <string name="home_notification_message">يستخدم Fulldroid الإشعارات لإعلامك عندما تكون اللعبة أو العملية قيد التشغيل في الخلفية.</string>
   <string name="home_notification_action">تمكين</string>

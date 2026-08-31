@@ -28,8 +28,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.SystemBarStyle
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -45,6 +47,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -106,6 +110,7 @@ import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsViewModel
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.Archive7zLockedDialog
 import com.swordfish.lemuroid.app.shared.GameInteractor
+import com.swordfish.lemuroid.app.shared.covers.CustomCovers
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
@@ -292,6 +297,54 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
 
             val onGameLongClick = { game: Game ->
                 selectedGameState.value = game
+            }
+
+            // Custom covers are files the user provides, so they can only come from a picture the
+            // user picks themselves. The game outlives the picker activity, hence the saveable.
+            val coverGameState =
+                rememberSaveable {
+                    mutableStateOf<Game?>(null)
+                }
+
+            val coverScope = rememberCoroutineScope()
+
+            val coverPicker =
+                rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+                    val game = coverGameState.value
+                    coverGameState.value = null
+                    if (uri == null || game == null) return@rememberLauncherForActivityResult
+
+                    coverScope.launch {
+                        val message =
+                            when (CustomCovers.save(applicationContext, game, uri)) {
+                                CustomCovers.SaveResult.NextToRom ->
+                                    R.string.custom_cover_saved_next_to_rom
+
+                                CustomCovers.SaveResult.AppStorage ->
+                                    R.string.custom_cover_saved_app_storage
+
+                                CustomCovers.SaveResult.Failed -> R.string.custom_cover_save_failed
+                            }
+                        Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+                    }
+                }
+
+            val onSetCover = { game: Game ->
+                coverGameState.value = game
+                coverPicker.launch(arrayOf("image/*"))
+            }
+
+            val onRemoveCover = { game: Game ->
+                coverScope.launch {
+                    if (!CustomCovers.delete(applicationContext, game)) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            R.string.custom_cover_remove_failed,
+                            Toast.LENGTH_LONG,
+                        ).show()
+                    }
+                }
+                Unit
             }
 
             // Web (GameHub) games launch via the offline WebView player, not the libretro
@@ -627,7 +680,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                         gameInteractor.onFavoriteToggle(game, isFavorite)
                     },
                     onCreateShortcut = { gameInteractor.onCreateShortcut(it) },
-                    onShareRoomcord = { shareRoomcordDialogDisplayed.value = it }
+                    onShareRoomcord = { shareRoomcordDialogDisplayed.value = it },
+                    onSetCover = onSetCover,
+                    onRemoveCover = onRemoveCover,
                 )
 
                 val game = shareRoomcordDialogDisplayed.value
@@ -689,6 +744,13 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             // while the paid part is only reading ROMs out of a .7z archive.
             _show7zLockedDialog.value = true
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Covers dropped next to the roms with a file manager show up when coming back to the app.
+        CustomCovers.invalidateAll()
     }
 
     override fun onActivityResult(

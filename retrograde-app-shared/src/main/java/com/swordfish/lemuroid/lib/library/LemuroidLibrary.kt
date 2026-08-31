@@ -41,6 +41,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 import timber.log.Timber
 
@@ -82,6 +83,7 @@ class LemuroidLibrary(
         isProVersion: Boolean
     ): Flow<Unit> {
         return provider.listBaseStorageFiles()
+            .map { files -> files.filterNot { it.extension.lowercase() in COVER_EXTENSIONS } }
             .flatMapConcat { StorageFilesMerger.mergeDataFiles(provider, it).asFlow() }
             .batchWithSizeAndTime(MAX_BUFFER_SIZE, MAX_TIME)
             .flatMapMerge { processBatch(it, provider, startedAtMs, gameMetadata, isProVersion) }
@@ -341,5 +343,9 @@ class LemuroidLibrary(
         // We batch database updates to avoid unnecessary UI updates.
         const val MAX_BUFFER_SIZE = 200
         const val MAX_TIME = 5000
+
+        // Custom covers live next to the roms. They are never games nor bios files, so there is no
+        // point in hashing them on every scan.
+        private val COVER_EXTENSIONS = setOf("png", "jpg", "jpeg", "webp")
     }
 }

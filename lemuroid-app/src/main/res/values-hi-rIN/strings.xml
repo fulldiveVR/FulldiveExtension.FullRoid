@@ -207,6 +207,12 @@
   <string name="game_context_menu_play">खेलें</string>
   <string name="game_context_menu_restart">फिर से शुरू करें</string>
   <string name="game_context_menu_create_shortcut">लॉन्चर पर पिन करें</string>
+  <string name="game_context_menu_set_cover">कवर चुनें</string>
+  <string name="game_context_menu_remove_cover">कवर हटाएँ</string>
+  <string name="custom_cover_saved_next_to_rom">कवर गेम फ़ाइल के पास सहेजा गया</string>
+  <string name="custom_cover_saved_app_storage">कवर ऐप में सहेजा गया। गेम फ़ोल्डर केवल पढ़ने योग्य है, कवर गेम के पास सहेजने के लिए सेटिंग में उसे फिर से चुनें।</string>
+  <string name="custom_cover_save_failed">कवर सहेजा नहीं जा सका</string>
+  <string name="custom_cover_remove_failed">कवर फ़ाइल हटाई नहीं जा सकी। गेम फ़ोल्डर केवल पढ़ने योग्य है।</string>
   <string name="home_empty_title">ROM फ़ोल्डर चुनें</string>
   <string name="home_empty_message">Roid को ROM फ़ाइलों वाले फ़ोल्डर को स्कैन करना होगा।\nइसमें कुछ मिनट लग सकते हैं।</string>
   <string name="home_empty_action">फ़ोल्डर चुनें</string>

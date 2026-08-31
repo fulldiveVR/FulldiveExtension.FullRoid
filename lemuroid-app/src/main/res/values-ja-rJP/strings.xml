@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">プレイ</string>
   <string name="game_context_menu_restart">再起動</string>
   <string name="game_context_menu_create_shortcut">ランチャーに追加</string>
+  <string name="game_context_menu_set_cover">カバー画像を選択</string>
+  <string name="game_context_menu_remove_cover">カバー画像を削除</string>
+  <string name="custom_cover_saved_next_to_rom">カバー画像をゲームファイルの隣に保存しました</string>
+  <string name="custom_cover_saved_app_storage">カバー画像をアプリ内に保存しました。ゲームフォルダーが読み取り専用です。ゲームの隣に保存するには、設定でフォルダーを選び直してください。</string>
+  <string name="custom_cover_save_failed">カバー画像を保存できませんでした</string>
+  <string name="custom_cover_remove_failed">カバー画像のファイルを削除できませんでした。ゲームフォルダーが読み取り専用です。</string>
   <string name="home_notification_title">通知を有効化</string>
   <string name="home_notification_message">Fulldroid は、ゲームや操作がバックグラウンドで実行されているときに通知を使用します。</string>
   <string name="home_notification_action">有効にする</string>

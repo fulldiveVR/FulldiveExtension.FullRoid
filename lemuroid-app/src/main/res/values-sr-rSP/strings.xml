@@ -81,6 +81,12 @@
   <string name="game_context_menu_play">Играј</string>
   <string name="game_context_menu_restart">Рестартуј</string>
   <string name="game_context_menu_create_shortcut">Закачи на покретач</string>
+  <string name="game_context_menu_set_cover">Изабери омот</string>
+  <string name="game_context_menu_remove_cover">Уклони омот</string>
+  <string name="custom_cover_saved_next_to_rom">Омот је сачуван поред датотеке игре</string>
+  <string name="custom_cover_saved_app_storage">Омот је сачуван у апликацији. Фасцикла са играма је само за читање — изаберите је поново у подешавањима да би се омоти чували поред игара.</string>
+  <string name="custom_cover_save_failed">Омот није могуће сачувати</string>
+  <string name="custom_cover_remove_failed">Датотеку омота није могуће избрисати. Фасцикла са играма је само за читање.</string>
   <string name="home_notification_title">Омогући обавештења</string>
   <string name="home_notification_message">Fulldroid користи обавештења да бисте знали када игра или операције ради у позадини.</string>
   <string name="home_notification_action">Омогући</string>

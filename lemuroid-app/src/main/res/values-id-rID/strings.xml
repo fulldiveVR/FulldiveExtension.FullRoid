@@ -207,6 +207,12 @@
   <string name="game_context_menu_play">Mainkan</string>
   <string name="game_context_menu_restart">Mulai ulang</string>
   <string name="game_context_menu_create_shortcut">Sematkan ke peluncur</string>
+  <string name="game_context_menu_set_cover">Pilih sampul</string>
+  <string name="game_context_menu_remove_cover">Hapus sampul</string>
+  <string name="custom_cover_saved_next_to_rom">Sampul disimpan di samping berkas gim</string>
+  <string name="custom_cover_saved_app_storage">Sampul disimpan di dalam aplikasi. Folder gim hanya bisa dibaca, pilih ulang folder tersebut di pengaturan agar sampul tersimpan di samping gim Anda.</string>
+  <string name="custom_cover_save_failed">Sampul tidak dapat disimpan</string>
+  <string name="custom_cover_remove_failed">Berkas sampul tidak dapat dihapus. Folder gim hanya bisa dibaca.</string>
   <string name="home_empty_title">Pilih folder ROM</string>
   <string name="home_empty_message">Roid perlu memindai folder yang berisi berkas ROM.\nProses ini bisa memakan waktu beberapa menit.</string>
   <string name="home_empty_action">Pilih folder</string>
