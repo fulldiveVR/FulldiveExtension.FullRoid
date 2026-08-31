@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Παίξε</string>
   <string name="game_context_menu_restart">Επανεκκίνηση</string>
   <string name="game_context_menu_create_shortcut">Καρφίτσωμα στον launcher</string>
+  <string name="game_context_menu_set_cover">Επιλογή εξωφύλλου</string>
+  <string name="game_context_menu_remove_cover">Αφαίρεση εξωφύλλου</string>
+  <string name="custom_cover_saved_next_to_rom">Το εξώφυλλο αποθηκεύτηκε δίπλα στο αρχείο του παιχνιδιού</string>
+  <string name="custom_cover_saved_app_storage">Το εξώφυλλο αποθηκεύτηκε στην εφαρμογή. Ο φάκελος παιχνιδιών είναι μόνο για ανάγνωση· επιλέξτε τον ξανά στις ρυθμίσεις για να αποθηκεύονται τα εξώφυλλα δίπλα στα παιχνίδια.</string>
+  <string name="custom_cover_save_failed">Δεν ήταν δυνατή η αποθήκευση του εξωφύλλου</string>
+  <string name="custom_cover_remove_failed">Δεν ήταν δυνατή η διαγραφή του αρχείου εξωφύλλου. Ο φάκελος παιχνιδιών είναι μόνο για ανάγνωση.</string>
   <string name="home_notification_title">Ενεργοποίηση ειδοποιήσεων</string>
   <string name="home_notification_message">Το Fulldroid χρησιμοποιεί ειδοποιήσεις για να σας ενημερώνει όταν ένα παιχνίδι ή μια λειτουργία τρέχει στο παρασκήνιο.</string>
   <string name="home_notification_action">Ενεργοποίηση</string>

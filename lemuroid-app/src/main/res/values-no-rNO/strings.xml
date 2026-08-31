@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Spill</string>
   <string name="game_context_menu_restart">Start på nytt</string>
   <string name="game_context_menu_create_shortcut">Fest til hjemskjermen</string>
+  <string name="game_context_menu_set_cover">Velg omslag</string>
+  <string name="game_context_menu_remove_cover">Fjern omslag</string>
+  <string name="custom_cover_saved_next_to_rom">Omslaget er lagret ved siden av spillfilen</string>
+  <string name="custom_cover_saved_app_storage">Omslaget er lagret i appen. Spillmappen er skrivebeskyttet – velg den på nytt i innstillingene for å lagre omslag ved siden av spillene dine.</string>
+  <string name="custom_cover_save_failed">Kunne ikke lagre omslaget</string>
+  <string name="custom_cover_remove_failed">Kunne ikke slette omslagsfilen. Spillmappen er skrivebeskyttet.</string>
   <string name="home_notification_title">Aktiver varsler</string>
   <string name="home_notification_message">Fulldroid bruker varsler for å fortelle deg når et spill eller en operasjon kjører i bakgrunnen.</string>
   <string name="home_notification_action">Aktiver</string>

@@ -81,6 +81,12 @@
   <string name="game_context_menu_play">Oyna</string>
   <string name="game_context_menu_restart">Yeniden Başlat</string>
   <string name="game_context_menu_create_shortcut">Ana Ekrana Sabitle</string>
+  <string name="game_context_menu_set_cover">Kapak seç</string>
+  <string name="game_context_menu_remove_cover">Kapağı kaldır</string>
+  <string name="custom_cover_saved_next_to_rom">Kapak, oyun dosyasının yanına kaydedildi</string>
+  <string name="custom_cover_saved_app_storage">Kapak uygulamanın içine kaydedildi. Oyun klasörü salt okunur; kapakları oyunlarınızın yanına kaydetmek için klasörü ayarlardan yeniden seçin.</string>
+  <string name="custom_cover_save_failed">Kapak kaydedilemedi</string>
+  <string name="custom_cover_remove_failed">Kapak dosyası silinemedi. Oyun klasörü salt okunur.</string>
   <string name="home_notification_title">Bildirimleri Aç</string>
   <string name="home_notification_message">Fulldroid, bir oyun veya işlemin arka planda çalıştığını size bildirmek için bildirimleri kullanır.</string>
   <string name="home_notification_action">Aç</string>

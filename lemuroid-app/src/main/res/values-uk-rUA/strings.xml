@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Грати</string>
   <string name="game_context_menu_restart">Перезапуск</string>
   <string name="game_context_menu_create_shortcut">Закріпити у лаунчері</string>
+  <string name="game_context_menu_set_cover">Вибрати обкладинку</string>
+  <string name="game_context_menu_remove_cover">Видалити обкладинку</string>
+  <string name="custom_cover_saved_next_to_rom">Обкладинку збережено поруч із файлом гри</string>
+  <string name="custom_cover_saved_app_storage">Обкладинку збережено в застосунку. Тека з іграми доступна лише для читання — виберіть її заново в налаштуваннях, щоб обкладинки зберігалися поруч з іграми.</string>
+  <string name="custom_cover_save_failed">Не вдалося зберегти обкладинку</string>
+  <string name="custom_cover_remove_failed">Не вдалося видалити файл обкладинки. Тека з іграми доступна лише для читання.</string>
   <string name="home_notification_title">Увімкнути сповіщення</string>
   <string name="home_notification_message">Fulldroid використовує сповіщення, щоб повідомити, коли гра або операція працює у фоновому режимі.</string>
   <string name="home_notification_action">Увімкнути</string>

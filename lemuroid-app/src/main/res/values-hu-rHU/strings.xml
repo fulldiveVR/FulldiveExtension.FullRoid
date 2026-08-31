@@ -215,6 +215,12 @@
   <string name="game_context_menu_play">Játék</string>
   <string name="game_context_menu_restart">Újraindítás</string>
   <string name="game_context_menu_create_shortcut">Rögzítés az indítóra</string>
+  <string name="game_context_menu_set_cover">Borító választása</string>
+  <string name="game_context_menu_remove_cover">Borító eltávolítása</string>
+  <string name="custom_cover_saved_next_to_rom">A borító a játékfájl mellé lett mentve</string>
+  <string name="custom_cover_saved_app_storage">A borító az alkalmazásban lett elmentve. A játékok mappája csak olvasható, válaszd ki újra a beállításokban, hogy a borítók a játékok mellé kerüljenek.</string>
+  <string name="custom_cover_save_failed">A borítót nem sikerült elmenteni</string>
+  <string name="custom_cover_remove_failed">A borítófájlt nem sikerült törölni. A játékok mappája csak olvasható.</string>
   <string name="home_empty_title">Válaszd ki a ROM-mappát</string>
   <string name="home_empty_message">A Roidnak be kell olvasnia egy ROM-fájlokat tartalmazó mappát.\nEz akár néhány percet is igénybe vehet.</string>
   <string name="home_empty_action">Mappa kiválasztása</string>

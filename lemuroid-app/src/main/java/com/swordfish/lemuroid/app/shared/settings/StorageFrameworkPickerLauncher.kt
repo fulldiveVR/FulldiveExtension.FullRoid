@@ -51,6 +51,9 @@ class StorageFrameworkPickerLauncher : RetrogradeActivity() {
             val intent =
                 Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).apply {
                     this.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    // Write access is what lets us store custom covers next to the roms. It is not
+                    // required: CustomCovers keeps them inside the app when the folder is read only.
+                    this.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
                     this.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
                     this.addFlags(Intent.FLAG_GRANT_PREFIX_URI_PERMISSION)
                     this.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
@@ -114,11 +117,17 @@ class StorageFrameworkPickerLauncher : RetrogradeActivity() {
             .forEach {
                 contentResolver.releasePersistableUriPermission(
                     it.uri,
-                    Intent.FLAG_GRANT_READ_URI_PERMISSION,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION,
                 )
             }
 
-        contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        // Not every provider hands out write access. Reading the roms is the only thing we truly
+        // need, so keep that grant even when we cannot persist the write one.
+        val readAndWrite = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+        runCatching { contentResolver.takePersistableUriPermission(uri, readAndWrite) }
+            .onFailure {
+                contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            }
     }
 
     private fun startLibraryIndexWork() {

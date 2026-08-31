@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Hrát</string>
   <string name="game_context_menu_restart">Restartovat</string>
   <string name="game_context_menu_create_shortcut">Připnout do launcheru</string>
+  <string name="game_context_menu_set_cover">Vybrat obal</string>
+  <string name="game_context_menu_remove_cover">Odebrat obal</string>
+  <string name="custom_cover_saved_next_to_rom">Obal byl uložen vedle souboru hry</string>
+  <string name="custom_cover_saved_app_storage">Obal byl uložen v aplikaci. Složka s hrami je jen pro čtení, vyberte ji znovu v nastavení, aby se obaly ukládaly vedle her.</string>
+  <string name="custom_cover_save_failed">Obal se nepodařilo uložit</string>
+  <string name="custom_cover_remove_failed">Soubor obalu se nepodařilo smazat. Složka s hrami je jen pro čtení.</string>
   <string name="home_notification_title">Povolit oznámení</string>
   <string name="home_notification_message">Fulldroid používá oznámení, aby informoval, zda hra nebo operace běží v pozadí.</string>
   <string name="home_notification_action">Povolit</string>

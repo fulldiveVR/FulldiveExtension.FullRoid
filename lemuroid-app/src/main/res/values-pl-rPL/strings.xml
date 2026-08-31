@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Graj</string>
   <string name="game_context_menu_restart">Zrestartuj</string>
   <string name="game_context_menu_create_shortcut">Dodaj do launchera</string>
+  <string name="game_context_menu_set_cover">Wybierz okładkę</string>
+  <string name="game_context_menu_remove_cover">Usuń okładkę</string>
+  <string name="custom_cover_saved_next_to_rom">Okładka zapisana obok pliku gry</string>
+  <string name="custom_cover_saved_app_storage">Okładka zapisana w aplikacji. Folder z grami jest tylko do odczytu – wybierz go ponownie w ustawieniach, aby zapisywać okładki obok gier.</string>
+  <string name="custom_cover_save_failed">Nie udało się zapisać okładki</string>
+  <string name="custom_cover_remove_failed">Nie udało się usunąć pliku okładki. Folder z grami jest tylko do odczytu.</string>
   <string name="home_notification_title">Włącz powiadomienia</string>
   <string name="home_notification_message">Fulldroid używa powiadomień, aby dać Ci znać, gdy gra lub operacja działa w tle.</string>
   <string name="home_notification_action">Włącz</string>

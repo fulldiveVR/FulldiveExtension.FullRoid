@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Spielen</string>
   <string name="game_context_menu_restart">Neustart</string>
   <string name="game_context_menu_create_shortcut">Zum Startbildschirm hinzufügen</string>
+  <string name="game_context_menu_set_cover">Cover auswählen</string>
+  <string name="game_context_menu_remove_cover">Cover entfernen</string>
+  <string name="custom_cover_saved_next_to_rom">Cover neben der Spieldatei gespeichert</string>
+  <string name="custom_cover_saved_app_storage">Cover in der App gespeichert. Der Spieleordner ist schreibgeschützt – wähle ihn in den Einstellungen erneut aus, um Cover neben deinen Spielen zu speichern.</string>
+  <string name="custom_cover_save_failed">Cover konnte nicht gespeichert werden</string>
+  <string name="custom_cover_remove_failed">Die Cover-Datei konnte nicht gelöscht werden. Der Spieleordner ist schreibgeschützt.</string>
   <string name="home_notification_title">Alle Benachrichtigungen aktivieren</string>
   <string name="home_notification_message">Fulldroid verwendet Benachrichtigungen, um dich darüber zu informieren, wenn ein Spiel oder eine Operation im Hintergrund läuft.</string>
   <string name="home_notification_action">Aktivieren</string>

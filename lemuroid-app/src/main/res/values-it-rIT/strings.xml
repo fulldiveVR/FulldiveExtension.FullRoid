@@ -84,6 +84,12 @@
   <string name="game_context_menu_play">Gioca</string>
   <string name="game_context_menu_restart">Riavvia</string>
   <string name="game_context_menu_create_shortcut">Aggiungi al launcher</string>
+  <string name="game_context_menu_set_cover">Scegli copertina</string>
+  <string name="game_context_menu_remove_cover">Rimuovi copertina</string>
+  <string name="custom_cover_saved_next_to_rom">Copertina salvata accanto al file del gioco</string>
+  <string name="custom_cover_saved_app_storage">Copertina salvata nell\'app. La cartella dei giochi è di sola lettura: selezionala di nuovo nelle impostazioni per salvare le copertine accanto ai giochi.</string>
+  <string name="custom_cover_save_failed">Impossibile salvare la copertina</string>
+  <string name="custom_cover_remove_failed">Impossibile eliminare il file della copertina. La cartella dei giochi è di sola lettura.</string>
   <string name="home_notification_title">Attiva notifiche</string>
   <string name="home_notification_message">Fulldroid utilizza le notifiche per farti sapere quando una gioco o un\'operazione sono in esecuzione in background.</string>
   <string name="home_notification_action">Attiva</string>

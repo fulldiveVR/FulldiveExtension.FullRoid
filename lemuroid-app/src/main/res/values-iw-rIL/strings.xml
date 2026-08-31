@@ -74,6 +74,12 @@
   <string name="game_context_menu_play">שחק</string>
   <string name="game_context_menu_restart">הפעל מחדש</string>
   <string name="game_context_menu_create_shortcut">הצמד למסך הבית</string>
+  <string name="game_context_menu_set_cover">בחירת עטיפה</string>
+  <string name="game_context_menu_remove_cover">הסרת העטיפה</string>
+  <string name="custom_cover_saved_next_to_rom">העטיפה נשמרה לצד קובץ המשחק</string>
+  <string name="custom_cover_saved_app_storage">העטיפה נשמרה באפליקציה. תיקיית המשחקים היא לקריאה בלבד, בחרו אותה מחדש בהגדרות כדי לשמור עטיפות לצד המשחקים.</string>
+  <string name="custom_cover_save_failed">לא ניתן לשמור את העטיפה</string>
+  <string name="custom_cover_remove_failed">לא ניתן למחוק את קובץ העטיפה. תיקיית המשחקים היא לקריאה בלבד.</string>
   <string name="home_empty_title">בחר את תיקיית היעד בה נמצאים קבצי ה-ROM</string>
   <string name="home_empty_message">Fulldroid צריך לסרוק תיקייה המכילה קבצי ROM. \nפעולה זו עשויה לארוך מספר דקות.</string>
   <string name="home_empty_action">בחירת תיקייה</string>
