@@ -1,3 +1,4 @@
 What's New:
 
-• Chat now opens instantly — Roomcord is built into the app, so it loads even on slow connections
+• Your own game covers — hold a game, tap "Choose cover" and pick any picture
+• Already have cover art? Drop a PNG next to your ROM with the same name and it shows up on its own

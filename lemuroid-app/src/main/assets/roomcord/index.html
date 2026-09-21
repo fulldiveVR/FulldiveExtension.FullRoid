@@ -57,6 +57,86 @@
 
   <script>
     (function() {
+      var page = new URL(window.location.href);
+      if ('Roomcord' === 'Jesuscord') return;
+      var hashQuery = page.hash.indexOf('?');
+      var hashParams = hashQuery === -1
+        ? new URLSearchParams()
+        : new URLSearchParams(page.hash.slice(hashQuery + 1));
+      if (page.searchParams.get('m') !== 'u' &&
+          hashParams.get('m') !== 'u') return;
+
+      var title = 'Web3 & AI Fundraising Platform for Startups | InnMind';
+      var description = 'Find verified Web3 and AI investors, build a focused shortlist, use pitch deck, SAFE, tokenomics & outreach templates to run a smarter fundraise.';
+      var socialTitle = 'Raise Smarter with InnMind | Fundraising Tools for Web3 & AI Startups';
+      var socialDescription = 'Find verified Web3 and AI investors: VCs, syndicates, angels... Raise smarter with the InnMind fundraising platform';
+      var socialImage = new URL('branding/innmind/og-default.webp', page).href;
+      var setMeta = function(attribute, key, value) {
+        var selector = 'meta[' + attribute + '="' + key + '"]';
+        var element = document.head.querySelector(selector);
+        if (!element) {
+          element = document.createElement('meta');
+          element.setAttribute(attribute, key);
+          document.head.appendChild(element);
+        }
+        element.setAttribute('content', value);
+      };
+      var setHref = function(selector, value) {
+        var element = document.head.querySelector(selector);
+        if (element) element.setAttribute('href', value);
+      };
+
+      document.title = title;
+      setMeta('name', 'description', description);
+      setMeta('property', 'og:type', 'website');
+      setMeta('property', 'og:title', socialTitle);
+      setMeta('property', 'og:description', socialDescription);
+      setMeta('property', 'og:image', socialImage);
+      setMeta('property', 'og:image:width', '1200');
+      setMeta('property', 'og:image:height', '630');
+      setMeta('property', 'og:image:type', 'image/webp');
+      setMeta('property', 'og:site_name', 'InnMind');
+      setMeta('name', 'twitter:card', 'summary_large_image');
+      setMeta('name', 'twitter:title', socialTitle);
+      setMeta('name', 'twitter:description', socialDescription);
+      setMeta('name', 'twitter:image', socialImage);
+      setMeta('name', 'twitter:site', '@InnMindcom');
+      setMeta('name', 'apple-mobile-web-app-title', 'InnMind');
+      setMeta('name', 'msapplication-TileImage', 'branding/innmind/tile-icon.png');
+      setHref('link[rel="icon"]', 'branding/innmind/favicon.png');
+      setHref('link[rel="apple-touch-icon"]', 'branding/innmind/apple-touch-icon.png');
+      setHref('link[rel="manifest"]', 'manifest-ru-demo.json');
+    })();
+  </script>
+
+  <!-- Chrome offers to install the site as an app — an omnibox button on
+       desktop, an "Install app" menu entry on Android — which lands users in a
+       bare PWA instead of our real clients (see #/me/download). We only want
+       the offer gone, not push with it, and Web Push needs nothing from the
+       manifest: it rides on the service worker registered by
+       firebase-messaging-sw.js, which works in an ordinary tab.
+
+       iOS is the one exception. Safari delivers push only to a web app added
+       to the Home Screen, and the manifest (display: standalone) is what makes
+       that Home Screen icon a standalone web app rather than a Safari
+       bookmark — and Safari never shows an install button anyway, so there is
+       nothing to suppress there. So: keep the manifest on iOS, drop it
+       everywhere else. This runs while the head is parsed, before the browser
+       fetches the manifest, so the install criteria are never met. -->
+  <script>
+    (function() {
+      var ua = navigator.userAgent || '';
+      var isIOS = /iPhone|iPad|iPod/i.test(ua) ||
+        // iPadOS sends a Macintosh UA; touch points give it away.
+        (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+      if (isIOS) return;
+      var link = document.head.querySelector('link[rel="manifest"]');
+      if (link) link.parentNode.removeChild(link);
+    })();
+  </script>
+
+  <script>
+    (function() {
       var path = window.location.pathname || '';
       var query = window.location.search || '';
       var key = 'wize.pendingKitRoute';
