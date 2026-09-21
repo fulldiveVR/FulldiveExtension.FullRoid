@@ -1,32 +1,32 @@
 {
-    "name": "Roomcord",
-    "short_name": "Roomcord",
-    "start_url": ".",
+    "name": "InnMind",
+    "short_name": "InnMind",
+    "start_url": ".?m=u",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Roomcord",
+    "description": "Find verified Web3 and AI investors, build a focused shortlist, use pitch deck, SAFE, tokenomics & outreach templates to run a smarter fundraise.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
         {
-            "src": "icons/Icon-192.png",
+            "src": "branding/innmind/Icon-192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "icons/Icon-512.png",
+            "src": "branding/innmind/Icon-512.png",
             "sizes": "512x512",
             "type": "image/png"
         },
         {
-            "src": "icons/Icon-maskable-192.png",
+            "src": "branding/innmind/Icon-maskable-192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "icons/Icon-maskable-512.png",
+            "src": "branding/innmind/Icon-maskable-512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"

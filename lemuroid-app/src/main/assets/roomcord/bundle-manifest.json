@@ -1,26 +1,26 @@
 {
   "brand": "roomcord",
-  "buildNumber": "231",
-  "builtAt": "2026-08-26T12:22:14Z",
+  "buildNumber": "258",
+  "builtAt": "2026-09-21T09:37:53Z",
   "engineRevision": "425cfb54d01a9472b3e81d9e76fd63a4a44cfbcb",
   "env": "prod",
-  "fileCount": 70,
+  "fileCount": 94,
   "files": {
     "assets/AssetManifest.bin": {
-      "sha256": "0c5bb898e6e8de7e39ad46a48138bb3a19066acb272c618899cf2adc46b2a854",
-      "size": 2549
+      "sha256": "2788ac6b422f73b8c9714dba78135ac5d64e022e4d2db28ad29fe7315e45bb61",
+      "size": 3820
     },
     "assets/AssetManifest.bin.json": {
-      "sha256": "7a59af19da2313e4852967a6a9a8c485307aa73be8471b8ac44015100eb7339e",
-      "size": 3402
+      "sha256": "1c9122f3f9527d4c79866404fda3acc62e7ebd257a162448bebb3a10cd153a25",
+      "size": 5098
     },
     "assets/FontManifest.json": {
       "sha256": "28b1eb2b3d2e1ad60b8c8b0f9100b1ccbf492f7fa97f5bebb51ea97e73926e7d",
       "size": 82
     },
     "assets/NOTICES": {
-      "sha256": "fe980464eebb13304594113f69a67baa04a4652b18881bf5478842426c15caee",
-      "size": 1577227
+      "sha256": "8f338ac06cad0b634ef2c9af066a5de7947dd249eade0cdc2b45460dee6c9a68",
+      "size": 1587495
     },
     "assets/assets/a2ui/basic_showcase.json": {
       "sha256": "c0d2147457df6f63e02577fc0e278f35abe259304adcfcef738f8533dc21c37e",
@@ -42,6 +42,14 @@
       "sha256": "7d66e294c29405f6307279e48b2e1bc2dc2cc11ab4b2403c55ec9b63b281d355",
       "size": 2338
     },
+    "assets/assets/branding/dev/logo.png": {
+      "sha256": "8bbe947066dc32bed91ecc2caa67bcacfb717e77c8ee4ea0f235a9ddd356dbfd",
+      "size": 342723
+    },
+    "assets/assets/branding/innovation_hub/logo.png": {
+      "sha256": "c8553409458b5f2af443962391ea19cdff932c85d93dc5a4d399604f84d27201",
+      "size": 59364
+    },
     "assets/assets/branding/jesuscord/logo.png": {
       "sha256": "3ba58cb472b2055371b6f0fcf10ea6e20d2cf8e4ada053577a9ad78dea699424",
       "size": 918143
@@ -62,6 +70,10 @@
       "sha256": "e1fc95ccefae302036879e620a4f446287ce940bde3a13dbb4e39597d2e8ef57",
       "size": 19860
     },
+    "assets/assets/branding/workcord/header-logo.svg": {
+      "sha256": "72ac00c0a719b1565b0f2488cea9c19154e913da46b2cb69e7af5b9a155b4dfc",
+      "size": 2061
+    },
     "assets/assets/branding/workcord/logo.png": {
       "sha256": "dfd6553dad3df1cc487935e52e8caa4a0bcd9de0311dbed63c5ca03d39af316e",
       "size": 23758
@@ -69,6 +81,34 @@
     "assets/assets/branding/workcord/logo_transparent.png": {
       "sha256": "a40b7a327888df1423ec5ac75ed03e094e1f248da497322d3e264e09181b39d5",
       "size": 14553
+    },
+    "assets/assets/branding/workcord/onboarding/agent-marketplace.webp": {
+      "sha256": "2b1cf6bee9ab1e0c5ae5e7a390677a65ea7ecbf3777a18a49e8164357fa4971b",
+      "size": 140298
+    },
+    "assets/assets/branding/workcord/onboarding/assistant-works-with-you.webp": {
+      "sha256": "d0809b6732b501c61cf5ecbe4a43e50d951d5dd9836f7d17a96b315dfec4a7c7",
+      "size": 90992
+    },
+    "assets/assets/branding/workcord/onboarding/people-and-agents.webp": {
+      "sha256": "b0a9454aeb37a97d2fab14b7e3bb76c65b3f65cfebe236197dc5cf5240bcd97a",
+      "size": 114150
+    },
+    "assets/assets/branding/workcord/onboarding/room-remembers.webp": {
+      "sha256": "39dace8a86be4f2e306165fd6995316f43a6335f17b15326540cdf2201c022e4",
+      "size": 92044
+    },
+    "assets/assets/branding/workcord/onboarding/roomagent-and-specialists.webp": {
+      "sha256": "31ddb7b2bc2566c913cf03efbe6b4254ce84085a8232308e60d45a53e9519166",
+      "size": 145804
+    },
+    "assets/assets/branding/workcord/onboarding/scheduled-work.webp": {
+      "sha256": "492965a4e4a0c8db4158b4415f49e1137810d50d18f557ddfad9ba396a6d29ce",
+      "size": 125540
+    },
+    "assets/assets/branding/workcord/onboarding/workcord-everywhere.webp": {
+      "sha256": "5c478e4c0b5a14d28239159bcfb0a205abb192b18008ff443639ddf0d46de530",
+      "size": 128442
     },
     "assets/assets/brands/claude.svg": {
       "sha256": "728cd046c80d287be6bb3f52f753e26147f20e0b39e648baad7d4c618cf935f5",
@@ -103,8 +143,8 @@
       "size": 6730
     },
     "assets/fonts/MaterialIcons-Regular.otf": {
-      "sha256": "aef974c8a6b00738c1108df89c13e0e9fdf1f6d237f72d48fb3769ce97c3aa90",
-      "size": 53248
+      "sha256": "90e7fd47efe9ea153291c69227125b3b46cb509808abf0fa052442acddfe9e78",
+      "size": 55544
     },
     "assets/packages/flutter_soloud/web/init_module.dart.js": {
       "sha256": "3e98b7c311ea4986aad5f1dd31127a6ec93d9beef9f133470088d9cec4b85fe6",
@@ -149,6 +189,58 @@
     "assets/shaders/stretch_effect.frag": {
       "sha256": "c723fbb5b9a3456b101073825ab5d34de312a39f32bf5de42aae0cda605d0a1a",
       "size": 6737
+    },
+    "assets/web/branding/innmind/logo.png": {
+      "sha256": "66c505c49628efa70e1dda66ed225724e3b928252e80295eb76617e3b2e6c263",
+      "size": 16770
+    },
+    "branding/innmind/Icon-192.png": {
+      "sha256": "15d45b5c5a188ecc1870ee3d31d470b3e0b6229e6cb1417a222d1e351cce7741",
+      "size": 4476
+    },
+    "branding/innmind/Icon-512.png": {
+      "sha256": "c13aded71392306e0686635449d9ea1517b69e5945bfcbf8a0db2b127fba42be",
+      "size": 71441
+    },
+    "branding/innmind/Icon-maskable-192.png": {
+      "sha256": "15d45b5c5a188ecc1870ee3d31d470b3e0b6229e6cb1417a222d1e351cce7741",
+      "size": 4476
+    },
+    "branding/innmind/Icon-maskable-512.png": {
+      "sha256": "c13aded71392306e0686635449d9ea1517b69e5945bfcbf8a0db2b127fba42be",
+      "size": 71441
+    },
+    "branding/innmind/README.md": {
+      "sha256": "0dbd1629205925f43009ecac37f35b25f84b2e141f4eb3bfd6f62ed27a097f69",
+      "size": 631
+    },
+    "branding/innmind/apple-touch-icon.png": {
+      "sha256": "58655d8990862e633fa0f06b3b436cf41f82a042d887bca13e8545c8e7ab2906",
+      "size": 4286
+    },
+    "branding/innmind/favicon.png": {
+      "sha256": "9e04b7ceea16f817bcc1f32a2af514ebbe800efa0cb53159c9fb372c82a7a36d",
+      "size": 1119
+    },
+    "branding/innmind/head-meta.html": {
+      "sha256": "1839b517dc549b7703e67533a1cad7aed8dd038cd0cf976df58c9d27baa125dd",
+      "size": 1187
+    },
+    "branding/innmind/header-logo.svg": {
+      "sha256": "93be4f29bca8dd217e89d471e6b3b8a871431adf02164e02e105b7464118b68f",
+      "size": 5106
+    },
+    "branding/innmind/logo.png": {
+      "sha256": "66c505c49628efa70e1dda66ed225724e3b928252e80295eb76617e3b2e6c263",
+      "size": 16770
+    },
+    "branding/innmind/og-default.webp": {
+      "sha256": "7ff4a930655ec255d53f9c2e3154e00dd606bf3a3fb6561acedc2519f423934e",
+      "size": 25746
+    },
+    "branding/innmind/tile-icon.png": {
+      "sha256": "8492f463bb53990d571196d73271c950d2d5ed79d71f3121060d97d17b7fb60a",
+      "size": 6019
     },
     "branding/jesuscord/Icon-192.png": {
       "sha256": "857efbc792a2bfc58d8180b44d3398c7a1f50e8f8762e7923de123c170778462",
@@ -271,23 +363,27 @@
       "size": 7833
     },
     "index.html": {
-      "sha256": "14ac81b639260ed6ca024fe15ea2f2ec5d7b677197dc0cb702a4c9a343867f26",
-      "size": 6498
+      "sha256": "b05a567fd9c126e151278a6fe8b89923ca78b1dbe98dac8d85c20f26691aece6",
+      "size": 10653
     },
     "main.dart.js": {
-      "sha256": "df6893bff1716b63504bb51fd7e87dcc5b42de7b4180111ee74aa59bd042032a",
-      "size": 15736147
+      "sha256": "96a609c249adc74db507efed285d116a788e27aa4b78f34f9ef13430683bd4c5",
+      "size": 16349529
+    },
+    "manifest-ru-demo.json": {
+      "sha256": "e9dccdd40aa66aeb325af004b240843f22d619cb5be2966c5448ae4f4cea08ef",
+      "size": 1081
     },
     "manifest.json": {
-      "sha256": "9784765733a3e4832a3a7fbeaedb407b5c19017148a681c8caceff624f51868a",
-      "size": 897
+      "sha256": "52e6dbbbe12a89f5b4b6bc2d80aac1d308ba20e388050bda89e54690b528f69d",
+      "size": 898
     },
     "version.json": {
-      "sha256": "84e998fad99abaa92ca6c3d207aca0d1a498869139c5b6442cc36edd3ae39db1",
-      "size": 94
+      "sha256": "9f01e175af5be0d6d1bbeb5d7c31a314db4161ba88dd3ed12583a7dc86f05c93",
+      "size": 93
     }
   },
-  "sourceCommit": "7d529caa8baf9e8e8f08f7b7430192abc7ed415b",
-  "totalBytes": 27570370,
-  "version": "1.2.530"
+  "sourceCommit": "a6ebe8a37d13dad2d2dd5cf1fb6bebc34608e658",
+  "totalBytes": 29675405,
+  "version": "2.0.40"
 }

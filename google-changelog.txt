@@ -1,191 +1,223 @@
 <en-US>
 What's New:
 
-• Chat now opens instantly — Roomcord is built into the app, so it loads even on slow connections
+• Your own game covers — hold a game, tap "Choose cover" and pick any picture
+• Already have cover art? Drop a PNG next to your ROM with the same name and it shows up on its own
 </en-US>
 
 <zh-CN>
 更新内容：
 
-• 聊天现在即刻打开 —— Roomcord 已内置到应用中，网络较慢时也能加载
+• 自定义游戏封面 —— 长按游戏，点击“选择封面”，然后挑选任意图片
+• 已经有封面图了？把同名的 PNG 放在 ROM 旁边，它会自动显示
 </zh-CN>
 
 <zh-TW>
 更新內容：
 
-• 聊天現在立即開啟 —— Roomcord 已內建於應用程式中，網路較慢時也能載入
+• 自訂遊戲封面 —— 長按遊戲，點選「選擇封面」，然後挑選任何圖片
+• 已經有封面圖了？把同名的 PNG 放在 ROM 旁邊，它就會自動顯示
 </zh-TW>
 
 <hi-IN>
 नया क्या है:
 
-• चैट अब तुरंत खुलती है — Roomcord ऐप में ही शामिल है, इसलिए धीमे कनेक्शन पर भी लोड होती है
+• अपने गेम कवर — गेम को दबाकर रखें, "कवर चुनें" पर टैप करें और कोई भी तस्वीर चुनें
+• कवर आर्ट पहले से है? अपने ROM के पास उसी नाम की PNG रखें और वह खुद दिख जाएगी
 </hi-IN>
 
 <es-ES>
 Novedades:
 
-• El chat se abre al instante: Roomcord viene integrado en la app, así que carga incluso con conexiones lentas
+• Tus propias portadas: mantén pulsado un juego, toca "Elegir portada" y elige cualquier imagen
+• ¿Ya tienes la portada? Pon un PNG con el mismo nombre junto a tu ROM y aparecerá sola
 </es-ES>
 
 <ar>
 ما الجديد:
 
-• تفتح الدردشة الآن على الفور — أصبح Roomcord مدمجًا داخل التطبيق، لذا يتم تحميله حتى مع الاتصالات البطيئة
+• أغلفة ألعابك الخاصة — اضغط مطولاً على لعبة، ثم اختر "اختيار الغلاف" وحدّد أي صورة
+• لديك صورة الغلاف بالفعل؟ ضع ملف PNG بالاسم نفسه بجانب الروم وسيظهر تلقائيًا
 </ar>
 
 <pt-BR>
 Novidades:
 
-• O chat agora abre instantaneamente — o Roomcord vem integrado ao app, então carrega mesmo com conexões lentas
+• Suas próprias capas — toque e segure um jogo, escolha "Escolher capa" e selecione qualquer imagem
+• Já tem a arte da capa? Coloque um PNG com o mesmo nome ao lado da ROM e ela aparece sozinha
 </pt-BR>
 
 <id>
 Yang Baru:
 
-• Chat kini terbuka seketika — Roomcord sudah menyatu di dalam aplikasi, jadi tetap termuat pada koneksi lambat
+• Sampul gim buatan Anda — tekan lama sebuah gim, ketuk "Pilih sampul", lalu pilih gambar apa pun
+• Sudah punya gambar sampul? Letakkan PNG dengan nama yang sama di samping ROM dan sampul akan muncul sendiri
 </id>
 
 <ru-RU>
 Что нового:
 
-• Чат открывается мгновенно — Roomcord встроен в приложение и загружается даже при медленном соединении
+• Свои обложки для игр — задержите палец на игре, нажмите «Выбрать обложку» и выберите любую картинку
+• Обложка уже есть? Положите PNG с тем же именем рядом с ромом — она подхватится сама
 </ru-RU>
 
 <ja-JP>
 新機能:
 
-• チャットが瞬時に開きます — Roomcord をアプリに内蔵したので、回線が遅くても読み込めます
+• ゲームのカバー画像を自由に設定 — ゲームを長押しして「カバー画像を選択」から好きな画像を選べます
+• すでに画像をお持ちですか？ ROM と同じ名前の PNG を隣に置くだけで自動的に表示されます
 </ja-JP>
 
 <de-DE>
 Neu:
 
-• Der Chat öffnet jetzt sofort — Roomcord ist in die App integriert und lädt auch bei langsamer Verbindung
+• Eigene Spiel-Cover — Spiel gedrückt halten, auf „Cover auswählen“ tippen und ein beliebiges Bild wählen
+• Cover schon vorhanden? Lege ein PNG mit demselben Namen neben dein ROM – es erscheint von selbst
 </de-DE>
 
 <fr-FR>
 Nouveautés :
 
-• Le chat s'ouvre désormais instantanément : Roomcord est intégré à l'application et se charge même avec une connexion lente
+• Vos propres couvertures : appuyez longuement sur un jeu, choisissez « Choisir une couverture » et sélectionnez n'importe quelle image
+• Vous avez déjà la jaquette ? Placez un PNG du même nom à côté de votre ROM et elle s'affiche toute seule
 </fr-FR>
 
 <ko-KR>
 새로운 기능:
 
-• 채팅이 이제 즉시 열립니다 — Roomcord가 앱에 내장되어 느린 연결에서도 불러옵니다
+• 원하는 게임 커버 — 게임을 길게 누르고 '커버 선택'에서 아무 사진이나 고르세요
+• 이미 커버 이미지가 있나요? ROM과 같은 이름의 PNG를 옆에 두면 저절로 표시됩니다
 </ko-KR>
 
 <tr-TR>
 Yenilikler:
 
-• Sohbet artık anında açılıyor — Roomcord uygulamaya yerleşik, bu yüzden yavaş bağlantılarda da yükleniyor
+• Kendi oyun kapakların — bir oyuna basılı tut, "Kapak seç"e dokun ve dilediğin resmi seç
+• Kapak görselin hazır mı? ROM'unun yanına aynı adla bir PNG koy, kapak kendiliğinden görünür
 </tr-TR>
 
 <vi>
 Có gì mới:
 
-• Trò chuyện giờ mở ngay lập tức — Roomcord đã được tích hợp sẵn trong ứng dụng nên vẫn tải được khi mạng chậm
+• Ảnh bìa game của riêng bạn — nhấn giữ một game, chọn "Chọn ảnh bìa" và lấy bất kỳ hình nào
+• Đã có ảnh bìa sẵn? Đặt tệp PNG cùng tên bên cạnh ROM và ảnh sẽ tự hiện
 </vi>
 
 <it-IT>
 Novità:
 
-• La chat ora si apre all'istante: Roomcord è integrato nell'app e si carica anche con connessioni lente
+• Le tue copertine — tieni premuto un gioco, tocca "Scegli copertina" e seleziona qualsiasi immagine
+• Hai già la copertina? Metti un PNG con lo stesso nome accanto alla ROM e comparirà da sola
 </it-IT>
 
 <pl-PL>
 Co nowego:
 
-• Czat otwiera się teraz błyskawicznie — Roomcord jest wbudowany w aplikację, więc ładuje się nawet przy wolnym połączeniu
+• Własne okładki gier — przytrzymaj grę, wybierz „Wybierz okładkę” i wskaż dowolne zdjęcie
+• Masz już grafikę okładki? Umieść plik PNG o tej samej nazwie obok ROM-u, a pojawi się sama
 </pl-PL>
 
 <uk>
 Що нового:
 
-• Чат тепер відкривається миттєво — Roomcord вбудовано в застосунок, тож він завантажується навіть за повільного з'єднання
+• Власні обкладинки для ігор — утримуйте гру, натисніть «Вибрати обкладинку» і виберіть будь-яке зображення
+• Обкладинка вже є? Покладіть PNG із такою самою назвою поруч із ромом — вона з'явиться сама
 </uk>
 
 <cs-CZ>
 Novinky:
 
-• Chat se nyní otevře okamžitě — Roomcord je zabudovaný v aplikaci, takže se načte i při pomalém připojení
+• Vlastní obaly her — podržte hru, klepněte na „Vybrat obal“ a vyberte jakýkoli obrázek
+• Obal už máte? Vložte PNG se stejným názvem k souboru ROM a zobrazí se sám
 </cs-CZ>
 
 <da-DK>
 Nyheder:
 
-• Chatten åbner nu med det samme — Roomcord er indbygget i appen og indlæses selv ved langsom forbindelse
+• Dine egne spilomslag — hold på et spil, tryk på "Vælg omslag" og vælg et vilkårligt billede
+• Har du allerede omslaget? Læg en PNG med samme navn ved siden af din ROM, så vises den af sig selv
 </da-DK>
 
 <el-GR>
 Τι νέο υπάρχει:
 
-• Η συνομιλία ανοίγει πλέον ακαριαία — το Roomcord είναι ενσωματωμένο στην εφαρμογή και φορτώνει ακόμη και σε αργή σύνδεση
+• Τα δικά σας εξώφυλλα παιχνιδιών — κρατήστε πατημένο ένα παιχνίδι, πατήστε «Επιλογή εξωφύλλου» και διαλέξτε οποιαδήποτε εικόνα
+• Έχετε ήδη το εξώφυλλο; Βάλτε ένα PNG με το ίδιο όνομα δίπλα στο ROM και θα εμφανιστεί από μόνο του
 </el-GR>
 
 <fi-FI>
 Mitä uutta:
 
-• Chat avautuu nyt heti — Roomcord on sisäänrakennettu sovellukseen, joten se latautuu hitaallakin yhteydellä
+• Omat kansikuvat peleille — paina peliä pitkään, valitse "Valitse kansikuva" ja poimi mikä tahansa kuva
+• Onko kansikuva jo valmiina? Laita samanniminen PNG ROM-tiedoston viereen, niin se näkyy itsestään
 </fi-FI>
 
 <hu-HU>
 Újdonságok:
 
-• A csevegés mostantól azonnal megnyílik — a Roomcord be van építve az alkalmazásba, így lassú kapcsolat mellett is betölt
+• Saját játékborítók — tartsd lenyomva a játékot, koppints a „Borító választása” lehetőségre, és válassz bármilyen képet
+• Már megvan a borító? Tegyél egy ugyanolyan nevű PNG-t a ROM mellé, és magától megjelenik
 </hu-HU>
 
 <iw-IL>
 מה חדש:
 
-• הצ'אט נפתח עכשיו מיד — Roomcord מובנה באפליקציה ולכן נטען גם בחיבור איטי
+• עטיפות משחק משלכם — לחצו לחיצה ארוכה על משחק, בחרו ב"בחירת עטיפה" ובחרו כל תמונה
+• יש לכם כבר תמונת עטיפה? הניחו קובץ PNG באותו שם ליד קובץ המשחק והוא יופיע מעצמו
 </iw-IL>
 
 <nl-NL>
 Wat is er nieuw:
 
-• De chat opent nu direct — Roomcord zit ingebouwd in de app en laadt ook bij een trage verbinding
+• Je eigen spelomslagen — houd een spel ingedrukt, tik op "Omslag kiezen" en kies een willekeurige afbeelding
+• Heb je de omslag al? Zet een PNG met dezelfde naam naast je ROM en hij verschijnt automatisch
 </nl-NL>
 
 <no-NO>
 Hva er nytt:
 
-• Chatten åpnes nå umiddelbart — Roomcord er innebygd i appen og lastes selv ved treg tilkobling
+• Dine egne spillomslag — hold på et spill, trykk «Velg omslag» og velg et hvilket som helst bilde
+• Har du omslaget allerede? Legg en PNG med samme navn ved siden av ROM-filen, så vises den av seg selv
 </no-NO>
 
 <pt-PT>
 Novidades:
 
-• O chat abre agora instantaneamente — o Roomcord está integrado na aplicação, por isso carrega mesmo com ligações lentas
+• As suas próprias capas — toque e mantenha num jogo, escolha "Escolher capa" e selecione qualquer imagem
+• Já tem a imagem da capa? Coloque um PNG com o mesmo nome junto da ROM e ela aparece sozinha
 </pt-PT>
 
 <ro>
 Ce este nou:
 
-• Chatul se deschide acum instantaneu — Roomcord este integrat în aplicație, așa că se încarcă și la conexiuni lente
+• Propriile coperte de joc — ține apăsat pe un joc, atinge „Alege coperta” și alege orice imagine
+• Ai deja coperta? Pune un PNG cu același nume lângă ROM și va apărea singură
 </ro>
 
 <sr>
 Шта је ново:
 
-• Ћаскање се сада отвара тренутно — Roomcord је уграђен у апликацију, па се учитава и при спорој вези
+• Сопствени омоти игара — задржите притисак на игри, изаберите „Изабери омот“ и одаберите било коју слику
+• Већ имате слику омота? Ставите PNG истог имена поред ROM датотеке и појавиће се сам
 </sr>
 
 <sv-SE>
 Nyheter:
 
-• Chatten öppnas nu direkt — Roomcord är inbyggt i appen och laddas även vid långsam anslutning
+• Dina egna spelomslag — håll in ett spel, tryck på "Välj omslag" och välj vilken bild du vill
+• Har du redan omslaget? Lägg en PNG med samma namn intill din ROM, då visas den av sig själv
 </sv-SE>
 
 <af>
 Wat is nuut:
 
-• Klets open nou dadelik — Roomcord is in die app ingebou, so dit laai selfs met stadige verbindings
+• Jou eie speletjie-omslae — hou 'n speletjie in, tik "Kies omslag" en kies enige prent
+• Het jy al die omslagprent? Sit 'n PNG met dieselfde naam langs jou ROM en dit wys van self
 </af>
 
 <ca>
 Novetats:
 
-• El xat s'obre a l'instant: Roomcord ve integrat a l'app, així que es carrega fins i tot amb connexions lentes
+• Les teves pròpies cobertes: mantén premut un joc, toca "Tria una coberta" i tria qualsevol imatge
+• Ja tens la imatge de la coberta? Posa un PNG amb el mateix nom al costat de la ROM i apareixerà sola
 </ca>
