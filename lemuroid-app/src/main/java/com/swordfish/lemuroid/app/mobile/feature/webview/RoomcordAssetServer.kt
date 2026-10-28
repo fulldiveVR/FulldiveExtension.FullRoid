@@ -31,7 +31,7 @@ import java.io.IOException
  * Serves the Roomcord web app out of `assets/roomcord/` so the WebView never
  * downloads the shell from Cloudflare (slow or blocked in some countries).
  *
- * The origin stays `https://web.roomcord.com`: requests to that host are
+ * The origin stays `https://app.roomcord.com`: requests to that host are
  * answered from the APK, everything else (the API, socket.io, media, sign-in)
  * goes to the network untouched. Keeping the real origin is what preserves
  * cookies / localStorage — a fake host would log every user out exactly once.
@@ -50,7 +50,7 @@ import java.io.IOException
  * `docs/plans/roomcord-embedded-webview.md`.
  */
 object RoomcordAssetServer {
-    const val HOST = "web.roomcord.com"
+    const val HOST = "app.roomcord.com"
 
     private const val ROOT = "roomcord"
     private const val INDEX = "index.html"
