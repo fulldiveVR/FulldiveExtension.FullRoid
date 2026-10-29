@@ -55,60 +55,6 @@
   <title>Roomcord</title>
   <link rel="manifest" href="manifest.json">
 
-  <script>
-    (function() {
-      var page = new URL(window.location.href);
-      if ('Roomcord' === 'Jesuscord') return;
-      var hashQuery = page.hash.indexOf('?');
-      var hashParams = hashQuery === -1
-        ? new URLSearchParams()
-        : new URLSearchParams(page.hash.slice(hashQuery + 1));
-      if (page.searchParams.get('m') !== 'u' &&
-          hashParams.get('m') !== 'u') return;
-
-      var title = 'Web3 & AI Fundraising Platform for Startups | InnMind';
-      var description = 'Find verified Web3 and AI investors, build a focused shortlist, use pitch deck, SAFE, tokenomics & outreach templates to run a smarter fundraise.';
-      var socialTitle = 'Raise Smarter with InnMind | Fundraising Tools for Web3 & AI Startups';
-      var socialDescription = 'Find verified Web3 and AI investors: VCs, syndicates, angels... Raise smarter with the InnMind fundraising platform';
-      var socialImage = new URL('branding/innmind/og-default.webp', page).href;
-      var setMeta = function(attribute, key, value) {
-        var selector = 'meta[' + attribute + '="' + key + '"]';
-        var element = document.head.querySelector(selector);
-        if (!element) {
-          element = document.createElement('meta');
-          element.setAttribute(attribute, key);
-          document.head.appendChild(element);
-        }
-        element.setAttribute('content', value);
-      };
-      var setHref = function(selector, value) {
-        var element = document.head.querySelector(selector);
-        if (element) element.setAttribute('href', value);
-      };
-
-      document.title = title;
-      setMeta('name', 'description', description);
-      setMeta('property', 'og:type', 'website');
-      setMeta('property', 'og:title', socialTitle);
-      setMeta('property', 'og:description', socialDescription);
-      setMeta('property', 'og:image', socialImage);
-      setMeta('property', 'og:image:width', '1200');
-      setMeta('property', 'og:image:height', '630');
-      setMeta('property', 'og:image:type', 'image/webp');
-      setMeta('property', 'og:site_name', 'InnMind');
-      setMeta('name', 'twitter:card', 'summary_large_image');
-      setMeta('name', 'twitter:title', socialTitle);
-      setMeta('name', 'twitter:description', socialDescription);
-      setMeta('name', 'twitter:image', socialImage);
-      setMeta('name', 'twitter:site', '@InnMindcom');
-      setMeta('name', 'apple-mobile-web-app-title', 'InnMind');
-      setMeta('name', 'msapplication-TileImage', 'branding/innmind/tile-icon.png');
-      setHref('link[rel="icon"]', 'branding/innmind/favicon.png');
-      setHref('link[rel="apple-touch-icon"]', 'branding/innmind/apple-touch-icon.png');
-      setHref('link[rel="manifest"]', 'manifest-ru-demo.json');
-    })();
-  </script>
-
   <!-- Chrome offers to install the site as an app — an omnibox button on
        desktop, an "Install app" menu entry on Android — which lands users in a
        bare PWA instead of our real clients (see #/me/download). We only want

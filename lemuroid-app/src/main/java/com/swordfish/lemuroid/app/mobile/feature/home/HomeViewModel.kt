@@ -176,7 +176,12 @@ class HomeViewModel(
         showDesmumeWarning: Boolean,
         catalogGames: List<Game>,
     ): UIState {
-        val noGames = recentGames.isEmpty() && favoritesGames.isEmpty() && discoveryGames.isEmpty()
+        // Only the user's own ROMs count: a played or favorited catalog/web game must not hide
+        // the "Select ROMs directory" card from someone who has never scanned anything.
+        val noGames =
+            recentGames.none { !it.isCatalogGame } &&
+                favoritesGames.none { !it.isCatalogGame } &&
+                discoveryGames.isEmpty()
 
         return UIState(
             favoritesGames = favoritesGames,
@@ -219,19 +224,12 @@ class HomeViewModel(
     private fun discoveryGames(retrogradeDb: RetrogradeDatabase) =
         retrogradeDb.gameDao().selectFirstNotPlayed(CAROUSEL_MAX_ITEMS)
 
-    // These two only feed the "no games" card, so they follow Home visibility: with the catalog
-    // hidden, a favorited or previously played catalog game must not suppress the empty state.
+    // These two only feed the "no games" card, which ignores catalog games itself.
     private fun recentGames(retrogradeDb: RetrogradeDatabase) =
-        combine(
-            retrogradeDb.gameDao().selectFirstUnfavoriteRecents(CAROUSEL_MAX_ITEMS),
-            showCatalog,
-        ) { games, show -> games.hideCatalogUnless(show) }
+        retrogradeDb.gameDao().selectFirstUnfavoriteRecents(CAROUSEL_MAX_ITEMS)
 
     private fun favoritesGames(retrogradeDb: RetrogradeDatabase) =
-        combine(
-            retrogradeDb.gameDao().selectFirstFavorites(CAROUSEL_MAX_ITEMS),
-            showCatalog,
-        ) { games, show -> games.hideCatalogUnless(show) }
+        retrogradeDb.gameDao().selectFirstFavorites(CAROUSEL_MAX_ITEMS)
 
     private fun dsGamesCount(retrogradeDb: RetrogradeDatabase): Flow<Int> {
         return retrogradeDb.gameDao().selectSystemsWithCount()

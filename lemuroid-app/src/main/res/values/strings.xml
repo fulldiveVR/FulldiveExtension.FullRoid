@@ -351,4 +351,9 @@
     <string name="web_game_loading_percent">Loading… %1$d%%</string>
     <string name="web_game_loading_mb">Loading… %1$d MB</string>
     <string name="web_game_load_failed">Couldn\'t load the game. Check your connection.</string>
+    <string name="roms_folder_lost_title">No access to your games folder</string>
+    <string name="roms_folder_lost_message">Android no longer lets the app read the folder “%1$s”. This happens after reinstalling the app or moving to a new phone. Select this folder again, otherwise the games from it can’t be launched.</string>
+    <string name="roms_folder_lost_action">Select folder</string>
+    <string name="roms_folder_lost_later">Later</string>
+    <string name="roms_folder_lost_card_message">The games from this folder can’t be launched until you select it again:</string>
 </resources>

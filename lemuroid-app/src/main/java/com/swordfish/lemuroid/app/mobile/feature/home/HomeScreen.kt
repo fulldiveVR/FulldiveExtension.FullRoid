@@ -61,6 +61,9 @@ import com.swordfish.lemuroid.app.mobile.shared.compose.ui.Brand
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.BrandSearchField
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameCard
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameImage
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.rememberRomsFolderLost
+import com.swordfish.lemuroid.app.shared.settings.RomsFolderAccess
+import com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher
 import com.swordfish.lemuroid.app.shared.systems.MetaSystemInfo
 import com.swordfish.lemuroid.app.utils.android.ComposableLifecycle
 import com.swordfish.lemuroid.common.displayDetailsSettingsScreen
@@ -103,10 +106,18 @@ fun HomeScreen(
     val newlyAddedGames = viewModel.newlyAddedGames.collectAsState(emptyList()).value
     val systems = viewModel.availableMetaSystems.collectAsState(emptyList()).value
     val showCatalog = viewModel.showCatalog.collectAsState(true).value
+    val romsFolderLost = rememberRomsFolderLost().value
+    val lostFolderName =
+        if (romsFolderLost) {
+            RomsFolderAccess.savedFolder(context)?.let { RomsFolderAccess.displayName(it) }
+        } else {
+            null
+        }
 
     HomeContent(
         modifier = modifier,
         state = state,
+        lostFolderName = lostFolderName,
         localRomsDirectory = viewModel.localRomsDirectory,
         installedGames = installedGames,
         catalogGames = catalogGames,
@@ -124,6 +135,7 @@ fun HomeScreen(
             }
         },
         onSetDirectoryClicked = { viewModel.changeLocalStorageFolder(context) },
+        onReselectDirectoryClicked = { StorageFrameworkPickerLauncher.reselectFolder(context) },
     )
 }
 
@@ -136,6 +148,8 @@ private const val KEY_CATALOG = "catalog"
 private fun HomeContent(
     modifier: Modifier = Modifier,
     state: HomeViewModel.UIState,
+    // Set while the saved ROMs folder can no longer be read.
+    lostFolderName: String?,
     localRomsDirectory: String,
     installedGames: List<Game>,
     catalogGames: List<Game>,
@@ -149,6 +163,7 @@ private fun HomeContent(
     onCatalogGameClicked: (Game) -> Unit,
     onEnableNotificationsClicked: () -> Unit,
     onSetDirectoryClicked: () -> Unit,
+    onReselectDirectoryClicked: () -> Unit,
 ) {
     val context = LocalContext.current
     val selectedKey = rememberSaveable { mutableStateOf(KEY_ALL) }
@@ -229,7 +244,17 @@ private fun HomeContent(
                 )
             }
         }
-        if (state.showNoGamesCard && selectedKey.value == KEY_ALL) {
+        if (lostFolderName != null) {
+            item(span = fullSpan) {
+                HomeNotification(
+                    titleId = R.string.roms_folder_lost_title,
+                    messageId = R.string.roms_folder_lost_card_message,
+                    actionId = R.string.roms_folder_lost_action,
+                    onAction = onReselectDirectoryClicked,
+                    extraText = lostFolderName,
+                )
+            }
+        } else if (state.showNoGamesCard && selectedKey.value == KEY_ALL) {
             item(span = fullSpan) {
                 HomeNotification(
                     titleId = R.string.home_empty_title,
@@ -256,6 +281,7 @@ private fun HomeContent(
             GameGridCard(
                 game = game,
                 context = context,
+                unavailable = lostFolderName != null && RomsFolderAccess.isFromFolder(game),
                 onGameClicked = onGameClicked,
                 onGameLongClick = onGameLongClick,
                 onCatalogGameClicked = onCatalogGameClicked,
@@ -269,6 +295,7 @@ private fun HomeContent(
 private fun GameGridCard(
     game: Game,
     context: android.content.Context,
+    unavailable: Boolean,
     onGameClicked: (Game) -> Unit,
     onGameLongClick: (Game) -> Unit,
     onCatalogGameClicked: (Game) -> Unit,
@@ -304,6 +331,7 @@ private fun GameGridCard(
                 game = game,
                 onClick = { onGameClicked(game) },
                 onLongClick = { onGameLongClick(game) },
+                unavailable = unavailable,
             )
         }
     }

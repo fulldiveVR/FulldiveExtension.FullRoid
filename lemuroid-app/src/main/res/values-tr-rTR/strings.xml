@@ -319,4 +319,9 @@
   <string name="archive_7z_locked_title">7z arşivleri için Pro gerekir</string>
   <string name="archive_7z_locked_message">Tüm emülatörler ücretsizdir. Yalnızca oyunu doğrudan .7z arşivinden okumak FullRoid X özelliğidir. Dosyayı açın — örneğin .iso, .cso veya .zip olarak — ve bu sürümde oynayın.</string>
   <string name="archive_7z_locked_action">Pro hakkında</string>
+    <string name="roms_folder_lost_title">Oyun klasörüne erişim yok</string>
+    <string name="roms_folder_lost_message">Android artık uygulamanın “%1$s” klasörünü okumasına izin vermiyor. Bu, uygulamayı yeniden yükledikten veya yeni bir telefona geçtikten sonra olur. Bu klasörü yeniden seçin, aksi halde içindeki oyunlar başlatılamaz.</string>
+    <string name="roms_folder_lost_action">Klasör seç</string>
+    <string name="roms_folder_lost_later">Daha sonra</string>
+    <string name="roms_folder_lost_card_message">Bu klasördeki oyunlar, klasörü yeniden seçene kadar başlatılamaz:</string>
 </resources>

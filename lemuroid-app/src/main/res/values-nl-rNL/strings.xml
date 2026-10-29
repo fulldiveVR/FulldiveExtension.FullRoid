@@ -322,4 +322,9 @@
   <string name="archive_7z_locked_title">7z-archieven vereisen Pro</string>
   <string name="archive_7z_locked_message">Alle emulators zijn gratis. Alleen een spel rechtstreeks uit een .7z-archief lezen is een functie van FullRoid X. Pak het bestand uit — bijvoorbeeld naar .iso, .cso of .zip — om het in deze versie te spelen.</string>
   <string name="archive_7z_locked_action">Over Pro</string>
+    <string name="roms_folder_lost_title">Geen toegang tot je gamesmap</string>
+    <string name="roms_folder_lost_message">Android staat de app niet meer toe de map ‘%1$s’ te lezen. Dit gebeurt na het opnieuw installeren van de app of na een overstap naar een nieuwe telefoon. Selecteer deze map opnieuw, anders kunnen de games eruit niet worden gestart.</string>
+    <string name="roms_folder_lost_action">Map selecteren</string>
+    <string name="roms_folder_lost_later">Later</string>
+    <string name="roms_folder_lost_card_message">De games uit deze map kunnen pas weer worden gestart als je hem opnieuw selecteert:</string>
 </resources>

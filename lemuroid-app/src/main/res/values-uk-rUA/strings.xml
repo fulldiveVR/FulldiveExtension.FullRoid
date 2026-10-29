@@ -322,4 +322,9 @@
   <string name="archive_7z_locked_title">Архіви 7z доступні в Pro</string>
   <string name="archive_7z_locked_message">Усі емулятори безкоштовні. Платна можливість FullRoid X — лише запуск гри просто з архіву .7z. Розпакуйте файл, наприклад у .iso, .cso або .zip, і він запуститься в цій версії.</string>
   <string name="archive_7z_locked_action">Про версію Pro</string>
+    <string name="roms_folder_lost_title">Немає доступу до папки з іграми</string>
+    <string name="roms_folder_lost_message">Android більше не дозволяє застосунку читати папку «%1$s». Так буває після перевстановлення застосунку або переходу на новий телефон. Виберіть цю папку знову, інакше ігри з неї не запустяться.</string>
+    <string name="roms_folder_lost_action">Вибрати папку</string>
+    <string name="roms_folder_lost_later">Пізніше</string>
+    <string name="roms_folder_lost_card_message">Ігри з цієї папки не запустяться, доки ви не виберете її знову:</string>
 </resources>

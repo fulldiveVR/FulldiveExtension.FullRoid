@@ -27,7 +27,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <queries>
-        <package android:name="com.feedai.mobile" />
+        <package android:name="com.roomcord.app" />
         <package android:name="com.fulldive.extension.fullroid.pro" />
         <!-- Needed so resolveActivity() can detect the SAF document picker on Android 11+ -->
         <intent>

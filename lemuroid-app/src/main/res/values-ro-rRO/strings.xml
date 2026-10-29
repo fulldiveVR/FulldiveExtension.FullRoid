@@ -312,4 +312,9 @@
   <string name="archive_7z_locked_title">Arhivele 7z necesită Pro</string>
   <string name="archive_7z_locked_message">Toate emulatoarele sunt gratuite. Doar citirea unui joc direct dintr-o arhivă .7z este o funcție FullRoid X. Dezarhivați fișierul — de exemplu în .iso, .cso sau .zip — pentru a-l juca în această versiune.</string>
   <string name="archive_7z_locked_action">Despre Pro</string>
+    <string name="roms_folder_lost_title">Fără acces la folderul cu jocuri</string>
+    <string name="roms_folder_lost_message">Android nu mai permite aplicației să citească folderul „%1$s”. Se întâmplă după reinstalarea aplicației sau trecerea pe un telefon nou. Selectează din nou acest folder, altfel jocurile din el nu vor putea fi pornite.</string>
+    <string name="roms_folder_lost_action">Selectează folderul</string>
+    <string name="roms_folder_lost_later">Mai târziu</string>
+    <string name="roms_folder_lost_card_message">Jocurile din acest folder nu pot fi pornite până nu îl selectezi din nou:</string>
 </resources>

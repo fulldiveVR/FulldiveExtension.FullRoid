@@ -322,4 +322,9 @@
   <string name="archive_7z_locked_title">7z-arkistot vaativat Pron</string>
   <string name="archive_7z_locked_message">Kaikki emulaattorit ovat ilmaisia. Vain pelin lukeminen suoraan .7z-arkistosta on FullRoid X:n ominaisuus. Pura tiedosto — esimerkiksi muotoon .iso, .cso tai .zip — niin voit pelata sitä tässä versiossa.</string>
   <string name="archive_7z_locked_action">Tietoja Prosta</string>
+    <string name="roms_folder_lost_title">Ei pääsyä pelikansioon</string>
+    <string name="roms_folder_lost_message">Android ei enää salli sovelluksen lukea kansiota ”%1$s”. Näin käy sovelluksen uudelleenasennuksen tai uuteen puhelimeen siirtymisen jälkeen. Valitse kansio uudelleen, muuten sen pelejä ei voi käynnistää.</string>
+    <string name="roms_folder_lost_action">Valitse kansio</string>
+    <string name="roms_folder_lost_later">Myöhemmin</string>
+    <string name="roms_folder_lost_card_message">Tämän kansion pelejä ei voi käynnistää, ennen kuin valitset sen uudelleen:</string>
 </resources>

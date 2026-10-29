@@ -322,4 +322,9 @@
   <string name="archive_7z_locked_title">Τα αρχεία 7z απαιτούν Pro</string>
   <string name="archive_7z_locked_message">Όλοι οι εξομοιωτές είναι δωρεάν. Μόνο η ανάγνωση παιχνιδιού απευθείας από αρχείο .7z είναι δυνατότητα του FullRoid X. Αποσυμπιέστε το αρχείο — για παράδειγμα σε .iso, .cso ή .zip — για να παίξετε σε αυτήν την έκδοση.</string>
   <string name="archive_7z_locked_action">Σχετικά με το Pro</string>
+    <string name="roms_folder_lost_title">Δεν υπάρχει πρόσβαση στον φάκελο παιχνιδιών</string>
+    <string name="roms_folder_lost_message">Το Android δεν επιτρέπει πλέον στην εφαρμογή να διαβάζει τον φάκελο «%1$s». Αυτό συμβαίνει μετά από επανεγκατάσταση της εφαρμογής ή μεταφορά σε νέο τηλέφωνο. Επιλέξτε ξανά αυτόν τον φάκελο, αλλιώς τα παιχνίδια του δεν θα ξεκινούν.</string>
+    <string name="roms_folder_lost_action">Επιλογή φακέλου</string>
+    <string name="roms_folder_lost_later">Αργότερα</string>
+    <string name="roms_folder_lost_card_message">Τα παιχνίδια αυτού του φακέλου δεν θα ξεκινούν μέχρι να τον επιλέξετε ξανά:</string>
 </resources>

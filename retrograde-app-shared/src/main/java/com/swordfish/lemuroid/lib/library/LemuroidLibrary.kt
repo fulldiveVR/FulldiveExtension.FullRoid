@@ -33,6 +33,7 @@ import com.swordfish.lemuroid.lib.storage.StorageFile
 import com.swordfish.lemuroid.lib.storage.StorageProvider
 import com.swordfish.lemuroid.lib.storage.StorageProviderRegistry
 import dagger.Lazy
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
@@ -54,12 +55,15 @@ class LemuroidLibrary(
     suspend fun indexLibrary(isProVersion: Boolean) {
         val startedAtMs = System.currentTimeMillis()
 
+        // Only a complete pass may delete games: anything not re-indexed by a failed or cancelled
+        // scan (e.g. the folder became unreadable after a restart) is still there, just unseen.
         try {
             indexProviders(startedAtMs, isProVersion)
-        } catch (e: Throwable) {
-            Timber.e("Library indexing stopped due to exception", e)
-        } finally {
             cleanUp(startedAtMs)
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Throwable) {
+            Timber.e(e, "Library indexing stopped due to exception, keeping existing games")
         }
 
         val executionTime = System.currentTimeMillis() - startedAtMs
@@ -70,9 +74,21 @@ class LemuroidLibrary(
     private suspend fun indexProviders(startedAtMs: Long, isProVersion: Boolean) {
         val gameMetadata = gameMetadataProvider.get()
         val enabledProviders = storageProviderRegistry.get().enabledProviders
-        enabledProviders.asFlow()
-            .flatMapConcat { indexSingleProvider(it, startedAtMs, gameMetadata, isProVersion) }
-            .collect()
+
+        // A failing provider must not stop the others from being indexed, but the pass as a
+        // whole still counts as incomplete so that nothing gets deleted.
+        var firstError: Throwable? = null
+        for (provider in enabledProviders) {
+            try {
+                indexSingleProvider(provider, startedAtMs, gameMetadata, isProVersion).collect()
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                Timber.e(e, "Indexing failed for provider ${provider.id}")
+                if (firstError == null) firstError = e
+            }
+        }
+        firstError?.let { throw it }
     }
 
     @OptIn(FlowPreview::class)

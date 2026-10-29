@@ -195,8 +195,6 @@ class PopupManager(private val context: Context) {
         val startCount = getCurrentStartCounter()
         return when {
             isProVersion() -> false
-            // Nothing to upsell when the user already owns Pro and has it on the device.
-            context.packageManager.isFullRoidProInstalled() -> false
             startCount % 3 == 0 -> true
             else -> false
         }

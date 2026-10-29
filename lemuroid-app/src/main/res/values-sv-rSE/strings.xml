@@ -322,4 +322,9 @@
   <string name="archive_7z_locked_title">7z-arkiv kräver Pro</string>
   <string name="archive_7z_locked_message">Alla emulatorer är gratis. Endast att läsa ett spel direkt från ett .7z-arkiv är en FullRoid X-funktion. Packa upp filen — till exempel till .iso, .cso eller .zip — för att spela den i den här versionen.</string>
   <string name="archive_7z_locked_action">Om Pro</string>
+    <string name="roms_folder_lost_title">Ingen åtkomst till spelmappen</string>
+    <string name="roms_folder_lost_message">Android låter inte längre appen läsa mappen ”%1$s”. Det händer efter att appen installerats om eller efter byte till en ny telefon. Välj mappen igen, annars går det inte att starta spelen i den.</string>
+    <string name="roms_folder_lost_action">Välj mapp</string>
+    <string name="roms_folder_lost_later">Senare</string>
+    <string name="roms_folder_lost_card_message">Spelen i den här mappen går inte att starta förrän du väljer den igen:</string>
 </resources>

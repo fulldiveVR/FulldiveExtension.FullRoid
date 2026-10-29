@@ -30,4 +30,6 @@ interface BusyActivity {
     fun isBusy(): Boolean
 
     fun showProUpgradeFor7z()
+
+    fun showRomsFolderAccessLost()
 }

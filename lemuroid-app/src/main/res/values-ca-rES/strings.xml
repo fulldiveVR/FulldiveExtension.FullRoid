@@ -309,4 +309,9 @@
   <string name="tilt_configuration_buttons_l_r">L - R</string>
   <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
   <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+    <string name="roms_folder_lost_title">Sense accés a la carpeta de jocs</string>
+    <string name="roms_folder_lost_message">Android ja no permet que l’aplicació llegeixi la carpeta «%1$s». Això passa després de reinstal·lar l’aplicació o de canviar de telèfon. Torna a seleccionar aquesta carpeta; si no, els seus jocs no es podran iniciar.</string>
+    <string name="roms_folder_lost_action">Selecciona la carpeta</string>
+    <string name="roms_folder_lost_later">Més tard</string>
+    <string name="roms_folder_lost_card_message">Els jocs d’aquesta carpeta no es podran iniciar fins que la tornis a seleccionar:</string>
 </resources>

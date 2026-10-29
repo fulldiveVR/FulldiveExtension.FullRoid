@@ -387,7 +387,7 @@ private class LemuroidWebViewClient(
 
     // NOTE: no onReceivedSslError override on purpose. The offline GameHub
     // player proceeds through cert errors for its fake host, but here the
-    // embedded host is the *real* web.roomcord.com: every request to it is
+    // embedded host is the *real* app.roomcord.com: every request to it is
     // answered from assets (no TLS at all), so an SSL error can only come from
     // a genuine network host — where the default behaviour (cancel) is right.
 

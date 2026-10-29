@@ -309,4 +309,9 @@
   <string name="tilt_configuration_buttons_l_r">L - R</string>
   <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
   <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+    <string name="roms_folder_lost_title">गेम फ़ोल्डर का एक्सेस नहीं है</string>
+    <string name="roms_folder_lost_message">Android अब ऐप को फ़ोल्डर “%1$s” पढ़ने नहीं देता। ऐसा ऐप को दोबारा इंस्टॉल करने या नए फ़ोन पर जाने के बाद होता है। यह फ़ोल्डर फिर से चुनें, वरना इसके गेम शुरू नहीं होंगे।</string>
+    <string name="roms_folder_lost_action">फ़ोल्डर चुनें</string>
+    <string name="roms_folder_lost_later">बाद में</string>
+    <string name="roms_folder_lost_card_message">जब तक आप यह फ़ोल्डर फिर से नहीं चुनते, इसके गेम शुरू नहीं होंगे:</string>
 </resources>
