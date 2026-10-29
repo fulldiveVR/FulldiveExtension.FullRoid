@@ -1,4 +1,5 @@
 What's New:
 
-• Your own game covers — hold a game, tap "Choose cover" and pick any picture
-• Already have cover art? Drop a PNG next to your ROM with the same name and it shows up on its own
+• Fixed: your games no longer disappear from the library after restarting the app
+• Lost access to your games folder after reinstalling or moving to a new phone? The app now tells you and lets you select the folder again in one tap. Your games stay in the library meanwhile
+• The "Select ROMs directory" card is back on the home screen until you add your own games

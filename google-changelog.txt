@@ -1,223 +1,255 @@
 <en-US>
 What's New:
 
-• Your own game covers — hold a game, tap "Choose cover" and pick any picture
-• Already have cover art? Drop a PNG next to your ROM with the same name and it shows up on its own
+• Fixed: your games no longer disappear from the library after restarting the app
+• Lost access to your games folder after reinstalling or moving to a new phone? The app now tells you and lets you select the folder again in one tap. Your games stay in the library meanwhile
+• The "Select ROMs directory" card is back on the home screen until you add your own games
 </en-US>
 
 <zh-CN>
 更新内容：
 
-• 自定义游戏封面 —— 长按游戏，点击“选择封面”，然后挑选任意图片
-• 已经有封面图了？把同名的 PNG 放在 ROM 旁边，它会自动显示
+• 已修复：重启应用后，游戏不会再从游戏库中消失
+• 重新安装应用或换用新手机后失去了游戏文件夹的访问权限？应用现在会提示你，只需轻点一下即可重新选择该文件夹。在此期间，你的游戏会保留在游戏库中
+• 在你添加自己的游戏之前，主屏幕上会重新显示“选择 ROM 目录”卡片
 </zh-CN>
 
 <zh-TW>
 更新內容：
 
-• 自訂遊戲封面 —— 長按遊戲，點選「選擇封面」，然後挑選任何圖片
-• 已經有封面圖了？把同名的 PNG 放在 ROM 旁邊，它就會自動顯示
+• 已修正：重新啟動應用程式後，遊戲不會再從遊戲庫中消失
+• 重新安裝應用程式或換用新手機後失去了遊戲資料夾的存取權？應用程式現在會提醒你，只要輕觸一下就能重新選擇該資料夾。在此期間，你的遊戲會保留在遊戲庫中
+• 在你加入自己的遊戲之前，主畫面上會重新顯示「選擇 ROMs 資料夾」卡片
 </zh-TW>
 
 <hi-IN>
 नया क्या है:
 
-• अपने गेम कवर — गेम को दबाकर रखें, "कवर चुनें" पर टैप करें और कोई भी तस्वीर चुनें
-• कवर आर्ट पहले से है? अपने ROM के पास उसी नाम की PNG रखें और वह खुद दिख जाएगी
+• ठीक किया गया: ऐप दोबारा शुरू करने के बाद आपके गेम अब लाइब्रेरी से गायब नहीं होते
+• ऐप दोबारा इंस्टॉल करने या नए फ़ोन पर जाने के बाद गेम फ़ोल्डर का एक्सेस खो गया? अब ऐप आपको बताता है और एक टैप में फ़ोल्डर फिर से चुनने देता है। तब तक आपके गेम लाइब्रेरी में बने रहते हैं
+• जब तक आप अपने गेम नहीं जोड़ते, होम स्क्रीन पर "ROM फ़ोल्डर चुनें" कार्ड फिर से दिखता है
 </hi-IN>
 
 <es-ES>
 Novedades:
 
-• Tus propias portadas: mantén pulsado un juego, toca "Elegir portada" y elige cualquier imagen
-• ¿Ya tienes la portada? Pon un PNG con el mismo nombre junto a tu ROM y aparecerá sola
+• Corregido: tus juegos ya no desaparecen de la biblioteca al reiniciar la aplicación
+• ¿Perdiste el acceso a tu carpeta de juegos tras reinstalar la aplicación o cambiar de teléfono? Ahora la aplicación te avisa y te permite volver a seleccionar la carpeta con un toque. Mientras tanto, tus juegos siguen en la biblioteca
+• La tarjeta «Seleccionar directorio de ROMs» vuelve a la pantalla de inicio hasta que añadas tus propios juegos
 </es-ES>
 
 <ar>
-ما الجديد:
+الجديد:
 
-• أغلفة ألعابك الخاصة — اضغط مطولاً على لعبة، ثم اختر "اختيار الغلاف" وحدّد أي صورة
-• لديك صورة الغلاف بالفعل؟ ضع ملف PNG بالاسم نفسه بجانب الروم وسيظهر تلقائيًا
+• تم الإصلاح: لم تعد ألعابك تختفي من المكتبة بعد إعادة تشغيل التطبيق
+• فقدت الوصول إلى مجلد ألعابك بعد إعادة تثبيت التطبيق أو الانتقال إلى هاتف جديد؟ سيخبرك التطبيق الآن ويتيح لك اختيار المجلد مرة أخرى بنقرة واحدة. وتبقى ألعابك في المكتبة في هذه الأثناء
+• عادت بطاقة "حدد مجلد ROM" إلى الشاشة الرئيسية إلى أن تضيف ألعابك الخاصة
 </ar>
 
 <pt-BR>
 Novidades:
 
-• Suas próprias capas — toque e segure um jogo, escolha "Escolher capa" e selecione qualquer imagem
-• Já tem a arte da capa? Coloque um PNG com o mesmo nome ao lado da ROM e ela aparece sozinha
+• Corrigido: seus jogos não somem mais da biblioteca depois de reiniciar o app
+• Perdeu o acesso à pasta de jogos depois de reinstalar o app ou trocar de celular? Agora o app avisa e deixa você selecionar a pasta de novo com um toque. Enquanto isso, seus jogos continuam na biblioteca
+• O cartão "Selecionar diretório das ROMs" voltou à tela inicial até você adicionar seus próprios jogos
 </pt-BR>
 
 <id>
 Yang Baru:
 
-• Sampul gim buatan Anda — tekan lama sebuah gim, ketuk "Pilih sampul", lalu pilih gambar apa pun
-• Sudah punya gambar sampul? Letakkan PNG dengan nama yang sama di samping ROM dan sampul akan muncul sendiri
+• Diperbaiki: game Anda tidak lagi hilang dari pustaka setelah aplikasi dimulai ulang
+• Kehilangan akses ke folder game setelah memasang ulang aplikasi atau pindah ke ponsel baru? Kini aplikasi memberi tahu Anda dan memungkinkan Anda memilih folder itu lagi dengan sekali ketuk. Sementara itu, game Anda tetap ada di pustaka
+• Kartu "Pilih folder ROM" kembali muncul di layar utama sampai Anda menambahkan game sendiri
 </id>
 
 <ru-RU>
 Что нового:
 
-• Свои обложки для игр — задержите палец на игре, нажмите «Выбрать обложку» и выберите любую картинку
-• Обложка уже есть? Положите PNG с тем же именем рядом с ромом — она подхватится сама
+• Исправлено: игры больше не пропадают из библиотеки после перезапуска приложения
+• Пропал доступ к папке с играми после переустановки или переезда на новый телефон? Теперь приложение сообщит об этом и предложит выбрать папку заново в одно касание. Игры до тех пор остаются в библиотеке
+• Карточка «Выберите каталог ROM-файлов» снова на главном экране, пока вы не добавите свои игры
 </ru-RU>
 
 <ja-JP>
-新機能:
+新機能：
 
-• ゲームのカバー画像を自由に設定 — ゲームを長押しして「カバー画像を選択」から好きな画像を選べます
-• すでに画像をお持ちですか？ ROM と同じ名前の PNG を隣に置くだけで自動的に表示されます
+• 修正：アプリを再起動してもゲームがライブラリから消えなくなりました
+• アプリの再インストールや新しいスマートフォンへの移行で、ゲームフォルダへのアクセスが失われましたか？アプリがお知らせし、ワンタップでフォルダを選び直せるようになりました。それまでの間もゲームはライブラリに残ります
+• 自分のゲームを追加するまで、ホーム画面に「ROMディレクトリを選択」カードが再び表示されます
 </ja-JP>
 
 <de-DE>
-Neu:
+Neuigkeiten:
 
-• Eigene Spiel-Cover — Spiel gedrückt halten, auf „Cover auswählen“ tippen und ein beliebiges Bild wählen
-• Cover schon vorhanden? Lege ein PNG mit demselben Namen neben dein ROM – es erscheint von selbst
+• Behoben: Deine Spiele verschwinden nach einem Neustart der App nicht mehr aus der Bibliothek
+• Zugriff auf deinen Spieleordner nach einer Neuinstallation oder dem Umzug auf ein neues Handy verloren? Die App weist dich jetzt darauf hin, und du kannst den Ordner mit einem Tippen erneut auswählen. Deine Spiele bleiben so lange in der Bibliothek
+• Die Karte „ROMs Verzeichnis wählen“ ist wieder auf dem Startbildschirm, bis du eigene Spiele hinzufügst
 </de-DE>
 
 <fr-FR>
 Nouveautés :
 
-• Vos propres couvertures : appuyez longuement sur un jeu, choisissez « Choisir une couverture » et sélectionnez n'importe quelle image
-• Vous avez déjà la jaquette ? Placez un PNG du même nom à côté de votre ROM et elle s'affiche toute seule
+• Corrigé : vos jeux ne disparaissent plus de la bibliothèque après le redémarrage de l'application
+• Accès au dossier de jeux perdu après une réinstallation ou un changement de téléphone ? L'application vous prévient et vous permet de resélectionner le dossier en un geste. En attendant, vos jeux restent dans la bibliothèque
+• La carte « Sélectionnez le dossier contenant les ROMs » revient sur l'accueil tant que vous n'avez pas ajouté vos jeux
 </fr-FR>
 
 <ko-KR>
 새로운 기능:
 
-• 원하는 게임 커버 — 게임을 길게 누르고 '커버 선택'에서 아무 사진이나 고르세요
-• 이미 커버 이미지가 있나요? ROM과 같은 이름의 PNG를 옆에 두면 저절로 표시됩니다
+• 수정: 앱을 다시 시작해도 게임이 라이브러리에서 사라지지 않습니다
+• 앱을 다시 설치하거나 새 휴대전화로 옮긴 후 게임 폴더 접근 권한을 잃으셨나요? 이제 앱이 알려 주고, 한 번의 탭으로 폴더를 다시 선택할 수 있습니다. 그동안 게임은 라이브러리에 그대로 남아 있습니다
+• 직접 게임을 추가하기 전까지 홈 화면에 "ROM 디렉토리 선택" 카드가 다시 표시됩니다
 </ko-KR>
 
 <tr-TR>
 Yenilikler:
 
-• Kendi oyun kapakların — bir oyuna basılı tut, "Kapak seç"e dokun ve dilediğin resmi seç
-• Kapak görselin hazır mı? ROM'unun yanına aynı adla bir PNG koy, kapak kendiliğinden görünür
+• Düzeltildi: Uygulama yeniden başlatıldıktan sonra oyunlarınız artık kütüphaneden kaybolmuyor
+• Uygulamayı yeniden yükledikten veya yeni bir telefona geçtikten sonra oyun klasörünüze erişimi mi kaybettiniz? Uygulama artık sizi uyarıyor ve klasörü tek dokunuşla yeniden seçmenizi sağlıyor. Bu sırada oyunlarınız kütüphanede kalıyor
+• Kendi oyunlarınızı ekleyene kadar ana ekranda "ROMların konumunu seç" kartı yeniden görünüyor
 </tr-TR>
 
 <vi>
 Có gì mới:
 
-• Ảnh bìa game của riêng bạn — nhấn giữ một game, chọn "Chọn ảnh bìa" và lấy bất kỳ hình nào
-• Đã có ảnh bìa sẵn? Đặt tệp PNG cùng tên bên cạnh ROM và ảnh sẽ tự hiện
+• Đã sửa: trò chơi của bạn không còn biến mất khỏi thư viện sau khi khởi động lại ứng dụng
+• Mất quyền truy cập thư mục trò chơi sau khi cài lại ứng dụng hoặc chuyển sang điện thoại mới? Giờ đây ứng dụng sẽ báo cho bạn và cho phép chọn lại thư mục chỉ với một lần chạm. Trong lúc đó, trò chơi vẫn nằm trong thư viện
+• Thẻ "Chọn thư mục chứa ROM" đã trở lại màn hình chính cho đến khi bạn thêm trò chơi của riêng mình
 </vi>
 
 <it-IT>
 Novità:
 
-• Le tue copertine — tieni premuto un gioco, tocca "Scegli copertina" e seleziona qualsiasi immagine
-• Hai già la copertina? Metti un PNG con lo stesso nome accanto alla ROM e comparirà da sola
+• Risolto: i tuoi giochi non spariscono più dalla libreria dopo il riavvio dell'app
+• Hai perso l'accesso alla cartella dei giochi dopo aver reinstallato l'app o essere passato a un nuovo telefono? Ora l'app ti avvisa e ti permette di selezionare di nuovo la cartella con un tocco. Nel frattempo i tuoi giochi restano nella libreria
+• La scheda "Seleziona directory ROM" torna nella schermata principale finché non aggiungi i tuoi giochi
 </it-IT>
 
 <pl-PL>
 Co nowego:
 
-• Własne okładki gier — przytrzymaj grę, wybierz „Wybierz okładkę” i wskaż dowolne zdjęcie
-• Masz już grafikę okładki? Umieść plik PNG o tej samej nazwie obok ROM-u, a pojawi się sama
+• Naprawiono: gry nie znikają już z biblioteki po ponownym uruchomieniu aplikacji
+• Straciłeś dostęp do folderu z grami po ponownej instalacji aplikacji lub przejściu na nowy telefon? Aplikacja teraz o tym informuje i pozwala jednym dotknięciem ponownie wybrać folder. W tym czasie gry pozostają w bibliotece
+• Karta „Wybierz katalog plików ROM” wróciła na ekran główny, dopóki nie dodasz własnych gier
 </pl-PL>
 
 <uk>
 Що нового:
 
-• Власні обкладинки для ігор — утримуйте гру, натисніть «Вибрати обкладинку» і виберіть будь-яке зображення
-• Обкладинка вже є? Покладіть PNG із такою самою назвою поруч із ромом — вона з'явиться сама
+• Виправлено: ігри більше не зникають із бібліотеки після перезапуску застосунку
+• Втратили доступ до папки з іграми після перевстановлення або переходу на новий телефон? Тепер застосунок повідомить про це й запропонує вибрати папку знову одним дотиком. Доти ігри залишаються в бібліотеці
+• Картка «Виберіть каталог ROM» знову на головному екрані, доки ви не додасте власні ігри
 </uk>
 
 <cs-CZ>
-Novinky:
+Co je nového:
 
-• Vlastní obaly her — podržte hru, klepněte na „Vybrat obal“ a vyberte jakýkoli obrázek
-• Obal už máte? Vložte PNG se stejným názvem k souboru ROM a zobrazí se sám
+• Opraveno: hry už po restartu aplikace nemizí z knihovny
+• Přišli jste o přístup ke složce s hrami po přeinstalaci aplikace nebo přechodu na nový telefon? Aplikace vás nyní upozorní a jedním klepnutím vám umožní složku znovu vybrat. Do té doby hry zůstávají v knihovně
+• Karta „Zvolit složku s ROMkami“ je zpět na hlavní obrazovce, dokud nepřidáte vlastní hry
 </cs-CZ>
 
 <da-DK>
 Nyheder:
 
-• Dine egne spilomslag — hold på et spil, tryk på "Vælg omslag" og vælg et vilkårligt billede
-• Har du allerede omslaget? Læg en PNG med samme navn ved siden af din ROM, så vises den af sig selv
+• Rettet: Dine spil forsvinder ikke længere fra biblioteket, når appen genstartes
+• Mistet adgangen til din spilmappe efter geninstallation eller skift til en ny telefon? Appen giver dig nu besked og lader dig vælge mappen igen med ét tryk. Imens bliver dine spil i biblioteket
+• Kortet "Vælg ROMs-mappe" er tilbage på startskærmen, indtil du tilføjer dine egne spil
 </da-DK>
 
 <el-GR>
 Τι νέο υπάρχει:
 
-• Τα δικά σας εξώφυλλα παιχνιδιών — κρατήστε πατημένο ένα παιχνίδι, πατήστε «Επιλογή εξωφύλλου» και διαλέξτε οποιαδήποτε εικόνα
-• Έχετε ήδη το εξώφυλλο; Βάλτε ένα PNG με το ίδιο όνομα δίπλα στο ROM και θα εμφανιστεί από μόνο του
+• Διορθώθηκε: τα παιχνίδια σας δεν εξαφανίζονται πλέον από τη βιβλιοθήκη μετά την επανεκκίνηση της εφαρμογής
+• Χάσατε την πρόσβαση στον φάκελο παιχνιδιών μετά από επανεγκατάσταση ή μεταφορά σε νέο τηλέφωνο; Η εφαρμογή σάς ενημερώνει πλέον και σας επιτρέπει να επιλέξετε ξανά τον φάκελο με ένα άγγιγμα. Στο μεταξύ τα παιχνίδια σας παραμένουν στη βιβλιοθήκη
+• Η κάρτα «Επιλέξτε ένα ευρετήριο με ROMs» επέστρεψε στην αρχική οθόνη μέχρι να προσθέσετε δικά σας παιχνίδια
 </el-GR>
 
 <fi-FI>
-Mitä uutta:
+Uutta:
 
-• Omat kansikuvat peleille — paina peliä pitkään, valitse "Valitse kansikuva" ja poimi mikä tahansa kuva
-• Onko kansikuva jo valmiina? Laita samanniminen PNG ROM-tiedoston viereen, niin se näkyy itsestään
+• Korjattu: pelit eivät enää katoa kirjastosta, kun sovellus käynnistetään uudelleen
+• Menetitkö pääsyn pelikansioon sovelluksen uudelleenasennuksen tai uuteen puhelimeen siirtymisen jälkeen? Sovellus kertoo nyt siitä ja antaa valita kansion uudelleen yhdellä napautuksella. Sillä välin pelit pysyvät kirjastossa
+• Kortti ”Valitse ROMien hakemisto” on taas aloitusnäytössä, kunnes lisäät omia pelejä
 </fi-FI>
 
 <hu-HU>
 Újdonságok:
 
-• Saját játékborítók — tartsd lenyomva a játékot, koppints a „Borító választása” lehetőségre, és válassz bármilyen képet
-• Már megvan a borító? Tegyél egy ugyanolyan nevű PNG-t a ROM mellé, és magától megjelenik
+• Javítva: a játékok már nem tűnnek el a könyvtárból az alkalmazás újraindítása után
+• Elvesztetted a hozzáférést a játékmappához az alkalmazás újratelepítése vagy új telefonra váltás után? Az alkalmazás most szól, és egy koppintással újra kiválaszthatod a mappát. Addig a játékok a könyvtárban maradnak
+• A „Válaszd ki a ROM-mappát” kártya újra megjelenik a kezdőképernyőn, amíg nem adsz hozzá saját játékokat
 </hu-HU>
 
 <iw-IL>
 מה חדש:
 
-• עטיפות משחק משלכם — לחצו לחיצה ארוכה על משחק, בחרו ב"בחירת עטיפה" ובחרו כל תמונה
-• יש לכם כבר תמונת עטיפה? הניחו קובץ PNG באותו שם ליד קובץ המשחק והוא יופיע מעצמו
+• תוקן: המשחקים שלך כבר לא נעלמים מהספרייה אחרי הפעלה מחדש של האפליקציה
+• איבדת גישה לתיקיית המשחקים אחרי התקנה מחדש או מעבר לטלפון חדש? עכשיו האפליקציה מודיעה על כך ומאפשרת לבחור שוב את התיקייה בהקשה אחת. בינתיים המשחקים נשארים בספרייה
+• הכרטיס "בחר את תיקיית היעד בה נמצאים קבצי ה-ROM" חזר למסך הבית עד שתוסיף משחקים משלך
 </iw-IL>
 
 <nl-NL>
-Wat is er nieuw:
+Nieuw:
 
-• Je eigen spelomslagen — houd een spel ingedrukt, tik op "Omslag kiezen" en kies een willekeurige afbeelding
-• Heb je de omslag al? Zet een PNG met dezelfde naam naast je ROM en hij verschijnt automatisch
+• Opgelost: je games verdwijnen niet meer uit de bibliotheek na het herstarten van de app
+• Toegang tot je gamesmap kwijt na het opnieuw installeren van de app of een overstap naar een nieuwe telefoon? De app laat het je nu weten en je kunt de map met één tik opnieuw kiezen. Intussen blijven je games in de bibliotheek
+• De kaart 'Selecteer ROM-map' staat weer op het startscherm totdat je je eigen games toevoegt
 </nl-NL>
 
 <no-NO>
-Hva er nytt:
+Nyheter:
 
-• Dine egne spillomslag — hold på et spill, trykk «Velg omslag» og velg et hvilket som helst bilde
-• Har du omslaget allerede? Legg en PNG med samme navn ved siden av ROM-filen, så vises den av seg selv
+• Rettet: spillene dine forsvinner ikke lenger fra biblioteket når appen startes på nytt
+• Mistet tilgangen til spillmappen etter å ha installert appen på nytt eller byttet til en ny telefon? Appen gir deg nå beskjed og lar deg velge mappen på nytt med ett trykk. I mellomtiden blir spillene værende i biblioteket
+• Kortet «Velg ROM-katalog» er tilbake på startskjermen til du legger til dine egne spill
 </no-NO>
 
 <pt-PT>
 Novidades:
 
-• As suas próprias capas — toque e mantenha num jogo, escolha "Escolher capa" e selecione qualquer imagem
-• Já tem a imagem da capa? Coloque um PNG com o mesmo nome junto da ROM e ela aparece sozinha
+• Corrigido: os seus jogos já não desaparecem da biblioteca depois de reiniciar a aplicação
+• Perdeu o acesso à pasta de jogos depois de reinstalar a aplicação ou mudar de telemóvel? A aplicação avisa-o agora e permite selecionar novamente a pasta com um toque. Entretanto, os seus jogos continuam na biblioteca
+• O cartão "Seleccionar directório de ROMs" voltou ao ecrã inicial até adicionar os seus próprios jogos
 </pt-PT>
 
 <ro>
-Ce este nou:
+Noutăți:
 
-• Propriile coperte de joc — ține apăsat pe un joc, atinge „Alege coperta” și alege orice imagine
-• Ai deja coperta? Pune un PNG cu același nume lângă ROM și va apărea singură
+• Remediat: jocurile nu mai dispar din bibliotecă după repornirea aplicației
+• Ai pierdut accesul la folderul cu jocuri după reinstalarea aplicației sau trecerea pe un telefon nou? Aplicația te anunță acum și îți permite să alegi din nou folderul cu o singură atingere. Între timp, jocurile rămân în bibliotecă
+• Cardul „Alege directorul de ROM-uri” a revenit pe ecranul principal până când îți adaugi propriile jocuri
 </ro>
 
 <sr>
 Шта је ново:
 
-• Сопствени омоти игара — задржите притисак на игри, изаберите „Изабери омот“ и одаберите било коју слику
-• Већ имате слику омота? Ставите PNG истог имена поред ROM датотеке и појавиће се сам
+• Исправљено: игре више не нестају из библиотеке након поновног покретања апликације
+• Изгубили сте приступ фасцикли са играма после поновног инсталирања или преласка на нови телефон? Апликација вас сада обавештава и омогућава да једним додиром поново изаберете фасциклу. У међувремену игре остају у библиотеци
+• Картица „Изаберите директоријум са ROM-овима“ поново је на почетном екрану док не додате своје игре
 </sr>
 
 <sv-SE>
 Nyheter:
 
-• Dina egna spelomslag — håll in ett spel, tryck på "Välj omslag" och välj vilken bild du vill
-• Har du redan omslaget? Lägg en PNG med samma namn intill din ROM, då visas den av sig själv
+• Åtgärdat: dina spel försvinner inte längre från biblioteket när appen startas om
+• Förlorat åtkomsten till spelmappen efter att ha installerat om appen eller bytt till en ny telefon? Appen säger nu till och låter dig välja mappen igen med ett tryck. Under tiden ligger spelen kvar i biblioteket
+• Kortet ”Välj ROM-katalog” är tillbaka på startskärmen tills du lägger till egna spel
 </sv-SE>
 
 <af>
-Wat is nuut:
+Wat's nuut:
 
-• Jou eie speletjie-omslae — hou 'n speletjie in, tik "Kies omslag" en kies enige prent
-• Het jy al die omslagprent? Sit 'n PNG met dieselfde naam langs jou ROM en dit wys van self
+• Reggemaak: jou speletjies verdwyn nie meer uit die biblioteek nadat die app herbegin is nie
+• Toegang tot jou speletjiesgids verloor ná die herinstallering van die app of ’n skuif na ’n nuwe foon? Die app laat jou nou weet en laat jou die gids met een tik weer kies. Intussen bly jou speletjies in die biblioteek
+• Die kaart "Kies ROM-gids" is terug op die tuisskerm totdat jy jou eie speletjies byvoeg
 </af>
 
 <ca>
 Novetats:
 
-• Les teves pròpies cobertes: mantén premut un joc, toca "Tria una coberta" i tria qualsevol imatge
-• Ja tens la imatge de la coberta? Posa un PNG amb el mateix nom al costat de la ROM i apareixerà sola
+• Corregit: els jocs ja no desapareixen de la biblioteca després de reiniciar l'aplicació
+• Has perdut l'accés a la carpeta de jocs després de reinstal·lar l'aplicació o canviar de telèfon? Ara l'aplicació t'avisa i et permet tornar a seleccionar la carpeta amb un toc. Mentrestant, els jocs es queden a la biblioteca
+• La targeta «Seleccionar directori de ROMs» torna a la pantalla d'inici fins que afegeixis els teus propis jocs
 </ca>
