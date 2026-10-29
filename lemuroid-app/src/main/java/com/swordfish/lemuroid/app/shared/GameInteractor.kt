@@ -9,6 +9,7 @@ import com.swordfish.lemuroid.app.appextension.isProVersion
 import com.swordfish.lemuroid.app.mobile.feature.shortcuts.ShortcutsGenerator
 import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
+import com.swordfish.lemuroid.app.shared.settings.RomsFolderAccess
 import com.swordfish.lemuroid.common.displayToast
 import com.swordfish.lemuroid.lib.library.GameSystem
 import com.swordfish.lemuroid.lib.library.GameSystemHelperImpl
@@ -35,6 +36,9 @@ class GameInteractor(
         if (!ensureProFeaturesAvailable(game)) {
             return
         }
+        if (!ensureRomsFolderAccessible(game)) {
+            return
+        }
         gameLauncher.launchGameAsync(activity.activity(), game, true, useLeanback,gameSystemHelper)
     }
 
@@ -48,7 +52,18 @@ class GameInteractor(
         if (!ensureProFeaturesAvailable(game)) {
             return
         }
+        if (!ensureRomsFolderAccessible(game)) {
+            return
+        }
         gameLauncher.launchGameAsync(activity.activity(), game, false, useLeanback,gameSystemHelper)
+    }
+
+    private fun ensureRomsFolderAccessible(game: Game): Boolean {
+        if (RomsFolderAccess.isGameUnavailable(activity.activity(), game)) {
+            activity.showRomsFolderAccessLost()
+            return false
+        }
+        return true
     }
 
     private fun ensureProFeaturesAvailable(game: Game): Boolean {

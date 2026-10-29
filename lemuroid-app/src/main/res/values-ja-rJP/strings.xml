@@ -324,4 +324,9 @@
   <string name="archive_7z_locked_title">7z アーカイブには Pro が必要です</string>
   <string name="archive_7z_locked_message">エミュレーターはすべて無料です。.7z アーカイブから直接ゲームを読み込むことだけが FullRoid X の機能です。ファイルを .iso や .cso、.zip などに展開すれば、このバージョンでも遊べます。</string>
   <string name="archive_7z_locked_action">Pro について</string>
+    <string name="roms_folder_lost_title">ゲームフォルダにアクセスできません</string>
+    <string name="roms_folder_lost_message">Android により、アプリはフォルダ「%1$s」を読み取れなくなりました。アプリの再インストールや新しいスマートフォンへの移行後に起こります。このフォルダをもう一度選択してください。選択しないと、このフォルダのゲームは起動できません。</string>
+    <string name="roms_folder_lost_action">フォルダを選択</string>
+    <string name="roms_folder_lost_later">後で</string>
+    <string name="roms_folder_lost_card_message">このフォルダを再度選択するまで、ここにあるゲームは起動できません:</string>
 </resources>

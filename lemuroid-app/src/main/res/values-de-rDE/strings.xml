@@ -322,4 +322,9 @@
   <string name="archive_7z_locked_title">7z-Archive erfordern Pro</string>
   <string name="archive_7z_locked_message">Alle Emulatoren sind kostenlos. Nur das Laden eines Spiels direkt aus einem .7z-Archiv ist eine Funktion von FullRoid X. Entpacke die Datei — zum Beispiel nach .iso, .cso oder .zip — um sie in dieser Version zu spielen.</string>
   <string name="archive_7z_locked_action">Über Pro</string>
+    <string name="roms_folder_lost_title">Kein Zugriff auf deinen Spieleordner</string>
+    <string name="roms_folder_lost_message">Android erlaubt der App nicht mehr, den Ordner „%1$s“ zu lesen. Das passiert nach einer Neuinstallation der App oder dem Umzug auf ein neues Handy. Wähle diesen Ordner erneut aus, sonst lassen sich die Spiele daraus nicht starten.</string>
+    <string name="roms_folder_lost_action">Ordner auswählen</string>
+    <string name="roms_folder_lost_later">Später</string>
+    <string name="roms_folder_lost_card_message">Die Spiele aus diesem Ordner lassen sich erst wieder starten, wenn du ihn erneut auswählst:</string>
 </resources>

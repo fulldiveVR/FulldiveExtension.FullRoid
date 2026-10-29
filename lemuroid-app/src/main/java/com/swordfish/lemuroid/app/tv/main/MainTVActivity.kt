@@ -27,6 +27,7 @@ import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.library.LibraryIndexScheduler
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
+import com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher
 import com.swordfish.lemuroid.app.tv.channel.ChannelUpdateWork
 import com.swordfish.lemuroid.app.tv.favorites.TVFavoritesFragment
 import com.swordfish.lemuroid.app.tv.games.TVGamesFragment
@@ -77,6 +78,11 @@ class MainTVActivity : BaseTVActivity(), BusyActivity {
                 proInstallReferrer("archive_7z_tv"),
             )
         }
+    }
+
+    override fun showRomsFolderAccessLost() {
+        Toast.makeText(this, R.string.roms_folder_lost_title, Toast.LENGTH_LONG).show()
+        StorageFrameworkPickerLauncher.reselectFolder(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

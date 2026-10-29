@@ -3,6 +3,7 @@ package com.swordfish.lemuroid.app.shared.game
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -10,6 +11,7 @@ import com.swordfish.lemuroid.R
 import com.swordfish.lemuroid.app.shared.ImmersiveActivity
 import com.swordfish.lemuroid.app.shared.library.PendingOperationsMonitor
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
+import com.swordfish.lemuroid.app.shared.settings.RomsFolderAccess
 import com.swordfish.lemuroid.app.tv.channel.ChannelUpdateWork
 import com.swordfish.lemuroid.app.tv.shared.TVHelper
 import com.swordfish.lemuroid.app.utils.android.displayErrorDialog
@@ -92,6 +94,14 @@ class ExternalGameLauncherActivity : ImmersiveActivity() {
         val game =
             retrogradeDatabase.gameDao().selectById(gameId)
                 ?: throw IllegalArgumentException("Game not found: $gameId")
+
+        // The shortcut outlived the folder permission. The app asks for the folder again.
+        if (RomsFolderAccess.isGameUnavailable(applicationContext, game)) {
+            Toast.makeText(this, R.string.roms_folder_lost_title, Toast.LENGTH_LONG).show()
+            packageManager.getLaunchIntentForPackage(packageName)?.let { startActivity(it) }
+            finish()
+            return
+        }
 
         delay(animationDuration().toLong())
 

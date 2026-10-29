@@ -322,4 +322,9 @@
   <string name="archive_7z_locked_title">أرشيفات 7z تتطلب Pro</string>
   <string name="archive_7z_locked_message">جميع المحاكيات مجانية. قراءة اللعبة مباشرة من أرشيف .7z هي وحدها ميزة FullRoid X. فك ضغط الملف — مثلاً إلى .iso أو .cso أو .zip — لتشغيله في هذه النسخة.</string>
   <string name="archive_7z_locked_action">حول Pro</string>
+    <string name="roms_folder_lost_title">لا يمكن الوصول إلى مجلد الألعاب</string>
+    <string name="roms_folder_lost_message">لم يعد Android يسمح للتطبيق بقراءة المجلد \"%1$s\". يحدث هذا بعد إعادة تثبيت التطبيق أو الانتقال إلى هاتف جديد. اختر هذا المجلد مرة أخرى، وإلا فلن تعمل الألعاب الموجودة فيه.</string>
+    <string name="roms_folder_lost_action">اختيار المجلد</string>
+    <string name="roms_folder_lost_later">لاحقًا</string>
+    <string name="roms_folder_lost_card_message">لن تعمل الألعاب الموجودة في هذا المجلد حتى تختاره مرة أخرى:</string>
 </resources>

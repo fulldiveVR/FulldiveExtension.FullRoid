@@ -57,7 +57,10 @@ class StorageFrameworkPickerLauncher : RetrogradeActivity() {
                     this.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
                     this.addFlags(Intent.FLAG_GRANT_PREFIX_URI_PERMISSION)
                     this.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
-                    if (needsInitialUri()) {
+                    val reselectUri = intent.getStringExtra(EXTRA_RESELECT_FOLDER)?.let { Uri.parse(it) }
+                    if (reselectUri != null) {
+                        this.putExtra(DocumentsContract.EXTRA_INITIAL_URI, reselectUri)
+                    } else if (needsInitialUri()) {
                         this.putExtra(DocumentsContract.EXTRA_INITIAL_URI, buildDocumentsInitialUri())
                     }
                 }
@@ -96,9 +99,14 @@ class StorageFrameworkPickerLauncher : RetrogradeActivity() {
             val currentValue: String? = sharedPreferences.getString(preferenceKey, null)
             val newValue = resultData?.data
 
-            if (newValue != null && newValue.toString() != currentValue) {
+            // Persist the grant even when the same folder is picked again: the saved value can
+            // outlive its permission (e.g. restored from a backup), and without a persisted grant
+            // the folder is readable only until the process dies.
+            if (newValue != null) {
                 updatePersistableUris(newValue)
+            }
 
+            if (newValue != null && newValue.toString() != currentValue) {
                 sharedPreferences.edit().apply {
                     this.putString(preferenceKey, newValue.toString())
                     this.apply()
@@ -152,9 +160,18 @@ class StorageFrameworkPickerLauncher : RetrogradeActivity() {
 
     companion object {
         private const val REQUEST_CODE_PICK_FOLDER = 1
+        private const val EXTRA_RESELECT_FOLDER = "EXTRA_RESELECT_FOLDER"
 
         fun pickFolder(context: Context) {
             context.startActivity(Intent(context, StorageFrameworkPickerLauncher::class.java))
+        }
+
+        // Asks for the saved folder again after its permission was lost, starting the picker there.
+        fun reselectFolder(context: Context) {
+            val initialUri = RomsFolderAccess.savedFolder(context)?.let { RomsFolderAccess.initialPickerUri(it) }
+            val intent = Intent(context, StorageFrameworkPickerLauncher::class.java)
+            initialUri?.let { intent.putExtra(EXTRA_RESELECT_FOLDER, it.toString()) }
+            context.startActivity(intent)
         }
     }
 }

@@ -309,4 +309,9 @@
   <string name="tilt_configuration_buttons_l_r">L - R</string>
   <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
   <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+    <string name="roms_folder_lost_title">Tidak ada akses ke folder game</string>
+    <string name="roms_folder_lost_message">Android tidak lagi mengizinkan aplikasi membaca folder “%1$s”. Ini terjadi setelah aplikasi dipasang ulang atau pindah ke ponsel baru. Pilih folder ini lagi, jika tidak game di dalamnya tidak dapat dijalankan.</string>
+    <string name="roms_folder_lost_action">Pilih folder</string>
+    <string name="roms_folder_lost_later">Nanti</string>
+    <string name="roms_folder_lost_card_message">Game dari folder ini tidak dapat dijalankan sampai Anda memilihnya lagi:</string>
 </resources>

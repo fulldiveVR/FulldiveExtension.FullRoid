@@ -109,6 +109,7 @@ import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsScreen
 import com.swordfish.lemuroid.app.mobile.feature.systems.MetaSystemsViewModel
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.AppTheme
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.Archive7zLockedDialog
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.RomsFolderAccessLostDialog
 import com.swordfish.lemuroid.app.shared.GameInteractor
 import com.swordfish.lemuroid.app.shared.covers.CustomCovers
 import com.swordfish.lemuroid.app.shared.game.BaseGameActivity
@@ -116,7 +117,9 @@ import com.swordfish.lemuroid.app.shared.game.GameLauncher
 import com.swordfish.lemuroid.app.shared.input.InputDeviceManager
 import com.swordfish.lemuroid.app.shared.main.BusyActivity
 import com.swordfish.lemuroid.app.shared.main.GameLaunchTaskHandler
+import com.swordfish.lemuroid.app.shared.settings.RomsFolderAccess
 import com.swordfish.lemuroid.app.shared.settings.SettingsInteractor
+import com.swordfish.lemuroid.app.shared.settings.StorageFrameworkPickerLauncher
 import com.swordfish.lemuroid.common.coroutines.safeLaunch
 import com.swordfish.lemuroid.ext.feature.review.ReviewManager
 import com.swordfish.lemuroid.lib.android.RetrogradeComponentActivity
@@ -191,6 +194,9 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
     private val _show7zLockedDialog = MutableStateFlow(false)
     private val show7zLockedDialog = _show7zLockedDialog.asStateFlow()
 
+    private val _showRomsFolderLostDialog = MutableStateFlow(false)
+    private val showRomsFolderLostDialog = _showRomsFolderLostDialog.asStateFlow()
+
     private val mainViewModel: MainViewModel by viewModels {
         MainViewModel.Factory(applicationContext, saveSyncManager)
     }
@@ -215,6 +221,11 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
         // so launching a game via shortcut doesn't trigger a scan. The scan is gated by the
         // "scan on every startup" setting (KEEP avoids stacking scans).
         lifecycleScope.launch {
+            // An unreadable folder does not stop the scan: it still indexes the internal roms
+            // directory and keeps the folder's games. Selecting the folder again rescans it.
+            if (savedInstanceState == null && RomsFolderAccess.isLostInBackground(applicationContext)) {
+                _showRomsFolderLostDialog.value = true
+            }
             LibraryIndexScheduler.scheduleStartupLibrarySync(
                 applicationContext,
                 settingsManager.scanOnAppStartup(),
@@ -287,6 +298,15 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
                 Archive7zLockedDialog(
                     onLearnMore = { _navigateToProTutorial.value = true },
                     onDismiss = { _show7zLockedDialog.value = false },
+                )
+            }
+
+            if (showRomsFolderLostDialog.collectAsState().value) {
+                val folder = RomsFolderAccess.savedFolder(this@MainActivity)
+                RomsFolderAccessLostDialog(
+                    folderName = folder?.let { RomsFolderAccess.displayName(it) }.orEmpty(),
+                    onSelectFolder = { StorageFrameworkPickerLauncher.reselectFolder(this@MainActivity) },
+                    onDismiss = { _showRomsFolderLostDialog.value = false },
                 )
             }
 
@@ -744,6 +764,10 @@ class MainActivity : RetrogradeComponentActivity(), BusyActivity {
             // while the paid part is only reading ROMs out of a .7z archive.
             _show7zLockedDialog.value = true
         }
+    }
+
+    override fun showRomsFolderAccessLost() {
+        _showRomsFolderLostDialog.value = true
     }
 
     override fun onResume() {

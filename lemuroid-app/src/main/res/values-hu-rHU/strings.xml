@@ -309,4 +309,9 @@
   <string name="tilt_configuration_buttons_l_r">L - R</string>
   <string name="tilt_configuration_buttons_l1_r1">L1 - R1</string>
   <string name="tilt_configuration_buttons_l2_r2">L2 - R2</string>
+    <string name="roms_folder_lost_title">Nincs hozzáférés a játékmappához</string>
+    <string name="roms_folder_lost_message">Az Android már nem engedi, hogy az alkalmazás olvassa a(z) „%1$s” mappát. Ez az alkalmazás újratelepítése vagy új telefonra váltás után fordul elő. Válaszd ki újra ezt a mappát, különben a benne lévő játékok nem indíthatók.</string>
+    <string name="roms_folder_lost_action">Mappa kiválasztása</string>
+    <string name="roms_folder_lost_later">Később</string>
+    <string name="roms_folder_lost_card_message">A mappában lévő játékok addig nem indíthatók, amíg újra ki nem választod:</string>
 </resources>

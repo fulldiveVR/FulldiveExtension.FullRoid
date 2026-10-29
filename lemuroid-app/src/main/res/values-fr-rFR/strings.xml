@@ -322,4 +322,9 @@
   <string name="archive_7z_locked_title">Les archives 7z nécessitent Pro</string>
   <string name="archive_7z_locked_message">Tous les émulateurs sont gratuits. Seule la lecture d\'un jeu directement depuis une archive .7z est une fonctionnalité de FullRoid X. Décompressez le fichier — par exemple en .iso, .cso ou .zip — pour y jouer dans cette version.</string>
   <string name="archive_7z_locked_action">À propos de Pro</string>
+    <string name="roms_folder_lost_title">Aucun accès à votre dossier de jeux</string>
+    <string name="roms_folder_lost_message">Android n’autorise plus l’application à lire le dossier « %1$s ». Cela arrive après une réinstallation de l’application ou un passage à un nouveau téléphone. Sélectionnez à nouveau ce dossier, sinon ses jeux ne pourront pas être lancés.</string>
+    <string name="roms_folder_lost_action">Choisir le dossier</string>
+    <string name="roms_folder_lost_later">Plus tard</string>
+    <string name="roms_folder_lost_card_message">Les jeux de ce dossier ne pourront pas être lancés tant que vous ne l’aurez pas sélectionné à nouveau :</string>
 </resources>

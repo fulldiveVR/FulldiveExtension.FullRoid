@@ -12,6 +12,8 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidEmptyView
 import com.swordfish.lemuroid.app.mobile.shared.compose.ui.LemuroidGameCard
+import com.swordfish.lemuroid.app.mobile.shared.compose.ui.rememberRomsFolderLost
+import com.swordfish.lemuroid.app.shared.settings.RomsFolderAccess
 import com.swordfish.lemuroid.lib.library.db.entity.Game
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -29,6 +31,8 @@ fun FavoritesScreen(
         return
     }
 
+    val romsFolderLost = rememberRomsFolderLost().value
+
     LazyVerticalGrid(
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(16.dp),
@@ -43,6 +47,7 @@ fun FavoritesScreen(
                 game = game,
                 onClick = { onGameClick(game) },
                 onLongClick = { onGameLongClick(game) },
+                unavailable = romsFolderLost && RomsFolderAccess.isFromFolder(game),
             )
         }
     }

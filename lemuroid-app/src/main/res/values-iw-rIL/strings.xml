@@ -314,4 +314,9 @@
   <string name="archive_7z_locked_title">ארכיוני 7z דורשים Pro</string>
   <string name="archive_7z_locked_message">כל האמולטורים חינמיים. רק קריאת משחק ישירות מארכיון .7z היא תכונה של FullRoid X. חלצו את הקובץ — למשל ל-.iso, ל-.cso או ל-.zip — כדי לשחק בו בגרסה הזו.</string>
   <string name="archive_7z_locked_action">על Pro</string>
+    <string name="roms_folder_lost_title">אין גישה לתיקיית המשחקים</string>
+    <string name="roms_folder_lost_message">Android כבר לא מאפשר לאפליקציה לקרוא את התיקייה \"%1$s\". זה קורה אחרי התקנה מחדש של האפליקציה או מעבר לטלפון חדש. בחרו שוב בתיקייה הזו, אחרת לא ניתן יהיה להפעיל את המשחקים שבה.</string>
+    <string name="roms_folder_lost_action">בחירת תיקייה</string>
+    <string name="roms_folder_lost_later">אחר כך</string>
+    <string name="roms_folder_lost_card_message">לא ניתן יהיה להפעיל את המשחקים מהתיקייה הזו עד שתבחרו בה שוב:</string>
 </resources>

@@ -101,6 +101,7 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
         flow {
             val directoryDocumentIds = mutableListOf<String>()
             DocumentsContract.getTreeDocumentId(rootUri)?.let { directoryDocumentIds.add(it) }
+            var firstError: Throwable? = null
 
             while (directoryDocumentIds.isNotEmpty()) {
                 val currentDirectoryDocumentId = directoryDocumentIds.removeAt(0)
@@ -111,6 +112,7 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
                     }
                 if (result.isFailure) {
                     Timber.e(result.exceptionOrNull(), "Error while listing files")
+                    if (firstError == null) firstError = result.exceptionOrNull()
                 }
 
                 val (files, directories) =
@@ -121,6 +123,10 @@ class StorageAccessFrameworkProvider(private val context: Context) : StorageProv
                 emit(files)
                 directoryDocumentIds.addAll(directories)
             }
+
+            // Keep scanning the readable directories, but report the failure so the library
+            // does not treat an unreadable folder (e.g. lost permission) as an empty one.
+            firstError?.let { throw it }
         }
 
     private fun listBaseStorageFiles(

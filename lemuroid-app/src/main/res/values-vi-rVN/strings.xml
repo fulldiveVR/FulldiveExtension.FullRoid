@@ -319,4 +319,9 @@
   <string name="archive_7z_locked_title">Tệp nén 7z cần bản Pro</string>
   <string name="archive_7z_locked_message">Mọi trình giả lập đều miễn phí. Chỉ việc đọc trò chơi trực tiếp từ tệp nén .7z mới là tính năng của FullRoid X. Hãy giải nén tệp — ví dụ sang .iso, .cso hoặc .zip — để chơi trong phiên bản này.</string>
   <string name="archive_7z_locked_action">Giới thiệu về Pro</string>
+    <string name="roms_folder_lost_title">Không có quyền truy cập thư mục trò chơi</string>
+    <string name="roms_folder_lost_message">Android không còn cho phép ứng dụng đọc thư mục “%1$s”. Điều này xảy ra sau khi cài lại ứng dụng hoặc chuyển sang điện thoại mới. Hãy chọn lại thư mục này, nếu không các trò chơi trong đó sẽ không thể khởi chạy.</string>
+    <string name="roms_folder_lost_action">Chọn thư mục</string>
+    <string name="roms_folder_lost_later">Để sau</string>
+    <string name="roms_folder_lost_card_message">Các trò chơi trong thư mục này sẽ không thể khởi chạy cho đến khi bạn chọn lại nó:</string>
 </resources>

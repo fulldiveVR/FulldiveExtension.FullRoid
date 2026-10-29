@@ -322,4 +322,9 @@
   <string name="archive_7z_locked_title">7z архиве захтевају Pro</string>
   <string name="archive_7z_locked_message">Сви емулатори су бесплатни. Само читање игре директно из .7z архиве јесте могућност FullRoid X-а. Распакујте датотеку — на пример у .iso, .cso или .zip — да бисте је играли у овој верзији.</string>
   <string name="archive_7z_locked_action">О Pro верзији</string>
+    <string name="roms_folder_lost_title">Нема приступа фасцикли са играма</string>
+    <string name="roms_folder_lost_message">Android више не дозвољава апликацији да чита фасциклу „%1$s“. То се дешава након поновног инсталирања апликације или преласка на нови телефон. Поново изаберите ову фасциклу, у супротном игре из ње неће моћи да се покрену.</string>
+    <string name="roms_folder_lost_action">Изабери фасциклу</string>
+    <string name="roms_folder_lost_later">Касније</string>
+    <string name="roms_folder_lost_card_message">Игре из ове фасцикле неће моћи да се покрену док је поново не изаберете:</string>
 </resources>

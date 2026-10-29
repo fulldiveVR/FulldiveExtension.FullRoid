@@ -321,4 +321,9 @@
   <string name="archive_7z_locked_title">7z 壓縮檔需要 Pro</string>
   <string name="archive_7z_locked_message">所有模擬器皆為免費。只有直接從 .7z 壓縮檔讀取遊戲才是 FullRoid X 的功能。請將檔案解壓縮（例如解壓縮為 .iso、.cso 或 .zip），即可在本版本中遊玩。</string>
   <string name="archive_7z_locked_action">關於 Pro</string>
+    <string name="roms_folder_lost_title">無法存取遊戲資料夾</string>
+    <string name="roms_folder_lost_message">Android 不再允許應用程式讀取資料夾「%1$s」。重新安裝應用程式或換用新手機後會發生這種情況。請重新選擇此資料夾，否則其中的遊戲將無法啟動。</string>
+    <string name="roms_folder_lost_action">選擇資料夾</string>
+    <string name="roms_folder_lost_later">稍後</string>
+    <string name="roms_folder_lost_card_message">重新選擇此資料夾之前，其中的遊戲將無法啟動：</string>
 </resources>

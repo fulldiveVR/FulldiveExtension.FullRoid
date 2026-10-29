@@ -321,4 +321,9 @@
   <string name="archive_7z_locked_title">Archivy 7z vyžadují Pro</string>
   <string name="archive_7z_locked_message">Všechny emulátory jsou zdarma. Placenou funkcí FullRoid X je pouze načtení hry přímo z archivu .7z. Rozbalte soubor — například do .iso, .cso nebo .zip — a spustíte ho i v této verzi.</string>
   <string name="archive_7z_locked_action">O verzi Pro</string>
+    <string name="roms_folder_lost_title">Žádný přístup ke složce s hrami</string>
+    <string name="roms_folder_lost_message">Android už aplikaci nedovoluje číst složku „%1$s“. Stává se to po přeinstalaci aplikace nebo přechodu na nový telefon. Vyberte tuto složku znovu, jinak hry z ní nepůjde spustit.</string>
+    <string name="roms_folder_lost_action">Vybrat složku</string>
+    <string name="roms_folder_lost_later">Později</string>
+    <string name="roms_folder_lost_card_message">Hry z této složky nepůjde spustit, dokud ji znovu nevyberete:</string>
 </resources>
