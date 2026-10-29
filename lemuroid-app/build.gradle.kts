@@ -160,12 +160,17 @@ android {
         val bundleDir = layout.buildDirectory.dir("outputs/bundle/${variant.name}").get().asFile
         tasks.matching { it.name == "bundle$capitalizedName" }.configureEach {
             doLast {
-                bundleDir.listFiles { file -> file.extension == "aab" }?.forEach { aab ->
-                    val target = File(bundleDir, "$baseName.aab")
-                    if (aab != target) {
-                        aab.copyTo(target, overwrite = true)
-                        aab.delete()
-                    }
+                // A reused workspace (Jenkins) still holds bundles of earlier versions here. Only
+                // the one just built may get the new name: copying every .aab onto it let an old
+                // bundle overwrite the new one, so 1.12.6 went out with version code 11204.
+                val bundles = bundleDir.listFiles { file -> file.extension == "aab" }.orEmpty()
+                val fresh = bundles.maxByOrNull { it.lastModified() } ?: return@doLast
+                bundles.filter { it != fresh }.forEach { it.delete() }
+
+                val target = File(bundleDir, "$baseName.aab")
+                if (fresh != target) {
+                    fresh.copyTo(target, overwrite = true)
+                    fresh.delete()
                 }
             }
         }
